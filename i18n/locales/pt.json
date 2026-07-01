@@ -5,6 +5,10 @@
   "actions": {
     "newScramble": "Novo scramble"
   },
+  "nav": {
+    "play": "Jogar",
+    "settings": "Configurações"
+  },
   "cube": {
     "other": "Outro"
   }

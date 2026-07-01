@@ -5,6 +5,10 @@
   "actions": {
     "newScramble": "New scramble"
   },
+  "nav": {
+    "play": "Play",
+    "settings": "Settings"
+  },
   "cube": {
     "other": "Other",
     "2x2x2": "2x2x2",
