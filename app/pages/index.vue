@@ -53,7 +53,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), flags: ["beta"], category: "normal", cubeType: configStore.selectedCubeType, sessionId: 1 })
+  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.selectedCubeType, sessionId: 1 })
   newScramble()
 }
 
@@ -156,7 +156,39 @@ onBeforeUnmount(() => {
 
 <template>
   <v-container fluid class="pa-4">
-        <v-row>
+        <v-row cols="12" md="2">
+          <v-col>
+            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
+              <SessionSelector/>
+              <SessionCubeSelector/>
+            </v-sheet>
+
+            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
+              <div class="d-flex justify-space-between align-center mb-2">
+                <span class="text-subtitle-1 font-weight-bold">Estatísticas</span>
+                <span class="text-caption text-medium-emphasis">{{ stats.count }} solves</span>
+              </div>
+              <v-row density="compact">
+                <v-col cols="6">
+                  <div class="stat-label">melhor</div>
+                  <div class="stat-value">{{ formatMs(stats.best) }}</div>
+                </v-col>
+                <v-col cols="6">
+                  <div class="stat-label">média</div>
+                  <div class="stat-value">{{ formatMs(stats.mean) }}</div>
+                </v-col>
+                <v-col cols="6">
+                  <div class="stat-label">ao5</div>
+                  <div class="stat-value">{{ formatMs(stats.ao5) }}</div>
+                </v-col>
+                <v-col cols="6">
+                  <div class="stat-label">ao12</div>
+                  <div class="stat-value">{{ formatMs(stats.ao12) }}</div>
+                </v-col>
+              </v-row>
+            </v-sheet>
+          </v-col>
+
           <!-- Timer column -->
           <v-col cols="12" md="8" class="d-flex flex-column">
             <!-- Scramble -->
@@ -190,38 +222,8 @@ onBeforeUnmount(() => {
             </v-sheet>
           </v-col>
 
-          <!-- Sidebar: stats + times -->
-          <v-col cols="12" md="4">
-            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
-              <SessionSelector/>
-              <SessionCubeSelector/>
-            </v-sheet>
-
-            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
-              <div class="d-flex justify-space-between align-center mb-2">
-                <span class="text-subtitle-1 font-weight-bold">Estatísticas</span>
-                <span class="text-caption text-medium-emphasis">{{ stats.count }} solves</span>
-              </div>
-              <v-row density="compact">
-                <v-col cols="6">
-                  <div class="stat-label">melhor</div>
-                  <div class="stat-value">{{ formatMs(stats.best) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">média</div>
-                  <div class="stat-value">{{ formatMs(stats.mean) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">ao5</div>
-                  <div class="stat-value">{{ formatMs(stats.ao5) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">ao12</div>
-                  <div class="stat-value">{{ formatMs(stats.ao12) }}</div>
-                </v-col>
-              </v-row>
-            </v-sheet>
-
+          <!-- Sidebar: times -->
+          <v-col cols="12" md="2">
             <v-sheet rounded="lg" color="surface" class="pa-4">
               <div class="d-flex justify-space-between align-center mb-2">
                 <span class="text-subtitle-1 font-weight-bold">Tempos</span>

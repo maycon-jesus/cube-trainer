@@ -9,10 +9,10 @@ export type Solve = Stored<{
   scramble: string
   penalty: Penalty
   createdAt: number
-  cubeType: string
+  puzzle: string
   category: Category
   sessionId: number
-  flags: string[]
+  trainingId?: number
 }>
 
 // Shared instance
