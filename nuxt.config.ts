@@ -1,3 +1,5 @@
+import { md3 } from "vuetify/blueprints";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -68,7 +70,25 @@ export default defineNuxtConfig({
     vuetifyOptions: {
       theme: {
         defaultTheme: 'dark',
+        themes: {
+          dark: {
+            colors: {
+              primary: '#F56217',
+              background: '#060708',
+              surface: '#121417'
+            }
+          },
+          light: {
+            dark: false,
+            colors: {
+              primary: '#F56217',
+              background: '#FBFCFD',
+              surface: '#EFF1F4'
+            }
+          }
+        }
       },
+      blueprint: md3
     },
   },
   pwa: {
