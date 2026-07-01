@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  ssr: false,
   devtools: { enabled: true },
   app: {
     head: {
@@ -41,6 +40,8 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
   routeRules: {
     '/': {
