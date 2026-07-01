@@ -38,6 +38,7 @@ export default defineNuxtConfig({
   },
   pwa: {
     registerType: 'autoUpdate',
+    manifestFilename: 'manifest.json',
     manifest: {
       name: 'Cube Timer',
       short_name: 'Cube Timer',
