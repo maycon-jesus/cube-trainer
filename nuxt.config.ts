@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Timer de speedcubing para cubo mágico' },
-        { name: 'theme-color', content: '#121212' },
+        { name: 'theme-color', content: '#F56217' },
         // Open Graph
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Cube Timer' },
@@ -79,7 +79,7 @@ export default defineNuxtConfig({
       display: 'standalone',
       orientation: 'portrait',
       background_color: '#121212',
-      theme_color: '#121212',
+      theme_color: '#F56217',
       categories: ['utilities', 'productivity'],
       icons: [
         {
