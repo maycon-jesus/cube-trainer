@@ -18,7 +18,7 @@ export type Solve = Stored<{
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
   version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }],
+  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' }],
 })
 
 export const useSolvesStore = defineStore('solves', () => {
