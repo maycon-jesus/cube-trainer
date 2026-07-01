@@ -1,0 +1,11 @@
+{
+  "app": {
+    "title": "Cube Timer"
+  },
+  "actions": {
+    "newScramble": "Novo scramble"
+  },
+  "cube": {
+    "other": "Outro"
+  }
+}
