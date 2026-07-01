@@ -4,5 +4,18 @@
   },
   "actions": {
     "newScramble": "New scramble"
+  },
+  "cube": {
+    "other": "Other",
+    "2x2x2": "2x2x2",
+    "3x3x3": "3x3x3",
+    "4x4x4": "4x4x4",
+    "5x5x5": "5x5x5",
+    "6x6x6": "6x6x6",
+    "7x7x7": "7x7x7",
+    "pyraminx": "Pyraminx",
+    "megaminx": "Megaminx",
+    "mirror-3x3x3": "Mirror 3x3x3",
+    "mirror-2x2x2": "Mirror 2x2x2"
   }
 }
