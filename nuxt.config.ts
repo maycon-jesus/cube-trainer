@@ -30,6 +30,10 @@ export default defineNuxtConfig({
         { name: 'twitter:image', content: '/pwa-512x512.png' },
         { name: 'twitter:image:alt', content: 'Cube Timer' },
       ],
+      link: [
+        // PWA
+        { rel: 'manifest', href: '/manifest.webmanifest' },
+      ]
     },
   },
   modules: [
