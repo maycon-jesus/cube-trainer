@@ -108,7 +108,7 @@ export default defineNuxtConfig({
       display_override: ['fullscreen', 'minimal-ui'],
       display: 'standalone',
       orientation: 'portrait',
-      background_color: '#121212',
+      background_color: '#060708',
       theme_color: '#F56217',
       categories: ['utilities', 'productivity'],
       icons: [
