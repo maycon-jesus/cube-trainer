@@ -6,7 +6,7 @@ import { useSolvesStore, type Penalty, type Solve } from '~/stores/db/solves'
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
 const { solves } = storeToRefs(solvesStore)
-const { refresh, add, update, remove, clear } = solvesStore
+const { add, update, remove, clear } = solvesStore
 
 // --- Scramble -------------------------------------------------------------
 const { scramble, newScramble } = useScramble()
@@ -138,7 +138,6 @@ const stats = computed(() => ({
 
 // --- Lifecycle ------------------------------------------------------------
 onBeforeMount(()=>{
-    refresh()
     window.addEventListener('keydown', onKeyDown)
     window.addEventListener('keyup', onKeyUp)
 })

@@ -49,11 +49,13 @@ export const useSessionsStore = defineStore('sessions', () => {
     sessions.value = []
   }
 
-  async function seed(sessionName: string = DEFAULT_SESSION_NAME): Promise<void> {
+  async function load(): Promise<void> {
     if (!import.meta.client) return
     const count = await db.count()
     if (count === 0) {
-      await add({ createdAt: Date.now(), name: sessionName })
+      await add({ createdAt: Date.now(), name: DEFAULT_SESSION_NAME })
+    } else {
+      await refresh()
     }
   }
 
@@ -65,5 +67,11 @@ export const useSessionsStore = defineStore('sessions', () => {
     return db.get(id)
   }
 
-  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, seed }
+  async function reset() {
+    ready.value = false
+    sessions.value = []
+    await db.deleteDB()
+  }
+
+  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset }
 })

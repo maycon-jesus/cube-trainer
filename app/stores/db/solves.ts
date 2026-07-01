@@ -61,5 +61,15 @@ export const useSolvesStore = defineStore('solves', () => {
     solves.value = []
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId }
+  async function load() {
+    await refresh()
+  }
+
+  async function reset() {
+    ready.value = false
+    solves.value = []
+    await db.deleteDB()
+  }
+
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load }
 })

@@ -1,5 +1,5 @@
 export const useLoader = defineStore('loader', () => {
-    const counter = ref(0)
+    const counter = useState('loader-counter', () => 0)
 
     const start = () => {
         counter.value++

@@ -1,31 +1,30 @@
 <script setup lang="ts">
-import { useConfigStore } from '~/stores/db/config';
-import { useSessionsStore } from '~/stores/db/sessions';
 import logo from '~/assets/logo-color.svg';
 
 const { newScramble } = useScramble()
-const { t } = useI18n() 
+const { t } = useI18n()
 
-onMounted(()=>{
+onMounted(() => {
   useLoader().start()
-  Promise.all([
-    useConfigStore().load(),
-    useSessionsStore().seed(),
-    useSessionsStore().refresh()
-  ]).then(()=>{
-    useLoader().end()
-  })
+  useMigrationStore().load()
+    .then(() => {
+      useLoader().end()
+    })
+    .catch(err => {
+      console.error(err)
+    })
 })
 
 </script>
 
 <template>
   <v-app>
-    <Loading/>
+    <Loading />
     <v-app-bar flat density="comfortable" color="surface">
       <div>
         <NuxtLink class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row pl-4">
-          <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title') }}</span>
+          <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title')
+            }}</span>
         </NuxtLink>
       </div>
       <template #append>

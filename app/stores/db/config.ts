@@ -22,7 +22,14 @@ export const useConfigStore = defineStore('config', () => {
         ready.value = true
     }
 
-    return { load, selectedSessionId, selectedCubeType, ready }
+    async function reset() {
+        ready.value = false
+        selectedSessionId.value = 0
+        selectedCubeType.value = ''
+        await db.deleteDB()
+    }
+
+    return { load, selectedSessionId, selectedCubeType, ready, reset }
 })
 
 async function loadSelectedSessionId(): Promise<number> {
