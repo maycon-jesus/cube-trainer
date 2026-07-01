@@ -24,43 +24,41 @@ export const ColorHex: Record<CubeColor, string> = {
   [CubeColor.Blue]: '#0000ff',
 }
 
-export enum CubeFaceIndex {
-  L = 0,
-  U,
-  F,
-  D,
-  R,
-  B,
+export abstract class CubeEngine {
+  abstract generateScramble(movesCount: number): string
+  abstract applyMove(move: string): void
+  abstract applyMoves(moves: string[]): void
+  abstract render(): Record<number, CubeColor[][]>
 }
 
-export class CubeFace {
-  color: CubeColor
-  pieces: CubeColor[]
+export type CubeFaceFiller<Piece> = Piece | Piece[]
 
-  constructor(color: CubeColor, size: number) {
-    this.color = color
-    this.pieces = new Array<CubeColor>(size * size).fill(color)
+export class CubeFace<Piece> {
+  private size: number
+  private filler: CubeFaceFiller<Piece>
+  pieces: Piece[]
+
+  constructor(size: number, filler: CubeFaceFiller<Piece>) {
+    this.size = size
+    this.filler = filler
+
+    this.pieces = new Array<Piece>(size)
+    if (Array.isArray(filler)) {
+      this.pieces = structuredClone(filler)
+    } else {
+      this.pieces.fill(structuredClone(filler))
+    }
   }
 
-  clone(): CubeFace {
-    const clone = Object.create(CubeFace.prototype) as CubeFace
-    clone.color = this.color
-    clone.pieces = [...this.pieces]
-    return clone
+  clone(): CubeFace<Piece> {
+    return new CubeFace<Piece>(this.size, this.pieces)
   }
 }
 
-/**
- * Layout of the pieces on each face:
- *
- *     1 2 3
- *     4 5 6
- *     7 8 9
- */
 export interface PieceMove {
-  srcFace: CubeFaceIndex
+  srcFace: number
   srcPos: number[]
-  dstFace: CubeFaceIndex
+  dstFace: number
   dstPos: number[]
 }
 
@@ -71,7 +69,7 @@ export type MovesCollection = Record<string, MoveSet>
  * Applies a move set to the faces. All transfers read from a snapshot taken
  * before any write, so the permutation is applied simultaneously.
  */
-export function resolveMoveSet(faces: CubeFace[], moveSet: MoveSet): void {
+export function resolveMoveSet<Piece>(faces: CubeFace<Piece>[], moveSet: MoveSet): void {
   const facesSrc = faces.map((face) => face.clone())
 
   for (const move of moveSet) {

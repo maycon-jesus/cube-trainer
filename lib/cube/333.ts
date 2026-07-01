@@ -8,68 +8,74 @@
 import {
   CubeColor,
   CubeFace,
-  CubeFaceIndex,
   resolveMoveSet,
   type MovesCollection,
 } from './cube'
 
-const F = CubeFaceIndex
+export enum FaceIndex {
+  L = 0,
+  U,
+  F,
+  D,
+  R,
+  B,
+}
 
 export const Cube333MovesCollection: MovesCollection = {
   U: [
-    { srcFace: F.U, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.U, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.L, srcPos: [1, 2, 3], dstFace: F.B, dstPos: [1, 2, 3] },
-    { srcFace: F.B, srcPos: [1, 2, 3], dstFace: F.R, dstPos: [1, 2, 3] },
-    { srcFace: F.R, srcPos: [1, 2, 3], dstFace: F.F, dstPos: [1, 2, 3] },
-    { srcFace: F.F, srcPos: [1, 2, 3], dstFace: F.L, dstPos: [1, 2, 3] },
+    { srcFace: FaceIndex.U, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.U, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.L, srcPos: [1, 2, 3], dstFace: FaceIndex.B, dstPos: [1, 2, 3] },
+    { srcFace: FaceIndex.B, srcPos: [1, 2, 3], dstFace: FaceIndex.R, dstPos: [1, 2, 3] },
+    { srcFace: FaceIndex.R, srcPos: [1, 2, 3], dstFace: FaceIndex.F, dstPos: [1, 2, 3] },
+    { srcFace: FaceIndex.F, srcPos: [1, 2, 3], dstFace: FaceIndex.L, dstPos: [1, 2, 3] },
   ],
   D: [
-    { srcFace: F.D, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.D, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.L, srcPos: [7, 8, 9], dstFace: F.F, dstPos: [7, 8, 9] },
-    { srcFace: F.F, srcPos: [7, 8, 9], dstFace: F.R, dstPos: [7, 8, 9] },
-    { srcFace: F.R, srcPos: [7, 8, 9], dstFace: F.B, dstPos: [7, 8, 9] },
-    { srcFace: F.B, srcPos: [7, 8, 9], dstFace: F.L, dstPos: [7, 8, 9] },
+    { srcFace: FaceIndex.D, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.D, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.L, srcPos: [7, 8, 9], dstFace: FaceIndex.F, dstPos: [7, 8, 9] },
+    { srcFace: FaceIndex.F, srcPos: [7, 8, 9], dstFace: FaceIndex.R, dstPos: [7, 8, 9] },
+    { srcFace: FaceIndex.R, srcPos: [7, 8, 9], dstFace: FaceIndex.B, dstPos: [7, 8, 9] },
+    { srcFace: FaceIndex.B, srcPos: [7, 8, 9], dstFace: FaceIndex.L, dstPos: [7, 8, 9] },
   ],
   F: [
-    { srcFace: F.F, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.F, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.U, srcPos: [7, 8, 9], dstFace: F.R, dstPos: [1, 4, 7] },
-    { srcFace: F.R, srcPos: [1, 4, 7], dstFace: F.D, dstPos: [3, 2, 1] },
-    { srcFace: F.D, srcPos: [1, 2, 3], dstFace: F.L, dstPos: [3, 6, 9] },
-    { srcFace: F.L, srcPos: [3, 6, 9], dstFace: F.U, dstPos: [9, 8, 7] },
+    { srcFace: FaceIndex.F, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.F, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.U, srcPos: [7, 8, 9], dstFace: FaceIndex.R, dstPos: [1, 4, 7] },
+    { srcFace: FaceIndex.R, srcPos: [1, 4, 7], dstFace: FaceIndex.D, dstPos: [3, 2, 1] },
+    { srcFace: FaceIndex.D, srcPos: [1, 2, 3], dstFace: FaceIndex.L, dstPos: [3, 6, 9] },
+    { srcFace: FaceIndex.L, srcPos: [3, 6, 9], dstFace: FaceIndex.U, dstPos: [9, 8, 7] },
   ],
   B: [
-    { srcFace: F.B, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.B, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.R, srcPos: [3, 6, 9], dstFace: F.U, dstPos: [1, 2, 3] },
-    { srcFace: F.U, srcPos: [1, 2, 3], dstFace: F.L, dstPos: [7, 4, 1] },
-    { srcFace: F.L, srcPos: [1, 4, 7], dstFace: F.D, dstPos: [7, 8, 9] },
-    { srcFace: F.D, srcPos: [7, 8, 9], dstFace: F.R, dstPos: [9, 6, 3] },
+    { srcFace: FaceIndex.B, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.B, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.R, srcPos: [3, 6, 9], dstFace: FaceIndex.U, dstPos: [1, 2, 3] },
+    { srcFace: FaceIndex.U, srcPos: [1, 2, 3], dstFace: FaceIndex.L, dstPos: [7, 4, 1] },
+    { srcFace: FaceIndex.L, srcPos: [1, 4, 7], dstFace: FaceIndex.D, dstPos: [7, 8, 9] },
+    { srcFace: FaceIndex.D, srcPos: [7, 8, 9], dstFace: FaceIndex.R, dstPos: [9, 6, 3] },
   ],
   R: [
-    { srcFace: F.R, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.R, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.U, srcPos: [3, 6, 9], dstFace: F.B, dstPos: [7, 4, 1] },
-    { srcFace: F.B, srcPos: [1, 4, 7], dstFace: F.D, dstPos: [9, 6, 3] },
-    { srcFace: F.D, srcPos: [3, 6, 9], dstFace: F.F, dstPos: [3, 6, 9] },
-    { srcFace: F.F, srcPos: [3, 6, 9], dstFace: F.U, dstPos: [3, 6, 9] },
+    { srcFace: FaceIndex.R, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.R, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.U, srcPos: [3, 6, 9], dstFace: FaceIndex.B, dstPos: [7, 4, 1] },
+    { srcFace: FaceIndex.B, srcPos: [1, 4, 7], dstFace: FaceIndex.D, dstPos: [9, 6, 3] },
+    { srcFace: FaceIndex.D, srcPos: [3, 6, 9], dstFace: FaceIndex.F, dstPos: [3, 6, 9] },
+    { srcFace: FaceIndex.F, srcPos: [3, 6, 9], dstFace: FaceIndex.U, dstPos: [3, 6, 9] },
   ],
   L: [
-    { srcFace: F.L, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: F.L, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
-    { srcFace: F.U, srcPos: [1, 4, 7], dstFace: F.F, dstPos: [1, 4, 7] },
-    { srcFace: F.F, srcPos: [1, 4, 7], dstFace: F.D, dstPos: [1, 4, 7] },
-    { srcFace: F.D, srcPos: [1, 4, 7], dstFace: F.B, dstPos: [9, 6, 3] },
-    { srcFace: F.B, srcPos: [3, 6, 9], dstFace: F.U, dstPos: [7, 4, 1] },
+    { srcFace: FaceIndex.L, srcPos: [1, 2, 3, 4, 5, 6, 7, 8, 9], dstFace: FaceIndex.L, dstPos: [3, 6, 9, 2, 5, 8, 1, 4, 7] },
+    { srcFace: FaceIndex.U, srcPos: [1, 4, 7], dstFace: FaceIndex.F, dstPos: [1, 4, 7] },
+    { srcFace: FaceIndex.F, srcPos: [1, 4, 7], dstFace: FaceIndex.D, dstPos: [1, 4, 7] },
+    { srcFace: FaceIndex.D, srcPos: [1, 4, 7], dstFace: FaceIndex.B, dstPos: [9, 6, 3] },
+    { srcFace: FaceIndex.B, srcPos: [3, 6, 9], dstFace: FaceIndex.U, dstPos: [7, 4, 1] },
   ],
 }
 
 export class Cube333 {
-  readonly faces: CubeFace[] = new Array<CubeFace>(6)
+  readonly faces: CubeFace<CubeColor>[] = new Array(6)
 
   constructor() {
-    this.faces[F.L] = new CubeFace(CubeColor.Orange, 3)
-    this.faces[F.U] = new CubeFace(CubeColor.White, 3)
-    this.faces[F.F] = new CubeFace(CubeColor.Green, 3)
-    this.faces[F.D] = new CubeFace(CubeColor.Yellow, 3)
-    this.faces[F.R] = new CubeFace(CubeColor.Red, 3)
-    this.faces[F.B] = new CubeFace(CubeColor.Blue, 3)
+    this.faces[FaceIndex.L] = new CubeFace(9, CubeColor.Orange)
+    this.faces[FaceIndex.U] = new CubeFace(9, CubeColor.White)
+    this.faces[FaceIndex.F] = new CubeFace(9, CubeColor.Green)
+    this.faces[FaceIndex.D] = new CubeFace(9, CubeColor.Yellow)
+    this.faces[FaceIndex.R] = new CubeFace(9, CubeColor.Red)
+    this.faces[FaceIndex.B] = new CubeFace(9, CubeColor.Blue)
   }
 
   applyMove(move: string): void {
@@ -110,19 +116,19 @@ export class Cube333 {
    * Returns each face as a 3x3 grid of colors, in the same layout the Go
    * `Render` produced, ready for a component to draw the unfolded cube.
    */
-  render(): Record<keyof typeof CubeFaceIndex, CubeColor[][]> {
-    const grid = (face: CubeFaceIndex): CubeColor[][] => {
+  render(): Record<keyof typeof FaceIndex, CubeColor[][]> {
+    const grid = (face: FaceIndex): CubeColor[][] => {
       const pieces = this.faces[face]!.pieces
       return [pieces.slice(0, 3), pieces.slice(3, 6), pieces.slice(6, 9)]
     }
 
     return {
-      L: grid(F.L),
-      U: grid(F.U),
-      F: grid(F.F),
-      D: grid(F.D),
-      R: grid(F.R),
-      B: grid(F.B),
+      L: grid(FaceIndex.L),
+      U: grid(FaceIndex.U),
+      F: grid(FaceIndex.F),
+      D: grid(FaceIndex.D),
+      R: grid(FaceIndex.R),
+      B: grid(FaceIndex.B),
     }
   }
 }
