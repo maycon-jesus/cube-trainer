@@ -12,13 +12,20 @@ export type Solve = Stored<{
   puzzle: string
   category: Category
   sessionId: number
-  trainingId?: number
+  trainingId: string
 }>
 
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
-  version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' }],
+  version: 2,
+  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' },
+  { name: 'category', keyPath: 'category' },
+  {
+    name: 'all-solves',
+    keyPath: ['category', 'sessionId', 'puzzle', 'trainingId'],
+    options: { unique: false },
+  },
+  ],
 })
 
 export const useSolvesStore = defineStore('solves', () => {
@@ -71,5 +78,10 @@ export const useSolvesStore = defineStore('solves', () => {
     await db.deleteDB()
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load }
+  async function getAll(type: Category, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
+    console.log("aaaa")
+    return db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
+  }
+
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll }
 })
