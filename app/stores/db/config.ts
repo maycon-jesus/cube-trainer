@@ -12,23 +12,26 @@ const db = new Database<Config>('config', 'config', {
     autoIncrement: false,
 })
 
+enum ConfigKeys {
+    SessionId = 'sessionId',
+    Puzzle = 'puzzle',
+    Theme = 'theme'
+}
+
 export const useConfigStore = defineStore('config', () => {
     const $theme = useTheme()
 
     const sessionId = ref(0)
     const puzzle = ref('')
     const theme = ref('')
-    const ready = ref(false)
 
     async function load() {
         sessionId.value = await loadSelectedSessionId()
         puzzle.value = await loadSelectedCubeType()
         theme.value = await loadSelectedTheme($theme)
-        ready.value = true
     }
 
     async function reset() {
-        ready.value = false
         sessionId.value = 0
         puzzle.value = ''
         theme.value = ''
@@ -37,21 +40,29 @@ export const useConfigStore = defineStore('config', () => {
 
     async function saveAll() {
         await db.put({
-            id: 'selectedTheme',
+            id: ConfigKeys.SessionId,
+            value: sessionId.value.toString()
+        })
+        await db.put({
+            id: ConfigKeys.Puzzle,
+            value: puzzle.value
+        })
+        await db.put({
+            id: ConfigKeys.Theme,
             value: theme.value
         })
     }
 
-    return { saveAll, load, sessionId, puzzle, theme, ready, reset }
+    return { saveAll, load, sessionId, puzzle, theme, reset }
 })
 
 async function loadSelectedSessionId(): Promise<number> {
-    const sessionId = await db.get('selectedSessionId')
+    const sessionId = await db.get(ConfigKeys.SessionId)
     if (!sessionId) {
         const lastSession = await useSessionsStore().getLastSession()
         if (lastSession) {
             await db.add({
-                id: 'selectedSessionId',
+                id: ConfigKeys.SessionId,
                 value: lastSession.id?.toString()
             })
         }
@@ -61,7 +72,7 @@ async function loadSelectedSessionId(): Promise<number> {
 
         const exists = await useSessionsStore().getSession(sessionIdParsed)
         if (!exists) {
-            await db.delete('selectedSessionId')
+            await db.delete(ConfigKeys.SessionId)
             return loadSelectedSessionId()
         } else {
             return sessionIdParsed
@@ -70,21 +81,21 @@ async function loadSelectedSessionId(): Promise<number> {
 }
 
 async function loadSelectedCubeType() {
-    const selectedCubeType = await db.get('selectedCubeType')
+    const selectedCubeType = await db.get(ConfigKeys.Puzzle)
     if (!selectedCubeType) {
         const cubeType = Object.keys(cubesDefinition)[0]
         if (!cubeType) {
             throw new Error("Not exists cube definition")
         }
         await db.add({
-            id: 'selectedCubeType',
+            id: ConfigKeys.Puzzle,
             value: cubeType
         })
         return loadSelectedCubeType()
     } else {
         const cubeDefinition = cubesDefinition[selectedCubeType.value]
         if (!cubeDefinition) {
-            await db.delete('selectedCubeType')
+            await db.delete(ConfigKeys.Puzzle)
             return loadSelectedCubeType()
         } else {
             return cubeDefinition.id
@@ -93,10 +104,10 @@ async function loadSelectedCubeType() {
 }
 
 async function loadSelectedTheme(themeInstance: ThemeInstance) {
-    const selectedTheme = await db.get('selectedTheme')
+    const selectedTheme = await db.get(ConfigKeys.Theme)
     if (!selectedTheme) {
         await db.add({
-            id: 'selectedTheme',
+            id: ConfigKeys.Theme,
             value: themeInstance.name.value
         })
         return loadSelectedTheme(themeInstance)
