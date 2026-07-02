@@ -13,36 +13,36 @@ const db = new Database<Config>('config', 'config', {
 })
 
 export const useConfigStore = defineStore('config', () => {
-    const theme = useTheme()
+    const $theme = useTheme()
 
-    const selectedSessionId = ref(0)
-    const selectedCubeType = ref('')
-    const selectedTheme = ref('')
+    const sessionId = ref(0)
+    const puzzle = ref('')
+    const theme = ref('')
     const ready = ref(false)
 
     async function load() {
-        selectedSessionId.value = await loadSelectedSessionId()
-        selectedCubeType.value = await loadSelectedCubeType()
-        selectedTheme.value = await loadSelectedTheme(theme)
+        sessionId.value = await loadSelectedSessionId()
+        puzzle.value = await loadSelectedCubeType()
+        theme.value = await loadSelectedTheme($theme)
         ready.value = true
     }
 
     async function reset() {
         ready.value = false
-        selectedSessionId.value = 0
-        selectedCubeType.value = ''
-        selectedTheme.value = ''
+        sessionId.value = 0
+        puzzle.value = ''
+        theme.value = ''
         await db.deleteDB()
     }
 
     async function saveAll() {
         await db.put({
             id: 'selectedTheme',
-            value: selectedTheme.value
+            value: theme.value
         })
     }
 
-    return { saveAll, load, selectedSessionId, selectedCubeType, selectedTheme, ready, reset }
+    return { saveAll, load, sessionId, puzzle, theme, ready, reset }
 })
 
 async function loadSelectedSessionId(): Promise<number> {

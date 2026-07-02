@@ -20,13 +20,13 @@ const currentLocale = computed({
 })
 
 const currentTheme = computed({
-  get: () => config.selectedTheme,
+  get: () => config.theme,
   set: (name: string) => {
     theme.change(name, {
         origin: '50% 50%'
     })
-    useConfigStore().selectedTheme = name
-    useConfigStore().saveAll()
+    config.theme = name
+    config.saveAll()
   },
 })
 

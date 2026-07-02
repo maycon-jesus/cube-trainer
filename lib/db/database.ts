@@ -154,6 +154,15 @@ export class Database<T extends Record<string, unknown>> {
         await this.tx('readwrite', (s) => s.clear())
     }
 
+    async deleteDB(): Promise<void> {
+        if (!Database.supported) {
+            throw new Error('IndexedDB is not available in this environment')
+        }
+        await this.close()
+        indexedDB.deleteDatabase(this.name)
+        return
+    }
+
     /** Close the underlying connection. The next call reopens it. */
     async close(): Promise<void> {
         if (!this.dbPromise) return

@@ -53,7 +53,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.selectedCubeType, sessionId: 1 })
+  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.puzzle, sessionId: configStore.sessionId })
   newScramble()
 }
 

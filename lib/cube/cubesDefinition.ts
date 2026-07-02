@@ -1,6 +1,9 @@
+import type { CubeEngine } from "./cube"
+
 export type CubeData = {
     id: string,
     name: string,
+    cubeEngine?: CubeEngine
 }
 
 export const cubesDefinition: Record<CubeData["id"], CubeData> = {
@@ -27,6 +30,22 @@ export const cubesDefinition: Record<CubeData["id"], CubeData> = {
     "7x7x7": {
         id: "7x7x7",
         name: "7x7x7"
+    },
+    "pyraminx": {
+        id: "pyraminx",
+        name: "Pyraminx"
+    },
+    "megaminx": {
+        id: "megaminx",
+        name: "Megaminx"
+    },
+    "mirror-3x3x3": {
+        id: "mirror-3x3x3",
+        name: "Mirror 3x3x3"
+    },
+    "mirror-2x2x2": {
+        id: "mirror-2x2x2",
+        name: "Mirror 2x2x2"
     },
     "other": {
         id: "other",

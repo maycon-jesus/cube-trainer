@@ -7,6 +7,7 @@
 
 import {
   CubeColor,
+  ColorHex,
   CubeFace,
   resolveMoveSet,
   type MovesCollection,
@@ -131,6 +132,87 @@ export class Cube333 {
       B: grid(FaceIndex.B),
     }
   }
+
+  /**
+   * Renders the cube as a self-contained SVG string of the unfolded net (the
+   * classic cross: U on top, L F R B in the middle row, D at the bottom).
+   *
+   * The return is a plain string so the front-end can drop it straight into
+   * `v-html`, an `<img src>` via {@link renderSvgDataUri}, or a download —
+   * no per-sticker Vue markup required.
+   */
+  renderSvg(options: RenderSvgOptions = {}): string {
+    const sticker = options.stickerSize ?? 16
+    const gap = options.gap ?? 2
+    const stroke = options.stroke ?? '#00000073'
+    const background = options.background ?? 'transparent'
+    const radius = options.radius ?? 2
+
+    const face = sticker * 3 + gap * 2 // side length of one 3x3 face
+    // Net layout in face units: [column, row] for each face.
+    const layout: Record<keyof typeof FaceIndex, [number, number]> = {
+      U: [1, 0],
+      L: [0, 1],
+      F: [1, 1],
+      R: [2, 1],
+      B: [3, 1],
+      D: [1, 2],
+    }
+
+    const grids = this.render()
+    const rects: string[] = []
+
+    for (const key of Object.keys(layout) as (keyof typeof FaceIndex)[]) {
+      const [fcol, frow] = layout[key]
+      const originX = fcol * (face + gap)
+      const originY = frow * (face + gap)
+
+      grids[key].forEach((line, r) => {
+        line.forEach((color, c) => {
+          const x = originX + c * (sticker + gap)
+          const y = originY + r * (sticker + gap)
+          rects.push(
+            `<rect x="${x}" y="${y}" width="${sticker}" height="${sticker}" rx="${radius}" ` +
+              `fill="${ColorHex[color]}" stroke="${stroke}" stroke-width="1"/>`,
+          )
+        })
+      })
+    }
+
+    const width = 4 * face + 3 * gap
+    const height = 3 * face + 2 * gap
+
+    return (
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ` +
+      `viewBox="0 0 ${width} ${height}">` +
+      `<rect width="${width}" height="${height}" fill="${background}"/>` +
+      rects.join('') +
+      `</svg>`
+    )
+  }
+
+  /**
+   * Same as {@link renderSvg} but as a `data:` URI, ready to use directly as an
+   * `<img :src>` value on the front-end. Uses UTF-8 percent-encoding so it works
+   * both in the browser and during SSR without `btoa`/`Buffer`.
+   */
+  renderSvgDataUri(options: RenderSvgOptions = {}): string {
+    const svg = this.renderSvg(options)
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+  }
+}
+
+export interface RenderSvgOptions {
+  /** Side length of a single sticker in px. Default `16`. */
+  stickerSize?: number
+  /** Gap in px between stickers and between faces. Default `2`. */
+  gap?: number
+  /** Sticker border color. Default `#00000073`. */
+  stroke?: string
+  /** Background fill of the whole SVG. Default `transparent`. */
+  background?: string
+  /** Sticker corner radius in px. Default `2`. */
+  radius?: number
 }
 
 export function createCube333(): Cube333 {

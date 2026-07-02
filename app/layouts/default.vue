@@ -3,6 +3,7 @@ import logo from '~/assets/logo-color.svg';
 import { useConfigStore } from '~/stores/db/config';
 
 const theme = useTheme()
+const configStore = useConfigStore()
 const { newScramble } = useScramble()
 const { t } = useI18n()
 
@@ -12,7 +13,7 @@ onMounted(() => {
   useLoader().start()
   useMigrationStore().load()
     .then(() => {
-      theme.change(useConfigStore().selectedTheme, true)
+      theme.change(configStore.theme, true)
       useLoader().end()
     })
     .catch(err => {

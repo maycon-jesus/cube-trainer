@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-autocomplete label="Puzzle" :items="items" v-model="configStore.selectedCubeType">
+        <v-autocomplete label="Puzzle" :items="items" v-model="configStore.puzzle">
         </v-autocomplete>
     </div>
 </template>

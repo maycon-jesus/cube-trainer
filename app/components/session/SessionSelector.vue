@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-autocomplete label="Session" :items="items" v-model="configStore.selectedSessionId">
+        <v-autocomplete label="Session" :items="items" v-model="configStore.sessionId">
             <template #append-item>
                 <v-list-item>
                     <v-list-item-title>AAA</v-list-item-title>
