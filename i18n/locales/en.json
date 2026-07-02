@@ -9,6 +9,29 @@
     "play": "Play",
     "settings": "Settings"
   },
+  "settings": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "subtitle": "Customize how the app looks",
+      "theme": "Theme",
+      "themeDark": "Dark",
+      "themeLight": "Light",
+      "language": "Language"
+    },
+    "data": {
+      "title": "Data",
+      "subtitle": "Manage your local data",
+      "reset": "Reset data",
+      "resetDescription": "Delete all sessions and solves and restore the app to its initial state.",
+      "resetConfirmTitle": "Reset all data?",
+      "resetConfirmText": "This will permanently delete all your sessions and solves. This action cannot be undone.",
+      "resetSuccess": "Data reset successfully",
+      "resetError": "Failed to reset data"
+    },
+    "cancel": "Cancel",
+    "confirm": "Reset"
+  },
   "cube": {
     "other": "Other",
     "2x2x2": "2x2x2",

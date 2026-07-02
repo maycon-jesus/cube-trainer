@@ -9,6 +9,29 @@
     "play": "Jogar",
     "settings": "Configurações"
   },
+  "settings": {
+    "title": "Configurações",
+    "appearance": {
+      "title": "Aparência",
+      "subtitle": "Personalize a aparência do aplicativo",
+      "theme": "Tema",
+      "themeDark": "Escuro",
+      "themeLight": "Claro",
+      "language": "Idioma"
+    },
+    "data": {
+      "title": "Dados",
+      "subtitle": "Gerencie seus dados locais",
+      "reset": "Resetar dados",
+      "resetDescription": "Apaga todas as sessões e resoluções e restaura o aplicativo ao estado inicial.",
+      "resetConfirmTitle": "Resetar todos os dados?",
+      "resetConfirmText": "Isso vai apagar permanentemente todas as suas sessões e resoluções. Esta ação não pode ser desfeita.",
+      "resetSuccess": "Dados resetados com sucesso",
+      "resetError": "Falha ao resetar os dados"
+    },
+    "cancel": "Cancelar",
+    "confirm": "Resetar"
+  },
   "cube": {
     "other": "Outro"
   }

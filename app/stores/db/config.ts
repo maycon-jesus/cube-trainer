@@ -1,6 +1,7 @@
 import { Database } from "~~/lib/db/database"
 import { useSessionsStore } from "./sessions"
 import { cubesDefinition } from "~~/lib/cube/cubesDefinition"
+import type { ThemeInstance } from "vuetify"
 
 export type Config = {
     id?: string,
@@ -12,13 +13,17 @@ const db = new Database<Config>('config', 'config', {
 })
 
 export const useConfigStore = defineStore('config', () => {
+    const theme = useTheme()
+
     const selectedSessionId = ref(0)
     const selectedCubeType = ref('')
+    const selectedTheme = ref('')
     const ready = ref(false)
 
     async function load() {
         selectedSessionId.value = await loadSelectedSessionId()
         selectedCubeType.value = await loadSelectedCubeType()
+        selectedTheme.value = await loadSelectedTheme(theme)
         ready.value = true
     }
 
@@ -26,10 +31,18 @@ export const useConfigStore = defineStore('config', () => {
         ready.value = false
         selectedSessionId.value = 0
         selectedCubeType.value = ''
+        selectedTheme.value = ''
         await db.deleteDB()
     }
 
-    return { load, selectedSessionId, selectedCubeType, ready, reset }
+    async function saveAll() {
+        await db.put({
+            id: 'selectedTheme',
+            value: selectedTheme.value
+        })
+    }
+
+    return { saveAll, load, selectedSessionId, selectedCubeType, selectedTheme, ready, reset }
 })
 
 async function loadSelectedSessionId(): Promise<number> {
@@ -76,5 +89,18 @@ async function loadSelectedCubeType() {
         } else {
             return cubeDefinition.id
         }
+    }
+}
+
+async function loadSelectedTheme(themeInstance: ThemeInstance) {
+    const selectedTheme = await db.get('selectedTheme')
+    if (!selectedTheme) {
+        await db.add({
+            id: 'selectedTheme',
+            value: themeInstance.name.value
+        })
+        return loadSelectedTheme(themeInstance)
+    } else {
+        return selectedTheme.value
     }
 }
