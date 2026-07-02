@@ -6,7 +6,7 @@ import { useSolvesStore, type Penalty, type Solve } from '~/stores/db/solves'
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
 const { solves } = storeToRefs(solvesStore)
-const { add, update, remove, clear } = solvesStore
+const { add } = solvesStore
 
 // --- Scramble -------------------------------------------------------------
 const { scramble, newScramble } = useScramble()
@@ -53,7 +53,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.puzzle, sessionId: configStore.sessionId })
+  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.puzzle, sessionId: configStore.sessionId, trainingId: '' })
   newScramble()
 }
 
@@ -114,17 +114,6 @@ function onTouchEnd() {
   }
   if (phase.value === 'ready') startRunning()
   else if (phase.value === 'holding') phase.value = 'idle'
-}
-
-// --- Solve actions --------------------------------------------------------
-async function setPenalty(solve: Solve, penalty: Penalty) {
-  await update({ ...solve, penalty: solve.penalty === penalty ? 'none' : penalty })
-}
-async function removeSolve(solve: Solve) {
-  if (solve.id !== undefined) await remove(solve.id)
-}
-async function clearAll() {
-  if (confirm('Apagar todos os tempos?')) await clear()
 }
 
 // --- Stats ----------------------------------------------------------------
@@ -223,64 +212,7 @@ onBeforeUnmount(() => {
 
           <!-- Sidebar: times -->
           <v-col cols="12" md="2">
-            <v-sheet rounded="lg" color="surface" class="pa-4">
-              <div class="d-flex justify-space-between align-center mb-2">
-                <span class="text-subtitle-1 font-weight-bold">Tempos</span>
-                <v-btn
-                  size="small"
-                  variant="text"
-                  color="error"
-                  :disabled="!solves.length"
-                  @click="clearAll"
-                >
-                  Limpar
-                </v-btn>
-              </div>
-
-              <v-list v-if="solves.length" density="compact" bg-color="transparent" class="times-list">
-                <v-list-item v-for="(solve, i) in solves" :key="solve.id" class="px-2">
-                  <template #prepend>
-                    <span class="text-caption text-medium-emphasis mr-3" style="width: 28px">
-                      {{ solves.length - i }}.
-                    </span>
-                  </template>
-                  <v-list-item-title
-                    class="font-weight-medium"
-                    :class="{ 'text-decoration-line-through text-medium-emphasis': solve.penalty === 'dnf' }"
-                  >
-                    {{ formatSolve(solve) }}
-                  </v-list-item-title>
-                  <template #append>
-                    <v-btn
-                      icon="mdi-numeric-2-box-outline"
-                      size="x-small"
-                      variant="text"
-                      :color="solve.penalty === '+2' ? 'amber' : undefined"
-                      title="+2"
-                      @click="setPenalty(solve, '+2')"
-                    />
-                    <v-btn
-                      icon="mdi-cancel"
-                      size="x-small"
-                      variant="text"
-                      :color="solve.penalty === 'dnf' ? 'error' : undefined"
-                      title="DNF"
-                      @click="setPenalty(solve, 'dnf')"
-                    />
-                    <v-btn
-                      icon="mdi-delete-outline"
-                      size="x-small"
-                      variant="text"
-                      title="Remover"
-                      @click="removeSolve(solve)"
-                    />
-                  </template>
-                </v-list-item>
-              </v-list>
-              <div v-else class="text-medium-emphasis text-center py-6">
-                Nenhum tempo ainda. Resolva o cubo!
-              </div>
-            </v-sheet>
+            <TimerSolves :solves="solves" />
         </v-col>
     </v-row>
   </v-container>
