@@ -11,127 +11,14 @@ const { add } = solvesStore
 // --- Scramble -------------------------------------------------------------
 const { scramble, newScramble } = useScramble()
 
-// --- Timer state machine --------------------------------------------------
-// idle -> holding -> ready -> running -> idle
-type Phase = 'idle' | 'holding' | 'ready' | 'running'
-const phase = ref<Phase>('idle')
-const HOLD_THRESHOLD = 300 // ms the spacebar must be held before it goes "ready"
-
-const elapsed = ref(0)
-let startTime = 0
-let rafId: number | null = null
-let holdTimer: ReturnType<typeof setTimeout> | null = null
-
-const display = computed(() => {
-  if (phase.value === 'running') return formatMs(elapsed.value)
-  const last = solves.value[0]
-  if (phase.value === 'idle' && last) return formatSolve(last)
-  return formatMs(elapsed.value)
-})
-
-const timerColor = computed(() => {
-  if (phase.value === 'ready') return 'text-green-accent-3'
-  if (phase.value === 'holding') return 'text-amber-accent-3'
-  return 'text-white'
-})
-
-function tick() {
-  elapsed.value = performance.now() - startTime
-  rafId = requestAnimationFrame(tick)
-}
-
-function startRunning() {
-  phase.value = 'running'
-  startTime = performance.now()
-  elapsed.value = 0
-  rafId = requestAnimationFrame(tick)
-}
-
-async function stopRunning() {
-  if (rafId !== null) cancelAnimationFrame(rafId)
-  rafId = null
-  const ms = performance.now() - startTime
-  elapsed.value = ms
-  phase.value = 'idle'
-  await add({ ms, scramble: scramble.value, penalty: 'none', createdAt: Date.now(), category: "normal", puzzle: configStore.puzzle, sessionId: configStore.sessionId, trainingId: '' })
-  newScramble()
-}
-
-// --- Keyboard handling ----------------------------------------------------
-function onKeyDown(e: KeyboardEvent) {
-  if (e.code !== 'Space') return
-  // Avoid scrolling / button activation while interacting with the timer.
-  if (e.repeat) {
-    e.preventDefault()
-    return
-  }
-  e.preventDefault()
-
-  if (phase.value === 'running') {
-    stopRunning()
-    return
-  }
-  if (phase.value === 'idle') {
-    phase.value = 'holding'
-    holdTimer = setTimeout(() => {
-      if (phase.value === 'holding') phase.value = 'ready'
-    }, HOLD_THRESHOLD)
-  }
-}
-
-function onKeyUp(e: KeyboardEvent) {
-  if (e.code !== 'Space') return
-  e.preventDefault()
-  if (holdTimer) {
-    clearTimeout(holdTimer)
-    holdTimer = null
-  }
-  if (phase.value === 'ready') {
-    startRunning()
-  } else if (phase.value === 'holding') {
-    // Released too early, cancel the arm.
-    phase.value = 'idle'
-  }
-}
-
-// --- Touch handling (mobile) ---------------------------------------------
-function onTouchStart() {
-  if (phase.value === 'running') {
-    stopRunning()
-    return
-  }
-  if (phase.value === 'idle') {
-    phase.value = 'holding'
-    holdTimer = setTimeout(() => {
-      if (phase.value === 'holding') phase.value = 'ready'
-    }, HOLD_THRESHOLD)
-  }
-}
-function onTouchEnd() {
-  if (holdTimer) {
-    clearTimeout(holdTimer)
-    holdTimer = null
-  }
-  if (phase.value === 'ready') startRunning()
-  else if (phase.value === 'holding') phase.value = 'idle'
-}
-
-
-// --- Lifecycle ------------------------------------------------------------
-onBeforeMount(()=>{
-    window.addEventListener('keydown', onKeyDown)
-    window.addEventListener('keyup', onKeyUp)
-})
-onMounted(() => {
+onBeforeMount(() => {
   newScramble()
 })
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', onKeyDown)
-  window.removeEventListener('keyup', onKeyUp)
-  if (rafId !== null) cancelAnimationFrame(rafId)
-  if (holdTimer) clearTimeout(holdTimer)
-})
 
+async function resolved(solve: Solve) {
+  await add(solve)
+  newScramble()
+}
 </script>
 
 <template>
@@ -158,20 +45,7 @@ onBeforeUnmount(() => {
             </v-sheet>
 
             <!-- Timer surface -->
-            <v-sheet
-              rounded="lg"
-              color="surface"
-              class="timer-surface d-flex flex-column align-center justify-center flex-grow-1"
-              @touchstart.prevent="onTouchStart"
-              @touchend.prevent="onTouchEnd"
-            >
-              <div class="timer-value font-weight-bold" :class="timerColor">
-                {{ display }}
-              </div>
-              <div class="text-medium-emphasis mt-4">
-                Segure <kbd>espaço</kbd> e solte para iniciar · pressione para parar
-              </div>
-            </v-sheet>
+            <Timer :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" />
 
             <!-- Scramble preview -->
             <v-sheet rounded="lg" color="surface" class="pa-4 mt-4 d-flex justify-center">
