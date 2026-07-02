@@ -1,5 +1,5 @@
 <template>
-    <v-sheet rounded="lg" color="surface" class="pa-4">
+    <v-card class="pa-4">
         <div class="d-flex justify-space-between align-center mb-2">
             <span class="text-subtitle-1 font-weight-bold">Tempos</span>
             <v-btn size="small" variant="text" color="error" :disabled="!solves.length" @click="clearAll">
@@ -33,7 +33,7 @@
         <div v-else class="text-medium-emphasis text-center py-6">
             Nenhum tempo ainda. Resolva o cubo!
         </div>
-    </v-sheet>
+    </v-card>
 </template>
 
 <script setup lang="ts">
