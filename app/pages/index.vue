@@ -116,14 +116,6 @@ function onTouchEnd() {
   else if (phase.value === 'holding') phase.value = 'idle'
 }
 
-// --- Stats ----------------------------------------------------------------
-const stats = computed(() => ({
-  count: solves.value.length,
-  best: bestOf(solves.value),
-  ao5: averageOf(solves.value, 5),
-  ao12: averageOf(solves.value, 12),
-  mean: meanOf(solves.value),
-}))
 
 // --- Lifecycle ------------------------------------------------------------
 onBeforeMount(()=>{
@@ -146,35 +138,14 @@ onBeforeUnmount(() => {
   <v-container fluid class="pa-4">
         <v-row cols="12" md="2">
           <v-col>
-            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
-              <SessionSelector/>
-              <SessionCubeSelector/>
-            </v-sheet>
-
-            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4">
-              <div class="d-flex justify-space-between align-center mb-2">
-                <span class="text-subtitle-1 font-weight-bold">Estatísticas</span>
-                <span class="text-caption text-medium-emphasis">{{ stats.count }} solves</span>
-              </div>
-              <v-row density="compact">
-                <v-col cols="6">
-                  <div class="stat-label">melhor</div>
-                  <div class="stat-value">{{ formatMs(stats.best) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">média</div>
-                  <div class="stat-value">{{ formatMs(stats.mean) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">ao5</div>
-                  <div class="stat-value">{{ formatMs(stats.ao5) }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div class="stat-label">ao12</div>
-                  <div class="stat-value">{{ formatMs(stats.ao12) }}</div>
-                </v-col>
-              </v-row>
-            </v-sheet>
+            <v-row>
+              <v-col cols="12">
+                <TimerSessionPuzzleSelector />
+              </v-col>
+              <v-col cols="12">
+                <TimerStats :solves="solves" />
+              </v-col>
+            </v-row>
           </v-col>
 
           <!-- Timer column -->
