@@ -6,7 +6,7 @@ export type CubeData = {
     cubeEngine?: CubeEngine
 }
 
-export const cubesDefinition: Record<CubeData["id"], CubeData> = {
+export const cubesDefinition: Record<string, CubeData> = {
     "2x2x2": {
         id: "2x2x2",
         name: "2x2x2"

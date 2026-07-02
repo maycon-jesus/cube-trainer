@@ -26,7 +26,6 @@ const currentTheme = computed({
         origin: '50% 50%'
     })
     config.theme = name
-    config.saveAll()
   },
 })
 

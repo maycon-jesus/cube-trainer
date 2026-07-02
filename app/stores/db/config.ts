@@ -18,12 +18,27 @@ enum ConfigKeys {
     Theme = 'theme'
 }
 
+const configEntry = <T>(id: ConfigKeys, value: T) => {
+    const entry = ref(value)
+    return computed({
+        get: () => entry.value,
+        set: async (value: T) => {
+            await db.put({
+                id: id,
+                value: value
+            })
+            entry.value = value
+        }
+    })
+}
+
 export const useConfigStore = defineStore('config', () => {
     const $theme = useTheme()
 
-    const sessionId = ref(0)
-    const puzzle = ref('')
-    const theme = ref('')
+    const sessionId = configEntry(ConfigKeys.SessionId, 0)
+    const puzzle = configEntry(ConfigKeys.Puzzle, '')
+    const theme = configEntry(ConfigKeys.Theme, '')
+
 
     async function load() {
         sessionId.value = await loadSelectedSessionId()
@@ -38,22 +53,7 @@ export const useConfigStore = defineStore('config', () => {
         await db.deleteDB()
     }
 
-    async function saveAll() {
-        await db.put({
-            id: ConfigKeys.SessionId,
-            value: sessionId.value.toString()
-        })
-        await db.put({
-            id: ConfigKeys.Puzzle,
-            value: puzzle.value
-        })
-        await db.put({
-            id: ConfigKeys.Theme,
-            value: theme.value
-        })
-    }
-
-    return { saveAll, load, sessionId, puzzle, theme, reset }
+    return { load, sessionId, puzzle, theme, reset }
 })
 
 async function loadSelectedSessionId(): Promise<number> {
@@ -83,7 +83,7 @@ async function loadSelectedSessionId(): Promise<number> {
 async function loadSelectedCubeType() {
     const selectedCubeType = await db.get(ConfigKeys.Puzzle)
     if (!selectedCubeType) {
-        const cubeType = Object.keys(cubesDefinition)[0]
+        const cubeType = Object.keys(cubesDefinition)[1]
         if (!cubeType) {
             throw new Error("Not exists cube definition")
         }
