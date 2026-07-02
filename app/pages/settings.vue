@@ -132,7 +132,7 @@ async function confirmReset() {
 
     <!-- Reset confirmation -->
     <v-dialog v-model="resetDialog" max-width="440" persistent>
-      <v-card rounded="xl">
+      <v-card>
         <v-card-item>
           <template #prepend>
             <v-icon icon="mdi-alert-outline" color="error" />
@@ -143,13 +143,12 @@ async function confirmReset() {
           {{ t('settings.data.resetConfirmText') }}
         </v-card-text>
         <v-card-actions class="justify-end">
-          <v-btn rounded="xl" :disabled="resetting" @click="resetDialog = false">
+          <v-btn :disabled="resetting" @click="resetDialog = false">
             {{ t('settings.cancel') }}
           </v-btn>
           <v-btn
             color="error"
             variant="flat"
-            rounded="xl"
             :loading="resetting"
             @click="confirmReset"
           >
