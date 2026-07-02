@@ -1,9 +1,16 @@
 import { md3 } from "vuetify/blueprints";
+import pkg from "./package.json";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      version: pkg.version,
+      githubUrl: 'https://github.com/maycon-jesus/cube-trainer',
+    },
+  },
   app: {
     head: {
       title: 'Cube Timer',

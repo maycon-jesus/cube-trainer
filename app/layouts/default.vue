@@ -69,9 +69,11 @@ onBeforeUnmount(()=>{
 
     <LayoutsNavDrawer />
 
-    <v-main>
+    <v-main :style="{minHeight: '100vh'}">
       <slot />
     </v-main>
+
+    <LayoutsFooter />
   </v-app>
 </template>
 
