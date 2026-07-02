@@ -5,8 +5,13 @@
   "actions": {
     "newScramble": "New scramble"
   },
+  "common": {
+    "underConstruction": "Under construction"
+  },
   "nav": {
     "play": "Play",
+    "patterns": "Patterns",
+    "training": "Training",
     "settings": "Settings"
   },
   "settings": {
