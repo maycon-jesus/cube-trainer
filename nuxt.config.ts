@@ -92,6 +92,9 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
+    devOptions: {
+      enabled: true,
+    },
     registerType: 'autoUpdate',
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'],
