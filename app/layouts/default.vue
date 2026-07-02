@@ -21,6 +21,30 @@ onMounted(() => {
     })
 })
 
+const wakeLock = ref<WakeLockSentinel|null>(null);
+
+async function requestWakeLock() {
+  try {
+    wakeLock.value = await navigator.wakeLock.request('screen');
+  } catch (err: any) {
+    console.error(err)
+  }
+}
+
+// Releasing a wake lock
+async function releaseWakeLock() {
+  if (wakeLock.value !== null) {
+    await wakeLock.value.release();
+    wakeLock.value = null;
+  }
+}
+
+onBeforeMount(()=>{
+  requestWakeLock()
+})
+onBeforeUnmount(()=>{
+  releaseWakeLock()
+})
 </script>
 
 <template>
