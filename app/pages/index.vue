@@ -48,11 +48,11 @@ async function resolved(solve: Solve) {
             <Timer :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" />
 
             <!-- Scramble preview -->
-            <v-sheet rounded="lg" color="surface" class="pa-4 mt-4 d-flex justify-center">
+            <v-card class="pa-4 mt-4 d-flex justify-center">
               <ClientOnly>
                 <ScrambleCube :scramble="scramble" />
               </ClientOnly>
-            </v-sheet>
+            </v-card>
           </v-col>
 
           <!-- Sidebar: times -->
