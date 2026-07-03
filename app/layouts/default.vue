@@ -4,7 +4,6 @@ import { useConfigStore } from '~/stores/db/config';
 
 const theme = useTheme()
 const configStore = useConfigStore()
-const { newScramble } = useScramble()
 const { t } = useI18n()
 
 const layoutState = useLayoutStateStore()
@@ -62,9 +61,6 @@ onBeforeUnmount(()=>{
         </NuxtLink>
       </div>
       </v-app-bar-title>
-      <template #append>
-        <v-btn variant="text" prepend-icon="mdi-refresh" @click="newScramble">{{ t('actions.newScramble') }}</v-btn>
-      </template>
     </v-app-bar>
 
     <LayoutsNavDrawer />
