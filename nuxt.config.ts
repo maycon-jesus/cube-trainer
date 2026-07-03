@@ -103,7 +103,7 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: true,
     },
-    registerType: 'autoUpdate',
+    registerType: 'prompt',
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'],
       navigateFallback: '/',
