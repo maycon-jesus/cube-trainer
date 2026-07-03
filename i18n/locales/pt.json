@@ -9,7 +9,8 @@
     "underConstruction": "Em construção"
   },
   "footer": {
-    "madeWith": "Feito com {heart} por {author}"
+    "madeWith": "Feito com {heart} por {author}",
+    "buyMeCoffee": "Me pague um café"
   },
   "nav": {
     "play": "Jogar",

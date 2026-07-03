@@ -2,6 +2,7 @@
 import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric } from 'vue-router'
 
 const { t } = useI18n()
+const { public: { buyMeCoffeeUrl } } = useRuntimeConfig()
 
 const layoutState = useLayoutStateStore()
 
@@ -23,5 +24,12 @@ const navItems = computed<{
       <v-list-item v-for="item in navItems" :key="item.title" :to="item.to" :prepend-icon="item.icon"
         :title="item.title" />
     </v-list>
+
+    <template #append>
+      <v-list nav>
+        <v-list-item :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-coffee"
+          :title="t('footer.buyMeCoffee')" />
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>

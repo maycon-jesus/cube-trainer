@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     public: {
       version: pkg.version,
       githubUrl: 'https://github.com/maycon-jesus/cube-trainer',
+      buyMeCoffeeUrl: 'https://buymeacoffee.com/mayconjesus',
     },
   },
   app: {
