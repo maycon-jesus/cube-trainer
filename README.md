@@ -1,10 +1,10 @@
-# Cube Timer
+# Cube Trainer
 
 Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. Cronometre suas resoluções, gere embaralhamentos oficiais e acompanhe suas estatísticas — tudo salvo localmente, sem precisar de conta ou servidor.
 
 ## Captura de tela
 
-![Captura de tela do Cube Timer](docs/screenshot.png)
+![Captura de tela do Cube Trainer](docs/screenshot.png)
 
 ## Funcionalidades
 
@@ -71,4 +71,4 @@ Se este projeto te ajudou, considere [me pagar um café](https://buymeacoffee.co
 
 ## Licença
 
-Uso pessoal. Sinta-se à vontade para explorar o código.
+[MIT](LICENSE)
