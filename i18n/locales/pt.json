@@ -20,9 +20,11 @@
     "license": "Licença MIT"
   },
   "nav": {
-    "play": "Jogar",
+    "play": "Timer",
     "patterns": "Padrões",
     "training": "Treino",
+    "sessions": "Sessões",
+    "history": "Histórico",
     "settings": "Configurações"
   },
   "settings": {

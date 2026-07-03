@@ -11,9 +11,11 @@ const navItems = computed<{
   icon: string
   to: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric | undefined
 }[]>(() => [
-  { title: t('nav.play'), icon: 'mdi-play', to: {name: 'index'} },
+  { title: t('nav.play'), icon: 'mdi-timer-outline', to: {name: 'index'} },
   { title: t('nav.training'), icon: 'mdi-dumbbell', to: {name: 'training'} },
   { title: t('nav.patterns'), icon: 'mdi-view-grid', to: {name: 'patterns'} },
+  { title: t('nav.sessions'), icon: 'mdi-folder-multiple', to: {name: 'sessions'} },
+  { title: t('nav.history'), icon: 'mdi-history', to: {name: 'history'} },
   { title: t('nav.settings'), icon: 'mdi-cog', to: {name: 'settings'} },
 ])
 </script>

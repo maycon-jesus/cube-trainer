@@ -20,9 +20,11 @@
     "license": "MIT License"
   },
   "nav": {
-    "play": "Play",
+    "play": "Timer",
     "patterns": "Patterns",
     "training": "Training",
+    "sessions": "Sessions",
+    "history": "History",
     "settings": "Settings"
   },
   "settings": {
