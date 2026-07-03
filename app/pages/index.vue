@@ -55,8 +55,9 @@ function newScramble() {
   scramble.value = cubeDefinition.value?.generateScramble?.() ?? ''
 }
 
-onBeforeMount(() => {
+onBeforeMount(async() => {
   newScramble()
+  await refrehSolves()
 })
 
 async function resolved(solve: Solve) {
