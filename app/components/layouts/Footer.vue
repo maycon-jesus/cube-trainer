@@ -24,7 +24,7 @@ const { public: { version, githubUrl, licenseUrl, buyMeCoffeeUrl } } = useRuntim
       </a>
     </div>
     <div>
-      <i18n-t keypath="footer.madeWith" tag="span">
+      <i18n-t keypath="footer.madeWith" tag="span" scope="global">
         <template #heart>
           <v-icon icon="mdi-heart" size="x-small" color="primary" />
         </template>
