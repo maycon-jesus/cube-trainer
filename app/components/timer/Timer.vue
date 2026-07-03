@@ -23,8 +23,7 @@ const props = defineProps<{
 }>()
 const emits = defineEmits<{
     (e: 'solve', solve: Solve): void
-    (e: 'start'): void
-    (e: 'stop'): void
+    (e: 'start' | 'stop'): void
 }>()
 
 // --- Timer state machine --------------------------------------------------

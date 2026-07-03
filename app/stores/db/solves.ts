@@ -57,10 +57,10 @@ export const useSolvesStore = defineStore('solves', () => {
     solves.value = solves.value.filter((it) => it.id !== id)
   }
 
-  async function removeBySessionId(id: number): Promise<void[]> {
+  async function removeBySessionId(id: number): Promise<void> {
     const all = await db.getAllByIndex('sessionId', id)
     const ids = all.map(it => it.sessionId)
-    return db.bulkDelete(ids)
+    await db.bulkDelete(ids)
   }
 
   async function clear(): Promise<void> {

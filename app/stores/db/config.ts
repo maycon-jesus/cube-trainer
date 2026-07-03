@@ -5,6 +5,7 @@ import type { ThemeInstance } from "vuetify"
 
 export type Config = {
     id?: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any
 }
 

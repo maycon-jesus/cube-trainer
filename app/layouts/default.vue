@@ -27,7 +27,7 @@ const wakeLock = ref<WakeLockSentinel|null>(null);
 async function requestWakeLock() {
   try {
     wakeLock.value = await navigator.wakeLock.request('screen');
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err)
   }
 }
@@ -50,7 +50,7 @@ onBeforeUnmount(()=>{
 
 <template>
   <v-app>
-    <Loading />
+    <AppLoading />
     <v-app-bar flat density="comfortable" color="surface">
       <template #prepend>
         <v-app-bar-nav-icon @click="layoutState.drawerOpen = !layoutState.drawerOpen" />

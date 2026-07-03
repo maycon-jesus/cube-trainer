@@ -16,6 +16,7 @@ const availableLocales = computed(() =>
 
 const currentLocale = computed({
   get: () => locale.value,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set: (code: string) => setLocale(code as any),
 })
 

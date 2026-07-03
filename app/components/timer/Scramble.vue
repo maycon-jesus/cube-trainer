@@ -2,7 +2,7 @@
     <v-card class="pa-4">
         <div class="d-flex justify-space-between align-center mb-2">
             <span class="text-subtitle-1 font-weight-bold">Embaralhamento</span>
-            <v-btn size="small" variant="text"  icon="mdi-refresh" :title="$t('actions.newScramble')" @click="$emit('refresh')"/>
+            <v-btn size="small" variant="text"  icon="mdi-refresh" :title="$t('actions.newScramble')" @click="emits('refresh')"/>
         </div>
         <v-card-text class="text-headline-small text-center text-md-headline-medium font-monospace text-medium-emphasis">
             <span v-for="(line, index) in lines" :key="index" class="d-block">

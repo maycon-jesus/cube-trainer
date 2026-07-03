@@ -41,9 +41,9 @@ icon="mdi-delete-outline" size="x-small" variant="text" title="Remover"
 </template>
 
 <script setup lang="ts">
-import { useSolvesStore, type Category, type Penalty, type Solve } from '~/stores/db/solves';
+import { useSolvesStore, type Penalty, type Solve } from '~/stores/db/solves';
 
-const props = defineProps<{
+defineProps<{
     solves: Solve[],
 }>()
 

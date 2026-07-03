@@ -141,12 +141,12 @@ export class Database<T extends Record<string, unknown>> {
         await this.tx('readwrite', (s) => s.delete(id))
     }
 
-    async bulkDelete(ids: number[]): Promise<void[]> {
+    async bulkDelete(ids: number[]): Promise<void> {
         const allPromises: Promise<void>[] = []
         for (const id of ids) {
             allPromises.push(this.delete(id))
         }
-        return Promise.all(allPromises)
+        await Promise.all(allPromises)
     }
 
     /** Remove every record from the store. */
