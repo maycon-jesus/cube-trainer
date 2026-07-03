@@ -79,7 +79,8 @@ export const useSolvesStore = defineStore('solves', () => {
   }
 
   async function getAll(type: Category, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
-    return db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
+    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
+    return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
   return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll }
