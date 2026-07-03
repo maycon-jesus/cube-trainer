@@ -2,14 +2,20 @@
 import { storeToRefs } from 'pinia'
 import { useConfigStore } from '~/stores/db/config'
 import { useSolvesStore, type Penalty, type Solve } from '~/stores/db/solves'
+import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
 
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
-const { solves } = storeToRefs(solvesStore)
 const { add } = solvesStore
+const solves= ref<Solve[]>([])
 
 // --- Scramble -------------------------------------------------------------
-const { scramble, newScramble } = useScramble()
+const scramble = ref('')
+const cubeDefinition = computed(() => cubesDefinition[configStore.puzzle])
+
+function newScramble() {
+  scramble.value = cubeDefinition.value?.generateScramble?.() ?? ''
+}
 
 onBeforeMount(() => {
   newScramble()
@@ -19,6 +25,11 @@ async function resolved(solve: Solve) {
   await add(solve)
   newScramble()
 }
+
+watch(() => configStore.puzzle, async ()=>{
+  newScramble()
+  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
+})
 </script>
 
 <template>
