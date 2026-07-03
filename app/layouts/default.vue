@@ -12,7 +12,9 @@ onMounted(() => {
   useLoader().start()
   useMigrationStore().load()
     .then(() => {
-      theme.change(configStore.theme, true)
+      if(configStore.theme){
+        theme.change(configStore.theme, true)
+      }
       useLoader().end()
     })
     .catch(err => {
