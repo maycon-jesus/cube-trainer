@@ -1,4 +1,5 @@
 import { generateScramble333 } from "./333"
+import { generateScrambleMegaminx } from "./megaminx"
 import type { CubeEngine } from "./cube"
 
 export type CubeData = {
@@ -41,7 +42,8 @@ export const cubesDefinition: Record<string, CubeData> = {
     },
     "megaminx": {
         id: "megaminx",
-        name: "Megaminx"
+        name: "Megaminx",
+        generateScramble: generateScrambleMegaminx
     },
     "mirror-3x3x3": {
         id: "mirror-3x3x3",

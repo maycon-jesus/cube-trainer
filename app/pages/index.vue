@@ -49,17 +49,13 @@ watch(() => configStore.puzzle, async ()=>{
           <!-- Timer column -->
           <v-col cols="12" md="8" class="d-flex flex-column">
             <!-- Scramble -->
-            <v-sheet rounded="lg" color="surface" class="pa-4 mb-4 text-center">
-              <div class="text-h6 text-md-h5 font-monospace text-medium-emphasis">
-                {{ scramble }}
-              </div>
-            </v-sheet>
+             <TimerScramble :scramble="scramble" v-show="scramble" />
 
             <!-- Timer surface -->
             <Timer :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" />
 
             <!-- Scramble preview -->
-            <v-card class="pa-4 mt-4 d-flex justify-center">
+            <v-card class="pa-4 mt-4 d-flex justify-center" v-if="configStore.puzzle === '3x3x3'">
               <ClientOnly>
                 <ScrambleCube :scramble="scramble" />
               </ClientOnly>
@@ -75,10 +71,7 @@ watch(() => configStore.puzzle, async ()=>{
 </template>
 
 <style scoped>
-.font-monospace {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  letter-spacing: 0.04em;
-}
+
 .timer-surface {
   min-height: 320px;
   user-select: none;
