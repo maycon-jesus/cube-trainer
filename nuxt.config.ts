@@ -48,6 +48,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxt/eslint',
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
