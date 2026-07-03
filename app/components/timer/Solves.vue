@@ -14,18 +14,22 @@
                         {{ solves.length - i }}.
                     </span>
                 </template>
-                <v-list-item-title class="font-weight-medium"
+                <v-list-item-title
+class="font-weight-medium"
                     :class="{ 'text-decoration-line-through text-medium-emphasis': solve.penalty === 'dnf' }">
                     {{ formatSolve(solve) }}
                 </v-list-item-title>
                 <template #append>
-                    <v-btn icon="mdi-numeric-2-box-outline" size="x-small" variant="text"
+                    <v-btn
+icon="mdi-numeric-2-box-outline" size="x-small" variant="text"
                         :color="solve.penalty === '+2' ? 'amber' : undefined" title="+2"
                         @click="setPenalty(solve, '+2')" />
-                    <v-btn icon="mdi-cancel" size="x-small" variant="text"
+                    <v-btn
+icon="mdi-cancel" size="x-small" variant="text"
                         :color="solve.penalty === 'dnf' ? 'error' : undefined" title="DNF"
                         @click="setPenalty(solve, 'dnf')" />
-                    <v-btn icon="mdi-delete-outline" size="x-small" variant="text" title="Remover"
+                    <v-btn
+icon="mdi-delete-outline" size="x-small" variant="text" title="Remover"
                         @click="removeSolve(solve)" />
                 </template>
             </v-list-item>

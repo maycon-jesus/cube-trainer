@@ -71,6 +71,7 @@ async function confirmReset() {
         <div class="mb-6">
           <div class="text-subtitle-2 mb-2">{{ t('settings.appearance.theme') }}</div>
           <v-btn-toggle
+            id="theme-toggle"
             v-model="currentTheme"
             mandatory
             divided
@@ -78,7 +79,6 @@ async function confirmReset() {
             color="primary"
             variant="outlined"
             density="comfortable"
-            id="theme-toggle"
           >
             <v-btn value="dark" prepend-icon="mdi-weather-night">
               {{ t('settings.appearance.themeDark') }}

@@ -21,13 +21,15 @@ const navItems = computed<{
 <template>
   <v-navigation-drawer v-model="layoutState.drawerOpen">
     <v-list nav>
-      <v-list-item v-for="item in navItems" :key="item.title" :to="item.to" :prepend-icon="item.icon"
+      <v-list-item
+v-for="item in navItems" :key="item.title" :to="item.to" :prepend-icon="item.icon"
         :title="item.title" />
     </v-list>
 
     <template #append>
       <v-list nav>
-        <v-list-item :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-coffee"
+        <v-list-item
+:href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-coffee"
           :title="t('footer.buyMeCoffee')" />
       </v-list>
     </template>

@@ -1,7 +1,6 @@
 <template>
     <div>
-        <v-select :label="t('puzzle.label')" :items="items" v-model="configStore.puzzle" hide-details>
-        </v-select>
+        <v-select v-model="configStore.puzzle" :label="t('puzzle.label')" :items="items" hide-details/>
     </div>
 </template>
 

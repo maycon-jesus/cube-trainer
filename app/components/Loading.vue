@@ -1,20 +1,20 @@
 <template>
-    <div class="loading" :class="{start,end}" v-show="show">
+    <div v-show="show" class="loading" :class="{start,end}">
         <div class="cube" :class="{start,end}">
             <div class="axis-switcher">
                 <div class="cube__comp">
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
                 </div>
                 <div class="cube__comp">
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
-                    <div class="cube__face"></div>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
+                    <div class="cube__face"/>
                 </div>
             </div>
         </div>

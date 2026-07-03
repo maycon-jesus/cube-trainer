@@ -1,8 +1,8 @@
 <template>
     <v-select
+        v-model="configStore.sessionId"
         :label="t('session.label')"
         :items="items"
-        v-model="configStore.sessionId"
         hide-details
     />
 </template>

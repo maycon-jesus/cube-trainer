@@ -14,7 +14,7 @@ const src = computed(() => {
 </script>
 
 <template>
-  <img class="net" :src="src" alt="Scramble preview" />
+  <img class="net" :src="src" alt="Scramble preview" >
 </template>
 
 <style scoped>

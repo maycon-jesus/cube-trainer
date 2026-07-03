@@ -15,13 +15,13 @@
           <!-- Timer column -->
           <v-col cols="12" md="8" class="d-flex flex-column">
             <!-- Scramble -->
-             <TimerScramble class="mb-4" :scramble="scramble" v-show="scramble" @refresh="newScramble()" />
+             <TimerScramble v-show="scramble" class="mb-4" :scramble="scramble" @refresh="newScramble()" />
 
             <!-- Timer surface -->
             <Timer :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
 
             <!-- Scramble preview -->
-            <v-card class="pa-4 mt-4 d-flex justify-center" v-if="configStore.puzzle === '3x3x3'">
+            <v-card v-if="configStore.puzzle === '3x3x3'" class="pa-4 mt-4 d-flex justify-center">
               <ClientOnly>
                 <ScrambleCube :scramble="scramble" />
               </ClientOnly>
