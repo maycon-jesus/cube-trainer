@@ -43,16 +43,23 @@ const props = defineProps<{
     solves: Solve[],
 }>()
 
+const emits = defineEmits<{
+    (e: 'solves-updated'): void
+}>()
+
 const solvesStore = useSolvesStore()
 
 // --- Solve actions --------------------------------------------------------
 async function setPenalty(solve: Solve, penalty: Penalty) {
   await solvesStore.update({ ...solve, penalty: solve.penalty === penalty ? 'none' : penalty })
+  emits('solves-updated')
 }
 async function removeSolve(solve: Solve) {
   if (solve.id !== undefined) await solvesStore.remove(solve.id)
+    emits('solves-updated')
 }
 async function clearAll() {
   if (confirm('Apagar todos os tempos?')) await solvesStore.clear()
+    emits('solves-updated')
 }
 </script>

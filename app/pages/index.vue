@@ -24,11 +24,16 @@ onBeforeMount(() => {
 async function resolved(solve: Solve) {
   await add(solve)
   newScramble()
+  await refrehSolves()
+}
+
+async function refrehSolves() {
+  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
 }
 
 watch(() => configStore.puzzle, async ()=>{
   newScramble()
-  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
+  await refrehSolves()
 })
 </script>
 
@@ -49,7 +54,7 @@ watch(() => configStore.puzzle, async ()=>{
           <!-- Timer column -->
           <v-col cols="12" md="8" class="d-flex flex-column">
             <!-- Scramble -->
-             <TimerScramble :scramble="scramble" v-show="scramble" />
+             <TimerScramble class="mb-4" :scramble="scramble" v-show="scramble" @refresh="newScramble()" />
 
             <!-- Timer surface -->
             <Timer :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" />
@@ -64,7 +69,7 @@ watch(() => configStore.puzzle, async ()=>{
 
           <!-- Sidebar: times -->
           <v-col cols="12" md="2">
-            <TimerSolves :solves="solves" />
+            <TimerSolves :solves="solves" @solves-updated="refrehSolves()" />
         </v-col>
     </v-row>
   </v-container>
