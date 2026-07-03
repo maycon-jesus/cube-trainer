@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="timer-surface d-flex flex-column align-center justify-center flex-grow-1"
+        class="timer-surface d-flex flex-column align-center justify-center flex-grow-1 pa-4"
         @touchstart.prevent="onTouchStart" @touchend.prevent="onTouchEnd">
         <div class="timer-value font-weight-bold" :class="timerColor">
             {{ display }}
@@ -23,6 +23,8 @@ const props = defineProps<{
 }>()
 const emits = defineEmits<{
     (e: 'solve', solve: Solve): void
+    (e: 'start'): void
+    (e: 'stop'): void
 }>()
 
 // --- Timer state machine --------------------------------------------------
@@ -56,6 +58,7 @@ function tick() {
 
 function startRunning() {
   phase.value = 'running'
+  emits('start')
   startTime = performance.now()
   elapsed.value = 0
   rafId = requestAnimationFrame(tick)
@@ -68,6 +71,7 @@ async function stopRunning() {
   elapsed.value = ms
   phase.value = 'idle'
   emits('solve', { ms, scramble: '', penalty: 'none', createdAt: Date.now(), category: props.category, puzzle: props.puzzle, sessionId: props.sessionId, trainingId: props.trainingId?? '' })
+  emits('stop')
 }
 
 // --- Keyboard handling ----------------------------------------------------
