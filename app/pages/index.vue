@@ -76,39 +76,6 @@ watch(() => configStore.puzzle, async ()=>{
 </script>
 
 <style scoped>
-.timer-surface {
-  min-height: 320px;
-  user-select: none;
-  cursor: pointer;
-}
-.timer-value {
-  font-size: clamp(3.5rem, 14vw, 9rem);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  transition: color 0.1s ease;
-}
-.stat-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.6;
-}
-.stat-value {
-  font-size: 1.25rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-.times-list {
-  max-height: 420px;
-  overflow-y: auto;
-}
-kbd {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
-  padding: 1px 6px;
-  font-size: 0.85em;
-}
-
 .elevated{
   position: fixed;
   top: 50%;

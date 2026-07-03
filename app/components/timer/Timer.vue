@@ -159,4 +159,11 @@ onBeforeUnmount(() => {
   font-variant-numeric: tabular-nums;
   transition: color 0.1s ease;
 }
+
+kbd {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+}
 </style>

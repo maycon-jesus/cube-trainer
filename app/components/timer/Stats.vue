@@ -41,3 +41,17 @@ const stats = computed(() => ({
   mean: meanOf(props.solves),
 }))
 </script>
+
+<style scoped>
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+</style>
