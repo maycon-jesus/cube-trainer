@@ -63,6 +63,11 @@ onBeforeUnmount(()=>{
         </NuxtLink>
       </div>
       </v-app-bar-title>
+      <template #append>
+        <ClientOnly>
+          <SessionSelector class="mr-2" />
+        </ClientOnly>
+      </template>
     </v-app-bar>
 
     <LayoutsNavDrawer />

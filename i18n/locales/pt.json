@@ -8,6 +8,12 @@
   "common": {
     "underConstruction": "Em construção"
   },
+  "session": {
+    "label": "Sessão"
+  },
+  "puzzle": {
+    "label": "Quebra-cabeça"
+  },
   "footer": {
     "madeWith": "Feito com {heart} por {author}",
     "buyMeCoffee": "Me pague um café",

@@ -1,22 +1,20 @@
 <template>
-    <div>
-        <v-autocomplete label="Session" :items="items" v-model="configStore.sessionId">
-            <template #append-item>
-                <v-list-item>
-                    <v-list-item-title>AAA</v-list-item-title>
-                </v-list-item>
-            </template>
-        </v-autocomplete>
-    </div>
+    <v-select
+        :label="t('session.label')"
+        :items="items"
+        v-model="configStore.sessionId"
+        hide-details
+    />
 </template>
 
 <script setup lang="ts">
 import { useConfigStore } from '~/stores/db/config';
 import { useSessionsStore } from '~/stores/db/sessions';
 
+const { t } = useI18n()
 const sessionStore = useSessionsStore()
 const configStore = useConfigStore()
-const items = computed(()=>{
+const items = computed(() => {
     return sessionStore.sessions.map(it => {
         return {
             title: it.name,
