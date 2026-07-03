@@ -173,7 +173,7 @@ export class Cube333 {
           const y = originY + r * (sticker + gap)
           rects.push(
             `<rect x="${x}" y="${y}" width="${sticker}" height="${sticker}" rx="${radius}" ` +
-              `fill="${ColorHex[color]}" stroke="${stroke}" stroke-width="1"/>`,
+            `fill="${ColorHex[color]}" stroke="${stroke}" stroke-width="1"/>`,
           )
         })
       })
@@ -224,7 +224,7 @@ function randomFromArr<T>(arr: T[]): [T, number] {
   return [arr[n]!, n]
 }
 
-export function generateScramble333(movesCount: number): string {
+export function generateScramble333(movesCount: number = 20): string {
   const moves: string[] = []
 
   const axisMoves: string[][] = [

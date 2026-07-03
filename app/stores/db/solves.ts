@@ -79,7 +79,6 @@ export const useSolvesStore = defineStore('solves', () => {
   }
 
   async function getAll(type: Category, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
-    console.log("aaaa")
     return db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
   }
 

@@ -1,19 +1,24 @@
+import { generateScramble333 } from "./333"
+import { generateScrambleMegaminx } from "./megaminx"
 import type { CubeEngine } from "./cube"
 
 export type CubeData = {
     id: string,
     name: string,
-    cubeEngine?: CubeEngine
+    cubeEngine?: CubeEngine,
+    generateScramble?: (movesCount?: number) => string,
 }
 
 export const cubesDefinition: Record<string, CubeData> = {
     "2x2x2": {
         id: "2x2x2",
-        name: "2x2x2"
+        name: "2x2x2",
+        generateScramble: generateScramble333
     },
     "3x3x3": {
         id: "3x3x3",
-        name: "3x3x3"
+        name: "3x3x3",
+        generateScramble: generateScramble333
     },
     "4x4x4": {
         id: "4x4x4",
@@ -37,7 +42,8 @@ export const cubesDefinition: Record<string, CubeData> = {
     },
     "megaminx": {
         id: "megaminx",
-        name: "Megaminx"
+        name: "Megaminx",
+        generateScramble: generateScrambleMegaminx
     },
     "mirror-3x3x3": {
         id: "mirror-3x3x3",

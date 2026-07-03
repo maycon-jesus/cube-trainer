@@ -1,5 +1,5 @@
 <template>
-    <v-sheet rounded="lg" color="surface" class="pa-4">
+    <v-card class="pa-4">
         <div class="d-flex justify-space-between align-center mb-2">
             <span class="text-subtitle-1 font-weight-bold">Tempos</span>
             <v-btn size="small" variant="text" color="error" :disabled="!solves.length" @click="clearAll">
@@ -33,7 +33,7 @@
         <div v-else class="text-medium-emphasis text-center py-6">
             Nenhum tempo ainda. Resolva o cubo!
         </div>
-    </v-sheet>
+    </v-card>
 </template>
 
 <script setup lang="ts">
@@ -43,16 +43,23 @@ const props = defineProps<{
     solves: Solve[],
 }>()
 
+const emits = defineEmits<{
+    (e: 'solves-updated'): void
+}>()
+
 const solvesStore = useSolvesStore()
 
 // --- Solve actions --------------------------------------------------------
 async function setPenalty(solve: Solve, penalty: Penalty) {
   await solvesStore.update({ ...solve, penalty: solve.penalty === penalty ? 'none' : penalty })
+  emits('solves-updated')
 }
 async function removeSolve(solve: Solve) {
   if (solve.id !== undefined) await solvesStore.remove(solve.id)
+    emits('solves-updated')
 }
 async function clearAll() {
   if (confirm('Apagar todos os tempos?')) await solvesStore.clear()
+    emits('solves-updated')
 }
 </script>
