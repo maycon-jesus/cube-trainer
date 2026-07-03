@@ -10,7 +10,8 @@
   },
   "footer": {
     "madeWith": "Feito com {heart} por {author}",
-    "buyMeCoffee": "Me pague um café"
+    "buyMeCoffee": "Me pague um café",
+    "license": "Licença MIT"
   },
   "nav": {
     "play": "Jogar",

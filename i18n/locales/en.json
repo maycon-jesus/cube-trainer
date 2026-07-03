@@ -10,7 +10,8 @@
   },
   "footer": {
     "madeWith": "Made with {heart} by {author}",
-    "buyMeCoffee": "Buy me a coffee"
+    "buyMeCoffee": "Buy me a coffee",
+    "license": "MIT License"
   },
   "nav": {
     "play": "Play",

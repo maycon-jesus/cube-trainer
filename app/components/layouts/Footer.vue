@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { public: { version, githubUrl, buyMeCoffeeUrl } } = useRuntimeConfig()
+const { public: { version, githubUrl, licenseUrl, buyMeCoffeeUrl } } = useRuntimeConfig()
 </script>
 
 <template>
@@ -16,6 +16,11 @@ const { public: { version, githubUrl, buyMeCoffeeUrl } } = useRuntimeConfig()
       <a :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" class="footer-link d-inline-flex align-center ga-1">
         <v-icon icon="mdi-coffee" size="small" />
         <span>{{ t('footer.buyMeCoffee') }}</span>
+      </a>
+      <span>·</span>
+      <a :href="licenseUrl" target="_blank" rel="noopener noreferrer" class="footer-link d-inline-flex align-center ga-1">
+        <v-icon icon="mdi-license" size="small" />
+        <span>{{ t('footer.license') }}</span>
       </a>
     </div>
     <div>
