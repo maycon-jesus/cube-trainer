@@ -1,75 +1,74 @@
-# Nuxt Minimal Starter
+# Cube Timer
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. Cronometre suas resoluções, gere embaralhamentos oficiais e acompanhe suas estatísticas — tudo salvo localmente, sem precisar de conta ou servidor.
 
-## Setup
+## Captura de tela
 
-Make sure to install dependencies:
+![Captura de tela do Cube Timer](docs/screenshot.png)
+
+## Funcionalidades
+
+- ⏱️ **Timer** controlado por barra de espaço (segure para armar) ou toque na tela
+- 🔀 **Embaralhamentos** gerados automaticamente para o 3x3, com visualização do cubo
+- 📊 **Estatísticas WCA** — melhor tempo, média de 5/12, média geral (descartando melhor e pior)
+- 🏷️ **Penalidades** `+2` e `DNF`
+- 🗂️ **Sessões** para organizar suas resoluções
+- 💾 **Armazenamento local** via IndexedDB (seus dados nunca saem do seu dispositivo)
+- 📱 **PWA** — instalável e funciona offline
+- 🌐 **i18n** — Português e Inglês
+- 🎨 **Tema** claro/escuro (Vuetify Material Design 3)
+
+## Tecnologias
+
+- [Nuxt 4](https://nuxt.com/) + [Vue 3](https://vuejs.org/) (Composition API)
+- [Vuetify 4](https://vuetifyjs.com/) (blueprint `md3`)
+- [Pinia](https://pinia.vuejs.org/) para estado
+- [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API) para persistência
+- PWA via [`@vite-pwa/nuxt`](https://vite-pwa-org.netlify.app/) e i18n via [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/)
+
+## Começando
+
+Requer [Node.js](https://nodejs.org/) e [pnpm](https://pnpm.io/).
 
 ```bash
-# npm
-npm install
-
-# pnpm
+# Instalar dependências
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
+# Servidor de desenvolvimento em http://localhost:3000
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Scripts
 
-Build the application for production:
+| Comando         | Descrição                                    |
+| --------------- | -------------------------------------------- |
+| `pnpm dev`      | Servidor de desenvolvimento (localhost:3000) |
+| `pnpm build`    | Build de produção                            |
+| `pnpm generate` | Geração do site estático (SSG)               |
+| `pnpm preview`  | Pré-visualiza o build de produção            |
 
-```bash
-# npm
-npm run build
+## Estrutura do projeto
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```
+lib/            Código independente de framework (sem Nuxt/Vue)
+  cube/         Engine do cubo (embaralhamento e renderização do 3x3)
+  db/           Wrapper genérico sobre IndexedDB
+app/            Aplicação Nuxt (srcDir)
+  pages/        Timer, configurações, treino, padrões
+  stores/       Stores Pinia sobre o IndexedDB
+  composables/  Composables auto-importados
+  utils/        Formatação de tempo e estatísticas WCA
+i18n/           Traduções (pt / en)
 ```
 
-Locally preview production build:
+## Status
 
-```bash
-# npm
-npm run preview
+Em desenvolvimento. Atualmente só o **3x3** possui engine de embaralhamento/renderização; as páginas de treino e padrões ainda são placeholders.
 
-# pnpm
-pnpm preview
+## Apoie o projeto
 
-# yarn
-yarn preview
+Se este projeto te ajudou, considere [me pagar um café](https://buymeacoffee.com/mayconjesus) ☕
 
-# bun
-bun run preview
-```
+## Licença
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Uso pessoal. Sinta-se à vontade para explorar o código.
