@@ -36,7 +36,7 @@ const model = defineModel<boolean>()
 
 const props = defineProps<{
   formMode: 'create' | 'rename'
-  session: Session|null
+  session?: Session|null
 }>()
 const emits = defineEmits<{
   (e: 'updated'): void
@@ -49,20 +49,25 @@ const configStore = useConfigStore()
 const formName = ref(props.session?.name ?? '')
 const saving = ref(false)
 
+function reloadFormName() {
+    formName.value = props.session?.name ?? ''
+}
+
 async function submitForm() {
     saving.value = true
     if (props.formMode === 'create') {
         const id = await sessionStore.add(formName.value)
         configStore.sessionId = id
-    } else if (props.formMode === 'rename' && props.session) {
+      } else if (props.formMode === 'rename' && props.session) {
         await sessionStore.update({ ...props.session, name: formName.value })
-    }
+      }
+      reloadFormName()
     saving.value = false
     model.value = false
     emits('updated')
 }
 
 watch(() => props.session, ()=>{
-    formName.value = props.session?.name ?? ''
+  reloadFormName()
 })
 </script>
