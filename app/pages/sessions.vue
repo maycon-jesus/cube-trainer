@@ -19,8 +19,8 @@ type SessionStats = {
 const solvesBySession = ref<Record<number, Solve[]>>({})
 const sessionStats = ref<Record<number, SessionStats>>({})
 
-watch(() => sessionsStore.sessions, async()=>{
-  for(let session of sessionsStore.sessions) {
+watch(() => sessionsStore.sessions, async () => {
+  for (const session of sessionsStore.sessions) {
     const solves = await solvesStore.getAllBySessionId(session.id!)
     solvesBySession.value[session.id!] = solves
 
@@ -61,7 +61,7 @@ function setCurrent(session: Session) {
 
 async function openSession(session: Session) {
   setCurrent(session)
-  await navigateTo({name: 'index'})
+  await navigateTo({ name: 'index' })
 }
 
 // Create / rename dialog
@@ -142,146 +142,123 @@ async function confirmDelete() {
       </v-btn>
     </div>
 
-    <ClientOnly>
-      <!-- Overview -->
-      <v-row dense class="mb-4">
-        <v-col cols="6">
-          <v-card variant="tonal" color="primary" rounded="lg">
-            <v-card-text class="d-flex align-center ga-4">
-              <v-avatar variant="tonal" color="primary">
-                <v-icon icon="mdi-folder-multiple-outline" />
+    <!-- Overview -->
+    <v-row density="comfortable" class="mb-4">
+      <v-col cols="6">
+        <v-card variant="tonal" color="primary" rounded="lg">
+          <v-card-text class="d-flex align-center ga-4">
+            <v-avatar variant="tonal" color="primary">
+              <v-icon icon="mdi-folder-multiple-outline" />
+            </v-avatar>
+            <div>
+              <div class="text-h5 font-weight-bold">{{ sessionsStore.sessions.length }}</div>
+              <div class="text-body-2">{{ t('sessions.totalSessions') }}</div>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card variant="tonal" color="secondary" rounded="lg">
+          <v-card-text class="d-flex align-center ga-4">
+            <v-avatar variant="tonal" color="secondary">
+              <v-icon icon="mdi-timer-outline" />
+            </v-avatar>
+            <div>
+              <div class="text-h5 font-weight-bold">{{ solvesStore.solves.length }}</div>
+              <div class="text-body-2">{{ t('sessions.totalSolves') }}</div>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- Session cards -->
+    <v-row density="comfortable">
+      <v-col v-for="session in sessionsStore.sessions" :key="session.id" cols="12" sm="6">
+        <v-card
+rounded="lg" class="session-card h-100 d-flex flex-column"
+          :class="{ 'session-card--current': isCurrent(session) }">
+          <v-card-item>
+            <template #prepend>
+              <v-avatar variant="tonal" :color="isCurrent(session) ? 'primary' : undefined">
+                <v-icon icon="mdi-cube-outline" />
               </v-avatar>
-              <div>
-                <div class="text-h5 font-weight-bold">{{ sessionsStore.sessions.length }}</div>
-                <div class="text-body-2">{{ t('sessions.totalSessions') }}</div>
+            </template>
+            <v-card-title class="d-flex align-center ga-2">
+              <span class="text-truncate">{{ session.name }}</span>
+              <v-chip v-if="isCurrent(session)" color="primary" size="x-small" variant="flat">
+                {{ t('sessions.current') }}
+              </v-chip>
+            </v-card-title>
+            <v-card-subtitle>
+              {{ t('sessions.lastActive', { date: formatDate(statsFor(session).lastActive) }) }}
+            </v-card-subtitle>
+            <template #append>
+              <v-menu>
+                <template #activator="{ props: menuProps }">
+                  <v-btn icon="mdi-dots-vertical" variant="text" size="small" v-bind="menuProps" />
+                </template>
+                <v-list density="compact" rounded="lg">
+                  <v-list-item
+prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
+                    @click="setCurrent(session)">
+                    <v-list-item-title>{{ t('sessions.setCurrent') }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-pencil-outline" @click="openRename(session)">
+                    <v-list-item-title>{{ t('sessions.rename') }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item prepend-icon="mdi-delete-outline" base-color="error" @click="openDelete(session)">
+                    <v-list-item-title>{{ t('sessions.delete') }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </template>
+          </v-card-item>
+
+          <v-card-text class="pt-0">
+            <div class="d-flex text-center">
+              <div class="flex-1-1">
+                <div class="text-caption text-medium-emphasis">{{ t('sessions.solves') }}</div>
+                <div class="text-subtitle-2 font-weight-bold">{{ statsFor(session).count }}</div>
               </div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-card variant="tonal" color="secondary" rounded="lg">
-            <v-card-text class="d-flex align-center ga-4">
-              <v-avatar variant="tonal" color="secondary">
-                <v-icon icon="mdi-timer-outline" />
-              </v-avatar>
-              <div>
-                <div class="text-h5 font-weight-bold">{{ solvesStore.solves.length }}</div>
-                <div class="text-body-2">{{ t('sessions.totalSolves') }}</div>
+              <v-divider vertical class="mx-2" />
+              <div class="flex-1-1">
+                <div class="text-caption text-medium-emphasis">{{ t('sessions.best') }}</div>
+                <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).best) }}</div>
               </div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <!-- Session cards -->
-      <v-row dense>
-        <v-col v-for="session in sessionsStore.sessions" :key="session.id" cols="12" sm="6">
-          <v-card
-            rounded="lg"
-            class="session-card h-100 d-flex flex-column"
-            :class="{ 'session-card--current': isCurrent(session) }"
-          >
-            <v-card-item>
-              <template #prepend>
-                <v-avatar variant="tonal" :color="isCurrent(session) ? 'primary' : undefined">
-                  <v-icon icon="mdi-cube-outline" />
-                </v-avatar>
-              </template>
-              <v-card-title class="d-flex align-center ga-2">
-                <span class="text-truncate">{{ session.name }}</span>
-                <v-chip
-                  v-if="isCurrent(session)"
-                  color="primary"
-                  size="x-small"
-                  variant="flat"
-                >
-                  {{ t('sessions.current') }}
-                </v-chip>
-              </v-card-title>
-              <v-card-subtitle>
-                {{ t('sessions.lastActive', { date: formatDate(statsFor(session).lastActive) }) }}
-              </v-card-subtitle>
-              <template #append>
-                <v-menu>
-                  <template #activator="{ props: menuProps }">
-                    <v-btn icon="mdi-dots-vertical" variant="text" size="small" v-bind="menuProps" />
-                  </template>
-                  <v-list density="compact" rounded="lg">
-                    <v-list-item
-                      prepend-icon="mdi-check-circle-outline"
-                      :disabled="isCurrent(session)"
-                      @click="setCurrent(session)"
-                    >
-                      <v-list-item-title>{{ t('sessions.setCurrent') }}</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item prepend-icon="mdi-pencil-outline" @click="openRename(session)">
-                      <v-list-item-title>{{ t('sessions.rename') }}</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item
-                      prepend-icon="mdi-delete-outline"
-                      base-color="error"
-                      @click="openDelete(session)"
-                    >
-                      <v-list-item-title>{{ t('sessions.delete') }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </template>
-            </v-card-item>
-
-            <v-card-text class="pt-0">
-              <div class="d-flex text-center">
-                <div class="flex-1-1">
-                  <div class="text-caption text-medium-emphasis">{{ t('sessions.solves') }}</div>
-                  <div class="text-subtitle-2 font-weight-bold">{{ statsFor(session).count }}</div>
-                </div>
-                <v-divider vertical class="mx-2" />
-                <div class="flex-1-1">
-                  <div class="text-caption text-medium-emphasis">{{ t('sessions.best') }}</div>
-                  <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).best) }}</div>
-                </div>
-                <v-divider vertical class="mx-2" />
-                <div class="flex-1-1">
-                  <div class="text-caption text-medium-emphasis">{{ t('sessions.ao5') }}</div>
-                  <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao5) }}</div>
-                </div>
-                <v-divider vertical class="mx-2" />
-                <div class="flex-1-1">
-                  <div class="text-caption text-medium-emphasis">{{ t('sessions.ao12') }}</div>
-                  <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao12) }}</div>
-                </div>
+              <v-divider vertical class="mx-2" />
+              <div class="flex-1-1">
+                <div class="text-caption text-medium-emphasis">{{ t('sessions.ao5') }}</div>
+                <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao5) }}</div>
               </div>
-            </v-card-text>
+              <v-divider vertical class="mx-2" />
+              <div class="flex-1-1">
+                <div class="text-caption text-medium-emphasis">{{ t('sessions.ao12') }}</div>
+                <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao12) }}</div>
+              </div>
+            </div>
+          </v-card-text>
 
-            <v-spacer />
+          <v-spacer />
 
-            <v-card-actions>
-              <v-btn color="primary" variant="text" rounded="xl" @click="openSession(session)">
-                {{ t('sessions.open') }}
-              </v-btn>
-              <v-btn
-                v-if="!isCurrent(session)"
-                variant="text"
-                rounded="xl"
-                @click="setCurrent(session)"
-              >
-                {{ t('sessions.setCurrent') }}
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </ClientOnly>
+          <v-card-actions>
+            <v-btn color="primary" variant="text" rounded="xl" @click="openSession(session)">
+              {{ t('sessions.open') }}
+            </v-btn>
+            <v-btn v-if="!isCurrent(session)" variant="text" rounded="xl" @click="setCurrent(session)">
+              {{ t('sessions.setCurrent') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
 
     <!-- Create / rename dialog -->
     <v-dialog v-model="formDialog" max-width="440">
       <v-card rounded="xl">
         <v-card-item>
           <template #prepend>
-            <v-icon
-              :icon="formMode === 'create' ? 'mdi-plus-circle-outline' : 'mdi-pencil-outline'"
-              color="primary"
-            />
+            <v-icon :icon="formMode === 'create' ? 'mdi-plus-circle-outline' : 'mdi-pencil-outline'" color="primary" />
           </template>
           <v-card-title>
             {{ formMode === 'create' ? t('sessions.new') : t('sessions.rename') }}
@@ -289,27 +266,16 @@ async function confirmDelete() {
         </v-card-item>
         <v-card-text>
           <v-text-field
-            v-model="formName"
-            :label="t('sessions.nameLabel')"
-            variant="outlined"
-            rounded="lg"
-            autofocus
-            hide-details
-            @keyup.enter="submitForm"
-          />
+v-model="formName" :label="t('sessions.nameLabel')" variant="outlined" rounded="lg" autofocus
+            hide-details @keyup.enter="submitForm" />
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-btn :disabled="saving" @click="formDialog = false">
             {{ t('sessions.cancel') }}
           </v-btn>
           <v-btn
-            color="primary"
-            variant="flat"
-            rounded="xl"
-            :loading="saving"
-            :disabled="!formName.trim()"
-            @click="submitForm"
-          >
+color="primary" variant="flat" rounded="xl" :loading="saving" :disabled="!formName.trim()"
+            @click="submitForm">
             {{ formMode === 'create' ? t('sessions.create') : t('sessions.save') }}
           </v-btn>
         </v-card-actions>
