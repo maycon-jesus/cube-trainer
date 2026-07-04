@@ -29,6 +29,7 @@ color="primary" variant="flat" :loading="saving" :disabled="!formName.trim()"
 </template>
 
 <script setup lang="ts">
+import { useConfigStore } from '~/stores/db/config';
 import { useSessionsStore, type Session } from '~/stores/db/sessions';
 
 const model = defineModel<boolean>()
@@ -43,6 +44,7 @@ const emits = defineEmits<{
 
 const {t} = useI18n()
 const sessionStore = useSessionsStore()
+const configStore = useConfigStore()
 
 const formName = ref(props.session?.name ?? '')
 const saving = ref(false)
@@ -50,7 +52,8 @@ const saving = ref(false)
 async function submitForm() {
     saving.value = true
     if (props.formMode === 'create') {
-        await sessionStore.add(formName.value)
+        const id = await sessionStore.add(formName.value)
+        configStore.sessionId = id
     } else if (props.formMode === 'rename' && props.session) {
         await sessionStore.update({ ...props.session, name: formName.value })
     }
