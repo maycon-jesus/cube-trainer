@@ -70,7 +70,7 @@ async function refrehSolves() {
   solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
 }
 
-watch(() => configStore.puzzle, async ()=>{
+watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{
   newScramble()
   await refrehSolves()
 })
