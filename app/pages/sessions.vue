@@ -19,6 +19,7 @@ type SessionStats = {
 const sessions = ref<Session[]>([])
 const solvesBySession = ref<Record<number, Solve[]>>({})
 const sessionStats = ref<Record<number, SessionStats>>({})
+const solvesCount = ref(0)
 
 async function reload(){
   sessions.value = await sessionsStore.getAll()
@@ -29,6 +30,7 @@ onBeforeMount(async()=>{
 })
 
 watch(sessions, async () => {
+  solvesCount.value=0
   for (const session of sessions.value) {
     const solves = await solvesStore.getAllBySessionId(session.id!)
     solvesBySession.value[session.id!] = solves
@@ -40,6 +42,7 @@ watch(sessions, async () => {
       ao12: averageOf(solves, 12),
       lastActive: solves[0]?.createdAt ?? session.createdAt,
     }
+    solvesCount.value += solves.length
   }
 }, {
   immediate: true,
@@ -135,7 +138,7 @@ function openDelete(session: Session) {
               <v-icon icon="mdi-timer-outline" />
             </v-avatar>
             <div>
-              <div class="text-h5 font-weight-bold">{{ solvesStore.solves.length }}</div>
+              <div class="text-h5 font-weight-bold">{{ solvesCount }}</div>
               <div class="text-body-2">{{ t('sessions.totalSolves') }}</div>
             </div>
           </v-card-text>
