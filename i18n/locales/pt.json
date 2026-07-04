@@ -8,6 +8,28 @@
   "common": {
     "underConstruction": "Em construção"
   },
+  "sessions": {
+    "subtitle": "Gerencie suas sessões de treino e acompanhe seu progresso",
+    "new": "Nova sessão",
+    "current": "Atual",
+    "solves": "Resoluções",
+    "best": "Melhor",
+    "ao5": "Ao5",
+    "ao12": "Ao12",
+    "lastActive": "Ativa {date}",
+    "open": "Abrir",
+    "setCurrent": "Definir como atual",
+    "rename": "Renomear",
+    "delete": "Excluir",
+    "totalSessions": "Sessões",
+    "totalSolves": "Total de resoluções",
+    "nameLabel": "Nome da sessão",
+    "create": "Criar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "deleteConfirmTitle": "Excluir sessão?",
+    "deleteConfirmText": "Isso vai excluir permanentemente \"{name}\" e todas as suas resoluções. Esta ação não pode ser desfeita."
+  },
   "session": {
     "label": "Sessão"
   },

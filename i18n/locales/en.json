@@ -8,6 +8,28 @@
   "common": {
     "underConstruction": "Under construction"
   },
+  "sessions": {
+    "subtitle": "Manage your practice sessions and track your progress",
+    "new": "New session",
+    "current": "Current",
+    "solves": "Solves",
+    "best": "Best",
+    "ao5": "Ao5",
+    "ao12": "Ao12",
+    "lastActive": "Last active {date}",
+    "open": "Open",
+    "setCurrent": "Set as current",
+    "rename": "Rename",
+    "delete": "Delete",
+    "totalSessions": "Sessions",
+    "totalSolves": "Total solves",
+    "nameLabel": "Session name",
+    "create": "Create",
+    "save": "Save",
+    "cancel": "Cancel",
+    "deleteConfirmTitle": "Delete session?",
+    "deleteConfirmText": "This will permanently delete \"{name}\" and all of its solves. This action cannot be undone."
+  },
   "session": {
     "label": "Session"
   },
