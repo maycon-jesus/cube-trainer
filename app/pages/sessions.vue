@@ -16,11 +16,20 @@ type SessionStats = {
   lastActive: number
 }
 
+const sessions = ref<Session[]>([])
 const solvesBySession = ref<Record<number, Solve[]>>({})
 const sessionStats = ref<Record<number, SessionStats>>({})
 
-watch(() => sessionsStore.sessions, async () => {
-  for (const session of sessionsStore.sessions) {
+async function reload(){
+  sessions.value = await sessionsStore.getAll()
+}
+
+onBeforeMount(async()=>{
+  await reload()
+})
+
+watch(sessions, async () => {
+  for (const session of sessions.value) {
     const solves = await solvesStore.getAllBySessionId(session.id!)
     solvesBySession.value[session.id!] = solves
 
@@ -51,7 +60,7 @@ function formatDate(timestamp: number): string {
 }
 
 function isCurrent(session: Session): boolean {
-  return session.id !== undefined && session.id === config.sessionId
+  return config.sessionId === session.id
 }
 
 function setCurrent(session: Session) {
@@ -67,65 +76,27 @@ async function openSession(session: Session) {
 // Create / rename dialog
 const formDialog = ref(false)
 const formMode = ref<'create' | 'rename'>('create')
-const formName = ref('')
 const formTarget = ref<Session | null>(null)
-const saving = ref(false)
 
 function openCreate() {
   formMode.value = 'create'
-  formName.value = ''
   formTarget.value = null
   formDialog.value = true
 }
 
 function openRename(session: Session) {
   formMode.value = 'rename'
-  formName.value = session.name
   formTarget.value = session
   formDialog.value = true
-}
-
-async function submitForm() {
-  const name = formName.value.trim()
-  if (!name) return
-  saving.value = true
-  try {
-    if (formMode.value === 'create') {
-      const id = await sessionsStore.add({ name, createdAt: Date.now() })
-      config.sessionId = id
-    } else if (formTarget.value) {
-      await sessionsStore.update({ ...formTarget.value, name })
-    }
-    formDialog.value = false
-  } finally {
-    saving.value = false
-  }
 }
 
 // Delete dialog
 const deleteDialog = ref(false)
 const deleteTarget = ref<Session | null>(null)
-const deleting = ref(false)
 
 function openDelete(session: Session) {
   deleteTarget.value = session
   deleteDialog.value = true
-}
-
-async function confirmDelete() {
-  const target = deleteTarget.value
-  if (!target || target.id === undefined) return
-  deleting.value = true
-  try {
-    const wasCurrent = isCurrent(target)
-    await sessionsStore.remove(target.id)
-    if (sessionsStore.sessions.length === 0) await sessionsStore.load()
-    const first = sessionsStore.sessions[0]
-    if (wasCurrent && first?.id !== undefined) config.sessionId = first.id
-    deleteDialog.value = false
-  } finally {
-    deleting.value = false
-  }
 }
 </script>
 
@@ -137,7 +108,7 @@ async function confirmDelete() {
         <h1 class="text-h5 font-weight-bold">{{ t('nav.sessions') }}</h1>
         <p class="text-body-2 text-medium-emphasis mb-0">{{ t('sessions.subtitle') }}</p>
       </div>
-      <v-btn color="primary" rounded="xl" prepend-icon="mdi-plus" @click="openCreate">
+      <v-btn color="primary" prepend-icon="mdi-plus" @click="openCreate">
         {{ t('sessions.new') }}
       </v-btn>
     </div>
@@ -145,20 +116,20 @@ async function confirmDelete() {
     <!-- Overview -->
     <v-row density="comfortable" class="mb-4">
       <v-col cols="6">
-        <v-card variant="tonal" color="primary" rounded="lg">
+        <v-card variant="tonal" color="primary">
           <v-card-text class="d-flex align-center ga-4">
             <v-avatar variant="tonal" color="primary">
               <v-icon icon="mdi-folder-multiple-outline" />
             </v-avatar>
             <div>
-              <div class="text-h5 font-weight-bold">{{ sessionsStore.sessions.length }}</div>
+              <div class="text-h5 font-weight-bold">{{ sessions.length }}</div>
               <div class="text-body-2">{{ t('sessions.totalSessions') }}</div>
             </div>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="6">
-        <v-card variant="tonal" color="secondary" rounded="lg">
+        <v-card variant="tonal" color="secondary">
           <v-card-text class="d-flex align-center ga-4">
             <v-avatar variant="tonal" color="secondary">
               <v-icon icon="mdi-timer-outline" />
@@ -174,9 +145,9 @@ async function confirmDelete() {
 
     <!-- Session cards -->
     <v-row density="comfortable">
-      <v-col v-for="session in sessionsStore.sessions" :key="session.id" cols="12" sm="6">
+      <v-col v-for="session in sessions" :key="session.id" cols="12" sm="6">
         <v-card
-rounded="lg" class="session-card h-100 d-flex flex-column"
+ class="session-card h-100 d-flex flex-column"
           :class="{ 'session-card--current': isCurrent(session) }">
           <v-card-item>
             <template #prepend>
@@ -198,7 +169,7 @@ rounded="lg" class="session-card h-100 d-flex flex-column"
                 <template #activator="{ props: menuProps }">
                   <v-btn icon="mdi-dots-vertical" variant="text" size="small" v-bind="menuProps" />
                 </template>
-                <v-list density="compact" rounded="lg">
+                <v-list density="compact">
                   <v-list-item
 prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
                     @click="setCurrent(session)">
@@ -242,10 +213,10 @@ prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
           <v-spacer />
 
           <v-card-actions>
-            <v-btn color="primary" variant="text" rounded="xl" @click="openSession(session)">
+            <v-btn color="primary" variant="text" @click="openSession(session)">
               {{ t('sessions.open') }}
             </v-btn>
-            <v-btn v-if="!isCurrent(session)" variant="text" rounded="xl" @click="setCurrent(session)">
+            <v-btn v-if="!isCurrent(session)" variant="text" @click="setCurrent(session)">
               {{ t('sessions.setCurrent') }}
             </v-btn>
           </v-card-actions>
@@ -254,56 +225,10 @@ prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
     </v-row>
 
     <!-- Create / rename dialog -->
-    <v-dialog v-model="formDialog" max-width="440">
-      <v-card rounded="xl">
-        <v-card-item>
-          <template #prepend>
-            <v-icon :icon="formMode === 'create' ? 'mdi-plus-circle-outline' : 'mdi-pencil-outline'" color="primary" />
-          </template>
-          <v-card-title>
-            {{ formMode === 'create' ? t('sessions.new') : t('sessions.rename') }}
-          </v-card-title>
-        </v-card-item>
-        <v-card-text>
-          <v-text-field
-v-model="formName" :label="t('sessions.nameLabel')" variant="outlined" rounded="lg" autofocus
-            hide-details @keyup.enter="submitForm" />
-        </v-card-text>
-        <v-card-actions class="justify-end">
-          <v-btn :disabled="saving" @click="formDialog = false">
-            {{ t('sessions.cancel') }}
-          </v-btn>
-          <v-btn
-color="primary" variant="flat" rounded="xl" :loading="saving" :disabled="!formName.trim()"
-            @click="submitForm">
-            {{ formMode === 'create' ? t('sessions.create') : t('sessions.save') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <SessionCreateRenameDialog v-model="formDialog" :form-mode="formMode" :session="formTarget" @updated="reload()" />
 
     <!-- Delete confirmation -->
-    <v-dialog v-model="deleteDialog" max-width="440" persistent>
-      <v-card rounded="xl">
-        <v-card-item>
-          <template #prepend>
-            <v-icon icon="mdi-alert-outline" color="error" />
-          </template>
-          <v-card-title>{{ t('sessions.deleteConfirmTitle') }}</v-card-title>
-        </v-card-item>
-        <v-card-text class="text-body-2 text-medium-emphasis">
-          {{ t('sessions.deleteConfirmText', { name: deleteTarget?.name ?? '' }) }}
-        </v-card-text>
-        <v-card-actions class="justify-end">
-          <v-btn :disabled="deleting" @click="deleteDialog = false">
-            {{ t('sessions.cancel') }}
-          </v-btn>
-          <v-btn color="error" variant="flat" rounded="xl" :loading="deleting" @click="confirmDelete">
-            {{ t('sessions.delete') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <SessionDeleteDialog v-model="deleteDialog" :target="deleteTarget" @updated="reload()" />
   </v-container>
 </template>
 

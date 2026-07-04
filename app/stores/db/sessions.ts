@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { Database, type Stored } from '~~/lib/db/database'
 import { useSolvesStore } from './solves'
+import { useConfigStore } from './config'
 
 export const DEFAULT_SESSION_NAME = 'Padrão'
 
@@ -17,6 +18,7 @@ export const useSessionsStore = defineStore('sessions', () => {
   const sessions = ref<Session[]>([])
   const ready = ref(false)
   const solves = useSolvesStore()
+  const config = useConfigStore()
 
   async function refresh() {
     if (!import.meta.client) return
@@ -27,7 +29,8 @@ export const useSessionsStore = defineStore('sessions', () => {
     ready.value = true
   }
 
-  async function add(session: Omit<Session, 'id'>): Promise<number> {
+  async function add(name: string): Promise<number> {
+    const session: Session = { name, createdAt: Date.now() }
     const id = await db.add(session)
     sessions.value = [{ ...session, id }, ...sessions.value]
     return id
@@ -41,7 +44,8 @@ export const useSessionsStore = defineStore('sessions', () => {
   async function remove(id: number): Promise<void> {
     await db.delete(id)
     await solves.removeBySessionId(id)
-    sessions.value = sessions.value.filter((it) => it.id !== id)
+    await load()
+    await config.load()
   }
 
   async function clear(): Promise<void> {
@@ -53,7 +57,7 @@ export const useSessionsStore = defineStore('sessions', () => {
     if (!import.meta.client) return
     const count = await db.count()
     if (count === 0) {
-      await add({ createdAt: Date.now(), name: DEFAULT_SESSION_NAME })
+      await add(DEFAULT_SESSION_NAME)
     } else {
       await refresh()
     }
@@ -67,11 +71,15 @@ export const useSessionsStore = defineStore('sessions', () => {
     return db.get(id)
   }
 
+  async function getAll(): Promise<Session[]> {
+    return db.getAll()
+  }
+
   async function reset() {
     ready.value = false
     sessions.value = []
     await db.deleteDB()
   }
 
-  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset }
+  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll}
 })
