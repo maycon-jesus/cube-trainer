@@ -142,4 +142,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  eslint: {
+    config: {
+      stylistic: false
+    }
+  }
 })
