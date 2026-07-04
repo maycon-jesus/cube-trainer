@@ -83,10 +83,15 @@ export const useSolvesStore = defineStore('solves', () => {
     return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
-  async function getAllBySessionId(sessionId: number): Promise<Solve[]> {
-    const solves = await db.getAllByIndex('sessionId', sessionId)
-    return solves.sort((a, b) => b.createdAt - a.createdAt)
+  async function getBySessionId(sessionId: number, size: number): Promise<Solve[]> {
+    const solves = await db.getEntriesByIndex('sessionId', sessionId, size, 'prev')
+    return solves
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getAllBySessionId }
+  async function countBySessionId(sessionId: number): Promise<number> {
+    const count = await db.countByIndex('sessionId', sessionId)
+    return count
+  }
+
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId}
 })

@@ -11,6 +11,8 @@ export interface DatabaseOptions {
     indexes?: IndexDefinition[]
 }
 
+export type IndexQuery = IDBValidKey | IDBKeyRange | undefined | null
+
 export type Stored<T> = T & { id?: number }
 
 export class Database<T extends Record<string, unknown>> {
@@ -85,19 +87,65 @@ export class Database<T extends Record<string, unknown>> {
         return this.tx('readonly', (s) => s.getAll() as IDBRequest<T[]>)
     }
 
-    /** Read the most recent `size` records (newest first). */
-    async getEntries(size: number, direction: IDBCursorDirection): Promise<T[]> {
+    /**
+     * Read up to `size` records by walking a cursor in key order.
+     *
+     * @param size Maximum number of records to return; the cursor stops once this many are collected.
+     * @param direction Cursor traversal direction: `next`/`prev` for ascending/descending key order,
+     *   `nextunique`/`prevunique` to visit only the first record of each key value.
+     * @param filter Optional predicate; only records for which it returns true are kept
+     *   (filtered-out records still count toward the walk but not toward `size`).
+     * @returns The collected records, in traversal order.
+     */
+    async getEntries(indexQuery:IndexQuery, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
             const transaction = db.transaction(this.store, 'readonly')
             const store = transaction.objectStore(this.store)
             const results: T[] = []
-            const cursorReq = store.openCursor(null, direction)
+            const cursorReq = store.openCursor(indexQuery, direction)
 
             cursorReq.onsuccess = () => {
                 const cursor = cursorReq.result
                 if (cursor && results.length < size) {
-                    results.push(cursor.value)
+                    if (!filter || filter(cursor.value)) {
+                        results.push(cursor.value)
+                    }
+                    cursor.continue()
+                } else {
+                    resolve(results)
+                }
+            }
+            cursorReq.onerror = () => reject(cursorReq.error)
+        })
+    }
+
+    /**
+     * Read up to `size` records by walking a cursor over an index, in that index's key order.
+     *
+     * @param indexName Name of the index to traverse; records are ordered by the index's keyPath.
+     * @param size Maximum number of records to return; the cursor stops once this many are collected.
+     * @param direction Cursor traversal direction: `next`/`prev` for ascending/descending key order,
+     *   `nextunique`/`prevunique` to visit only the first record of each index key value.
+     * @param filter Optional predicate; only records for which it returns true are kept
+     *   (filtered-out records still count toward the walk but not toward `size`).
+     * @returns The collected records, in traversal order.
+     */
+    async getEntriesByIndex(indexName: string, indexQuery:IndexQuery ,size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
+        const db = await this.open()
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(this.store, 'readonly')
+            const store = transaction.objectStore(this.store)
+            const index = store.index(indexName)
+            const results: T[] = []
+            const cursorReq = index.openCursor(indexQuery, direction)
+
+            cursorReq.onsuccess = () => {
+                const cursor = cursorReq.result
+                if (cursor && results.length < size) {
+                    if (!filter || filter(cursor.value)) {
+                        results.push(cursor.value)
+                    }
                     cursor.continue()
                 } else {
                     resolve(results)
@@ -122,6 +170,10 @@ export class Database<T extends Record<string, unknown>> {
     /** Count the records in the store. */
     count(): Promise<number> {
         return this.tx('readonly', (s) => s.count())
+    }
+
+    countByIndex(indexName: string, value: NonNullable<IndexQuery>): Promise<number> {
+        return this.tx('readonly', (s) => s.index(indexName).count(value))
     }
 
     /** Insert a new record and resolve its generated id. */

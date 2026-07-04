@@ -10,7 +10,7 @@ const config = useConfigStore()
 
 type SessionStats = {
   count: number
-  best: number | null
+  mo3: number | null
   ao5: number | null
   ao12: number | null
   lastActive: number
@@ -32,23 +32,24 @@ onBeforeMount(async()=>{
 watch(sessions, async () => {
   solvesCount.value=0
   for (const session of sessions.value) {
-    const solves = await solvesStore.getAllBySessionId(session.id!)
+    const solves = await solvesStore.getBySessionId(session.id!, 12)
+    const count = await solvesStore.countBySessionId(session.id!)
     solvesBySession.value[session.id!] = solves
 
     sessionStats.value[session.id!] = {
-      count: solves.length,
-      best: bestOf(solves),
+      count: count,
+      mo3: meanOf(solves),
       ao5: averageOf(solves, 5),
       ao12: averageOf(solves, 12),
       lastActive: solves[0]?.createdAt ?? session.createdAt,
     }
-    solvesCount.value += solves.length
+    solvesCount.value += count
   }
 }, {
   immediate: true,
 })
 
-const emptyStats: SessionStats = { count: 0, best: null, ao5: null, ao12: null, lastActive: 0 }
+const emptyStats: SessionStats = { count: 0, mo3: null, ao5: null, ao12: null, lastActive: 0 }
 
 function statsFor(session: Session): SessionStats {
   return (session.id !== undefined && sessionStats.value[session.id]) || emptyStats
@@ -197,8 +198,8 @@ prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
               </div>
               <v-divider vertical class="mx-2" />
               <div class="flex-1-1">
-                <div class="text-caption text-medium-emphasis">{{ t('sessions.best') }}</div>
-                <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).best) }}</div>
+                <div class="text-caption text-medium-emphasis">{{ t('sessions.mo3') }}</div>
+                <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).mo3) }}</div>
               </div>
               <v-divider vertical class="mx-2" />
               <div class="flex-1-1">
