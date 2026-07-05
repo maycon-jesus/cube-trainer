@@ -41,9 +41,13 @@ export const useSessionsStore = defineStore('sessions', () => {
     sessions.value = sessions.value.map((it) => (it.id === session.id ? session : it))
   }
 
-  async function remove(id: number): Promise<void> {
+  async function remove(id: number, moveSolvesToSessionId?: number|null): Promise<void> {
     await db.delete(id)
-    await solves.removeBySessionId(id)
+    if(!moveSolvesToSessionId) {
+      await solves.removeBySessionId(id)
+    }else{
+      await solves.changeSessionId(id, moveSolvesToSessionId)
+    }
     await load()
     await config.load()
   }

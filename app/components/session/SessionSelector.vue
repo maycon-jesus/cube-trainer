@@ -1,6 +1,6 @@
 <template>
     <v-select
-        v-model="configStore.sessionId"
+        v-model="model"
         :label="t('session.label')"
         :items="items"
         hide-details
@@ -18,12 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { useConfigStore } from '~/stores/db/config';
 import { useSessionsStore } from '~/stores/db/sessions';
+
+const props = defineProps<{
+    excludedIds?: number[]
+}>()
+
+const model = defineModel<number>()
 
 const { t } = useI18n()
 const sessionStore = useSessionsStore()
-const configStore = useConfigStore()
 
 const openCreateDialog = ref(false)
 const items = computed(() => {
@@ -32,6 +36,6 @@ const items = computed(() => {
             title: it.name,
             value: it.id
         }
-    })
+    }).filter(it => it.value && !props.excludedIds?.includes(it.value))
 })
 </script>

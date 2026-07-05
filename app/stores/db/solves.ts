@@ -93,5 +93,13 @@ export const useSolvesStore = defineStore('solves', () => {
     return count
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId}
+  async function changeSessionId(oldSessionId: number, newSessionId: number): Promise<void> {
+    const solves = await db.getAllByIndex('sessionId', oldSessionId)
+    for (const solve of solves) {
+      solve.sessionId = newSessionId
+      await db.put(solve)
+    }
+  }
+
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, changeSessionId}
 })
