@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="model" max-width="440" persistent>
-    <v-card rounded="xl">
+    <v-card>
       <v-card-item>
         <template #prepend>
           <v-icon icon="mdi-alert-outline" color="error" />
@@ -8,10 +8,10 @@
         <v-card-title>{{ t('sessions.deleteConfirmTitle') }}</v-card-title>
       </v-card-item>
       <v-card-text class="text-body-2 text-medium-emphasis">
-        {{ t('sessions.deleteConfirmText', { name: target?.name ?? '' }) }}
+        {{ t(moveSolves ? 'sessions.deleteConfirmTextMove' : 'sessions.deleteConfirmText', { name: target?.name ?? '' }) }}
         <v-row density="comfortable">
           <v-col cols="12">
-            <v-switch v-model="moveSolves" label="Move solves" hide-details />
+            <v-switch v-model="moveSolves" :label="t('sessions.moveSolves')" hide-details />
           </v-col>
         </v-row>
         <animation-expand v-model="moveSolves">

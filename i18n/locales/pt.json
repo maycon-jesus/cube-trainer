@@ -29,7 +29,9 @@
     "save": "Salvar",
     "cancel": "Cancelar",
     "deleteConfirmTitle": "Excluir sessão?",
-    "deleteConfirmText": "Isso vai excluir permanentemente \"{name}\" e todas as suas resoluções. Esta ação não pode ser desfeita."
+    "deleteConfirmText": "Isso vai excluir permanentemente \"{name}\" e todas as suas resoluções. Esta ação não pode ser desfeita.",
+    "deleteConfirmTextMove": "Isso vai excluir permanentemente \"{name}\". As resoluções dela serão movidas para a sessão selecionada em vez de excluídas.",
+    "moveSolves": "Mover resoluções para outra sessão"
   },
   "session": {
     "label": "Sessão"

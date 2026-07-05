@@ -29,7 +29,9 @@
     "save": "Save",
     "cancel": "Cancel",
     "deleteConfirmTitle": "Delete session?",
-    "deleteConfirmText": "This will permanently delete \"{name}\" and all of its solves. This action cannot be undone."
+    "deleteConfirmText": "This will permanently delete \"{name}\" and all of its solves. This action cannot be undone.",
+    "deleteConfirmTextMove": "This will permanently delete \"{name}\". Its solves will be moved to the selected session instead of being deleted.",
+    "moveSolves": "Move solves to another session"
   },
   "session": {
     "label": "Session"
