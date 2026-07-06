@@ -4,8 +4,8 @@
         <LayoutsPageHeader :title="t('nav.stats')" :subtitle="t('stats.subtitle')">
             <template #append>
                 <div class="filters d-flex flex-wrap ga-3">
-                    <CubeSelector v-model="puzzle" show-all-option />
                     <SessionSelector v-model="sessionId" show-all-option />
+                    <CubeSelector v-model="puzzle" show-all-option />
                 </div>
             </template>
         </LayoutsPageHeader>

@@ -11,8 +11,10 @@
 </template>
 
 <script setup lang="ts">
+import type { IconValue } from 'vuetify/lib/composables/icons.mjs';
+
 const props = withDefaults(defineProps<{
-  icon: string
+  icon: IconValue
   value: string | number
   label: string
   color?: string
