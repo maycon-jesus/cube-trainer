@@ -24,11 +24,11 @@ const configEntry = <T>(id: ConfigKeys, value: T) => {
     return computed({
         get: () => entry.value,
         set: async (value: T) => {
+            entry.value = value
             await db.put({
                 id: id,
                 value: value
             })
-            entry.value = value
         }
     })
 }
