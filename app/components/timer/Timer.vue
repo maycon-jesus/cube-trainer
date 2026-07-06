@@ -20,6 +20,7 @@ const props = defineProps<{
     puzzle: string
     sessionId: number
     trainingId?: string
+    scramble: string
 }>()
 const emits = defineEmits<{
     (e: 'solve', solve: Solve): void
@@ -69,7 +70,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  emits('solve', { ms, scramble: '', penalty: 'none', createdAt: Date.now(), category: props.category, puzzle: props.puzzle, sessionId: props.sessionId, trainingId: props.trainingId?? '' })
+  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), category: props.category, puzzle: props.puzzle, sessionId: props.sessionId, trainingId: props.trainingId?? '' })
   emits('stop')
 }
 

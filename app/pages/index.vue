@@ -18,7 +18,7 @@
              <TimerScramble v-show="scramble" class="mb-4" :scramble="scramble" @refresh="newScramble()" />
 
             <!-- Timer surface -->
-            <Timer :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
+            <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
 
             <!-- Scramble preview -->
             <v-card v-if="configStore.puzzle === '3x3x3'" class="pa-4 mt-4 d-flex justify-center">
