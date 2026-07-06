@@ -36,7 +36,7 @@ export function formatSolve(solve: Solve): string {
  */
 export function averageOf(solves: Solve[], n: number): number | null {
   if (solves.length < n) return null
-  const trimSize = Math.ceil(solves.length * 0.05)
+  const trimSize = Math.ceil(n * 0.05)
   const window = solves.slice(0, n).map(effectiveMs)
   const sorted = window.sort((a, b) => a - b)
   const trimmed = sorted.slice(trimSize, -trimSize)
