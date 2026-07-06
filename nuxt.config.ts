@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Cube Timer',
+      title: 'Cube Trainer — Free Speedcubing Timer & Statistics',
       htmlAttrs: { lang: 'en' },
       meta: [
         { charset: 'utf-8' },
@@ -26,25 +26,46 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#F56217' },
         // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'Cube Timer' },
-        { property: 'og:title', content: 'Cube Timer' },
+        { property: 'og:site_name', content: 'Cube Trainer' },
+        { property: 'og:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
         { property: 'og:description', content: 'Speedcubing timer for Rubik\'s cube' },
         { property: 'og:image', content: '/pwa-512x512.png' },
         { property: 'og:image:width', content: '512' },
         { property: 'og:image:height', content: '512' },
-        { property: 'og:image:alt', content: 'Cube Timer' },
+        { property: 'og:image:alt', content: 'Cube Trainer' },
         { property: 'og:locale', content: 'en_US' },
         { property: 'og:locale:alternate', content: 'pt_BR' },
         // Twitter Card
         { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:title', content: 'Cube Timer' },
+        { name: 'twitter:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
         { name: 'twitter:description', content: 'Speedcubing timer for Rubik\'s cube' },
         { name: 'twitter:image', content: '/pwa-512x512.png' },
-        { name: 'twitter:image:alt', content: 'Cube Timer' },
+        { name: 'twitter:image:alt', content: 'Cube Trainer' },
       ],
       link: [
         // PWA
         { rel: 'manifest', href: '/manifest.webmanifest' },
+      ],
+      script: [
+        // JSON-LD structured data
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'Cube Trainer',
+            url: 'https://cubetrainer.net/',
+            description: 'Speedcubing timer for Rubik\'s cube',
+            applicationCategory: 'UtilitiesApplication',
+            operatingSystem: 'Any',
+            browserRequirements: 'Requires JavaScript',
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+          }),
+        },
       ]
     },
   },
@@ -120,8 +141,8 @@ export default defineNuxtConfig({
       navigateFallback: '/',
     },
     manifest: {
-      name: 'Cube Timer',
-      short_name: 'Cube Timer',
+      name: 'Cube Trainer',
+      short_name: 'Cube Trainer',
       description: 'Speedcubing timer for Rubik\'s cube',
       lang: 'en',
       dir: 'ltr',
