@@ -6,7 +6,7 @@
                     <SessionSelector v-model="configStore.sessionId"/>
                 </v-col>
                 <v-col cols="12">
-                    <SessionCubeSelector/>
+                    <SessionCubeSelector v-model="configStore.puzzle" />
                 </v-col>
             </v-row>
         </v-card-text>

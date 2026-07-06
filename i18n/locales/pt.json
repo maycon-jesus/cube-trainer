@@ -31,7 +31,8 @@
     "deleteConfirmTitle": "Excluir sessão?",
     "deleteConfirmText": "Isso vai excluir permanentemente \"{name}\" e todas as suas resoluções. Esta ação não pode ser desfeita.",
     "deleteConfirmTextMove": "Isso vai excluir permanentemente \"{name}\". As resoluções dela serão movidas para a sessão selecionada em vez de excluídas.",
-    "moveSolves": "Mover resoluções para outra sessão"
+    "moveSolves": "Mover resoluções para outra sessão",
+    "all": "Todas as sessões"
   },
   "session": {
     "label": "Sessão"
@@ -50,7 +51,62 @@
     "training": "Treino",
     "sessions": "Sessões",
     "history": "Histórico",
+    "stats": "Estatísticas",
     "settings": "Configurações"
+  },
+  "stats": {
+    "subtitle": "Analise suas resoluções e acompanhe seu progresso ao longo do tempo",
+    "common": {
+      "notEnoughData": "Dados insuficientes"
+    },
+    "kpi": {
+      "totalSolves": "Total de resoluções",
+      "personalBest": "Recorde pessoal",
+      "currentStreak": "Sequência atual",
+      "daysPracticed": "Dias praticados"
+    },
+    "bestAverages": {
+      "title": "Melhores médias",
+      "best": "Melhor"
+    },
+    "streak": {
+      "title": "Rastreador de sequência",
+      "sub": "Sub-",
+      "current": "Atual",
+      "best": "Melhor",
+      "days": "Dias"
+    },
+    "timeOfDay": {
+      "title": "Análise por horário",
+      "bestTime": "Melhor horário",
+      "boost": "Ganho",
+      "insight": "Você faz em média {time} durante {period}, o que é {boost} mais rápido que seu pior horário do dia.",
+      "periods": {
+        "night": "a madrugada",
+        "morning": "a manhã",
+        "afternoon": "a tarde",
+        "evening": "a noite"
+      }
+    },
+    "performance": {
+      "title": "Desempenho ao longo do tempo",
+      "week": "S",
+      "month": "M",
+      "year": "A",
+      "all": "Tudo"
+    },
+    "distribution": {
+      "title": "Distribuição",
+      "empty": "Dados insuficientes para distribuição"
+    },
+    "calendar": {
+      "title": "Calendário de prática",
+      "less": "Menos",
+      "more": "Mais"
+    },
+    "pbJourney": {
+      "title": "Jornada de recordes"
+    }
   },
   "settings": {
     "title": "Configurações",

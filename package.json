@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",
+    "@nuxt/fonts": "^0.14.0",
     "@nuxtjs/i18n": "^10.4.0",
     "eslint": "^10.6.0",
     "sass-embedded": "^1.100.0",

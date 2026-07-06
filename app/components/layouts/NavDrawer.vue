@@ -16,6 +16,7 @@ const navItems = computed<{
   { title: t('nav.patterns'), icon: 'mdi-view-grid', to: {name: 'patterns'} },
   { title: t('nav.sessions'), icon: 'mdi-folder-multiple', to: {name: 'sessions'} },
   { title: t('nav.history'), icon: 'mdi-history', to: {name: 'history'} },
+  { title: t('nav.stats'), icon: 'mdi-chart-bar', to: {name: 'stats'} },
   { title: t('nav.settings'), icon: 'mdi-cog', to: {name: 'settings'} },
 ])
 </script>

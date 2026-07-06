@@ -22,6 +22,7 @@ import { useSessionsStore } from '~/stores/db/sessions';
 
 const props = defineProps<{
     excludedIds?: number[]
+    showAllOption?: boolean
 }>()
 
 const model = defineModel<number>()
@@ -31,11 +32,20 @@ const sessionStore = useSessionsStore()
 
 const openCreateDialog = ref(false)
 const items = computed(() => {
-    return sessionStore.sessions.map(it => {
+    const all = sessionStore.sessions.map(it => {
         return {
             title: it.name,
             value: it.id
         }
     }).filter(it => it.value && !props.excludedIds?.includes(it.value))
+
+    if (props.showAllOption) {
+        all.unshift({
+            title: t('sessions.all'),
+            value: -1
+        })
+    }
+
+    return all
 })
 </script>

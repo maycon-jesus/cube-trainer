@@ -31,7 +31,8 @@
     "deleteConfirmTitle": "Delete session?",
     "deleteConfirmText": "This will permanently delete \"{name}\" and all of its solves. This action cannot be undone.",
     "deleteConfirmTextMove": "This will permanently delete \"{name}\". Its solves will be moved to the selected session instead of being deleted.",
-    "moveSolves": "Move solves to another session"
+    "moveSolves": "Move solves to another session",
+    "all": "All sessions"
   },
   "session": {
     "label": "Session"
@@ -50,7 +51,62 @@
     "training": "Training",
     "sessions": "Sessions",
     "history": "History",
+    "stats": "Statistics",
     "settings": "Settings"
+  },
+  "stats": {
+    "subtitle": "Analyze your solves and track your progress over time",
+    "common": {
+      "notEnoughData": "Not enough data yet"
+    },
+    "kpi": {
+      "totalSolves": "Total solves",
+      "personalBest": "Personal best",
+      "currentStreak": "Current streak",
+      "daysPracticed": "Days practiced"
+    },
+    "bestAverages": {
+      "title": "Best averages",
+      "best": "Best"
+    },
+    "streak": {
+      "title": "Streak tracker",
+      "sub": "Sub-",
+      "current": "Current",
+      "best": "Best",
+      "days": "Days"
+    },
+    "timeOfDay": {
+      "title": "Time of day analysis",
+      "bestTime": "Best time",
+      "boost": "Boost",
+      "insight": "You average {time} in the {period}, which is {boost} faster than your worst time of day.",
+      "periods": {
+        "night": "Night",
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "evening": "Evening"
+      }
+    },
+    "performance": {
+      "title": "Performance over time",
+      "week": "W",
+      "month": "M",
+      "year": "Y",
+      "all": "All"
+    },
+    "distribution": {
+      "title": "Distribution",
+      "empty": "Not enough data for distribution"
+    },
+    "calendar": {
+      "title": "Practice calendar",
+      "less": "Less",
+      "more": "More"
+    },
+    "pbJourney": {
+      "title": "Personal best journey"
+    }
   },
   "settings": {
     "title": "Settings",

@@ -27,9 +27,11 @@ const lines = computed(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../assets/variables' as vars;
+
 .font-monospace {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-family: vars.$font-family-mono;
   letter-spacing: 0.04em;
   text-wrap: balance;
 }

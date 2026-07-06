@@ -49,6 +49,7 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxt/eslint',
+    '@nuxt/fonts',
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
@@ -56,6 +57,12 @@ export default defineNuxtConfig({
     '@vercel/analytics',
     '@vercel/speed-insights'
   ],
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google' },
+      { name: 'JetBrains Mono', provider: 'google' },
+    ],
+  },
   routeRules: {
     '/': {
       prerender: true
@@ -78,6 +85,9 @@ export default defineNuxtConfig({
     },
   },
   vuetify: {
+    moduleOptions: {
+      styles: { configFile: 'assets/vuetify-settings.scss' },
+    },
     vuetifyOptions: {
       theme: {
         defaultTheme: 'dark',
