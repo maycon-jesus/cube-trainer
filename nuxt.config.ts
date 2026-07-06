@@ -115,7 +115,7 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
-    registerType: 'prompt',
+    registerType: 'autoUpdate',
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'],
       navigateFallback: '/',
