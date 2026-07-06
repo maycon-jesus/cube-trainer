@@ -2,7 +2,7 @@
   "name": "cube-trainer",
   "type": "module",
   "private": true,
-  "version": "0.9.0",
+  "version": "0.9.1",
   "license": "MIT",
   "author": {
     "name": "Maycon Jesus",
