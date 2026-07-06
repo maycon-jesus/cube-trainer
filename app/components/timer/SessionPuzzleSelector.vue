@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="center">
         <v-card-text>
             <v-row>
                 <v-col cols="12">
@@ -18,3 +18,11 @@ import { useConfigStore } from '~/stores/db/config';
 
 const configStore = useConfigStore()
 </script>
+
+<style scoped>
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>

@@ -1,36 +1,58 @@
 <template>
   <v-container fluid class="pa-4">
-        <v-row cols="12" md="2">
-          <v-col>
-            <v-row>
-              <v-col cols="12">
-                <TimerSessionPuzzleSelector />
+        <v-row density="comfortable">
+          <v-col cols="12" lg="4" xxl="2" >
+            <v-row density="comfortable">
+              <v-col cols="12" md="6" lg="12">
+                <TimerSessionPuzzleSelector class="fill-height" />
               </v-col>
-              <v-col cols="12">
+              <v-col v-if="display.mdAndUp.value" cols="12" md="6" lg="12">
                 <TimerStats :solves="solves" />
+              </v-col>
+              <v-col v-if="display.lgAndUp.value" cols="12">
+                <TimerSolves :solves="solves.slice(0, 12)" @solves-updated="refrehSolves()" />
               </v-col>
             </v-row>
           </v-col>
 
           <!-- Timer column -->
-          <v-col cols="12" md="8" class="d-flex flex-column">
+          <v-col cols="12" lg="8">
             <!-- Scramble -->
-             <TimerScramble v-show="scramble" class="mb-4" :scramble="scramble" @refresh="newScramble()" />
+            <v-row density="comfortable">
+              <v-col cols="12">
+              <TimerScramble v-show="scramble" :scramble="scramble" @refresh="newScramble()" />
+            </v-col>
+            </v-row>
 
             <!-- Timer surface -->
-            <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
+            <v-row density="comfortable">
+              <v-col cols="12">
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
+            </v-col>
+            </v-row>
 
             <!-- Scramble preview -->
-            <v-card v-if="configStore.puzzle === '3x3x3'" class="pa-4 mt-4 d-flex justify-center">
-              <ClientOnly>
-                <ScrambleCube :scramble="scramble" />
-              </ClientOnly>
-            </v-card>
+            <v-row density="comfortable">
+              <v-col cols="12">
+                <v-card v-if="configStore.puzzle === '3x3x3'" class="pa-4 d-flex justify-center">
+                  <ClientOnly>
+                    <ScrambleCube :scramble="scramble" />
+                  </ClientOnly>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
 
           <!-- Sidebar: times -->
-          <v-col cols="12" md="2">
-            <TimerSolves :solves="solves" @solves-updated="refrehSolves()" />
+          <v-col v-if="display.mdAndDown.value" cols="12">
+            <v-row>
+              <v-col v-if="display.smAndDown.value" cols="12">
+                <TimerStats :solves="solves" />
+              </v-col>
+              <v-col cols="12">
+                <TimerSolves :solves="solves.slice(0, 12)" @solves-updated="refrehSolves()" />
+              </v-col>
+            </v-row>
         </v-col>
     </v-row>
   </v-container>
@@ -43,6 +65,8 @@ import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
 
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
+const display = useDisplay()
+
 const { add } = solvesStore
 const solves= ref<Solve[]>([])
 const started = ref(false)
