@@ -9,10 +9,11 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 ## Funcionalidades
 
 - ⏱️ **Timer** controlado por barra de espaço (segure para armar) ou toque na tela
-- 🔀 **Embaralhamentos** gerados automaticamente para o 3x3, com visualização do cubo
-- 📊 **Estatísticas WCA** — melhor tempo, média de 5/12, média geral (descartando melhor e pior)
+- 🔀 **Embaralhamentos** gerados automaticamente para 2x2, 3x3 e megaminx (com visualização do cubo no 3x3)
+- 📊 **Estatísticas WCA** — melhor tempo, média de 5/12, média geral (descartando melhor e pior), além de um dashboard com gráficos e streaks
 - 🏷️ **Penalidades** `+2` e `DNF`
 - 🗂️ **Sessões** para organizar suas resoluções
+- 📜 **Histórico** de resoluções
 - 💾 **Armazenamento local** via IndexedDB (seus dados nunca saem do seu dispositivo)
 - 📱 **PWA** — instalável e funciona offline
 - 🌐 **i18n** — Português e Inglês
@@ -54,16 +55,16 @@ lib/            Código independente de framework (sem Nuxt/Vue)
   cube/         Engine do cubo (embaralhamento e renderização do 3x3)
   db/           Wrapper genérico sobre IndexedDB
 app/            Aplicação Nuxt (srcDir)
-  pages/        Timer, configurações, treino, padrões
+  pages/        Timer, histórico, estatísticas, sessões, configurações, treino, padrões
+  components/   Componentes (timer, sessão, dashboard de estatísticas, ícones)
   stores/       Stores Pinia sobre o IndexedDB
-  composables/  Composables auto-importados
   utils/        Formatação de tempo e estatísticas WCA
 i18n/           Traduções (pt / en)
 ```
 
 ## Status
 
-Em desenvolvimento. Atualmente só o **3x3** possui engine de embaralhamento/renderização; as páginas de treino e padrões ainda são placeholders.
+Em desenvolvimento. 2x2, 3x3 e megaminx geram embaralhamentos, mas só o **3x3** possui renderização do cubo; as páginas de treino e padrões ainda são placeholders.
 
 ## Apoie o projeto
 
