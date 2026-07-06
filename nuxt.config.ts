@@ -22,13 +22,13 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Timer de speedcubing para cubo mágico' },
+        { name: 'description', content: 'Speedcubing timer for Rubik\'s cube' },
         { name: 'theme-color', content: '#F56217' },
         // Open Graph
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Cube Timer' },
         { property: 'og:title', content: 'Cube Timer' },
-        { property: 'og:description', content: 'Timer de speedcubing para cubo mágico' },
+        { property: 'og:description', content: 'Speedcubing timer for Rubik\'s cube' },
         { property: 'og:image', content: '/pwa-512x512.png' },
         { property: 'og:image:width', content: '512' },
         { property: 'og:image:height', content: '512' },
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         // Twitter Card
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: 'Cube Timer' },
-        { name: 'twitter:description', content: 'Timer de speedcubing para cubo mágico' },
+        { name: 'twitter:description', content: 'Speedcubing timer for Rubik\'s cube' },
         { name: 'twitter:image', content: '/pwa-512x512.png' },
         { name: 'twitter:image:alt', content: 'Cube Timer' },
       ],
@@ -122,7 +122,7 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Cube Timer',
       short_name: 'Cube Timer',
-      description: 'Timer de speedcubing para cubo mágico',
+      description: 'Speedcubing timer for Rubik\'s cube',
       lang: 'en',
       dir: 'ltr',
       start_url: '/',
