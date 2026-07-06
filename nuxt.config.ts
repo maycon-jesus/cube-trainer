@@ -1,5 +1,7 @@
+import { fileURLToPath } from "node:url";
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
+
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -152,9 +154,12 @@ export default defineNuxtConfig({
       ],
     },
   },
+  alias: {
+    '@icon': fileURLToPath(new URL('./app/components/icon', import.meta.url)),
+  },
   eslint: {
     config: {
       stylistic: false
     }
-  }
+  },
 })
