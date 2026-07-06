@@ -177,9 +177,25 @@ export class Database<T extends Record<string, unknown>> {
     }
 
     /** Insert a new record and resolve its generated id. */
-    async add(value: T): Promise<number> {
+    async add(value: T): Promise<T["id"]> {
         const key = await this.tx('readwrite', (s) => s.add(value))
-        return key as number
+        return key as T["id"]
+    }
+
+    /** Insert many new records in a single transaction, resolving their generated ids in order. */
+    async bulkAdd(values: T[]): Promise<T["id"][]> {
+        const db = await this.open()
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(this.store, 'readwrite')
+            const store = transaction.objectStore(this.store)
+            const ids: T["id"][] = []
+            for (const value of values) {
+                const req = store.add(value)
+                req.onsuccess = () => ids.push(req.result as T["id"])
+            }
+            transaction.oncomplete = () => resolve(ids)
+            transaction.onerror = () => reject(transaction.error)
+        })
     }
 
     /** Insert or replace a record (requires the primary key to be present). */
