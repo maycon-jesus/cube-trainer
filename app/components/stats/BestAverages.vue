@@ -1,6 +1,6 @@
 <template>
   <StatsSection :title="t('stats.bestAverages.title')">
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col v-for="stat in stats" :key="stat.n" cols="6" sm="3">
         <div class="avg-cell">
           <div class="avg-cell__name">Ao{{ stat.n }}</div>

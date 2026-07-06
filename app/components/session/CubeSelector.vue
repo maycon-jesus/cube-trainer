@@ -1,5 +1,24 @@
 <template>
-    <v-select v-model="model" :label="t('puzzle.label')" :items="items" hide-details />
+    <v-select
+v-model="model" :label="t('puzzle.label')" :items="items" hide-details item-title="title"
+        item-value="value" item-icon="icon">
+        <template #selection="{item}">
+            <v-icon v-if="item.icon" class="mr-2"><component :is="item.icon"/></v-icon>
+            <span>{{ item.title }}</span>
+        </template>
+        <template #item="{ item, props: attrs }">
+            <v-list-item v-bind="attrs">
+                <template v-if="item.icon" #prepend>
+                    <v-icon>
+                        <component :is="item.icon" />
+                    </v-icon>
+                </template>
+                <template #title>
+                    {{ item.title }}
+                </template>
+            </v-list-item>
+        </template>
+    </v-select>
 </template>
 
 <script setup lang="ts">
@@ -17,13 +36,15 @@ const items = computed(() => {
     const all = Object.entries(cubesDefinition).map(([, cube]) => {
         return {
             value: cube.id,
-            title: t(`cube.${cube.id}`)
+            title: t(`cube.${cube.id}`),
+            icon: cube.icon
         }
     })
     if (props.showAllOption) {
         all.unshift({
-            title: t('sessions.all'),
-            value: 'all'
+            title: t('puzzle.all'),
+            value: 'all',
+            icon: undefined
         })
     }
     return all

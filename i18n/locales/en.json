@@ -38,7 +38,8 @@
     "label": "Session"
   },
   "puzzle": {
-    "label": "Puzzle"
+    "label": "Puzzle",
+    "all": "All"
   },
   "footer": {
     "madeWith": "Made with {heart} by {author}",

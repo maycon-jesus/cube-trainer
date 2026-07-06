@@ -16,7 +16,7 @@
       </div>
     </template>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col v-for="item in items" :key="item.label" cols="4">
         <div class="streak-cell" :style="{ '--accent': item.color }">
           <div class="streak-cell__value">{{ item.value }}</div>

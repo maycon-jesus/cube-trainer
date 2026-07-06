@@ -38,7 +38,8 @@
     "label": "Sessão"
   },
   "puzzle": {
-    "label": "Quebra-cabeça"
+    "label": "Quebra-cabeça",
+    "all": "Todos"
   },
   "footer": {
     "madeWith": "Feito com {heart} por {author}",
