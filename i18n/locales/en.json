@@ -132,6 +132,16 @@
     "cancel": "Cancel",
     "confirm": "Reset"
   },
+  "solve": {
+    "details": {
+      "title": "Solve details",
+      "delete": "Delete",
+      "scramble": "Scramble",
+      "puzzle": "Puzzle",
+      "date": "Date",
+      "close": "Close"
+    }
+  },
   "cube": {
     "other": "Other",
     "2x2x2": "2x2x2",

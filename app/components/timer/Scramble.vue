@@ -5,11 +5,10 @@
             <v-btn size="small" variant="text"  icon="mdi-refresh" :title="$t('actions.newScramble')" @click="emits('refresh')"/>
         </div>
         <v-card-text class="text-headline-small text-center text-md-headline-medium font-monospace text-medium-emphasis">
-            <span v-for="(line, index) in lines" :key="index" class="d-block">
+            <span v-for="(line, index) in getScrambleLines(props.scramble)" :key="index" class="d-block">
                 {{ line }}
             </span>
         </v-card-text>
-        
     </v-card>
 </template>
 
@@ -21,10 +20,6 @@ const props = defineProps<{
 const emits = defineEmits<{
     (e: 'refresh'): void
 }>()
-
-const lines = computed(() => {
-    return props.scramble.split('\n')
-})
 </script>
 
 <style scoped lang="scss">
