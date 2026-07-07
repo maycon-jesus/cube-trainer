@@ -22,13 +22,13 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Free speedcubing timer with scramble generator for 2x2, 3x3 and Megaminx, WCA-style stats (ao5, ao12), sessions and progress charts. Works offline as a PWA.' },
+        { name: 'description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
         { name: 'theme-color', content: '#F56217' },
         // Open Graph
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Cube Trainer' },
         { property: 'og:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
-        { property: 'og:description', content: 'Free speedcubing timer with scramble generator for 2x2, 3x3 and Megaminx, WCA-style stats (ao5, ao12), sessions and progress charts. Works offline as a PWA.' },
+        { property: 'og:description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
         { property: 'og:image', content: 'https://cubetrainer.net/og.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         // Twitter Card
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
-        { name: 'twitter:description', content: 'Free speedcubing timer with scramble generator for 2x2, 3x3 and Megaminx, WCA-style stats (ao5, ao12), sessions and progress charts. Works offline as a PWA.' },
+        { name: 'twitter:description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
         { name: 'twitter:image', content: 'https://cubetrainer.net/og.png' },
         { name: 'twitter:image:alt', content: 'Cube Trainer' },
       ],
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
             '@type': 'WebApplication',
             name: 'Cube Trainer',
             url: 'https://cubetrainer.net/',
-            description: 'Free speedcubing timer with scramble generator for 2x2, 3x3 and Megaminx, WCA-style stats (ao5, ao12), sessions and progress charts. Works offline as a PWA.',
+            description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
             applicationCategory: 'UtilitiesApplication',
             operatingSystem: 'Any',
             browserRequirements: 'Requires JavaScript',
@@ -143,7 +143,7 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Cube Trainer',
       short_name: 'Cube Trainer',
-      description: 'Free speedcubing timer with scramble generator for 2x2, 3x3 and Megaminx, WCA-style stats (ao5, ao12), sessions and progress charts. Works offline as a PWA.',
+      description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
       lang: 'en',
       dir: 'ltr',
       start_url: '/',
