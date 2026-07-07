@@ -67,6 +67,8 @@ const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
 const display = useDisplay()
 
+usePageSeo('index', { suffix: false })
+
 const { add } = solvesStore
 const solves= ref<Solve[]>([])
 const started = ref(false)

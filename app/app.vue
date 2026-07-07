@@ -7,5 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-
+useHead({
+  titleTemplate: '%s — Cube Trainer',
+})
 </script>

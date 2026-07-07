@@ -159,5 +159,35 @@
     "megaminx": "Megaminx",
     "mirror-3x3x3": "Mirror 3x3x3",
     "mirror-2x2x2": "Mirror 2x2x2"
+  },
+  "seo": {
+    "index": {
+      "title": "Cube Trainer — Free Speedcubing Timer & Statistics",
+      "description": "Free Rubik's Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline."
+    },
+    "stats": {
+      "title": "Your Statistics",
+      "description": "Follow your personal progress: best single, Ao5, Ao12 and charts of your solve times."
+    },
+    "sessions": {
+      "title": "Practice Sessions",
+      "description": "Organize your solves into practice sessions and compare your times and averages for each puzzle."
+    },
+    "history": {
+      "title": "Solve History",
+      "description": "Browse your complete solve history with scrambles, penalties and session details."
+    },
+    "patterns": {
+      "title": "Rubik's Cube Patterns",
+      "description": "Learn to make cool patterns on your Rubik's Cube, step by step."
+    },
+    "training": {
+      "title": "Algorithm Training",
+      "description": "Practice specific algorithms and cases to improve your solve times."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Customize Cube Trainer: switch between light and dark theme, change the language and manage your data."
+    }
   }
 }

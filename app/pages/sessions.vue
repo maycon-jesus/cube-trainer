@@ -8,6 +8,8 @@ const sessionsStore = useSessionsStore()
 const solvesStore = useSolvesStore()
 const config = useConfigStore()
 
+usePageSeo('sessions')
+
 type SessionStats = {
   count: number
   mo3: number | null

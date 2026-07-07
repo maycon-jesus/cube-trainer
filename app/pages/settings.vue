@@ -2,6 +2,9 @@
 import { useConfigStore } from '~/stores/db/config'
 
 const { t, locale, locales, setLocale } = useI18n()
+
+usePageSeo('settings')
+
 const theme = useTheme()
 const migration = useMigrationStore()
 const config = useConfigStore()

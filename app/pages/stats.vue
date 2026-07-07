@@ -67,6 +67,8 @@ const { t } = useI18n()
 const config = useConfigStore()
 const solvesStore = useSolvesStore()
 
+usePageSeo('stats')
+
 const ALL_SESSIONS = -1
 const ALL_PUZZLES = 'all'
 

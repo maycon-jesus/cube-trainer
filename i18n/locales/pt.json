@@ -159,5 +159,35 @@
     "megaminx": "Megaminx",
     "mirror-3x3x3": "Mirror 3x3x3",
     "mirror-2x2x2": "Mirror 2x2x2"
+  },
+  "seo": {
+    "index": {
+      "title": "Cube Trainer — Timer de Speedcubing Grátis e Estatísticas",
+      "description": "Timer de cubo mágico grátis. Gere embaralhamentos para 2x2, 3x3 e Megaminx, registre seus tempos e médias e acompanhe seu progresso com gráficos. Funciona offline."
+    },
+    "stats": {
+      "title": "Suas Estatísticas",
+      "description": "Acompanhe seu progresso pessoal: melhor tempo, Ao5, Ao12 e gráficos dos seus tempos de resolução."
+    },
+    "sessions": {
+      "title": "Sessões de Treino",
+      "description": "Organize suas resoluções em sessões de treino e compare seus tempos e médias para cada cubo."
+    },
+    "history": {
+      "title": "Histórico de Resoluções",
+      "description": "Veja seu histórico completo de resoluções com embaralhamentos, penalidades e detalhes das sessões."
+    },
+    "patterns": {
+      "title": "Padrões do Cubo Mágico",
+      "description": "Aprenda a montar padrões incríveis no seu cubo mágico, passo a passo."
+    },
+    "training": {
+      "title": "Treino de Algoritmos",
+      "description": "Treine algoritmos e casos específicos para melhorar seus tempos."
+    },
+    "settings": {
+      "title": "Configurações",
+      "description": "Personalize o Cube Trainer: alterne entre tema claro e escuro, mude o idioma e gerencie seus dados."
+    }
   }
 }

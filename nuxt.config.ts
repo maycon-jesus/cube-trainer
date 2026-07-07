@@ -35,10 +35,8 @@ export default defineNuxtConfig({
         { property: 'og:image:alt', content: 'Cube Trainer' },
         { property: 'og:locale', content: 'en_US' },
         { property: 'og:locale:alternate', content: 'pt_BR' },
-        // Twitter Card
+        // Twitter Card (title/description fall back to og:*)
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
-        { name: 'twitter:description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
         { name: 'twitter:image', content: 'https://cubetrainer.net/og.png' },
         { name: 'twitter:image:alt', content: 'Cube Trainer' },
       ],
