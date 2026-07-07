@@ -5,6 +5,7 @@ import { useConfigStore } from '~/stores/db/config';
 const theme = useTheme()
 const configStore = useConfigStore()
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const layoutState = useLayoutStateStore()
 
@@ -57,7 +58,7 @@ onBeforeUnmount(()=>{
       </template>
       <v-app-bar-title>
         <div>
-        <NuxtLink to="/" class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row no-decoration">
+        <NuxtLink :to="localePath('/')" class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row no-decoration">
           <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title')
             }}</span>
         </NuxtLink>

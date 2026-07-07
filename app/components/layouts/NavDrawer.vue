@@ -2,6 +2,7 @@
 import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric } from 'vue-router'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { public: { buyMeCoffeeUrl } } = useRuntimeConfig()
 
 const layoutState = useLayoutStateStore()
@@ -11,13 +12,13 @@ const navItems = computed<{
   icon: string
   to: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric | undefined
 }[]>(() => [
-  { title: t('nav.play'), icon: 'mdi-timer-outline', to: {name: 'index'} },
-  { title: t('nav.training'), icon: 'mdi-dumbbell', to: {name: 'training'} },
-  { title: t('nav.patterns'), icon: 'mdi-view-grid', to: {name: 'patterns'} },
-  { title: t('nav.sessions'), icon: 'mdi-folder-multiple', to: {name: 'sessions'} },
-  { title: t('nav.history'), icon: 'mdi-history', to: {name: 'history'} },
-  { title: t('nav.stats'), icon: 'mdi-chart-bar', to: {name: 'stats'} },
-  { title: t('nav.settings'), icon: 'mdi-cog', to: {name: 'settings'} },
+  { title: t('nav.play'), icon: 'mdi-timer-outline', to: localePath({ name: 'index' }) },
+  { title: t('nav.training'), icon: 'mdi-dumbbell', to: localePath({ name: 'training' }) },
+  { title: t('nav.patterns'), icon: 'mdi-view-grid', to: localePath({ name: 'patterns' }) },
+  { title: t('nav.sessions'), icon: 'mdi-folder-multiple', to: localePath({ name: 'sessions' }) },
+  { title: t('nav.history'), icon: 'mdi-history', to: localePath({ name: 'history' }) },
+  { title: t('nav.stats'), icon: 'mdi-chart-bar', to: localePath({ name: 'stats' }) },
+  { title: t('nav.settings'), icon: 'mdi-cog', to: localePath({ name: 'settings' }) },
 ])
 </script>
 

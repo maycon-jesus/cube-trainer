@@ -18,7 +18,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Cube Trainer — Free Speedcubing Timer & Statistics',
-      htmlAttrs: { lang: 'en' },
+      // htmlAttrs.lang and og:locale / og:locale:alternate are managed per-locale
+      // by useLocaleHead({ seo: true }) in app.vue.
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -33,8 +34,6 @@ export default defineNuxtConfig({
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { property: 'og:image:alt', content: 'Cube Trainer' },
-        { property: 'og:locale', content: 'en_US' },
-        { property: 'og:locale:alternate', content: 'pt_BR' },
         // Twitter Card (title/description fall back to og:*)
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:image', content: 'https://cubetrainer.net/og.png' },
@@ -99,10 +98,13 @@ export default defineNuxtConfig({
   },
   i18n: {
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    strategy: 'prefix_except_default',
+    // Absolute base URL — required so i18n can emit correct hreflang / canonical
+    // links and og:url for the SEO head (useLocaleHead in app.vue).
+    baseUrl: 'https://cubetrainer.net',
     locales: [
-      { code: 'pt', name: 'Português', file: 'pt.json' },
-      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'pt', name: 'Português', language: 'pt-BR', file: 'pt.json' },
+      { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
     ],
     detectBrowserLanguage: {
       useCookie: true,

@@ -4,6 +4,7 @@ import { useSessionsStore, type Session } from '~/stores/db/sessions'
 import { useSolvesStore, type Solve } from '~/stores/db/solves'
 
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const sessionsStore = useSessionsStore()
 const solvesStore = useSolvesStore()
 const config = useConfigStore()
@@ -76,7 +77,7 @@ function setCurrent(session: Session) {
 
 async function openSession(session: Session) {
   setCurrent(session)
-  await navigateTo({ name: 'index' })
+  await navigateTo(localePath({ name: 'index' }))
 }
 
 // Create / rename dialog
