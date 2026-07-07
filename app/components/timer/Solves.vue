@@ -35,7 +35,7 @@ icon="mdi-delete-outline" size="x-small" variant="text" title="Remover"
             </v-list-item>
         </v-list>
         <div v-else class="text-medium-emphasis text-center py-6">
-            Nenhum tempo ainda. Resolva o cubo!
+            {{ t('timer.solves.empty') }}
         </div>
         <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty" @delete-solve="removeSolve" />
     </v-card>
@@ -52,6 +52,7 @@ const emits = defineEmits<{
     (e: 'solves-updated'): void
 }>()
 
+const { t } = useI18n()
 const solvesStore = useSolvesStore()
 const modalSolve = ref<Solve | null>(null)
 const openModalSolve = ref(false)

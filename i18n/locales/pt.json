@@ -132,6 +132,11 @@
     "cancel": "Cancelar",
     "confirm": "Resetar"
   },
+  "timer": {
+    "solves": {
+      "empty": "Nenhum tempo ainda. Resolva o cubo!"
+    }
+  },
   "solve": {
     "details": {
       "title": "Detalhes da resolução",
