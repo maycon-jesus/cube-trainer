@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   site: {
     url: 'https://cubetrainer.net',
+    name: 'Cube Trainer',
   },
   runtimeConfig: {
     public: {
