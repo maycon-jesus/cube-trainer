@@ -101,11 +101,6 @@ export default defineNuxtConfig({
       prerender: true
     }
   },
-  nitro: {
-    prerender: {
-      routes: ['/sitemap_index.xml'],
-    },
-  },
   i18n: {
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
@@ -200,4 +195,7 @@ export default defineNuxtConfig({
       stylistic: false
     }
   },
+  sitemap: {
+    zeroRuntime: true
+  }
 })
