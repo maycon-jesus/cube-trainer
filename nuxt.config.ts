@@ -78,13 +78,13 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtjs/sitemap',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
-    '@nuxtjs/sitemap',
     '@vercel/analytics',
     '@vercel/speed-insights'
   ],
