@@ -1,0 +1,210 @@
+{
+  "app": {
+    "title": "Cube Trainer"
+  },
+  "actions": {
+    "newScramble": "新打乱"
+  },
+  "common": {
+    "underConstruction": "建设中"
+  },
+  "sessions": {
+    "subtitle": "管理你的练习分组并追踪进步",
+    "new": "新建分组",
+    "current": "当前",
+    "solves": "复原次数",
+    "best": "最佳",
+    "mo3": "Mo3",
+    "ao5": "Ao5",
+    "ao12": "Ao12",
+    "lastActive": "上次活动 {date}",
+    "open": "打开",
+    "setCurrent": "设为当前",
+    "rename": "重命名",
+    "delete": "删除",
+    "totalSessions": "分组数",
+    "totalSolves": "总复原次数",
+    "nameLabel": "分组名称",
+    "create": "创建",
+    "save": "保存",
+    "cancel": "取消",
+    "deleteConfirmTitle": "删除分组？",
+    "deleteConfirmText": "这将永久删除“{name}”及其所有复原记录。此操作无法撤销。",
+    "deleteConfirmTextMove": "这将永久删除“{name}”。其复原记录将被移动到所选分组，而不会被删除。",
+    "moveSolves": "将复原记录移动到其他分组",
+    "all": "所有分组"
+  },
+  "session": {
+    "label": "分组"
+  },
+  "puzzle": {
+    "label": "魔方类型",
+    "all": "全部"
+  },
+  "footer": {
+    "madeWith": "由 {author} 用 {heart} 制作",
+    "buyMeCoffee": "请我喝杯咖啡",
+    "license": "MIT 许可证"
+  },
+  "nav": {
+    "play": "计时器",
+    "patterns": "花样",
+    "training": "训练",
+    "sessions": "分组",
+    "history": "历史记录",
+    "stats": "统计",
+    "settings": "设置"
+  },
+  "stats": {
+    "subtitle": "分析你的复原记录并追踪长期进步",
+    "common": {
+      "notEnoughData": "数据尚不足"
+    },
+    "kpi": {
+      "totalSolves": "总复原次数",
+      "personalBest": "个人最佳",
+      "currentStreak": "当前连续天数",
+      "daysPracticed": "练习天数"
+    },
+    "bestAverages": {
+      "title": "最佳平均",
+      "best": "最佳"
+    },
+    "streak": {
+      "title": "连续练习追踪",
+      "sub": "Sub-",
+      "current": "当前",
+      "best": "最佳",
+      "days": "天"
+    },
+    "timeOfDay": {
+      "title": "时段分析",
+      "bestTime": "最佳时段",
+      "boost": "提升",
+      "insight": "你在{period}的平均成绩为 {time}，比你一天中最差的时段快 {boost}。",
+      "periods": {
+        "night": "夜间",
+        "morning": "上午",
+        "afternoon": "下午",
+        "evening": "傍晚"
+      }
+    },
+    "performance": {
+      "title": "成绩变化趋势",
+      "week": "周",
+      "month": "月",
+      "year": "年",
+      "all": "全部"
+    },
+    "distribution": {
+      "title": "分布",
+      "empty": "数据不足，无法显示分布"
+    },
+    "calendar": {
+      "title": "练习日历",
+      "less": "较少",
+      "more": "较多"
+    },
+    "pbJourney": {
+      "title": "个人最佳历程"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "appearance": {
+      "title": "外观",
+      "subtitle": "自定义应用的外观",
+      "theme": "主题",
+      "themeDark": "深色",
+      "themeLight": "浅色",
+      "language": "语言"
+    },
+    "data": {
+      "title": "数据",
+      "subtitle": "管理你的本地数据",
+      "reset": "重置数据",
+      "resetDescription": "删除所有分组和复原记录，并将应用恢复到初始状态。",
+      "resetConfirmTitle": "重置所有数据？",
+      "resetConfirmText": "这将永久删除你的所有分组和复原记录。此操作无法撤销。",
+      "resetSuccess": "数据重置成功",
+      "resetError": "数据重置失败"
+    },
+    "cancel": "取消",
+    "confirm": "重置"
+  },
+  "timer": {
+    "hint": "按住{key}并松开以开始 · 按下以停止",
+    "hintKey": "空格键",
+    "scramble": {
+      "title": "打乱"
+    },
+    "stats": {
+      "title": "统计",
+      "solvesCount": "{count} 次复原",
+      "best": "最佳",
+      "mean": "平均",
+      "ao5": "ao5",
+      "ao12": "ao12"
+    },
+    "solves": {
+      "title": "成绩",
+      "clear": "清空",
+      "clearConfirm": "删除所有成绩？",
+      "remove": "移除",
+      "empty": "暂无成绩，去复原魔方吧！"
+    }
+  },
+  "solve": {
+    "details": {
+      "title": "复原详情",
+      "delete": "删除",
+      "scramble": "打乱",
+      "puzzle": "魔方类型",
+      "date": "日期",
+      "close": "关闭"
+    }
+  },
+  "cube": {
+    "other": "其他",
+    "2x2x2": "2x2x2",
+    "3x3x3": "3x3x3",
+    "4x4x4": "4x4x4",
+    "5x5x5": "5x5x5",
+    "6x6x6": "6x6x6",
+    "7x7x7": "7x7x7",
+    "pyraminx": "金字塔",
+    "megaminx": "五魔方",
+    "mirror-3x3x3": "镜面 3x3x3",
+    "mirror-2x2x2": "镜面 2x2x2"
+  },
+  "seo": {
+    "index": {
+      "title": "Cube Trainer — 免费速拧计时器与统计",
+      "description": "免费的魔方计时器。获取 2x2、3x3 和五魔方的打乱，记录你的复原时间与平均成绩，并通过图表追踪进步。支持离线使用。"
+    },
+    "stats": {
+      "title": "你的统计",
+      "description": "追踪你的个人进步：最佳单次、Ao5、Ao12 以及复原时间图表。"
+    },
+    "sessions": {
+      "title": "练习分组",
+      "description": "将复原记录整理到练习分组中，并比较每种魔方的成绩与平均值。"
+    },
+    "history": {
+      "title": "复原历史",
+      "description": "浏览完整的复原历史，包含打乱、罚时与分组详情。"
+    },
+    "patterns": {
+      "title": "魔方花样",
+      "description": "一步步学习在魔方上制作酷炫花样。"
+    },
+    "training": {
+      "title": "公式训练",
+      "description": "练习特定公式与情形，提升你的复原成绩。"
+    },
+    "settings": {
+      "title": "设置",
+      "description": "自定义 Cube Trainer：切换浅色与深色主题、更改语言并管理数据。"
+    }
+  }
+}

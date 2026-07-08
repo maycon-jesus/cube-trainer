@@ -1,0 +1,210 @@
+{
+  "app": {
+    "title": "Cube Trainer"
+  },
+  "actions": {
+    "newScramble": "Nueva mezcla"
+  },
+  "common": {
+    "underConstruction": "En construcción"
+  },
+  "sessions": {
+    "subtitle": "Gestiona tus sesiones de práctica y sigue tu progreso",
+    "new": "Nueva sesión",
+    "current": "Actual",
+    "solves": "Resoluciones",
+    "best": "Mejor",
+    "mo3": "Mo3",
+    "ao5": "Ao5",
+    "ao12": "Ao12",
+    "lastActive": "Última actividad {date}",
+    "open": "Abrir",
+    "setCurrent": "Establecer como actual",
+    "rename": "Renombrar",
+    "delete": "Eliminar",
+    "totalSessions": "Sesiones",
+    "totalSolves": "Total de resoluciones",
+    "nameLabel": "Nombre de la sesión",
+    "create": "Crear",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "deleteConfirmTitle": "¿Eliminar sesión?",
+    "deleteConfirmText": "Esto eliminará permanentemente \"{name}\" y todas sus resoluciones. Esta acción no se puede deshacer.",
+    "deleteConfirmTextMove": "Esto eliminará permanentemente \"{name}\". Sus resoluciones se moverán a la sesión seleccionada en lugar de eliminarse.",
+    "moveSolves": "Mover resoluciones a otra sesión",
+    "all": "Todas las sesiones"
+  },
+  "session": {
+    "label": "Sesión"
+  },
+  "puzzle": {
+    "label": "Puzzle",
+    "all": "Todos"
+  },
+  "footer": {
+    "madeWith": "Hecho con {heart} por {author}",
+    "buyMeCoffee": "Invítame a un café",
+    "license": "Licencia MIT"
+  },
+  "nav": {
+    "play": "Temporizador",
+    "patterns": "Patrones",
+    "training": "Entrenamiento",
+    "sessions": "Sesiones",
+    "history": "Historial",
+    "stats": "Estadísticas",
+    "settings": "Ajustes"
+  },
+  "stats": {
+    "subtitle": "Analiza tus resoluciones y sigue tu progreso a lo largo del tiempo",
+    "common": {
+      "notEnoughData": "Aún no hay datos suficientes"
+    },
+    "kpi": {
+      "totalSolves": "Total de resoluciones",
+      "personalBest": "Récord personal",
+      "currentStreak": "Racha actual",
+      "daysPracticed": "Días practicados"
+    },
+    "bestAverages": {
+      "title": "Mejores promedios",
+      "best": "Mejor"
+    },
+    "streak": {
+      "title": "Seguimiento de rachas",
+      "sub": "Sub-",
+      "current": "Actual",
+      "best": "Mejor",
+      "days": "Días"
+    },
+    "timeOfDay": {
+      "title": "Análisis por hora del día",
+      "bestTime": "Mejor tiempo",
+      "boost": "Mejora",
+      "insight": "Promedias {time} durante la {period}, que es {boost} más rápido que tu peor hora del día.",
+      "periods": {
+        "night": "Noche",
+        "morning": "Mañana",
+        "afternoon": "Tarde",
+        "evening": "Atardecer"
+      }
+    },
+    "performance": {
+      "title": "Rendimiento a lo largo del tiempo",
+      "week": "S",
+      "month": "M",
+      "year": "A",
+      "all": "Todo"
+    },
+    "distribution": {
+      "title": "Distribución",
+      "empty": "No hay datos suficientes para la distribución"
+    },
+    "calendar": {
+      "title": "Calendario de práctica",
+      "less": "Menos",
+      "more": "Más"
+    },
+    "pbJourney": {
+      "title": "Evolución del récord personal"
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "appearance": {
+      "title": "Apariencia",
+      "subtitle": "Personaliza el aspecto de la aplicación",
+      "theme": "Tema",
+      "themeDark": "Oscuro",
+      "themeLight": "Claro",
+      "language": "Idioma"
+    },
+    "data": {
+      "title": "Datos",
+      "subtitle": "Gestiona tus datos locales",
+      "reset": "Restablecer datos",
+      "resetDescription": "Elimina todas las sesiones y resoluciones y restaura la aplicación a su estado inicial.",
+      "resetConfirmTitle": "¿Restablecer todos los datos?",
+      "resetConfirmText": "Esto eliminará permanentemente todas tus sesiones y resoluciones. Esta acción no se puede deshacer.",
+      "resetSuccess": "Datos restablecidos correctamente",
+      "resetError": "No se pudieron restablecer los datos"
+    },
+    "cancel": "Cancelar",
+    "confirm": "Restablecer"
+  },
+  "timer": {
+    "hint": "Mantén {key} y suelta para empezar · pulsa para detener",
+    "hintKey": "espacio",
+    "scramble": {
+      "title": "Mezcla"
+    },
+    "stats": {
+      "title": "Estadísticas",
+      "solvesCount": "{count} resoluciones",
+      "best": "mejor",
+      "mean": "media",
+      "ao5": "ao5",
+      "ao12": "ao12"
+    },
+    "solves": {
+      "title": "Tiempos",
+      "clear": "Borrar",
+      "clearConfirm": "¿Eliminar todos los tiempos?",
+      "remove": "Quitar",
+      "empty": "Aún no hay tiempos. ¡Resuelve el cubo!"
+    }
+  },
+  "solve": {
+    "details": {
+      "title": "Detalles de la resolución",
+      "delete": "Eliminar",
+      "scramble": "Mezcla",
+      "puzzle": "Puzzle",
+      "date": "Fecha",
+      "close": "Cerrar"
+    }
+  },
+  "cube": {
+    "other": "Otro",
+    "2x2x2": "2x2x2",
+    "3x3x3": "3x3x3",
+    "4x4x4": "4x4x4",
+    "5x5x5": "5x5x5",
+    "6x6x6": "6x6x6",
+    "7x7x7": "7x7x7",
+    "pyraminx": "Pyraminx",
+    "megaminx": "Megaminx",
+    "mirror-3x3x3": "Mirror 3x3x3",
+    "mirror-2x2x2": "Mirror 2x2x2"
+  },
+  "seo": {
+    "index": {
+      "title": "Cube Trainer — Temporizador y Estadísticas de Speedcubing Gratis",
+      "description": "Temporizador gratuito para el cubo de Rubik. Obtén mezclas para 2x2, 3x3 y Megaminx, registra tus tiempos y promedios, y sigue tu progreso con gráficos. Funciona sin conexión."
+    },
+    "stats": {
+      "title": "Tus Estadísticas",
+      "description": "Sigue tu progreso personal: mejor tiempo, Ao5, Ao12 y gráficos de tus tiempos de resolución."
+    },
+    "sessions": {
+      "title": "Sesiones de Práctica",
+      "description": "Organiza tus resoluciones en sesiones de práctica y compara tus tiempos y promedios para cada puzzle."
+    },
+    "history": {
+      "title": "Historial de Resoluciones",
+      "description": "Explora tu historial completo de resoluciones con mezclas, penalizaciones y detalles de la sesión."
+    },
+    "patterns": {
+      "title": "Patrones del Cubo de Rubik",
+      "description": "Aprende a hacer patrones geniales en tu cubo de Rubik, paso a paso."
+    },
+    "training": {
+      "title": "Entrenamiento de Algoritmos",
+      "description": "Practica algoritmos y casos específicos para mejorar tus tiempos de resolución."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Personaliza Cube Trainer: cambia entre tema claro y oscuro, cambia el idioma y gestiona tus datos."
+    }
+  }
+}

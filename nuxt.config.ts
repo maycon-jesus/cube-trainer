@@ -79,6 +79,7 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
+    '@nuxtjs/sitemap',
     '@vercel/analytics',
     '@vercel/speed-insights'
   ],
@@ -105,6 +106,8 @@ export default defineNuxtConfig({
     locales: [
       { code: 'pt', name: 'Português', language: 'pt-BR', file: 'pt.json' },
       { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
+      { code: 'es', name: 'Español', language: 'es-ES', file: 'es.json' },
+      { code: 'zh', name: '简体中文', language: 'zh-CN', file: 'zh.json' },
     ],
     detectBrowserLanguage: {
       useCookie: true,
