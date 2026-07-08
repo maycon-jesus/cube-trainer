@@ -5,14 +5,18 @@
         <div class="timer-value font-weight-bold" :class="timerColor">
             {{ display }}
         </div>
-        <div class="text-medium-emphasis mt-4">
-            Segure <kbd>espaço</kbd> e solte para iniciar · pressione para parar
-        </div>
+        <i18n-t keypath="timer.hint" tag="div" class="text-medium-emphasis mt-4">
+            <template #key>
+                <kbd>{{ t('timer.hintKey') }}</kbd>
+            </template>
+        </i18n-t>
     </v-card>
 </template>
 
 <script setup lang="ts">
 import type { Category, Solve } from '~/stores/db/solves';
+
+const { t } = useI18n()
 
 const props = defineProps<{
     lastSolve?: Solve

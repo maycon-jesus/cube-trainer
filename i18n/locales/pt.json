@@ -133,7 +133,24 @@
     "confirm": "Resetar"
   },
   "timer": {
+    "hint": "Segure {key} e solte para iniciar · pressione para parar",
+    "hintKey": "espaço",
+    "scramble": {
+      "title": "Embaralhamento"
+    },
+    "stats": {
+      "title": "Estatísticas",
+      "solvesCount": "{count} resoluções",
+      "best": "melhor",
+      "mean": "média",
+      "ao5": "ao5",
+      "ao12": "ao12"
+    },
     "solves": {
+      "title": "Tempos",
+      "clear": "Limpar",
+      "clearConfirm": "Apagar todos os tempos?",
+      "remove": "Remover",
       "empty": "Nenhum tempo ainda. Resolva o cubo!"
     }
   },

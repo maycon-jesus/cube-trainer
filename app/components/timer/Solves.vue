@@ -1,9 +1,9 @@
 <template>
     <v-card class="pa-4">
         <div class="d-flex justify-space-between align-center mb-2">
-            <span class="text-subtitle-1 font-weight-bold">Tempos</span>
+            <span class="text-subtitle-1 font-weight-bold">{{ t('timer.solves.title') }}</span>
             <v-btn size="small" variant="text" color="error" :disabled="!solves.length" @click="clearAll">
-                Limpar
+                {{ t('timer.solves.clear') }}
             </v-btn>
         </div>
 
@@ -29,7 +29,7 @@ icon="mdi-cancel" size="x-small" variant="text"
                         :color="solve.penalty === 'dnf' ? 'error' : undefined" title="DNF"
                         @click.stop="setPenalty(solve, 'dnf')" />
                     <v-btn
-icon="mdi-delete-outline" size="x-small" variant="text" title="Remover"
+icon="mdi-delete-outline" size="x-small" variant="text" :title="t('timer.solves.remove')"
                         @click.stop="removeSolve(solve)" />
                 </template>
             </v-list-item>
@@ -70,7 +70,7 @@ async function removeSolve(solve: Solve) {
     emits('solves-updated')
 }
 async function clearAll() {
-  if (confirm('Apagar todos os tempos?')) await solvesStore.clear()
+  if (confirm(t('timer.solves.clearConfirm'))) await solvesStore.clear()
     emits('solves-updated')
 }
 

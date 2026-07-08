@@ -1,7 +1,7 @@
 <template>
     <v-card class="pa-4">
         <div class="d-flex justify-space-between align-center mb-2">
-            <span class="text-subtitle-1 font-weight-bold">Embaralhamento</span>
+            <span class="text-subtitle-1 font-weight-bold">{{ $t('timer.scramble.title') }}</span>
             <v-btn size="small" variant="text"  icon="mdi-refresh" :title="$t('actions.newScramble')" @click="emits('refresh')"/>
         </div>
         <v-card-text class="text-headline-small text-center text-md-headline-medium font-monospace text-medium-emphasis">

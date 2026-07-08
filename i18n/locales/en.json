@@ -133,7 +133,24 @@
     "confirm": "Reset"
   },
   "timer": {
+    "hint": "Hold {key} and release to start · press to stop",
+    "hintKey": "space",
+    "scramble": {
+      "title": "Scramble"
+    },
+    "stats": {
+      "title": "Statistics",
+      "solvesCount": "{count} solves",
+      "best": "best",
+      "mean": "mean",
+      "ao5": "ao5",
+      "ao12": "ao12"
+    },
     "solves": {
+      "title": "Times",
+      "clear": "Clear",
+      "clearConfirm": "Delete all times?",
+      "remove": "Remove",
       "empty": "No times yet. Solve the cube!"
     }
   },
