@@ -148,6 +148,7 @@
     },
     "solves": {
       "title": "Tempos",
+      "subtitle": "Ultima resolução | Ultimas {count} resoluções",
       "clear": "Limpar",
       "clearConfirm": "Apagar todos os tempos?",
       "remove": "Remover",

@@ -148,6 +148,7 @@
     },
     "solves": {
       "title": "Times",
+      "subtitle": "Last solve | Last {count} solves",
       "clear": "Clear",
       "clearConfirm": "Delete all times?",
       "remove": "Remove",

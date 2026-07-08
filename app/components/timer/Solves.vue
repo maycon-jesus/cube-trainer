@@ -1,11 +1,10 @@
 <template>
-    <v-card class="pa-4">
-        <div class="d-flex justify-space-between align-center mb-2">
-            <span class="text-subtitle-1 font-weight-bold">{{ t('timer.solves.title') }}</span>
-            <v-btn size="small" variant="text" color="error" :disabled="!solves.length" @click="clearAll">
+    <CustomCard :title="t('timer.solves.title')" :subtitle="t('timer.solves.subtitle',{count: solves.length})">
+        <template #title-append>
+            <v-btn variant="text" color="error" :disabled="!solves.length" @click="clearAll">
                 {{ t('timer.solves.clear') }}
             </v-btn>
-        </div>
+        </template>
 
         <v-list v-if="solves.length" density="compact" bg-color="transparent" class="times-list">
             <v-list-item v-for="(solve, i) in solves" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
@@ -38,7 +37,7 @@ icon="mdi-delete-outline" size="x-small" variant="text" color="btn" :title="t('t
             {{ t('timer.solves.empty') }}
         </div>
         <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty" @delete-solve="removeSolve" />
-    </v-card>
+    </CustomCard>
 </template>
 
 <script setup lang="ts">
