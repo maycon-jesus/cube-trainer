@@ -7,6 +7,9 @@ import pkg from "./package.json";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  site: {
+    url: 'https://cubetrainer.net',
+  },
   runtimeConfig: {
     public: {
       version: pkg.version,
