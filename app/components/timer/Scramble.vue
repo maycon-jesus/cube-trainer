@@ -1,15 +1,13 @@
 <template>
-    <v-card class="pa-4">
-        <div class="d-flex justify-space-between align-center mb-2">
-            <span class="text-subtitle-1 font-weight-bold">{{ $t('timer.scramble.title') }}</span>
+    <CustomCard :title="$t('timer.scramble.title')">
+        <template #title-append>
             <v-btn size="small" variant="text"  icon="mdi-refresh" :title="$t('actions.newScramble')" @click="emits('refresh')"/>
-        </div>
-        <v-card-text class="text-headline-small text-center text-md-headline-medium font-monospace text-medium-emphasis">
-            <span v-for="(line, index) in getScrambleLines(props.scramble)" :key="index" class="d-block">
+        </template>
+
+        <span v-for="(line, index) in getScrambleLines(props.scramble)" :key="index" class="d-block text-headline-small text-center text-md-headline-medium font-monospace text-medium-emphasis">
                 {{ line }}
             </span>
-        </v-card-text>
-    </v-card>
+    </CustomCard>
 </template>
 
 <script setup lang="ts">
