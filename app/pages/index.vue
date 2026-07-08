@@ -6,16 +6,12 @@
               <v-col cols="12" md="6" lg="12">
                 <TimerSessionPuzzleSelector class="fill-height" />
               </v-col>
-              <v-col cols="12">
-                <CustomCard title="Session Info" subtitle="ola" />
-              </v-col>
               <v-col v-if="display.mdAndUp.value" cols="12" md="6" lg="12">
                 <TimerStats :solves="solves" />
               </v-col>
               <v-col v-if="display.lgAndUp.value" cols="12">
                 <TimerSolves :solves="solves.slice(0, 12)" @solves-updated="refrehSolves()" />
               </v-col>
-              
             </v-row>
           </v-col>
 
