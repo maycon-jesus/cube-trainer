@@ -12,8 +12,8 @@
                     </v-col>
                     <v-col cols="12">
                         <div class="d-flex justify-center ga-2">
-                            <v-btn :variant="isDNF(props.solve)? 'elevated':'tonal'" @click="() => emits('setPenalty', props.solve, 'dnf')">DNF</v-btn>
-                            <v-btn :variant="isPlus2(props.solve)? 'elevated':'tonal'" @click="() => emits('setPenalty', props.solve, '+2')">+2</v-btn>
+                            <v-btn :variant="isDNF(props.solve)? 'elevated':'tonal'" :color="isDNF(props.solve)? 'primary' : 'btn'" @click="() => emits('setPenalty', props.solve, 'dnf')">DNF</v-btn>
+                            <v-btn :variant="isPlus2(props.solve)? 'elevated':'tonal'" :color="isPlus2(props.solve)? 'primary' : 'btn'" @click="() => emits('setPenalty', props.solve, '+2')">+2</v-btn>
                             <v-btn variant="outlined" color="error" @click="() => emits('deleteSolve', props.solve)">{{ t('solve.details.delete') }}</v-btn>
                         </div>
                     </v-col>
