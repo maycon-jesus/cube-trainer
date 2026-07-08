@@ -131,6 +131,7 @@ export default defineNuxtConfig({
               primary: '#F56217',
               background: '#060708',
               surface: '#121417',
+              btn: '#FBFCFD',
             }
           },
           light: {
@@ -139,6 +140,7 @@ export default defineNuxtConfig({
               primary: '#F56217',
               background: '#FBFCFD',
               surface: '#EFF1F4',
+              btn: '#060708',
             }
           }
         }
