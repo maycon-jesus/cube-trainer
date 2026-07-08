@@ -4,6 +4,7 @@
   "private": true,
   "version": "0.11.2",
   "license": "MIT",
+  "packageManager": "pnpm@11.9.0",
   "author": {
     "name": "Maycon Jesus",
     "url": "https://mayconjesus.dev",
