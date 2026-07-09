@@ -13,6 +13,7 @@ export type Solve = Stored<{
   category: Category
   sessionId: number
   trainingId: string
+  tagsId: number[]
 }>
 
 // Shared instance
