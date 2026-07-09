@@ -5,7 +5,7 @@
         <div class="timer-value font-weight-bold" :class="timerColor">
             {{ display }}
         </div>
-        <i18n-t keypath="timer.hint" tag="div" class="text-medium-emphasis mt-4">
+        <i18n-t keypath="timer.hint" tag="div" class="text-medium-emphasis mt-4" scope="global">
             <template #key>
                 <kbd>{{ t('timer.hintKey') }}</kbd>
             </template>

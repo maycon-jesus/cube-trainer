@@ -27,7 +27,7 @@
           </div>
         </div>
         <div v-if="data.best && data.boost" class="tod-insight">
-          <i18n-t keypath="stats.timeOfDay.insight" tag="span">
+          <i18n-t keypath="stats.timeOfDay.insight" tag="span" scope="global">
             <template #period><strong>{{ t(`stats.timeOfDay.periods.${data.best.key}`) }}</strong></template>
             <template #time><strong>{{ formatMs(data.best.avg) }}</strong></template>
             <template #boost><span style="color: #22a06b; font-weight: 600">{{ boostText }}</span></template>
