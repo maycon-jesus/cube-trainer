@@ -148,7 +148,7 @@ export default defineNuxtConfig({
       dir: 'ltr',
       start_url: '/',
       scope: '/',
-      display_override: ['fullscreen', 'minimal-ui'],
+      display_override: ['minimal-ui'],
       display: 'standalone',
       orientation: 'portrait',
       background_color: '#060708',
