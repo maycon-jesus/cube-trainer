@@ -20,7 +20,7 @@
                 </div>
 
                 <v-btn
-                    variant="tonal"
+                    variant="elevated"
                     rounded="xl"
                     :color="action.color"
                     :prepend-icon="action.icon"
@@ -45,7 +45,7 @@
 
             <v-btn
                 color="error"
-                variant="tonal"
+                variant="text"
                 rounded="xl"
                 prepend-icon="mdi-delete-outline"
                 @click="resetDialog = true"

@@ -21,14 +21,14 @@ class="font-weight-medium"
                 <template #append>
                     <v-btn
 icon="mdi-numeric-2-box-outline" size="x-small" variant="text"
-                        :color="solve.penalty === '+2' ? 'primary' : 'btn'"
+                        :color="solve.penalty === '+2' ? 'primary' : 'foregound'"
                         @click.stop="setPenalty(solve, '+2')" />
                     <v-btn
 icon="mdi-cancel" size="x-small" variant="text"
-                        :color="solve.penalty === 'dnf' ? 'primary' : 'btn'" title="DNF"
+                        :color="solve.penalty === 'dnf' ? 'primary' : 'foregound'" title="DNF"
                         @click.stop="setPenalty(solve, 'dnf')" />
                     <v-btn
-icon="mdi-delete-outline" size="x-small" variant="text" color="btn" :title="t('timer.solves.remove')"
+icon="mdi-delete-outline" size="x-small" variant="text" color="error" :title="t('timer.solves.remove')"
                         @click.stop="removeSolve(solve)" />
                 </template>
             </v-list-item>

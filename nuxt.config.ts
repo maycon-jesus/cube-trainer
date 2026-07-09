@@ -1,6 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
+import { themes, defaultThemeName } from "./config/themes";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -127,26 +128,8 @@ export default defineNuxtConfig({
     },
     vuetifyOptions: {
       theme: {
-        defaultTheme: 'dark',
-        themes: {
-          dark: {
-            colors: {
-              primary: '#F56217',
-              background: '#060708',
-              surface: '#121417',
-              btn: '#FBFCFD',
-            }
-          },
-          light: {
-            dark: false,
-            colors: {
-              primary: '#F56217',
-              background: '#FBFCFD',
-              surface: '#EFF1F4',
-              btn: '#060708',
-            }
-          }
-        }
+        defaultTheme: defaultThemeName,
+        themes,
       },
       blueprint: md3
     },
