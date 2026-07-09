@@ -1,5 +1,6 @@
 import { generateScramble333 } from "./333"
 import { generateScrambleMegaminx } from "./megaminx"
+import { generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
 import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon, Cube5x5x5Icon, Cube6x6x6Icon, Cube7x7x7Icon, Mirror3x3Icon, PyraminxIcon, OtherIcon} from "@icon"
 import type { Component } from "vue"
@@ -48,6 +49,7 @@ export const cubesDefinition: Record<string, CubeData> = {
     "pyraminx": {
         id: "pyraminx",
         name: "Pyraminx",
+        generateScramble: generateScramblePyraminx,
         icon: PyraminxIcon
     },
     "megaminx": {
