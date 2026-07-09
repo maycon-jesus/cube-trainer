@@ -12,6 +12,22 @@ function shade(hex: string, amount: number): string {
     return '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()
 }
 
+/** Relative luminance of a hex color, per WCAG 2.x. */
+function luminance(hex: string): number {
+    const n = parseInt(hex.slice(1), 16)
+    const channel = (c: number) => {
+        const s = c / 255
+        return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4
+    }
+    return 0.2126 * channel((n >> 16) & 0xff) + 0.7152 * channel((n >> 8) & 0xff) + 0.0722 * channel(n & 0xff)
+}
+
+/** Black or white, whichever has the higher WCAG contrast ratio against `hex`. */
+function onColor(hex: string): string {
+    // Contrast vs black beats contrast vs white when (L + 0.05)^2 > 1.05 * 0.05.
+    return (luminance(hex) + 0.05) ** 2 > 0.0525 ? '#000000' : '#FFFFFF'
+}
+
 interface ThemeSpec {
     dark: boolean
     /** App/window background. */
@@ -44,9 +60,13 @@ function buildTheme(spec: ThemeSpec): ThemeDefinition {
             'surface-variant': shade(surface, step * 0.16),
             'on-surface-variant': muted,
             primary: spec.primary,
+            'on-primary': onColor(spec.primary),
             'primary-darken-1': shade(spec.primary, -0.18),
+            'on-primary-darken-1': onColor(shade(spec.primary, -0.18)),
             secondary: spec.secondary,
+            'on-secondary': onColor(spec.secondary),
             'secondary-darken-1': shade(spec.secondary, -0.18),
+            'on-secondary-darken-1': onColor(shade(spec.secondary, -0.18)),
             error: spec.error,
             info: spec.info,
             success: spec.success,
