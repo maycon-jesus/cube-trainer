@@ -9,15 +9,16 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 ## Funcionalidades
 
 - ⏱️ **Timer** controlado por barra de espaço (segure para armar) ou toque na tela
-- 🔀 **Embaralhamentos** gerados automaticamente para 2x2, 3x3 e megaminx (com visualização do cubo no 3x3)
+- 🔀 **Embaralhamentos** gerados automaticamente para 2x2, 3x3, pyraminx e megaminx (com visualização do cubo no 3x3)
 - 📊 **Estatísticas WCA** — melhor tempo, média de 5/12, média geral (descartando melhor e pior), além de um dashboard com gráficos e streaks
 - 🏷️ **Penalidades** `+2` e `DNF`
 - 🗂️ **Sessões** para organizar suas resoluções
 - 📜 **Histórico** de resoluções
 - 💾 **Armazenamento local** via IndexedDB (seus dados nunca saem do seu dispositivo)
+- 📤 **Backup** — exporte e importe todos os seus dados em um arquivo JSON
 - 📱 **PWA** — instalável e funciona offline
 - 🌐 **i18n** — Português e Inglês
-- 🎨 **Tema** claro/escuro (Vuetify Material Design 3)
+- 🎨 **Temas** — mais de 25 temas claros e escuros, incluindo paletas inspiradas em editores (Dracula, Nord, Catppuccin…)
 
 ## Tecnologias
 
@@ -54,6 +55,7 @@ pnpm dev
 lib/            Código independente de framework (sem Nuxt/Vue)
   cube/         Engine do cubo (embaralhamento e renderização do 3x3)
   db/           Wrapper genérico sobre IndexedDB
+config/         Catálogo de temas do Vuetify
 app/            Aplicação Nuxt (srcDir)
   pages/        Timer, histórico, estatísticas, sessões, configurações, treino, padrões
   components/   Componentes (timer, sessão, dashboard de estatísticas, ícones)
@@ -64,7 +66,7 @@ i18n/           Traduções (pt / en)
 
 ## Status
 
-Em desenvolvimento. 2x2, 3x3 e megaminx geram embaralhamentos, mas só o **3x3** possui renderização do cubo; as páginas de treino e padrões ainda são placeholders.
+Em desenvolvimento. 2x2, 3x3, pyraminx e megaminx geram embaralhamentos, mas só o **3x3** possui renderização do cubo; as páginas de treino e padrões ainda são placeholders.
 
 ## Apoie o projeto
 
