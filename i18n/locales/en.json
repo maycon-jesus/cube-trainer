@@ -122,15 +122,35 @@
     "data": {
       "title": "Data",
       "subtitle": "Manage your local data",
-      "reset": "Reset data",
-      "resetDescription": "Delete all sessions and solves and restore the app to its initial state.",
-      "resetConfirmTitle": "Reset all data?",
-      "resetConfirmText": "This will permanently delete all your sessions and solves. This action cannot be undone.",
-      "resetSuccess": "Data reset successfully",
-      "resetError": "Failed to reset data"
+      "import": {
+        "action": "Import",
+        "title": "Import data",
+        "subtitle": "Import your data from another device",
+        "success": "Data imported successfully",
+        "error": "Failed to import data. Please try again."
+      },
+      "export": {
+        "action": "Export",
+        "title": "Export data",
+        "subtitle": "Download your data to take to another device",
+        "success": "Data exported successfully"
+      },
+      "filename": {
+        "label": "File name",
+        "required": "Enter a file name"
+      },
+      "reset": {
+        "action": "Reset data",
+        "description": "Delete all sessions and solves and restore the app to its initial state.",
+        "confirmTitle": "Reset all data?",
+        "confirmText": "This will permanently delete all your sessions and solves. This action cannot be undone.",
+        "confirm": "Reset",
+        "success": "Data reset successfully",
+        "error": "Failed to reset data"
+      }
     },
     "cancel": "Cancel",
-    "confirm": "Reset"
+    "close": "Close"
   },
   "timer": {
     "hint": "Hold {key} and release to start · press to stop",

@@ -204,6 +204,21 @@ export class Database<T extends Record<string, unknown>> {
         return key as number
     }
 
+    async bulkPut(values: T[]): Promise<T["id"][]> {
+        const db = await this.open()
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(this.store, 'readwrite')
+            const store = transaction.objectStore(this.store)
+            const ids: T["id"][] = []
+            for (const value of values) {
+                const req = store.put(value)
+                req.onsuccess = () => ids.push(req.result as T["id"])
+            }
+            transaction.oncomplete = () => resolve(ids)
+            transaction.onerror = () => reject(transaction.error)
+        })
+    }
+
     /** Delete a single record by its primary key. */
     async delete(id: IDBValidKey | IDBKeyRange): Promise<void> {
         await this.tx('readwrite', (s) => s.delete(id))
@@ -234,6 +249,17 @@ export class Database<T extends Record<string, unknown>> {
         await this.close()
         indexedDB.deleteDatabase(this.name)
         return
+    }
+
+    // export & import
+
+    async exportAll(): Promise<T[]> {
+        return await this.getAll()
+    }
+
+    async importAll(values: T[]): Promise<void> {
+        await this.clear()
+        await this.bulkAdd(values)
     }
 
     /** Close the underlying connection. The next call reopens it. */

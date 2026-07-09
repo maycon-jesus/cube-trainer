@@ -122,15 +122,35 @@
     "data": {
       "title": "数据",
       "subtitle": "管理你的本地数据",
-      "reset": "重置数据",
-      "resetDescription": "删除所有分组和复原记录，并将应用恢复到初始状态。",
-      "resetConfirmTitle": "重置所有数据？",
-      "resetConfirmText": "这将永久删除你的所有分组和复原记录。此操作无法撤销。",
-      "resetSuccess": "数据重置成功",
-      "resetError": "数据重置失败"
+      "import": {
+        "action": "导入",
+        "title": "导入数据",
+        "subtitle": "从其他设备导入你的数据",
+        "success": "数据导入成功！",
+        "error": "导入数据失败，请重试。"
+      },
+      "export": {
+        "action": "导出",
+        "title": "导出数据",
+        "subtitle": "下载你的数据以便迁移到其他设备",
+        "success": "数据导出成功！"
+      },
+      "filename": {
+        "label": "文件名",
+        "required": "请输入文件名"
+      },
+      "reset": {
+        "action": "重置数据",
+        "description": "删除所有分组和复原记录，并将应用恢复到初始状态。",
+        "confirmTitle": "重置所有数据？",
+        "confirmText": "这将永久删除你的所有分组和复原记录。此操作无法撤销。",
+        "confirm": "重置",
+        "success": "数据重置成功",
+        "error": "数据重置失败"
+      }
     },
     "cancel": "取消",
-    "confirm": "重置"
+    "close": "关闭"
   },
   "timer": {
     "hint": "按住{key}并松开以开始 · 按下以停止",

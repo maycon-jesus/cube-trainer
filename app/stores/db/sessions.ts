@@ -31,9 +31,9 @@ export const useSessionsStore = defineStore('sessions', () => {
 
   async function add(name: string): Promise<number> {
     const session: Session = { name, createdAt: Date.now() }
-    const id = await db.add(session)
+    const id = await db.add(session) 
     sessions.value = [{ ...session, id }, ...sessions.value]
-    return id
+    return id as number
   }
 
   async function update(session: Session): Promise<void> {
@@ -85,5 +85,5 @@ export const useSessionsStore = defineStore('sessions', () => {
     await db.deleteDB()
   }
 
-  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll}
+  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
 })

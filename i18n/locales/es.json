@@ -122,15 +122,35 @@
     "data": {
       "title": "Datos",
       "subtitle": "Gestiona tus datos locales",
-      "reset": "Restablecer datos",
-      "resetDescription": "Elimina todas las sesiones y resoluciones y restaura la aplicación a su estado inicial.",
-      "resetConfirmTitle": "¿Restablecer todos los datos?",
-      "resetConfirmText": "Esto eliminará permanentemente todas tus sesiones y resoluciones. Esta acción no se puede deshacer.",
-      "resetSuccess": "Datos restablecidos correctamente",
-      "resetError": "No se pudieron restablecer los datos"
+      "import": {
+        "action": "Importar",
+        "title": "Importar datos",
+        "subtitle": "Importa tus datos desde otro dispositivo",
+        "success": "¡Datos importados correctamente!",
+        "error": "Error al importar los datos. Por favor, inténtalo de nuevo."
+      },
+      "export": {
+        "action": "Exportar",
+        "title": "Exportar datos",
+        "subtitle": "Descarga tus datos para llevarlos a otro dispositivo",
+        "success": "¡Datos exportados correctamente!"
+      },
+      "filename": {
+        "label": "Nombre del archivo",
+        "required": "Indica un nombre para el archivo"
+      },
+      "reset": {
+        "action": "Restablecer datos",
+        "description": "Elimina todas las sesiones y resoluciones y restaura la aplicación a su estado inicial.",
+        "confirmTitle": "¿Restablecer todos los datos?",
+        "confirmText": "Esto eliminará permanentemente todas tus sesiones y resoluciones. Esta acción no se puede deshacer.",
+        "confirm": "Restablecer",
+        "success": "Datos restablecidos correctamente",
+        "error": "No se pudieron restablecer los datos"
+      }
     },
     "cancel": "Cancelar",
-    "confirm": "Restablecer"
+    "close": "Cerrar"
   },
   "timer": {
     "hint": "Mantén {key} y suelta para empezar · pulsa para detener",

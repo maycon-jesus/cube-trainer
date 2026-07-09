@@ -44,7 +44,7 @@ export const useSolvesStore = defineStore('solves', () => {
   async function add(solve: Omit<Solve, 'id'>): Promise<number> {
     const id = await db.add(solve)
     solves.value = [{ ...solve, id }, ...solves.value]
-    return id
+    return id as number
   }
 
   async function update(solve: Solve): Promise<void> {
@@ -101,5 +101,5 @@ export const useSolvesStore = defineStore('solves', () => {
     }
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, changeSessionId}
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, changeSessionId, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
 })
