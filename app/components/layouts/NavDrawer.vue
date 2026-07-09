@@ -24,7 +24,7 @@ const navItems = computed<{
 
 <template>
   <v-navigation-drawer v-model="layoutState.drawerOpen">
-    <v-list nav>
+    <v-list nav color="primary" variant="flat">
       <v-list-item
 v-for="item in navItems" :key="item.title" :to="item.to" :prepend-icon="item.icon"
         :title="item.title" />
