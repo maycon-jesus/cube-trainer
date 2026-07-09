@@ -17,7 +17,7 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 - 💾 **Armazenamento local** via IndexedDB (seus dados nunca saem do seu dispositivo)
 - 📤 **Backup** — exporte e importe todos os seus dados em um arquivo JSON
 - 📱 **PWA** — instalável e funciona offline
-- 🌐 **i18n** — Português e Inglês
+- 🌐 **i18n** — Português, Inglês, Espanhol e Chinês simplificado
 - 🎨 **Temas** — mais de 25 temas claros e escuros, incluindo paletas inspiradas em editores (Dracula, Nord, Catppuccin…)
 
 ## Tecnologias
@@ -61,7 +61,7 @@ app/            Aplicação Nuxt (srcDir)
   components/   Componentes (timer, sessão, dashboard de estatísticas, ícones)
   stores/       Stores Pinia sobre o IndexedDB
   utils/        Formatação de tempo e estatísticas WCA
-i18n/           Traduções (pt / en)
+i18n/           Traduções (pt / en / es / zh)
 ```
 
 ## Status
