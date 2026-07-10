@@ -41,6 +41,7 @@
                 v-model="page"
                 :length="pageCount"
                 :total-visible="7"
+                :disabled="loading"
                 density="comfortable"
                 class="mt-4" />
         </CustomCard>
@@ -73,6 +74,7 @@ const puzzle = ref<string>(ALL_PUZZLES)
 const page = ref(1)
 const total = ref(0)
 const solves = ref<Solve[]>([])
+const loading = ref(false)
 
 const pageCount = computed(() => Math.ceil(total.value / PAGE_SIZE))
 
@@ -83,11 +85,17 @@ const filter = computed<SolvesFilter>(() => ({
 
 async function loadPage() {
     if (!import.meta.client) return
-    solves.value = await solvesStore.getAllWithFilter({ ...filter.value, page: page.value, pageSize: PAGE_SIZE })
+    loading.value = true
+    try {
+        solves.value = await solvesStore.getAllWithFilter({ ...filter.value, page: page.value, pageSize: PAGE_SIZE })
 
-    // The current page can disappear (e.g. after deleting the last solve on it).
-    if (page.value > 1 && !solves.value.length) {
-        page.value--
+        // The current page can disappear (e.g. after deleting the last solve on it).
+        if (page.value > 1 && !solves.value.length) {
+            page.value--
+        }
+    }
+    finally {
+        loading.value = false
     }
 }
 
