@@ -65,8 +65,6 @@ const solvesStore = useSolvesStore()
 
 usePageSeo('history')
 
-const ALL_SESSIONS = -1
-const ALL_PUZZLES = 'all'
 const PAGE_SIZE = 20
 
 const sessionId = ref<number>(ALL_SESSIONS)

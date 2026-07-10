@@ -69,9 +69,6 @@ const solvesStore = useSolvesStore()
 
 usePageSeo('stats')
 
-const ALL_SESSIONS = -1
-const ALL_PUZZLES = 'all'
-
 const puzzle = ref<string>(config.puzzle || ALL_PUZZLES)
 const sessionId = ref<number>(config.sessionId || ALL_SESSIONS)
 

@@ -42,7 +42,7 @@ const items = computed(() => {
     if (props.showAllOption) {
         all.unshift({
             title: t('sessions.all'),
-            value: -1
+            value: ALL_SESSIONS
         })
     }
 

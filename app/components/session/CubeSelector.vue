@@ -50,7 +50,7 @@ const items = computed<Item[]>(() => {
     if (props.showAllOption) {
         all.unshift({
             title: t('puzzle.all'),
-            value: 'all',
+            value: ALL_PUZZLES,
             icon: undefined
         })
     }
