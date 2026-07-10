@@ -44,7 +44,7 @@ export const useSolvesStore = defineStore('solves', () => {
 
   async function refresh() {
     if (!import.meta.client) return
-    const all = await db.getAll()
+    const all = await db.getEntries(null, 0, 10000, 'prev')
 
     // Newest first.
     solves.value = all.sort((a, b) => b.createdAt - a.createdAt)
@@ -134,5 +134,9 @@ export const useSolvesStore = defineStore('solves', () => {
     }
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
+    count: () => db.count(),
+    exportEach: db.exportEach.bind(db),
+    importBatch: db.importBatch.bind(db),
+  }
 })

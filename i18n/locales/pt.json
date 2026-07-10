@@ -158,14 +158,19 @@
         "action": "Importar",
         "title": "Importar dados",
         "subtitle": "Importe seus dados de outro dispositivo",
-        "success": "Dados importados com sucesso!",
-        "error": "Erro ao importar dados. Por favor, tente novamente."
+        "success": "{count} linhas importadas com sucesso!",
+        "error": "Erro ao importar dados. Por favor, tente novamente.",
+        "invalidFile": "Este arquivo não é um backup válido do Cube Trainer.",
+        "progress": "Importando… {count} de {total} linhas"
       },
       "export": {
         "action": "Exportar",
         "title": "Exportar dados",
         "subtitle": "Baixe seus dados para levar a outro dispositivo",
-        "success": "Dados exportados com sucesso!"
+        "success": "{count} linhas exportadas com sucesso!",
+        "progress": "Exportando… {count} de {total} linhas",
+        "error": "Erro ao exportar dados. Por favor, tente novamente.",
+        "retry": "Tentar novamente"
       },
       "filename": {
         "label": "Nome do arquivo",

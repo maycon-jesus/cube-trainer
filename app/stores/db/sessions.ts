@@ -85,5 +85,9 @@ export const useSessionsStore = defineStore('sessions', () => {
     await db.deleteDB()
   }
 
-  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
+  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll,
+    count: () => db.count(),
+    exportEach: db.exportEach.bind(db),
+    importBatch: db.importBatch.bind(db),
+  }
 })

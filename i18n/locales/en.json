@@ -158,14 +158,19 @@
         "action": "Import",
         "title": "Import data",
         "subtitle": "Import your data from another device",
-        "success": "Data imported successfully",
-        "error": "Failed to import data. Please try again."
+        "success": "{count} rows imported successfully",
+        "error": "Failed to import data. Please try again.",
+        "invalidFile": "This file isn’t a valid Cube Trainer backup.",
+        "progress": "Importing… {count} of {total} rows"
       },
       "export": {
         "action": "Export",
         "title": "Export data",
         "subtitle": "Download your data to take to another device",
-        "success": "Data exported successfully"
+        "success": "{count} rows exported successfully",
+        "progress": "Exporting… {count} of {total} rows",
+        "error": "Failed to export data. Please try again.",
+        "retry": "Try again"
       },
       "filename": {
         "label": "File name",

@@ -85,25 +85,31 @@ const filter = computed<SolvesFilter>(() => ({
 
 async function loadPage() {
     if (!import.meta.client) return
-    const [items, count] = await Promise.all([
-        solvesStore.getAllWithFilter({ ...filter.value, page: page.value, pageSize: PAGE_SIZE }),
-        solvesStore.countWithFilter(filter.value),
-    ])
-    solves.value = items
-    total.value = count
+    solves.value = await solvesStore.getAllWithFilter({ ...filter.value, page: page.value, pageSize: PAGE_SIZE })
 
     // The current page can disappear (e.g. after deleting the last solve on it).
-    if (page.value > 1 && !items.length && count > 0) {
-        page.value = Math.ceil(count / PAGE_SIZE)
+    if (page.value > 1 && !solves.value.length) {
+        page.value--
     }
 }
 
-watch(filter, () => {
-    if (page.value === 1) loadPage()
+async function loadPagination(){
+    total.value = 0
+    total.value = await solvesStore.countWithFilter(filter.value)
+}
+
+watch(filter, async () => {
+    if (page.value === 1) {
+        await loadPage()
+        await loadPagination()
+    }
     else page.value = 1
 })
 watch(page, loadPage)
-onMounted(loadPage)
+onMounted(async()=>{
+    await loadPage()
+    await loadPagination()
+})
 
 // --- Solve details ---------------------------------------------------------
 const modalSolve = ref<Solve | null>(null)

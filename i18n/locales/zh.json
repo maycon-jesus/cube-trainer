@@ -158,14 +158,19 @@
         "action": "导入",
         "title": "导入数据",
         "subtitle": "从其他设备导入你的数据",
-        "success": "数据导入成功！",
-        "error": "导入数据失败，请重试。"
+        "success": "成功导入 {count} 行数据！",
+        "error": "导入数据失败，请重试。",
+        "invalidFile": "此文件不是有效的 Cube Trainer 备份。",
+        "progress": "正在导入… {count} / {total} 行"
       },
       "export": {
         "action": "导出",
         "title": "导出数据",
         "subtitle": "下载你的数据以便迁移到其他设备",
-        "success": "数据导出成功！"
+        "success": "成功导出 {count} 行数据！",
+        "progress": "正在导出… {count} / {total} 行",
+        "error": "导出数据失败，请重试。",
+        "retry": "重试"
       },
       "filename": {
         "label": "文件名",

@@ -87,16 +87,6 @@ export class Database<T extends Record<string, unknown>> {
         return this.tx('readonly', (s) => s.getAll() as IDBRequest<T[]>)
     }
 
-    /**
-     * Read up to `size` records by walking a cursor in key order.
-     *
-     * @param size Maximum number of records to return; the cursor stops once this many are collected.
-     * @param direction Cursor traversal direction: `next`/`prev` for ascending/descending key order,
-     *   `nextunique`/`prevunique` to visit only the first record of each key value.
-     * @param filter Optional predicate; only records for which it returns true are kept
-     *   (filtered-out records still count toward the walk but not toward `size`).
-     * @returns The collected records, in traversal order.
-     */
     async getEntries(indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
@@ -104,19 +94,18 @@ export class Database<T extends Record<string, unknown>> {
             const store = transaction.objectStore(this.store)
             const results: T[] = []
             const cursorReq = store.openCursor(indexQuery, direction)
-            let offsetCount = 0
-
+            let offsetCount = offset
             cursorReq.onsuccess = () => {
                 const cursor = cursorReq.result
+                
                 if (cursor && results.length < size) {
-                    if (!filter || filter(cursor.value)) {
-                        if (offsetCount < offset) {
-                            offsetCount++
-                        } else {
-                            results.push(cursor.value)
-                        }
+                    if (offsetCount > 0) {
+                        cursor.advance(offsetCount)
+                        offsetCount=0
+                    }else if (!filter || filter(cursor.value)) {
+                        results.push(cursor.value)
+                        cursor.continue()
                     }
-                    cursor.continue()
                 } else {
                     resolve(results)
                 }
@@ -125,17 +114,6 @@ export class Database<T extends Record<string, unknown>> {
         })
     }
 
-    /**
-     * Read up to `size` records by walking a cursor over an index, in that index's key order.
-     *
-     * @param indexName Name of the index to traverse; records are ordered by the index's keyPath.
-     * @param size Maximum number of records to return; the cursor stops once this many are collected.
-     * @param direction Cursor traversal direction: `next`/`prev` for ascending/descending key order,
-     *   `nextunique`/`prevunique` to visit only the first record of each index key value.
-     * @param filter Optional predicate; only records for which it returns true are kept
-     *   (filtered-out records still count toward the walk but not toward `size`).
-     * @returns The collected records, in traversal order.
-     */
     async getEntriesByIndex(indexName: string, indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
@@ -284,14 +262,21 @@ export class Database<T extends Record<string, unknown>> {
     }
 
     // export & import
-
-    async exportAll(): Promise<T[]> {
-        return await this.getAll()
+    async exportEach(onBatch: (rows: T[]) => Promise<void>, batchSize = 1000): Promise<void> {
+        let after: IDBValidKey | null = null
+        for (;;) {
+            const range = after != null ? IDBKeyRange.lowerBound(after, true) : null
+            const page = await this.getEntries(range, 0, batchSize, 'next')
+            if (page.length === 0) break
+            await onBatch(page)
+            if (page.length < batchSize) break
+            after = (page[page.length - 1] as Record<string, IDBValidKey>)[this.keyPath]!
+        }
     }
-
-    async importAll(values: T[]): Promise<void> {
-        await this.clear()
-        await this.bulkAdd(values)
+    
+    /** Append one batch of records during a streamed import. */
+    async importBatch(rows: T[]): Promise<void> {
+        await this.bulkAdd(rows)
     }
 
     /** Close the underlying connection. The next call reopens it. */

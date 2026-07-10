@@ -54,7 +54,12 @@ export const useConfigStore = defineStore('config', () => {
         await db.deleteDB()
     }
 
-    return { load, sessionId, puzzle, theme, reset, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db) }
+    return { load, sessionId, puzzle, theme, reset,
+        clear: () => db.clear(),
+        count: () => db.count(),
+        exportEach: db.exportEach.bind(db),
+        importBatch: db.importBatch.bind(db),
+    }
 })
 
 async function loadSelectedSessionId(): Promise<number> {

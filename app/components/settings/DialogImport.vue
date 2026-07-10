@@ -3,15 +3,20 @@
         <CustomCard :title="t('settings.data.import.title')" :subtitle="t('settings.data.import.subtitle')" icon="mdi-database-import-outline">
             <template #default>
                 <AnimationExpand :model-value="isSelectingFile">
-                    <v-file-input v-model="importFile" class="mt-1" :label="t('settings.data.import.action')" accept="application/json,.json" :multiple="false"/>
+                    <v-file-input v-model="importFile" class="mt-1" :label="t('settings.data.import.action')" accept=".txt,text/plain,application/json,.json" :multiple="false"/>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isImporting">
-                    <v-progress-circular indeterminate class="d-block mx-auto"/>
+                    <div class="text-center">
+                        <v-progress-circular indeterminate class="d-block mx-auto"/>
+                        <div class="text-caption text-medium-emphasis mt-2">
+                            {{ t('settings.data.import.progress', { count: importedCount, total: totalCount }) }}
+                        </div>
+                    </div>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isFinished">
-                    <v-alert v-if="!importErrorMessage" type="success">{{ t('settings.data.import.success') }}</v-alert>
+                    <v-alert v-if="!importErrorMessage" type="success">{{ t('settings.data.import.success', { count: importedCount }) }}</v-alert>
                     <v-alert v-else-if="importErrorMessage" type="error">{{ importErrorMessage }}</v-alert>
                 </AnimationExpand>
 
@@ -26,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import { InvalidBackupFileError } from '~/stores/migration'
+
 const { t } = useI18n()
 
 const model = defineModel<boolean>('modelValue', {
@@ -38,8 +45,10 @@ enum steps {
     finished
 }
 
-const importFile = ref(null)
+const importFile = ref<File | null>(null)
 const importStep = ref(steps.selectFile)
+const importedCount = ref(0)
+const totalCount = ref(0)
 const importErrorMessage = ref<string|undefined>(undefined)
 const migration = useMigrationStore()
 
@@ -48,18 +57,18 @@ const isImporting = computed(() => importStep.value === steps.importing)
 const isFinished = computed(() => importStep.value === steps.finished)
 
 async function importData() {
-  if (importFile.value) {
-    const reader = new FileReader()
-    reader.onload = async (event) => {
-      try {
-        const jsonData = JSON.parse(event.target?.result as string)
-        await migration.importAll(jsonData)
-      } catch (err) {
-        console.error(err)
-        importErrorMessage.value = t('settings.data.import.error')
-      }
-    }
-    reader.readAsText(importFile.value)
+  if (!importFile.value) return
+  importedCount.value = 0
+  totalCount.value = 0
+  try {
+    await migration.importAll(importFile.value, {
+      onProgress: (imported, total) => { importedCount.value = imported; totalCount.value = total },
+    })
+  } catch (err) {
+    console.error(err)
+    importErrorMessage.value = err instanceof InvalidBackupFileError
+      ? t('settings.data.import.invalidFile')
+      : t('settings.data.import.error')
   }
 }
 
@@ -74,6 +83,8 @@ async function nextStep() {
 async function reset() {
     importStep.value = steps.selectFile
     importFile.value = null
+    importedCount.value = 0
+    totalCount.value = 0
     importErrorMessage.value = undefined
 }
 
