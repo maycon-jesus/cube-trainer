@@ -97,19 +97,24 @@ export class Database<T extends Record<string, unknown>> {
      *   (filtered-out records still count toward the walk but not toward `size`).
      * @returns The collected records, in traversal order.
      */
-    async getEntries(indexQuery:IndexQuery, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
+    async getEntries(indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
             const transaction = db.transaction(this.store, 'readonly')
             const store = transaction.objectStore(this.store)
             const results: T[] = []
             const cursorReq = store.openCursor(indexQuery, direction)
+            let offsetCount = 0
 
             cursorReq.onsuccess = () => {
                 const cursor = cursorReq.result
                 if (cursor && results.length < size) {
                     if (!filter || filter(cursor.value)) {
-                        results.push(cursor.value)
+                        if (offsetCount < offset) {
+                            offsetCount++
+                        } else {
+                            results.push(cursor.value)
+                        }
                     }
                     cursor.continue()
                 } else {
@@ -131,7 +136,7 @@ export class Database<T extends Record<string, unknown>> {
      *   (filtered-out records still count toward the walk but not toward `size`).
      * @returns The collected records, in traversal order.
      */
-    async getEntriesByIndex(indexName: string, indexQuery:IndexQuery ,size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
+    async getEntriesByIndex(indexName: string, indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
             const transaction = db.transaction(this.store, 'readonly')
@@ -139,12 +144,17 @@ export class Database<T extends Record<string, unknown>> {
             const index = store.index(indexName)
             const results: T[] = []
             const cursorReq = index.openCursor(indexQuery, direction)
+            let offsetCount = 0
 
             cursorReq.onsuccess = () => {
                 const cursor = cursorReq.result
                 if (cursor && results.length < size) {
                     if (!filter || filter(cursor.value)) {
-                        results.push(cursor.value)
+                        if (offsetCount < offset) {
+                            offsetCount++
+                        } else {
+                            results.push(cursor.value)
+                        }
                     }
                     cursor.continue()
                 } else {
@@ -170,6 +180,28 @@ export class Database<T extends Record<string, unknown>> {
     /** Count the records in the store. */
     count(): Promise<number> {
         return this.tx('readonly', (s) => s.count())
+    }
+
+    async countEntries(indexQuery: IndexQuery, filter?: (val: T) => boolean): Promise<number> {
+        if (!filter) return this.tx('readonly', (s) => s.count(indexQuery ?? undefined))
+        const db = await this.open()
+        return new Promise((resolve, reject) => {
+            const transaction = db.transaction(this.store, 'readonly')
+            const store = transaction.objectStore(this.store)
+            const cursorReq = store.openCursor(indexQuery)
+            let count = 0
+
+            cursorReq.onsuccess = () => {
+                const cursor = cursorReq.result
+                if (cursor) {
+                    if (filter(cursor.value)) count++
+                    cursor.continue()
+                } else {
+                    resolve(count)
+                }
+            }
+            cursorReq.onerror = () => reject(cursorReq.error)
+        })
     }
 
     countByIndex(indexName: string, value: NonNullable<IndexQuery>): Promise<number> {

@@ -27,7 +27,7 @@
             <!-- Timer surface -->
             <v-row density="comfortable">
               <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :category="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
             </v-col>
             </v-row>
 

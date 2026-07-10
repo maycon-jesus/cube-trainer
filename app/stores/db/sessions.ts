@@ -68,7 +68,7 @@ export const useSessionsStore = defineStore('sessions', () => {
   }
 
   async function getLastSession(): Promise<Session | undefined> {
-    return (await db.getEntries(null,1, 'prev'))[0]
+    return (await db.getEntries(null,0,1, 'prev'))[0]
   }
 
   async function getSession(id: number) {

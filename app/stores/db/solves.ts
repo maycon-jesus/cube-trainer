@@ -2,7 +2,15 @@ import { defineStore } from 'pinia'
 import { Database, type Stored } from '~~/lib/db/database'
 
 export type Penalty = 'none' | '+2' | 'dnf'
-export type Category = 'normal' | 'training'
+export type Type = 'normal' | 'training'
+
+export type SolvesFilter = {
+  type?: Type
+  sessionId?: number
+  puzzle?: string
+  trainingId?: string
+  tagsId?: number[]
+}
 
 export type Solve = Stored<{
   ms: number
@@ -10,20 +18,21 @@ export type Solve = Stored<{
   penalty: Penalty
   createdAt: number
   puzzle: string
-  category: Category
+  type: Type
   sessionId: number
   trainingId: string
-  tagsId: number[]
+  tagsId: number[],
+  annotation: string
 }>
 
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
   version: 1,
   indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' },
-  { name: 'category', keyPath: 'category' },
+  { name: 'type', keyPath: 'type' },
   {
     name: 'all-solves',
-    keyPath: ['category', 'sessionId', 'puzzle', 'trainingId'],
+    keyPath: ['type', 'sessionId', 'puzzle', 'trainingId'],
     options: { unique: false },
   },
   ],
@@ -79,13 +88,36 @@ export const useSolvesStore = defineStore('solves', () => {
     await db.deleteDB()
   }
 
-  async function getAll(type: Category, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
+  async function getAll(type: Type, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
     const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
     return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
+  function matchesFilter(filter: SolvesFilter) {
+    return (solve: Solve) => {
+      if(filter.type && solve.type !== filter.type) return false
+      if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
+      if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
+      if(filter.trainingId && solve.trainingId !== filter.trainingId) return false
+      if(filter.tagsId && !filter.tagsId.every(tag => (solve.tagsId ?? []).includes(tag))) return false
+      return true
+    }
+  }
+
+  async function getAllWithFilter(filter: SolvesFilter & {
+    pageSize: number
+    page: number
+  }): Promise<Solve[]> {
+    const offset = (filter.page - 1) * filter.pageSize
+    return db.getEntries(null, offset, filter.pageSize, 'prev', matchesFilter(filter))
+  }
+
+  async function countWithFilter(filter: SolvesFilter): Promise<number> {
+    return db.countEntries(null, matchesFilter(filter))
+  }
+
   async function getBySessionId(sessionId: number, size: number): Promise<Solve[]> {
-    const solves = await db.getEntriesByIndex('sessionId', sessionId, size, 'prev')
+    const solves = await db.getEntriesByIndex('sessionId', sessionId, 0,size, 'prev')
     return solves
   }
 
@@ -102,5 +134,5 @@ export const useSolvesStore = defineStore('solves', () => {
     }
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, changeSessionId, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId, exportAll: db.exportAll.bind(db), importAll: db.importAll.bind(db)}
 })

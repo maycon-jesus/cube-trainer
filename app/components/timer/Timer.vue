@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Category, Solve } from '~/stores/db/solves';
+import type { Type, Solve } from '~/stores/db/solves';
 
 const { t } = useI18n()
 
 const props = defineProps<{
     lastSolve?: Solve
-    category: Category
+    type: Type
     puzzle: string
     sessionId: number
     trainingId?: string
@@ -74,7 +74,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), category: props.category, puzzle: props.puzzle, sessionId: props.sessionId, trainingId: props.trainingId?? '', tagsId: []})
+  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingId: props.trainingId?? '', tagsId: [], annotation: '' })
   emits('stop')
 }
 

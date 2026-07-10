@@ -55,6 +55,12 @@
     "stats": "Estatísticas",
     "settings": "Configurações"
   },
+  "history": {
+    "subtitle": "Veja todos os seus tempos registrados",
+    "solves": "Tempos",
+    "count": "Nenhum tempo | {count} tempo | {count} tempos",
+    "empty": "Nenhum tempo encontrado para esses filtros."
+  },
   "stats": {
     "subtitle": "Analise suas resoluções e acompanhe seu progresso ao longo do tempo",
     "common": {
