@@ -5,12 +5,28 @@ import type { CubeEngine } from "./cube"
 import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon, Cube5x5x5Icon, Cube6x6x6Icon, Cube7x7x7Icon, Mirror3x3Icon, PyraminxIcon, OtherIcon} from "@icon"
 import type { Component } from "vue"
 
+export type TrainingAlgorithm = {
+    name: string,
+    imageUrl: string,
+    setups: string[],
+    solves: string[],
+}
+
+export type TrainingSet = {
+    name: string,
+    description: string,
+    imageUrl: string,
+    algorithms: TrainingAlgorithm[]
+}
+
 export type CubeData = {
     id: string,
     name: string,
     cubeEngine?: CubeEngine,
+    imageUrl?: string,
     generateScramble?: (movesCount?: number) => string,
-    icon: Component
+    icon: Component,
+    trainingSets?: TrainingSet[]
 }
 
 export const cubesDefinition: Record<string, CubeData> = {
@@ -24,7 +40,64 @@ export const cubesDefinition: Record<string, CubeData> = {
         id: "3x3x3",
         name: "3x3x3",
         generateScramble: generateScramble333,
-        icon: Cube3x3x3Icon
+        icon: Cube3x3x3Icon,
+        imageUrl: '/img/puzzle/3x3x3.png',
+        trainingSets: [
+            {
+                name: 'PLL',
+                description: 'Practice PLL algorithms',
+                imageUrl: '/img/training/3x3x3/pll.png',
+                algorithms: [
+                    {
+                        name: 'Caso U horário',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U R' U' R' U' U R U R2"
+                        ]
+                    },
+                    {
+                        name: 'Caso U anti-horário',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
+                        setups: [
+                            "R2 U' R' U' R U R U R U' R"
+                        ],
+                        solves: [
+                            "R2 U' R' U' R U R U R U' R"
+                        ]
+                    },
+                ]
+            },
+            {
+                name: 'OLL',
+                description: 'Practice OLL algorithms',
+                imageUrl: '/img/training/3x3x3/oll.png',
+                algorithms: [
+                    {
+                        name: 'Caso U horário',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U R' U' R' U' U R U R2"
+                        ]
+                    },
+                    {
+                        name: 'Caso U anti-horário',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
+                        setups: [
+                            "R2 U' R' U' R U R U R U' R"
+                        ],
+                        solves: [
+                            "R2 U' R' U' R U R U R U' R"
+                        ]
+                    },
+                ]
+            }
+        ]
     },
     "4x4x4": {
         id: "4x4x4",

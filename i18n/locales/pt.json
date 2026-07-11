@@ -235,6 +235,11 @@
     "mirror-3x3x3": "Mirror 3x3x3",
     "mirror-2x2x2": "Mirror 2x2x2"
   },
+  "training": {
+    "title": "Treino de algoritmos",
+    "subtitle": "Selecione o puzzle que deseja praticar",
+    "sets": "{count} conjunto | {count} conjuntos"
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — Timer de Speedcubing Grátis e Estatísticas",

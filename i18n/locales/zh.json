@@ -235,6 +235,11 @@
     "mirror-3x3x3": "镜面 3x3x3",
     "mirror-2x2x2": "镜面 2x2x2"
   },
+  "training": {
+    "title": "算法训练",
+    "subtitle": "选择要练习的魔方",
+    "sets": "{count} 组"
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — 免费速拧计时器与统计",

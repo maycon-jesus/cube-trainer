@@ -1,0 +1,11 @@
+/// Hover that lifts the element and highlights the border with the primary color.
+/// Requires the element to have a border (e.g. the `border` prop on v-card).
+@mixin hover-primary-border {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    border-color: rgba(var(--v-theme-primary), 0.5);
+  }
+}
