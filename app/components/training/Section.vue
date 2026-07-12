@@ -12,6 +12,7 @@
         variant="flat"
         prepend-icon="mdi-play"
         rounded="pill"
+        @click="$emit('train-set', set)"
       >
         Treinar todos {{ set.name }}
       </v-btn>
@@ -20,23 +21,27 @@
     <v-row>
       <v-col
         v-for="algorithm in set.algorithms"
-        :key="algorithm.name"
+        :key="algorithm.id"
         cols="12"
         sm="6"
         lg="4"
         xl="3"
       >
-        <TrainingAlgorithmCard :algorithm="algorithm" />
+        <TrainingAlgorithmCard :algorithm="algorithm" @train="$emit('train', $event)" @add-to-list="$emit('add-to-list', $event)" />
       </v-col>
     </v-row>
   </section>
 </template>
 
 <script setup lang="ts">
-import type { TrainingSet } from '~~/lib/cube/cubesDefinition';
+import type { TrainingAlgorithm, TrainingSet } from '~~/lib/cube/cubesDefinition';
 
 defineProps<{
   set: TrainingSet
+}>()
+defineEmits<{
+  (e: 'train' | 'add-to-list', algorithm: TrainingAlgorithm): void
+  (e: 'train-set', set: TrainingSet): void
 }>()
 </script>
 

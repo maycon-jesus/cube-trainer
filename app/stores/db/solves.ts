@@ -8,7 +8,8 @@ export type SolvesFilter = {
   type?: Type
   sessionId?: number
   puzzle?: string
-  trainingId?: string
+  trainingSetId?: string
+  algorithmId?: string
   tagsId?: number[]
 }
 
@@ -20,7 +21,8 @@ export type Solve = Stored<{
   puzzle: string
   type: Type
   sessionId: number
-  trainingId: string
+  trainingSetId: string
+  algorithmId: string
   tagsId: number[],
   annotation: string
 }>
@@ -32,7 +34,7 @@ const db = new Database<Solve>('solves-history', 'solves', {
   { name: 'type', keyPath: 'type' },
   {
     name: 'all-solves',
-    keyPath: ['type', 'sessionId', 'puzzle', 'trainingId'],
+    keyPath: ['type', 'sessionId', 'puzzle', 'trainingSetId', 'algorithmId'],
     options: { unique: false },
   },
   ],
@@ -88,8 +90,8 @@ export const useSolvesStore = defineStore('solves', () => {
     await db.deleteDB()
   }
 
-  async function getAll(type: Type, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
-    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
+  async function getAll(type: Type, sessionId: number, puzzle: string, trainingSetId: string, algorithmId: string): Promise<Solve[]> {
+    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingSetId, algorithmId])
     return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
@@ -98,7 +100,8 @@ export const useSolvesStore = defineStore('solves', () => {
       if(filter.type && solve.type !== filter.type) return false
       if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
       if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
-      if(filter.trainingId && solve.trainingId !== filter.trainingId) return false
+      if(filter.trainingSetId && solve.trainingSetId !== filter.trainingSetId) return false
+      if(filter.algorithmId && solve.algorithmId !== filter.algorithmId) return false
       if(filter.tagsId && !filter.tagsId.every(tag => (solve.tagsId ?? []).includes(tag))) return false
       return true
     }

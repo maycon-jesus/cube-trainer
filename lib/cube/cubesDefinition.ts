@@ -7,6 +7,7 @@ import type { Component } from "vue"
 
 export type TrainingAlgorithm = {
     name: string,
+    id: string,
     imageUrl: string,
     setups: string[],
     solves: string[],
@@ -14,6 +15,7 @@ export type TrainingAlgorithm = {
 
 export type TrainingSet = {
     name: string,
+    id: string,
     description: string,
     imageUrl: string,
     algorithms: TrainingAlgorithm[]
@@ -45,11 +47,13 @@ export const cubesDefinition: Record<string, CubeData> = {
         trainingSets: [
             {
                 name: 'PLL',
+                id: 'pll',
                 description: 'Practice PLL algorithms',
                 imageUrl: '/img/training/3x3x3/pll.png',
                 algorithms: [
                     {
                         name: 'Caso U horário',
+                        id: 'u-horario',
                         imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
                         setups: [
                             "R R R"
@@ -59,7 +63,30 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
+                        name: 'Caso U horário 2',
+                        id: 'u-horario 2',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
+                        setups: [
+                            "R R R2"
+                        ],
+                        solves: [
+                            "R' U R' U' R' U' U R U R2"
+                        ]
+                    },
+                    {
+                        name: 'Caso U horário 3',
+                        id: 'u-horario 3',
+                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
+                        setups: [
+                            "R R R3"
+                        ],
+                        solves: [
+                            "R' U R' U' R' U' U R U R2"
+                        ]
+                    },
+                    {
                         name: 'Caso U anti-horário',
+                        id: 'u-anti-horario',
                         imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
                         setups: [
                             "R2 U' R' U' R U R U R U' R"
@@ -72,11 +99,13 @@ export const cubesDefinition: Record<string, CubeData> = {
             },
             {
                 name: 'OLL',
+                id: 'oll',
                 description: 'Practice OLL algorithms',
                 imageUrl: '/img/training/3x3x3/oll.png',
                 algorithms: [
                     {
                         name: 'Caso U horário',
+                        id: 'u-horario',
                         imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
                         setups: [
                             "R R R"
@@ -87,6 +116,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                     },
                     {
                         name: 'Caso U anti-horário',
+                        id: 'u-anti-horario',
                         imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
                         setups: [
                             "R2 U' R' U' R U R U R U' R"

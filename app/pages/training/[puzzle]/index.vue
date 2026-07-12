@@ -13,15 +13,19 @@
 
     <TrainingSection
       v-for="set in trainingSets"
-      :key="set.name"
+      :key="set.id"
       :ref="(el) => registerSection(set.name, el)"
       :set="set"
+      @add-to-list="addToTrainingList"
+      @train="addToTrainingList"
+      @train-set="trainSet"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
+import { useCustomTimerStore } from '~/stores/customTimer';
+import { cubesDefinition, type TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -38,9 +42,11 @@ if(!puzzle.trainingSets) {
   })
 }
 
-const trainingSets = puzzle.trainingSets
+const localePath = useLocalePath()
 
+const trainingSets = puzzle.trainingSets
 const sections = new Map<string, HTMLElement>()
+const customTimerStore = useCustomTimerStore()
 
 function registerSection(name: string, el: Element | ComponentPublicInstance | null) {
   const dom = el instanceof HTMLElement ? el : (el as ComponentPublicInstance | null)?.$el
@@ -53,5 +59,20 @@ function registerSection(name: string, el: Element | ComponentPublicInstance | n
 
 function scrollToSet(name: string) {
   sections.get(name)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+onMounted(()=>{
+  customTimerStore.useTrainingSetDefault(puzzleId)
+})
+
+function addToTrainingList(algorithm: TrainingAlgorithm) {
+  console.log('Adding algorithm to training list:', algorithm)
+  customTimerStore.addAlgorithmToTrainingSet(algorithm)
+  navigateTo(localePath({ name: 'training-timer' }))
+}
+
+function trainSet(set: typeof trainingSets[number]) {
+  customTimerStore.useTrainingSet(set)
+  navigateTo(localePath({ name: 'training-timer' }))
 }
 </script>

@@ -34,12 +34,14 @@
           variant="tonal"
           size="small"
           aria-label="Adicionar à lista"
+          @click="$emit('add-to-list', algorithm)"
         />
         <v-btn
           color="primary"
           variant="flat"
           rounded="pill"
           prepend-icon="mdi-play"
+          @click="$emit('train', algorithm)"
         >
           Treinar
         </v-btn>
@@ -53,6 +55,9 @@ import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
 
 defineProps<{
   algorithm: TrainingAlgorithm
+}>()
+defineEmits<{
+  (e: 'train' | 'add-to-list', algorithm: TrainingAlgorithm): void
 }>()
 </script>
 
