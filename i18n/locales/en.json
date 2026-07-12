@@ -238,7 +238,36 @@
   "training": {
     "title": "Algorithm training",
     "subtitle": "Choose a puzzle to practice",
-    "sets": "{count} set | {count} sets"
+    "sets": "{count} set | {count} sets",
+    "3x3x3": {
+      "pll": {
+        "name": "PLL",
+        "description": "Practice PLL algorithms",
+        "cases": {
+          "u-clockwise": "U case (clockwise)",
+          "u-anticlockwise": "U case (counter-clockwise)",
+          "a-clockwise": "A case (clockwise)",
+          "a-anticlockwise": "A case (counter-clockwise)",
+          "h": "H case",
+          "z": "Z case",
+          "t": "T case",
+          "f": "F case",
+          "y": "Y case",
+          "e": "E case",
+          "v": "V case",
+          "ra": "Ra case",
+          "rb": "Rb case",
+          "ja": "Ja case",
+          "jb": "Jb case",
+          "na": "Na case",
+          "nb": "Nb case",
+          "ga": "Ga case",
+          "gb": "Gb case",
+          "gc": "Gc case",
+          "gd": "Gd case"
+        }
+      }
+    }
   },
   "seo": {
     "index": {

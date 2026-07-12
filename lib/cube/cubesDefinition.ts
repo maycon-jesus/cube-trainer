@@ -6,7 +6,8 @@ import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon
 import type { Component } from "vue"
 
 export type TrainingAlgorithm = {
-    name: string,
+    nameKey?: string,
+    name?: string,
     id: string,
     imageUrl: string,
     setups: string[],
@@ -14,9 +15,11 @@ export type TrainingAlgorithm = {
 }
 
 export type TrainingSet = {
-    name: string,
+    nameKey?: string,
+    name?: string,
     id: string,
-    description: string,
+    descriptionKey?: string,
+    description?: string,
     imageUrl: string,
     algorithms: TrainingAlgorithm[]
 }
@@ -46,13 +49,13 @@ export const cubesDefinition: Record<string, CubeData> = {
         imageUrl: '/img/puzzle/3x3x3.png',
         trainingSets: [
             {
-                name: 'PLL',
+                nameKey: 'training.3x3x3.pll.name',
                 id: 'pll',
-                description: 'Practice PLL algorithms',
+                descriptionKey: 'training.3x3x3.pll.description',
                 imageUrl: '/img/training/3x3x3/pll.png',
                 algorithms: [
                     {
-                        name: 'Caso U horário',
+                        nameKey: 'training.3x3x3.pll.cases.u-clockwise',
                         id: 'pll-u-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-u-clockwise.png',
                         setups: [
@@ -63,7 +66,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso U anti-horário',
+                        nameKey: 'training.3x3x3.pll.cases.u-anticlockwise',
                         id: 'pll-u-anti-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-u-anticlockwise.png',
                         setups: [
@@ -74,7 +77,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso A horário',
+                        nameKey: 'training.3x3x3.pll.cases.a-clockwise',
                         id: 'pll-a-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-a-clockwise.png',
                         setups: [
@@ -85,7 +88,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso A anti-horário',
+                        nameKey: 'training.3x3x3.pll.cases.a-anticlockwise',
                         id: 'pll-a-anti-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-a-anticlockwise.png',
                         setups: [
@@ -96,7 +99,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso H',
+                        nameKey: 'training.3x3x3.pll.cases.h',
                         id: 'pll-h',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-h.png',
                         setups: [
@@ -107,7 +110,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso Z',
+                        nameKey: 'training.3x3x3.pll.cases.z',
                         id: 'pll-z',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-z.png',
                         setups: [
@@ -118,7 +121,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso T',
+                        nameKey: 'training.3x3x3.pll.cases.t',
                         id: 'pll-t',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-t.png',
                         setups: [
@@ -129,7 +132,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso F',
+                        nameKey: 'training.3x3x3.pll.cases.f',
                         id: 'pll-f',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-f.png',
                         setups: [
@@ -140,7 +143,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso Y',
+                        nameKey: 'training.3x3x3.pll.cases.y',
                         id: 'pll-y',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-y.png',
                         setups: [
@@ -151,7 +154,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso E',
+                        nameKey: 'training.3x3x3.pll.cases.e',
                         id: 'pll-e',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-e.png',
                         setups: [
@@ -162,7 +165,7 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso V',
+                        nameKey: 'training.3x3x3.pll.cases.v',
                         id: 'pll-v',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-v.png',
                         setups: [
@@ -173,9 +176,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso R1',
-                        id: 'pll-r1',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-r1.png',
+                        nameKey: 'training.3x3x3.pll.cases.ra',
+                        id: 'pll-ra',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-ra.png',
                         setups: [
                             "R R R"
                         ],
@@ -184,9 +187,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso R2',
-                        id: 'pll-r2',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-r2.png',
+                        nameKey: 'training.3x3x3.pll.cases.rb',
+                        id: 'pll-rb',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-rb.png',
                         setups: [
                             "R R R"
                         ],
@@ -195,9 +198,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso J1',
-                        id: 'pll-j1',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-j1.png',
+                        nameKey: 'training.3x3x3.pll.cases.ja',
+                        id: 'pll-ja',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-ja.png',
                         setups: [
                             "R R R"
                         ],
@@ -206,9 +209,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso J2',
-                        id: 'pll-j2',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-j2.png',
+                        nameKey: 'training.3x3x3.pll.cases.jb',
+                        id: 'pll-jb',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-jb.png',
                         setups: [
                             "R R R"
                         ],
@@ -217,9 +220,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso N1',
-                        id: 'pll-n1',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-n1.png',
+                        nameKey: 'training.3x3x3.pll.cases.na',
+                        id: 'pll-na',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-na.png',
                         setups: [
                             "R R R"
                         ],
@@ -228,9 +231,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso N2',
-                        id: 'pll-n2',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-n2.png',
+                        nameKey: 'training.3x3x3.pll.cases.nb',
+                        id: 'pll-nb',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-nb.png',
                         setups: [
                             "R R R"
                         ],
@@ -239,9 +242,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso G1',
-                        id: 'pll-g1',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-g1.png',
+                        nameKey: 'training.3x3x3.pll.cases.ga',
+                        id: 'pll-ga',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-ga.png',
                         setups: [
                             "R R R"
                         ],
@@ -250,9 +253,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso G2',
-                        id: 'pll-g2',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-g2.png',
+                        nameKey: 'training.3x3x3.pll.cases.gb',
+                        id: 'pll-gb',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-gb.png',
                         setups: [
                             "R R R"
                         ],
@@ -261,9 +264,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso G3',
-                        id: 'pll-g3',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-g3.png',
+                        nameKey: 'training.3x3x3.pll.cases.gc',
+                        id: 'pll-gc',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-gc.png',
                         setups: [
                             "R R R"
                         ],
@@ -272,9 +275,9 @@ export const cubesDefinition: Record<string, CubeData> = {
                         ]
                     },
                     {
-                        name: 'Caso G4',
-                        id: 'pll-g4',
-                        imageUrl: '/img/training/3x3x3/pll/pll-case-g4.png',
+                        nameKey: 'training.3x3x3.pll.cases.gd',
+                        id: 'pll-gd',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-gd.png',
                         setups: [
                             "R R R"
                         ],

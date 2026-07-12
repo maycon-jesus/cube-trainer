@@ -14,7 +14,7 @@
     <TrainingSection
       v-for="set in trainingSets"
       :key="set.id"
-      :ref="(el) => registerSection(set.name, el)"
+      :ref="(el) => registerSection(set.id, el)"
       :set="set"
       @add-to-list="addToTrainingList"
       @train="addToTrainingList"
@@ -48,17 +48,17 @@ const trainingSets = puzzle.trainingSets
 const sections = new Map<string, HTMLElement>()
 const customTimerStore = useCustomTimerStore()
 
-function registerSection(name: string, el: Element | ComponentPublicInstance | null) {
+function registerSection(id: string, el: Element | ComponentPublicInstance | null) {
   const dom = el instanceof HTMLElement ? el : (el as ComponentPublicInstance | null)?.$el
   if (dom instanceof HTMLElement) {
-    sections.set(name, dom)
+    sections.set(id, dom)
   } else {
-    sections.delete(name)
+    sections.delete(id)
   }
 }
 
-function scrollToSet(name: string) {
-  sections.get(name)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+function scrollToSet(id: string) {
+  sections.get(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 onMounted(()=>{

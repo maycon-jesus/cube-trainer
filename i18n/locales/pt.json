@@ -238,7 +238,36 @@
   "training": {
     "title": "Treino de algoritmos",
     "subtitle": "Selecione o puzzle que deseja praticar",
-    "sets": "{count} conjunto | {count} conjuntos"
+    "sets": "{count} conjunto | {count} conjuntos",
+    "3x3x3": {
+      "pll": {
+        "name": "PLL",
+        "description": "Pratique os algoritmos de PLL",
+        "cases": {
+          "u-clockwise": "Caso U (horário)",
+          "u-anticlockwise": "Caso U (anti-horário)",
+          "a-clockwise": "Caso A (horário)",
+          "a-anticlockwise": "Caso A (anti-horário)",
+          "h": "Caso H",
+          "z": "Caso Z",
+          "t": "Caso T",
+          "f": "Caso F",
+          "y": "Caso Y",
+          "e": "Caso E",
+          "v": "Caso V",
+          "ra": "Caso Ra",
+          "rb": "Caso Rb",
+          "ja": "Caso Ja",
+          "jb": "Caso Jb",
+          "na": "Caso Na",
+          "nb": "Caso Nb",
+          "ga": "Caso Ga",
+          "gb": "Caso Gb",
+          "gc": "Caso Gc",
+          "gd": "Caso Gd"
+        }
+      }
+    }
   },
   "seo": {
     "index": {

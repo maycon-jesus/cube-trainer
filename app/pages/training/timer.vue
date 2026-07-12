@@ -4,17 +4,17 @@
           <v-col cols="12" lg="4" xxl="2" >
             <v-row density="comfortable">
               <v-col cols="12" md="6" lg="12">
-                  <CustomCard :title="trainingSet?.name ?? 'Treino'" :subtitle="trainingSet?.description">
+                  <CustomCard :title="trainingSetName" :subtitle="trainingSetDescription">
                       <SessionSelector v-model="configStore.sessionId" class="mt-4" />
                   <v-list-item
                     v-if="currentAlgorithm"
                     class="px-0 mt-4"
-                    :title="currentAlgorithm.name"
+                    :title="currentAlgorithmName"
                     subtitle="Caso atual"
                   >
                     <template #prepend>
                       <v-avatar v-if="currentAlgorithm.imageUrl" rounded="lg" size="48">
-                        <v-img :src="currentAlgorithm.imageUrl" :alt="currentAlgorithm.name" />
+                        <v-img :src="currentAlgorithm.imageUrl" :alt="currentAlgorithmName" />
                       </v-avatar>
                     </template>
                   </v-list-item>
@@ -83,6 +83,7 @@ const configStore = useConfigStore()
 const customTimerStore = useCustomTimerStore()
 const display = useDisplay()
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 usePageSeo('index', { suffix: false })
 
@@ -135,6 +136,21 @@ async function refreshSolves() {
 watch([() => configStore.sessionId, trainingSetId], async () => {
   newScramble()
   await refreshSolves()
+})
+
+const trainingSetName = computed(() => {
+  if (!trainingSet.value) return ''
+  return trainingSet.value.name ?? t(trainingSet.value.nameKey??'')
+})
+
+const trainingSetDescription = computed(() => {
+  if (!trainingSet.value) return undefined
+  return trainingSet.value.description ?? (trainingSet.value.descriptionKey? t(trainingSet.value.descriptionKey) : undefined)
+})
+
+const currentAlgorithmName = computed(() => {
+  if (!currentAlgorithm.value) return ''
+  return currentAlgorithm.value.name ?? t(currentAlgorithm.value.nameKey??'')
 })
 </script>
 

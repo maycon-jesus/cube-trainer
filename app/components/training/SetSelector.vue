@@ -2,19 +2,19 @@
   <div class="set-nav d-flex ga-3 py-2 overflow-x-auto">
     <button
       v-for="set in sets"
-      :key="set.name"
+      :key="set.id"
       type="button"
       class="set-nav__card d-flex flex-column align-center flex-grow-0 flex-shrink-0 ga-2 pa-3 border rounded-lg bg-surface"
-      @click="emit('select', set.name)"
+      @click="emit('select', set.id)"
     >
       <v-img
         :src="set.imageUrl"
-        :alt="set.name"
+        :alt="t(set.nameKey)"
         :aspect-ratio="1"
         width="72"
         class="set-nav__img rounded-lg"
       />
-      <span class="text-body-2 font-weight-medium">{{ set.name }}</span>
+      <span class="text-body-2 font-weight-medium">{{ t(set.nameKey) }}</span>
     </button>
   </div>
 </template>
@@ -22,12 +22,14 @@
 <script setup lang="ts">
 import type { TrainingSet } from '~~/lib/cube/cubesDefinition';
 
+const { t } = useI18n()
+
 defineProps<{
   sets: TrainingSet[]
 }>()
 
 const emit = defineEmits<{
-  select: [name: string]
+  select: [id: string]
 }>()
 </script>
 

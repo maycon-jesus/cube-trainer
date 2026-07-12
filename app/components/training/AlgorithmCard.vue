@@ -8,13 +8,13 @@
     <div class="training-card__image pa-3 d-flex align-center justify-center">
       <nuxt-img
 :src="algorithm.imageUrl"
-        :alt="algorithm.name"
+        :alt="t(algorithm.nameKey)"
         width="200"
         class="rounded-lg aspect-ratio-1-1" />
     </div>
 
     <div class="pa-4 pt-2 d-flex flex-column flex-fill">
-      <h3 class="text-title-medium font-weight-bold mb-2">{{ algorithm.name }}</h3>
+      <h3 class="text-title-medium font-weight-bold mb-2">{{ t(algorithm.nameKey) }}</h3>
 
       <div class="d-flex flex-column ga-1 mb-4">
         <code
@@ -50,6 +50,8 @@
 
 <script setup lang="ts">
 import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
+
+const { t } = useI18n()
 
 defineProps<{
   algorithm: TrainingAlgorithm

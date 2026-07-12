@@ -238,7 +238,36 @@
   "training": {
     "title": "算法训练",
     "subtitle": "选择要练习的魔方",
-    "sets": "{count} 组"
+    "sets": "{count} 组",
+    "3x3x3": {
+      "pll": {
+        "name": "PLL",
+        "description": "练习 PLL 公式",
+        "cases": {
+          "u-clockwise": "U 情况（顺时针）",
+          "u-anticlockwise": "U 情况（逆时针）",
+          "a-clockwise": "A 情况（顺时针）",
+          "a-anticlockwise": "A 情况（逆时针）",
+          "h": "H 情况",
+          "z": "Z 情况",
+          "t": "T 情况",
+          "f": "F 情况",
+          "y": "Y 情况",
+          "e": "E 情况",
+          "v": "V 情况",
+          "ra": "Ra 情况",
+          "rb": "Rb 情况",
+          "ja": "Ja 情况",
+          "jb": "Jb 情况",
+          "na": "Na 情况",
+          "nb": "Nb 情况",
+          "ga": "Ga 情况",
+          "gb": "Gb 情况",
+          "gc": "Gc 情况",
+          "gd": "Gd 情况"
+        }
+      }
+    }
   },
   "seo": {
     "index": {

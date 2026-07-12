@@ -2,9 +2,9 @@
   <section class="training-section mb-10">
     <div class="d-flex flex-wrap align-center justify-space-between ga-3 mb-4">
       <div>
-        <h2 class="text-headline-small font-weight-bold mb-0">{{ set.name }}</h2>
-        <p v-if="set.description" class="text-body-2 text-medium-emphasis mb-0">
-          {{ set.description }}
+        <h2 class="text-headline-small font-weight-bold mb-0">{{ t(set.nameKey) }}</h2>
+        <p v-if="set.descriptionKey" class="text-body-2 text-medium-emphasis mb-0">
+          {{ t(set.descriptionKey) }}
         </p>
       </div>
       <v-btn
@@ -14,7 +14,7 @@
         rounded="pill"
         @click="$emit('train-set', set)"
       >
-        Treinar todos {{ set.name }}
+        Treinar todos {{ t(set.nameKey) }}
       </v-btn>
     </div>
 
@@ -35,6 +35,8 @@
 
 <script setup lang="ts">
 import type { TrainingAlgorithm, TrainingSet } from '~~/lib/cube/cubesDefinition';
+
+const { t } = useI18n()
 
 defineProps<{
   set: TrainingSet
