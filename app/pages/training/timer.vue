@@ -5,7 +5,7 @@
             <v-row density="comfortable">
               <v-col cols="12" md="6" lg="12">
                   <CustomCard :title="trainingSetName" :subtitle="trainingSetDescription">
-                      <SessionSelector v-model="configStore.sessionId" class="mt-4" />
+                      <SessionSelector v-model="configStore.sessionId" />
                   <v-list-item
                     v-if="currentAlgorithm"
                     class="px-0 mt-4"

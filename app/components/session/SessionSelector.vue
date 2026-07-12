@@ -1,5 +1,6 @@
 <template>
-    <v-select
+    <div>
+        <v-select
         v-model="model"
         :label="t('session.label')"
         :items="items"
@@ -15,6 +16,7 @@
     </template>
     </v-select>
     <session-create-rename-dialog v-model="openCreateDialog" form-mode="create" />
+    </div>
 </template>
 
 <script setup lang="ts">
