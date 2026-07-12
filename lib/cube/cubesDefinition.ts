@@ -53,80 +53,127 @@ export const cubesDefinition: Record<string, CubeData> = {
                 algorithms: [
                     {
                         name: 'Caso U horário',
-                        id: 'u-horario',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
+                        id: 'pll-u-horario',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-u-clockwise.png',
                         setups: [
                             "R R R"
                         ],
                         solves: [
-                            "R' U R' U' R' U' U R U R2"
-                        ]
-                    },
-                    {
-                        name: 'Caso U horário 2',
-                        id: 'u-horario 2',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
-                        setups: [
-                            "R R R2"
-                        ],
-                        solves: [
-                            "R' U R' U' R' U' U R U R2"
-                        ]
-                    },
-                    {
-                        name: 'Caso U horário 3',
-                        id: 'u-horario 3',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
-                        setups: [
-                            "R R R3"
-                        ],
-                        solves: [
-                            "R' U R' U' R' U' U R U R2"
+                            "R' U R' U' R' U' R' U R U R2"
                         ]
                     },
                     {
                         name: 'Caso U anti-horário',
-                        id: 'u-anti-horario',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
+                        id: 'pll-u-anti-horario',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-u-anticlockwise.png',
                         setups: [
-                            "R2 U' R' U' R U R U R U' R"
+                            "R R R"
                         ],
                         solves: [
                             "R2 U' R' U' R U R U R U' R"
+                        ]
+                    },
+                    {
+                        name: 'Caso A horário',
+                        id: 'pll-a-horario',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-a-clockwise.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "x R' U R' D2 R U' R' D2 R2 x'"
+                        ]
+                    },
+                    {
+                        name: 'Caso A anti-horário',
+                        id: 'pll-a-anti-horario',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-a-anticlockwise.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "x R2' D2 R U R'D2 R U' R x'"
+                        ]
+                    },
+                    {
+                        name: 'Caso H',
+                        id: 'pll-h',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-h.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "M2 U M2 U2 M2 U M2"
+                        ]
+                    },
+                    {
+                        name: 'Caso Z',
+                        id: 'pll-z',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-z.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "M2 U M2 U M' U2 M2 U2 M'"
+                        ]
+                    },
+                    {
+                        name: 'Caso T',
+                        id: 'pll-t',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-t.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R U R' U' R' F R2 U' R' U' R U R' F'"
+                        ]
+                    },
+                    {
+                        name: 'Caso F',
+                        id: 'pll-f',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-f.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"
+                        ]
+                    },
+                    {
+                        name: 'Caso Y',
+                        id: 'pll-y',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-y.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "F R U' R' U' R U R' F' R U R' U' R' F R F'"
+                        ]
+                    },
+                    {
+                        name: 'Caso E',
+                        id: 'pll-e',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-e.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "x' R U' R' D R U R' D' R U R' D R U' R' D' x"
+                        ]
+                    },
+                    {
+                        name: 'Caso V',
+                        id: 'pll-v',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-v.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U R' Dw' R' F' R2 U' R' U R' F R F"
                         ]
                     },
                 ]
             },
-            {
-                name: 'OLL',
-                id: 'oll',
-                description: 'Practice OLL algorithms',
-                imageUrl: '/img/training/3x3x3/oll.png',
-                algorithms: [
-                    {
-                        name: 'Caso U horário',
-                        id: 'u-horario',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-h-01.png',
-                        setups: [
-                            "R R R"
-                        ],
-                        solves: [
-                            "R' U R' U' R' U' U R U R2"
-                        ]
-                    },
-                    {
-                        name: 'Caso U anti-horário',
-                        id: 'u-anti-horario',
-                        imageUrl: 'https://cubovelocidade.com.br/wp-content/uploads/2020/07/pll-caso-u-a-01.png',
-                        setups: [
-                            "R2 U' R' U' R U R U R U' R"
-                        ],
-                        solves: [
-                            "R2 U' R' U' R U R U R U' R"
-                        ]
-                    },
-                ]
-            }
         ]
     },
     "4x4x4": {

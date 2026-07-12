@@ -6,13 +6,11 @@
     flat
   >
     <div class="training-card__image pa-3 d-flex align-center justify-center">
-      <v-img
-        :src="algorithm.imageUrl"
+      <nuxt-img
+:src="algorithm.imageUrl"
         :alt="algorithm.name"
-        :aspect-ratio="1"
-        width="160"
-        class="rounded-lg"
-      />
+        width="200"
+        class="rounded-lg aspect-ratio-1-1" />
     </div>
 
     <div class="pa-4 pt-2 d-flex flex-column flex-fill">
@@ -78,5 +76,9 @@ defineEmits<{
   background: rgba(var(--v-theme-primary), 0.08);
   white-space: normal;
   word-break: break-word;
+}
+
+.aspect-ratio-1-1{
+  aspect-ratio: 1/1;
 }
 </style>
