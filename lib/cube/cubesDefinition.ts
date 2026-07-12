@@ -172,6 +172,116 @@ export const cubesDefinition: Record<string, CubeData> = {
                             "R' U R' Dw' R' F' R2 U' R' U R' F R F"
                         ]
                     },
+                    {
+                        name: 'Caso R1',
+                        id: 'pll-r1',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-r1.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R U' R' U' R U R D R' U' R D' R' U2 R' U'"
+                        ]
+                    },
+                    {
+                        name: 'Caso R2',
+                        id: 'pll-r2',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-r2.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U2 R U2' R' F R U R' U' R' F' R2 U'"
+                        ]
+                    },
+                    {
+                        name: 'Caso J1',
+                        id: 'pll-j1',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-j1.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "x R2 F R F' R U2 Rw' U Rw U2 x'"
+                        ]
+                    },
+                    {
+                        name: 'Caso J2',
+                        id: 'pll-j2',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-j2.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R U R' F' R U R' U' R' F R2 U' R' U'"
+                        ]
+                    },
+                    {
+                        name: 'Caso N1',
+                        id: 'pll-n1',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-n1.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"
+                        ]
+                    },
+                    {
+                        name: 'Caso N2',
+                        id: 'pll-n2',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-n2.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U R U' R' F' U' F R U R' F R' F' R U' R"
+                        ]
+                    },
+                    {
+                        name: 'Caso G1',
+                        id: 'pll-g1',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-g1.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R2' Uw R' U R' U' R Uw' R2 y' R' U R"
+                        ]
+                    },
+                    {
+                        name: 'Caso G2',
+                        id: 'pll-g2',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-g2.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R' U' R U D' R2 U R' U R U' R U' R2 D U'"
+                        ]
+                    },
+                    {
+                        name: 'Caso G3',
+                        id: 'pll-g3',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-g3.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R2 U' R U' R U R' U R2 D' U R U' R' D U'"
+                        ]
+                    },
+                    {
+                        name: 'Caso G4',
+                        id: 'pll-g4',
+                        imageUrl: '/img/training/3x3x3/pll/pll-case-g4.png',
+                        setups: [
+                            "R R R"
+                        ],
+                        solves: [
+                            "R U R' y' R2 Uw' R U' R' U R' Uw R2"
+                        ]
+                    },
                 ]
             },
         ]
