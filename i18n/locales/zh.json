@@ -245,6 +245,10 @@
     "trainAll": "训练全部 {set}",
     "addToList": "添加到列表",
     "3x3x3": {
+      "header": {
+        "title": "训练 3x3x3 算法",
+        "subtitle": "逐组练习算法，掌握每一种情况"
+      },
       "pll": {
         "name": "PLL",
         "description": "练习 PLL 公式",

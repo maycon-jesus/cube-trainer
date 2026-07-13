@@ -245,6 +245,10 @@
     "trainAll": "Train all {set}",
     "addToList": "Add to list",
     "3x3x3": {
+      "header": {
+        "title": "Train 3x3x3 algorithms",
+        "subtitle": "Practice algorithms set by set and master every case"
+      },
       "pll": {
         "name": "PLL",
         "description": "Practice PLL algorithms",

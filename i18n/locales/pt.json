@@ -245,6 +245,10 @@
     "trainAll": "Treinar todo o {set}",
     "addToList": "Adicionar à lista",
     "3x3x3": {
+      "header": {
+        "title": "Treinar algoritmos 3x3x3",
+        "subtitle": "Pratique os algoritmos por conjunto e domine cada caso"
+      },
       "pll": {
         "name": "PLL",
         "description": "Pratique os algoritmos de PLL",

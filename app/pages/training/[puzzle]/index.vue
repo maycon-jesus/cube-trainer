@@ -1,8 +1,8 @@
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
     <LayoutsPageHeader
-      :title="`Treinar algoritmos ${puzzle.name}`"
-      subtitle="Pratique os algoritmos por conjunto e domine cada caso"
+      :title="t(`training.${puzzleId}.header.title`)"
+      :subtitle="t(`training.${puzzleId}.header.subtitle`)"
     />
 
     <TrainingSetSelector
@@ -43,6 +43,7 @@ if(!puzzle.trainingSets) {
 }
 
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
