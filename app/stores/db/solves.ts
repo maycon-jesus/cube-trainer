@@ -30,7 +30,7 @@ export type Solve = Stored<{
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
   version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' },
+  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingSetId', keyPath: 'trainingSetId' },{ name: 'algorithmId', keyPath: 'algorithmId' }, { name: 'puzzle', keyPath: 'puzzle' },
   { name: 'type', keyPath: 'type' },
   {
     name: 'all-solves',
@@ -90,6 +90,15 @@ export const useSolvesStore = defineStore('solves', () => {
     await db.deleteDB()
   }
 
+  /**
+   * Most recent solves for a training case, newest first. Reads the in-memory
+   * `solves` ref (already newest-first) so callers stay reactive. `limit` caps
+   * the window (default 100, enough for an ao100).
+   */
+  function getByAlgorithmId(algorithmId: string, limit = 100): Solve[] {
+    return solves.value.filter((solve) => solve.algorithmId === algorithmId).slice(0, limit)
+  }
+
   async function getAll(type: Type, sessionId: number, puzzle: string, trainingSetId: string, algorithmId: string): Promise<Solve[]> {
     const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingSetId, algorithmId])
     return solves.sort((a, b) => b.createdAt - a.createdAt)
@@ -137,7 +146,7 @@ export const useSolvesStore = defineStore('solves', () => {
     }
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getByAlgorithmId, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
     count: () => db.count(),
     exportEach: db.exportEach.bind(db),
     importBatch: db.importBatch.bind(db),

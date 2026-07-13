@@ -44,6 +44,19 @@ export function averageOf(solves: Solve[], n: number): number | null {
   return trimmed.reduce((a, b) => a + b, 0) / trimmed.length
 }
 
+/** A single rolling-average entry (`aoN` and its value, null when not enough solves). */
+export type AverageEntry = { n: number; value: number | null }
+
+/**
+ * Standard training rolling averages (ao3/ao5/ao12/ao100) over `solves`
+ * (newest first). ao100 is omitted until there are enough solves for it.
+ */
+export function trainingAverages(solves: Solve[]): AverageEntry[] {
+  return [3, 5, 12, 100]
+    .map((n) => ({ n, value: averageOf(solves, n) }))
+    .filter((avg) => avg.n !== 100 || avg.value !== null)
+}
+
 /** Arithmetic mean over all solves (DNFs make it Infinity). */
 export function meanOf(solves: Solve[]): number | null {
   if (solves.length === 0) return null

@@ -26,6 +26,17 @@
         </code>
       </div>
 
+      <div v-if="averages.length" class="d-flex flex-wrap ga-2 mb-4">
+        <div
+          v-for="avg in averages"
+          :key="avg.n"
+          class="training-card__stat d-flex flex-column align-center px-3 py-1 rounded flex-fill"
+        >
+          <span class="training-card__stat-label text-label-small text-medium-emphasis">ao{{ avg.n }}</span>
+          <span class="training-card__stat-value text-body-medium font-weight-bold">{{ formatMs(avg.value) }}</span>
+        </div>
+      </div>
+
       <div class="d-flex align-center justify-end ga-2 mt-auto">
         <v-btn
           icon="mdi-cart-outline"
@@ -50,15 +61,29 @@
 
 <script setup lang="ts">
 import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
+import { useSolvesStore } from '~/stores/db/solves';
+import { formatMs, trainingAverages } from '~/utils/stats';
 
 const { t } = useI18n()
 
-defineProps<{
+const props = defineProps<{
   algorithm: TrainingAlgorithm
 }>()
 defineEmits<{
   (e: 'train' | 'add-to-list', algorithm: TrainingAlgorithm): void
 }>()
+
+const solvesStore = useSolvesStore()
+
+// Most recent solves for this case (up to an ao100 window), newest first.
+const caseSolves = computed(() => solvesStore.getByAlgorithmId(props.algorithm.id))
+
+
+
+// ao3 / ao5 / ao12 (and ao100 once there are enough solves). Empty hides the row.
+const averages = computed(() =>
+  caseSolves.value.length ? trainingAverages(caseSolves.value) : [],
+)
 </script>
 
 <style scoped lang="scss">
@@ -78,6 +103,14 @@ defineEmits<{
   background: rgba(var(--v-theme-primary), 0.08);
   white-space: normal;
   word-break: break-word;
+}
+
+.training-card__stat {
+  background: rgba(var(--v-theme-on-surface), 0.04);
+}
+
+.training-card__stat-value {
+  font-family: vars.$font-family-mono;
 }
 
 .aspect-ratio-1-1{
