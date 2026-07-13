@@ -13,7 +13,7 @@ const navItems = computed<{
   to: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric | undefined
 }[]>(() => [
   { title: t('nav.play'), icon: 'mdi-timer-outline', to: localePath({ name: 'index' }) },
-  { title: t('nav.training'), icon: 'mdi-dumbbell', to: localePath({ name: 'training' }) },
+  { title: t('nav.training-algorithms'), icon: 'mdi-dumbbell', to: localePath({ name: 'training' }) },
   { title: t('nav.patterns'), icon: 'mdi-view-grid', to: localePath({ name: 'patterns' }) },
   { title: t('nav.sessions'), icon: 'mdi-folder-multiple', to: localePath({ name: 'sessions' }) },
   { title: t('nav.history'), icon: 'mdi-history', to: localePath({ name: 'history' }) },

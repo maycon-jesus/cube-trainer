@@ -54,7 +54,7 @@
   "nav": {
     "play": "Timer",
     "patterns": "Patterns",
-    "training": "Training",
+    "training-algorithms": "Train Algorithms",
     "sessions": "Sessions",
     "history": "History",
     "stats": "Statistics",
