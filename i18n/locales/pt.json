@@ -299,6 +299,12 @@
       "title": "Treino de Algoritmos",
       "description": "Treine algoritmos e casos específicos para melhorar seus tempos."
     },
+    "puzzle": {
+      "3x3x3": {
+        "title": "Treino de Algoritmos 3x3x3",
+        "description": "Treine os algoritmos de OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos."
+      }
+    },
     "settings": {
       "title": "Configurações",
       "description": "Personalize o Cube Trainer: alterne entre tema claro e escuro, mude o idioma e gerencie seus dados."

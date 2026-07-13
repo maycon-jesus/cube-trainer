@@ -299,6 +299,12 @@
       "title": "公式训练",
       "description": "练习特定公式与情形，提升你的复原成绩。"
     },
+    "puzzle": {
+      "3x3x3": {
+        "title": "3x3x3 公式训练",
+        "description": "训练 3x3x3 的 OLL 和 PLL 公式，掌握每个情形，提升你的复原成绩。"
+      }
+    },
     "settings": {
       "title": "设置",
       "description": "自定义 Cube Trainer：切换浅色与深色主题、更改语言并管理数据。"

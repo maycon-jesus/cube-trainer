@@ -44,6 +44,8 @@ if(!puzzle.trainingSets) {
 
 const localePath = useLocalePath()
 
+usePageSeo(`puzzle.${puzzleId}`)
+
 const trainingSets = puzzle.trainingSets
 const sections = new Map<string, HTMLElement>()
 const customTimerStore = useCustomTimerStore()

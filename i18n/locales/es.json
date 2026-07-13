@@ -299,6 +299,12 @@
       "title": "Entrenamiento de Algoritmos",
       "description": "Practica algoritmos y casos específicos para mejorar tus tiempos de resolución."
     },
+    "puzzle": {
+      "3x3x3": {
+        "title": "Entrenamiento de Algoritmos 3x3x3",
+        "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos."
+      }
+    },
     "settings": {
       "title": "Ajustes",
       "description": "Personaliza Cube Trainer: cambia entre tema claro y oscuro, cambia el idioma y gestiona tus datos."
