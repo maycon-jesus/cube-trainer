@@ -27,7 +27,12 @@
         lg="4"
         xl="3"
       >
-        <TrainingAlgorithmCard :algorithm="algorithm" @train="$emit('train', $event)" @add-to-list="$emit('add-to-list', $event)" />
+        <TrainingAlgorithmCard
+          :algorithm="algorithm"
+          :selected="selectedIds?.has(algorithm.id)"
+          @train="$emit('train', $event)"
+          @add-to-list="$emit('add-to-list', $event)"
+        />
       </v-col>
     </v-row>
   </section>
@@ -40,6 +45,7 @@ const { t } = useI18n()
 
 const props = defineProps<{
   set: TrainingSet
+  selectedIds?: Set<string>
 }>()
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.

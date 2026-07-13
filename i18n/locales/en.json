@@ -276,6 +276,14 @@
           "gd": "Gd case"
         }
       }
+    },
+    "removeFromList": "Remove from list",
+    "selection": {
+      "count": "{count} case selected | {count} cases selected",
+      "trainSelected": "Train selected",
+      "createPlaylist": "Create playlist",
+      "clear": "Clear selection",
+      "comingSoon": "Coming soon"
     }
   },
   "seo": {

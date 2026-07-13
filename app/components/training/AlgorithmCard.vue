@@ -1,6 +1,7 @@
 <template>
   <v-card
     class="training-card d-flex flex-column h-100"
+    :class="{ 'training-card--selected': selected }"
     rounded="lg"
     border
     flat
@@ -74,13 +75,16 @@
       <div class="d-flex align-center justify-end ga-2 mt-auto">
         <v-btn
           icon
-          variant="tonal"
+          :variant="selected ? 'flat' : 'tonal'"
+          :color="selected ? 'primary' : undefined"
           size="small"
-          :aria-label="t('training.addToList')"
+          :aria-label="selected ? t('training.removeFromList') : t('training.addToList')"
           @click="$emit('add-to-list', algorithm)"
         >
-          <v-icon icon="mdi-playlist-plus" />
-          <v-tooltip activator="parent" location="top">{{ t('training.addToList') }}</v-tooltip>
+          <v-icon :icon="selected ? 'mdi-playlist-check' : 'mdi-playlist-plus'" />
+          <v-tooltip activator="parent" location="top">
+            {{ selected ? t('training.removeFromList') : t('training.addToList') }}
+          </v-tooltip>
         </v-btn>
         <v-btn
           color="primary"
@@ -105,6 +109,7 @@ const { t } = useI18n()
 
 const props = defineProps<{
   algorithm: TrainingAlgorithm
+  selected?: boolean
 }>()
 defineEmits<{
   (e: 'train' | 'add-to-list', algorithm: TrainingAlgorithm): void
@@ -139,6 +144,11 @@ const setupLabel = computed(() =>
 
 .training-card {
   @include mixins.hover-primary-border;
+}
+
+.training-card--selected {
+  border-color: rgb(var(--v-theme-primary)) !important;
+  background: rgba(var(--v-theme-primary), 0.04);
 }
 
 .training-card__image {

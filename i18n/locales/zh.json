@@ -276,6 +276,14 @@
           "gd": "Gd 情况"
         }
       }
+    },
+    "removeFromList": "从列表移除",
+    "selection": {
+      "count": "已选择 {count} 个情况",
+      "trainSelected": "训练所选",
+      "createPlaylist": "创建训练列表",
+      "clear": "清除选择",
+      "comingSoon": "即将推出"
     }
   },
   "seo": {

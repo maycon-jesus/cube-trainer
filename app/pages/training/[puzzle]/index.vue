@@ -16,9 +16,16 @@
       :key="set.id"
       :ref="(el) => registerSection(set.id, el)"
       :set="set"
-      @add-to-list="addToTrainingList"
-      @train="addToTrainingList"
+      :selected-ids="selectedIds"
+      @add-to-list="toggleSelection"
+      @train="trainSingle"
       @train-set="trainSet"
+    />
+
+    <TrainingSelectionToolbar
+      :count="selectedAlgorithms.length"
+      @train="trainSelected"
+      @clear="clearSelection"
     />
   </v-container>
 </template>
@@ -51,6 +58,10 @@ const trainingSets = puzzle.trainingSets
 const sections = new Map<string, HTMLElement>()
 const customTimerStore = useCustomTimerStore()
 
+// Algorithms picked via "add to list" build a selection surfaced in the toolbar.
+const selectedAlgorithms = ref<TrainingAlgorithm[]>([])
+const selectedIds = computed(() => new Set(selectedAlgorithms.value.map((a) => a.id)))
+
 function registerSection(id: string, el: Element | ComponentPublicInstance | null) {
   const dom = el instanceof HTMLElement ? el : (el as ComponentPublicInstance | null)?.$el
   if (dom instanceof HTMLElement) {
@@ -68,9 +79,31 @@ onMounted(()=>{
   customTimerStore.useTrainingSetDefault(puzzleId)
 })
 
-function addToTrainingList(algorithm: TrainingAlgorithm) {
-  console.log('Adding algorithm to training list:', algorithm)
+function toggleSelection(algorithm: TrainingAlgorithm) {
+  const index = selectedAlgorithms.value.findIndex((a) => a.id === algorithm.id)
+  if (index >= 0) {
+    selectedAlgorithms.value.splice(index, 1)
+  } else {
+    selectedAlgorithms.value.push(algorithm)
+  }
+}
+
+function clearSelection() {
+  selectedAlgorithms.value = []
+}
+
+function trainSingle(algorithm: TrainingAlgorithm) {
+  customTimerStore.useTrainingSetDefault(puzzleId)
   customTimerStore.addAlgorithmToTrainingSet(algorithm)
+  navigateTo(localePath({ name: 'training-timer' }))
+}
+
+function trainSelected() {
+  if (!selectedAlgorithms.value.length) return
+  customTimerStore.useTrainingSetDefault(puzzleId)
+  for (const algorithm of selectedAlgorithms.value) {
+    customTimerStore.addAlgorithmToTrainingSet(algorithm)
+  }
   navigateTo(localePath({ name: 'training-timer' }))
 }
 

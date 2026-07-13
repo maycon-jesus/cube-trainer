@@ -276,6 +276,14 @@
           "gd": "Caso Gd"
         }
       }
+    },
+    "removeFromList": "Remover da lista",
+    "selection": {
+      "count": "{count} caso selecionado | {count} casos selecionados",
+      "trainSelected": "Treinar selecionados",
+      "createPlaylist": "Criar playlist",
+      "clear": "Limpar seleção",
+      "comingSoon": "Em breve"
     }
   },
   "seo": {
