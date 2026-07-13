@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "建设中"
   },
+  "statLabels": {
+    "best": "最佳",
+    "mean": "平均",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "管理你的练习分组并追踪进步",
     "new": "新建分组",
     "current": "当前",
     "solves": "复原次数",
-    "best": "最佳",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "上次活动 {date}",
     "open": "打开",
     "setCurrent": "设为当前",
@@ -73,8 +78,7 @@
       "daysPracticed": "练习天数"
     },
     "bestAverages": {
-      "title": "最佳平均",
-      "best": "最佳"
+      "title": "最佳平均"
     },
     "streak": {
       "title": "连续练习追踪",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "统计",
-      "solvesCount": "{count} 次复原",
-      "best": "最佳",
-      "mean": "平均",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} 次复原"
     },
     "solves": {
       "title": "成绩",
@@ -239,6 +239,11 @@
     "title": "算法训练",
     "subtitle": "选择要练习的魔方",
     "sets": "{count} 组",
+    "solveCount": "{count} 次还原",
+    "setup": "Setup | Setup ({count})",
+    "train": "训练",
+    "trainAll": "训练全部 {set}",
+    "addToList": "添加到列表",
     "3x3x3": {
       "pll": {
         "name": "PLL",

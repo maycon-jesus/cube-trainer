@@ -44,17 +44,21 @@ export function averageOf(solves: Solve[], n: number): number | null {
   return trimmed.reduce((a, b) => a + b, 0) / trimmed.length
 }
 
-/** A single rolling-average entry (`aoN` and its value, null when not enough solves). */
-export type AverageEntry = { n: number; value: number | null }
+/** A single stat-tile entry (label like `mo3`/`ao5` and its value, null when not enough solves). */
+export type AverageEntry = { label: string; value: number | null }
 
 /**
- * Standard training rolling averages (ao3/ao5/ao12/ao100) over `solves`
- * (newest first). ao100 is omitted until there are enough solves for it.
+ * Standard training rolling stats over `solves` (newest first): mo3 (plain
+ * mean of 3 — the speedcubing convention for 3, since a trimmed "ao3" would
+ * just be the median) plus ao5/ao12, and ao100 once there are enough solves.
  */
 export function trainingAverages(solves: Solve[]): AverageEntry[] {
-  return [3, 5, 12, 100]
-    .map((n) => ({ n, value: averageOf(solves, n) }))
-    .filter((avg) => avg.n !== 100 || avg.value !== null)
+  return [
+    { label: 'mo3', value: solves.length >= 3 ? meanOf(solves.slice(0, 3)) : null },
+    ...[5, 12, 100]
+      .map((n) => ({ label: `ao${n}`, value: averageOf(solves, n) }))
+      .filter((avg) => avg.label !== 'ao100' || avg.value !== null),
+  ]
 }
 
 /** Arithmetic mean over all solves (DNFs make it Infinity). */

@@ -2,19 +2,19 @@
   <CustomCard :title="t('timer.stats.title')" :subtitle="t('timer.stats.solvesCount', { count: props.solves.length })">
     <v-row density="compact">
       <v-col cols="6">
-        <div class="stat-label">{{ t('timer.stats.best') }}</div>
+        <div class="stat-label">{{ t('statLabels.best') }}</div>
         <div class="stat-value">{{ formatMs(stats.best) }}</div>
       </v-col>
       <v-col cols="6">
-        <div class="stat-label">{{ t('timer.stats.mean') }}</div>
+        <div class="stat-label">{{ t('statLabels.mean') }}</div>
         <div class="stat-value">{{ formatMs(stats.mean) }}</div>
       </v-col>
       <v-col cols="6">
-        <div class="stat-label">{{ t('timer.stats.ao5') }}</div>
+        <div class="stat-label">{{ t('statLabels.ao5') }}</div>
         <div class="stat-value">{{ formatMs(stats.ao5) }}</div>
       </v-col>
       <v-col cols="6">
-        <div class="stat-label">{{ t('timer.stats.ao12') }}</div>
+        <div class="stat-label">{{ t('statLabels.ao12') }}</div>
         <div class="stat-value">{{ formatMs(stats.ao12) }}</div>
       </v-col>
     </v-row>

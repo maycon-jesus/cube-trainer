@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "Under construction"
   },
+  "statLabels": {
+    "best": "best",
+    "mean": "mean",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "Manage your practice sessions and track your progress",
     "new": "New session",
     "current": "Current",
     "solves": "Solves",
-    "best": "Best",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "Last active {date}",
     "open": "Open",
     "setCurrent": "Set as current",
@@ -73,8 +78,7 @@
       "daysPracticed": "Days practiced"
     },
     "bestAverages": {
-      "title": "Best averages",
-      "best": "Best"
+      "title": "Best averages"
     },
     "streak": {
       "title": "Streak tracker",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "Statistics",
-      "solvesCount": "{count} solves",
-      "best": "best",
-      "mean": "mean",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} solves"
     },
     "solves": {
       "title": "Times",
@@ -239,6 +239,11 @@
     "title": "Algorithm training",
     "subtitle": "Choose a puzzle to practice",
     "sets": "{count} set | {count} sets",
+    "solveCount": "{count} solve | {count} solves",
+    "setup": "Setup | Setup ({count})",
+    "train": "Train",
+    "trainAll": "Train all {set}",
+    "addToList": "Add to list",
     "3x3x3": {
       "pll": {
         "name": "PLL",

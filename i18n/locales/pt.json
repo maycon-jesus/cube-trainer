@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "Em construção"
   },
+  "statLabels": {
+    "best": "melhor",
+    "mean": "média",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "Gerencie suas sessões de treino e acompanhe seu progresso",
     "new": "Nova sessão",
     "current": "Atual",
     "solves": "Resoluções",
-    "best": "Melhor",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "Ativa {date}",
     "open": "Abrir",
     "setCurrent": "Definir como atual",
@@ -73,8 +78,7 @@
       "daysPracticed": "Dias praticados"
     },
     "bestAverages": {
-      "title": "Melhores médias",
-      "best": "Melhor"
+      "title": "Melhores médias"
     },
     "streak": {
       "title": "Rastreador de sequência",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "Estatísticas",
-      "solvesCount": "{count} resoluções",
-      "best": "melhor",
-      "mean": "média",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} resoluções"
     },
     "solves": {
       "title": "Tempos",
@@ -239,6 +239,11 @@
     "title": "Treino de algoritmos",
     "subtitle": "Selecione o puzzle que deseja praticar",
     "sets": "{count} conjunto | {count} conjuntos",
+    "solveCount": "{count} resolução | {count} resoluções",
+    "setup": "Setup | Setup ({count})",
+    "train": "Treinar",
+    "trainAll": "Treinar todo o {set}",
+    "addToList": "Adicionar à lista",
     "3x3x3": {
       "pll": {
         "name": "PLL",

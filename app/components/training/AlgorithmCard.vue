@@ -7,16 +7,18 @@
   >
     <div class="training-card__image pa-3 d-flex align-center justify-center">
       <nuxt-img
-:src="algorithm.imageUrl"
-        :alt="t(algorithm.nameKey)"
+        :src="algorithm.imageUrl"
+        :alt="algorithmName"
         width="200"
-        class="rounded-lg aspect-ratio-1-1" />
+        height="200"
+        class="rounded-lg aspect-ratio-1-1"
+      />
     </div>
 
     <div class="pa-4 pt-2 d-flex flex-column flex-fill">
-      <h3 class="text-title-medium font-weight-bold mb-2">{{ t(algorithm.nameKey) }}</h3>
+      <h3 class="text-title-medium font-weight-bold mb-2">{{ algorithmName }}</h3>
 
-      <div class="d-flex flex-column ga-1 mb-4">
+      <div class="d-flex flex-column ga-1 mb-2">
         <code
           v-for="(solve, i) in algorithm.solves"
           :key="i"
@@ -26,25 +28,60 @@
         </code>
       </div>
 
-      <div v-if="averages.length" class="d-flex flex-wrap ga-2 mb-4">
-        <div
-          v-for="avg in averages"
-          :key="avg.n"
-          class="training-card__stat d-flex flex-column align-center px-3 py-1 rounded flex-fill"
+      <div v-if="algorithm.setups.length" class="mb-4">
+        <v-btn
+          variant="text"
+          size="small"
+          color="on-surface"
+          class="training-card__setup-toggle px-1 text-none"
+          prepend-icon="mdi-cube-scan"
+          :append-icon="showSetups ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          @click="showSetups = !showSetups"
         >
-          <span class="training-card__stat-label text-label-small text-medium-emphasis">ao{{ avg.n }}</span>
-          <span class="training-card__stat-value text-body-medium font-weight-bold">{{ formatMs(avg.value) }}</span>
+          {{ setupLabel }}
+        </v-btn>
+        <AnimationExpand :model-value="showSetups">
+          <div class="d-flex flex-column ga-1 pt-1">
+            <code
+              v-for="(setup, i) in algorithm.setups"
+              :key="i"
+              class="training-card__setup text-body-large text-on-surface px-2 py-1 rounded"
+            >
+              {{ setup }}
+            </code>
+          </div>
+        </AnimationExpand>
+      </div>
+
+      <div class="mb-4">
+        <div class="d-flex align-center justify-end mb-1 px-1">
+          <span class="text-label-small text-medium-emphasis">
+            {{ t('training.solveCount', caseSolves.length) }}
+          </span>
+        </div>
+        <div class="d-flex flex-wrap ga-2">
+          <div
+            v-for="stat in statTiles"
+            :key="stat.label"
+            class="training-card__stat d-flex flex-column align-center px-3 py-1 rounded flex-fill"
+          >
+            <span class="training-card__stat-label text-label-small text-medium-emphasis">{{ stat.label }}</span>
+            <span class="training-card__stat-value text-body-medium font-weight-bold">{{ formatMs(stat.value) }}</span>
+          </div>
         </div>
       </div>
 
       <div class="d-flex align-center justify-end ga-2 mt-auto">
         <v-btn
-          icon="mdi-cart-outline"
+          icon
           variant="tonal"
           size="small"
-          aria-label="Adicionar à lista"
+          :aria-label="t('training.addToList')"
           @click="$emit('add-to-list', algorithm)"
-        />
+        >
+          <v-icon icon="mdi-playlist-plus" />
+          <v-tooltip activator="parent" location="top">{{ t('training.addToList') }}</v-tooltip>
+        </v-btn>
         <v-btn
           color="primary"
           variant="flat"
@@ -52,7 +89,7 @@
           prepend-icon="mdi-play"
           @click="$emit('train', algorithm)"
         >
-          Treinar
+          {{ t('training.train') }}
         </v-btn>
       </div>
     </div>
@@ -62,7 +99,7 @@
 <script setup lang="ts">
 import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
 import { useSolvesStore } from '~/stores/db/solves';
-import { formatMs, trainingAverages } from '~/utils/stats';
+import { bestOf, formatMs, trainingAverages } from '~/utils/stats';
 
 const { t } = useI18n()
 
@@ -75,14 +112,24 @@ defineEmits<{
 
 const solvesStore = useSolvesStore()
 
-// Most recent solves for this case (up to an ao100 window), newest first.
+const showSetups = ref(false)
+
+const algorithmName = computed(() =>
+  props.algorithm.nameKey ? t(props.algorithm.nameKey) : props.algorithm.name ?? '',
+)
+
 const caseSolves = computed(() => solvesStore.getByAlgorithmId(props.algorithm.id))
 
+const statTiles = computed(() => [
+  { label: t('statLabels.best'), value: bestOf(caseSolves.value) },
+  ...trainingAverages(caseSolves.value).map((avg) => ({
+    label: t(`statLabels.${avg.label}`),
+    value: avg.value,
+  })),
+])
 
-
-// ao3 / ao5 / ao12 (and ao100 once there are enough solves). Empty hides the row.
-const averages = computed(() =>
-  caseSolves.value.length ? trainingAverages(caseSolves.value) : [],
+const setupLabel = computed(() =>
+  t('training.setup', showSetups.value ? 1 : props.algorithm.setups.length),
 )
 </script>
 
@@ -101,6 +148,17 @@ const averages = computed(() =>
 .training-card__solve {
   font-family: vars.$font-family-mono;
   background: rgba(var(--v-theme-primary), 0.08);
+  white-space: normal;
+  word-break: break-word;
+}
+
+.training-card__setup-toggle {
+  opacity: 0.7;
+}
+
+.training-card__setup {
+  font-family: vars.$font-family-mono;
+  background: rgba(var(--v-theme-on-surface), 0.06);
   white-space: normal;
   word-break: break-word;
 }

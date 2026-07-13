@@ -201,17 +201,17 @@ prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
               </div>
               <v-divider vertical class="mx-2" />
               <div class="flex-1-1">
-                <div class="text-caption text-medium-emphasis">{{ t('sessions.mo3') }}</div>
+                <div class="text-caption text-medium-emphasis">{{ t('statLabels.mo3') }}</div>
                 <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).mo3) }}</div>
               </div>
               <v-divider vertical class="mx-2" />
               <div class="flex-1-1">
-                <div class="text-caption text-medium-emphasis">{{ t('sessions.ao5') }}</div>
+                <div class="text-caption text-medium-emphasis">{{ t('statLabels.ao5') }}</div>
                 <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao5) }}</div>
               </div>
               <v-divider vertical class="mx-2" />
               <div class="flex-1-1">
-                <div class="text-caption text-medium-emphasis">{{ t('sessions.ao12') }}</div>
+                <div class="text-caption text-medium-emphasis">{{ t('statLabels.ao12') }}</div>
                 <div class="text-subtitle-2 font-weight-bold">{{ formatMs(statsFor(session).ao12) }}</div>
               </div>
             </div>
