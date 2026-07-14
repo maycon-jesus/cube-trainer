@@ -23,8 +23,7 @@ export type Solve = Stored<{
   sessionId: number
   trainingSetId: string
   algorithmId: string
-  tagsId: number[],
-  annotation: string
+  tagsId: number[]
 }>
 
 // Shared instance
