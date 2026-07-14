@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "建设中"
   },
+  "statLabels": {
+    "best": "最佳",
+    "mean": "平均",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "管理你的练习分组并追踪进步",
     "new": "新建分组",
     "current": "当前",
     "solves": "复原次数",
-    "best": "最佳",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "上次活动 {date}",
     "open": "打开",
     "setCurrent": "设为当前",
@@ -49,7 +54,7 @@
   "nav": {
     "play": "计时器",
     "patterns": "花样",
-    "training": "训练",
+    "training-algorithms": "算法训练",
     "sessions": "分组",
     "history": "历史记录",
     "stats": "统计",
@@ -73,8 +78,7 @@
       "daysPracticed": "练习天数"
     },
     "bestAverages": {
-      "title": "最佳平均",
-      "best": "最佳"
+      "title": "最佳平均"
     },
     "streak": {
       "title": "连续练习追踪",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "统计",
-      "solvesCount": "{count} 次复原",
-      "best": "最佳",
-      "mean": "平均",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} 次复原"
     },
     "solves": {
       "title": "成绩",
@@ -235,6 +235,57 @@
     "mirror-3x3x3": "镜面 3x3x3",
     "mirror-2x2x2": "镜面 2x2x2"
   },
+  "training": {
+    "title": "算法训练",
+    "subtitle": "选择要练习的魔方",
+    "sets": "{count} 组",
+    "solveCount": "{count} 次还原",
+    "setup": "Setup | Setup ({count})",
+    "train": "训练",
+    "trainAll": "训练全部 {set}",
+    "addToList": "添加到列表",
+    "3x3x3": {
+      "header": {
+        "title": "训练 3x3x3 算法",
+        "subtitle": "逐组练习算法，掌握每一种情况"
+      },
+      "pll": {
+        "name": "PLL",
+        "description": "练习 PLL 公式",
+        "cases": {
+          "u-clockwise": "U 情况（顺时针）",
+          "u-anticlockwise": "U 情况（逆时针）",
+          "a-clockwise": "A 情况（顺时针）",
+          "a-anticlockwise": "A 情况（逆时针）",
+          "h": "H 情况",
+          "z": "Z 情况",
+          "t": "T 情况",
+          "f": "F 情况",
+          "y": "Y 情况",
+          "e": "E 情况",
+          "v": "V 情况",
+          "ra": "Ra 情况",
+          "rb": "Rb 情况",
+          "ja": "Ja 情况",
+          "jb": "Jb 情况",
+          "na": "Na 情况",
+          "nb": "Nb 情况",
+          "ga": "Ga 情况",
+          "gb": "Gb 情况",
+          "gc": "Gc 情况",
+          "gd": "Gd 情况"
+        }
+      }
+    },
+    "removeFromList": "从列表移除",
+    "selection": {
+      "count": "已选择 {count} 个情况",
+      "trainSelected": "训练所选",
+      "createPlaylist": "创建训练列表",
+      "clear": "清除选择",
+      "comingSoon": "即将推出"
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — 免费速拧计时器与统计",
@@ -259,6 +310,12 @@
     "training": {
       "title": "公式训练",
       "description": "练习特定公式与情形，提升你的复原成绩。"
+    },
+    "puzzle": {
+      "3x3x3": {
+        "title": "3x3x3 公式训练",
+        "description": "训练 3x3x3 的 OLL 和 PLL 公式，掌握每个情形，提升你的复原成绩。"
+      }
     },
     "settings": {
       "title": "设置",

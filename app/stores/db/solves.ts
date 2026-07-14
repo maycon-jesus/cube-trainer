@@ -8,7 +8,8 @@ export type SolvesFilter = {
   type?: Type
   sessionId?: number
   puzzle?: string
-  trainingId?: string
+  trainingSetId?: string
+  algorithmId?: string
   tagsId?: number[]
 }
 
@@ -20,19 +21,19 @@ export type Solve = Stored<{
   puzzle: string
   type: Type
   sessionId: number
-  trainingId: string
-  tagsId: number[],
-  annotation: string
+  trainingSetId: string
+  algorithmId: string
+  tagsId: number[]
 }>
 
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
   version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingId', keyPath: 'trainingId' }, { name: 'puzzle', keyPath: 'puzzle' },
+  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingSetId', keyPath: 'trainingSetId' },{ name: 'algorithmId', keyPath: 'algorithmId' }, { name: 'puzzle', keyPath: 'puzzle' },
   { name: 'type', keyPath: 'type' },
   {
     name: 'all-solves',
-    keyPath: ['type', 'sessionId', 'puzzle', 'trainingId'],
+    keyPath: ['type', 'sessionId', 'puzzle', 'trainingSetId', 'algorithmId'],
     options: { unique: false },
   },
   ],
@@ -88,8 +89,17 @@ export const useSolvesStore = defineStore('solves', () => {
     await db.deleteDB()
   }
 
-  async function getAll(type: Type, sessionId: number, puzzle: string, trainingId: string): Promise<Solve[]> {
-    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingId])
+  /**
+   * Most recent solves for a training case, newest first. Reads the in-memory
+   * `solves` ref (already newest-first) so callers stay reactive. `limit` caps
+   * the window (default 100, enough for an ao100).
+   */
+  function getByAlgorithmId(algorithmId: string, limit = 100): Solve[] {
+    return solves.value.filter((solve) => solve.algorithmId === algorithmId).slice(0, limit)
+  }
+
+  async function getAll(type: Type, sessionId: number, puzzle: string, trainingSetId: string, algorithmId: string): Promise<Solve[]> {
+    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingSetId, algorithmId])
     return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
@@ -98,7 +108,8 @@ export const useSolvesStore = defineStore('solves', () => {
       if(filter.type && solve.type !== filter.type) return false
       if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
       if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
-      if(filter.trainingId && solve.trainingId !== filter.trainingId) return false
+      if(filter.trainingSetId && solve.trainingSetId !== filter.trainingSetId) return false
+      if(filter.algorithmId && solve.algorithmId !== filter.algorithmId) return false
       if(filter.tagsId && !filter.tagsId.every(tag => (solve.tagsId ?? []).includes(tag))) return false
       return true
     }
@@ -134,7 +145,7 @@ export const useSolvesStore = defineStore('solves', () => {
     }
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
+  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getByAlgorithmId, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
     count: () => db.count(),
     exportEach: db.exportEach.bind(db),
     importBatch: db.importBatch.bind(db),

@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "En construcción"
   },
+  "statLabels": {
+    "best": "mejor",
+    "mean": "media",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "Gestiona tus sesiones de práctica y sigue tu progreso",
     "new": "Nueva sesión",
     "current": "Actual",
     "solves": "Resoluciones",
-    "best": "Mejor",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "Última actividad {date}",
     "open": "Abrir",
     "setCurrent": "Establecer como actual",
@@ -49,7 +54,7 @@
   "nav": {
     "play": "Temporizador",
     "patterns": "Patrones",
-    "training": "Entrenamiento",
+    "training-algorithms": "Entrenar Algoritmos",
     "sessions": "Sesiones",
     "history": "Historial",
     "stats": "Estadísticas",
@@ -73,8 +78,7 @@
       "daysPracticed": "Días practicados"
     },
     "bestAverages": {
-      "title": "Mejores promedios",
-      "best": "Mejor"
+      "title": "Mejores promedios"
     },
     "streak": {
       "title": "Seguimiento de rachas",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "Estadísticas",
-      "solvesCount": "{count} resoluciones",
-      "best": "mejor",
-      "mean": "media",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} resoluciones"
     },
     "solves": {
       "title": "Tiempos",
@@ -235,6 +235,57 @@
     "mirror-3x3x3": "Mirror 3x3x3",
     "mirror-2x2x2": "Mirror 2x2x2"
   },
+  "training": {
+    "title": "Entrenamiento de algoritmos",
+    "subtitle": "Selecciona el puzzle que quieres practicar",
+    "sets": "{count} conjunto | {count} conjuntos",
+    "solveCount": "{count} resolución | {count} resoluciones",
+    "setup": "Setup | Setup ({count})",
+    "train": "Entrenar",
+    "trainAll": "Entrenar todo el {set}",
+    "addToList": "Añadir a la lista",
+    "3x3x3": {
+      "header": {
+        "title": "Entrenar algoritmos 3x3x3",
+        "subtitle": "Practica los algoritmos por conjunto y domina cada caso"
+      },
+      "pll": {
+        "name": "PLL",
+        "description": "Practica los algoritmos de PLL",
+        "cases": {
+          "u-clockwise": "Caso U (horario)",
+          "u-anticlockwise": "Caso U (antihorario)",
+          "a-clockwise": "Caso A (horario)",
+          "a-anticlockwise": "Caso A (antihorario)",
+          "h": "Caso H",
+          "z": "Caso Z",
+          "t": "Caso T",
+          "f": "Caso F",
+          "y": "Caso Y",
+          "e": "Caso E",
+          "v": "Caso V",
+          "ra": "Caso Ra",
+          "rb": "Caso Rb",
+          "ja": "Caso Ja",
+          "jb": "Caso Jb",
+          "na": "Caso Na",
+          "nb": "Caso Nb",
+          "ga": "Caso Ga",
+          "gb": "Caso Gb",
+          "gc": "Caso Gc",
+          "gd": "Caso Gd"
+        }
+      }
+    },
+    "removeFromList": "Quitar de la lista",
+    "selection": {
+      "count": "{count} caso seleccionado | {count} casos seleccionados",
+      "trainSelected": "Entrenar seleccionados",
+      "createPlaylist": "Crear playlist",
+      "clear": "Limpiar selección",
+      "comingSoon": "Próximamente"
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — Temporizador y Estadísticas de Speedcubing Gratis",
@@ -259,6 +310,12 @@
     "training": {
       "title": "Entrenamiento de Algoritmos",
       "description": "Practica algoritmos y casos específicos para mejorar tus tiempos de resolución."
+    },
+    "puzzle": {
+      "3x3x3": {
+        "title": "Entrenamiento de Algoritmos 3x3x3",
+        "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos."
+      }
     },
     "settings": {
       "title": "Ajustes",

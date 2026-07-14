@@ -3,6 +3,12 @@ import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
 import { themes, defaultThemeName } from "./config/themes";
 
+function getAllRoutesLocale(route: string){
+  const locales = ['pt', 'es', 'zh']
+  const routes = [route, ...locales.map(locale => `/${locale}${route}`)]
+  return routes
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2026-07-07',
@@ -49,6 +55,7 @@ export default defineNuxtConfig({
       link: [
         // Favicon
         { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
+        { rel: 'icon', type: 'image/svg+xml', sizes: 'any', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
@@ -83,12 +90,13 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
     '@nuxt/fonts',
+    '@nuxt/image',
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
     '@vercel/analytics',
-    '@vercel/speed-insights'
+    '@vercel/speed-insights',
   ],
   fonts: {
     families: [
@@ -101,7 +109,14 @@ export default defineNuxtConfig({
       prerender: true
     },
     '/**': {
-      prerender: true
+      prerender: true,
+    }
+  },
+  nitro: {
+    prerender: {
+      routes: [
+        ...getAllRoutesLocale('/training/3x3x3'),
+      ]
     }
   },
   i18n: {

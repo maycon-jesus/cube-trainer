@@ -2,7 +2,7 @@
   "name": "cube-trainer",
   "type": "module",
   "private": true,
-  "version": "0.13.0",
+  "version": "0.14.0",
   "license": "MIT",
   "packageManager": "pnpm@11.9.0",
   "author": {
@@ -20,6 +20,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "^2.0.0",
     "@pinia/nuxt": "0.11.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

@@ -93,7 +93,7 @@ async function resolved(solve: Solve) {
 }
 
 async function refrehSolves() {
-  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
+  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '', '')
 }
 
 watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{

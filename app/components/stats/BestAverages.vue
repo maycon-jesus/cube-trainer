@@ -3,10 +3,10 @@
     <v-row density="comfortable">
       <v-col v-for="stat in stats" :key="stat.n" cols="6" sm="3">
         <div class="avg-cell">
-          <div class="avg-cell__name">Ao{{ stat.n }}</div>
+          <div class="avg-cell__name">{{ t(`statLabels.ao${stat.n}`) }}</div>
           <div class="avg-cell__current">{{ formatMs(stat.current) }}</div>
           <div class="avg-cell__best">
-            <span class="text-medium-emphasis">{{ t('stats.bestAverages.best') }}</span>
+            <span class="text-medium-emphasis">{{ t('statLabels.best') }}</span>
             <span class="avg-cell__best-value">{{ formatMs(stat.best) }}</span>
           </div>
         </div>

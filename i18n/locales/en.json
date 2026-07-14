@@ -8,15 +8,20 @@
   "common": {
     "underConstruction": "Under construction"
   },
+  "statLabels": {
+    "best": "best",
+    "mean": "mean",
+    "mo3": "mo3",
+    "ao5": "ao5",
+    "ao12": "ao12",
+    "ao50": "ao50",
+    "ao100": "ao100"
+  },
   "sessions": {
     "subtitle": "Manage your practice sessions and track your progress",
     "new": "New session",
     "current": "Current",
     "solves": "Solves",
-    "best": "Best",
-    "mo3": "Mo3",
-    "ao5": "Ao5",
-    "ao12": "Ao12",
     "lastActive": "Last active {date}",
     "open": "Open",
     "setCurrent": "Set as current",
@@ -49,7 +54,7 @@
   "nav": {
     "play": "Timer",
     "patterns": "Patterns",
-    "training": "Training",
+    "training-algorithms": "Train Algorithms",
     "sessions": "Sessions",
     "history": "History",
     "stats": "Statistics",
@@ -73,8 +78,7 @@
       "daysPracticed": "Days practiced"
     },
     "bestAverages": {
-      "title": "Best averages",
-      "best": "Best"
+      "title": "Best averages"
     },
     "streak": {
       "title": "Streak tracker",
@@ -197,11 +201,7 @@
     },
     "stats": {
       "title": "Statistics",
-      "solvesCount": "{count} solves",
-      "best": "best",
-      "mean": "mean",
-      "ao5": "ao5",
-      "ao12": "ao12"
+      "solvesCount": "{count} solves"
     },
     "solves": {
       "title": "Times",
@@ -235,6 +235,57 @@
     "mirror-3x3x3": "Mirror 3x3x3",
     "mirror-2x2x2": "Mirror 2x2x2"
   },
+  "training": {
+    "title": "Algorithm training",
+    "subtitle": "Choose a puzzle to practice",
+    "sets": "{count} set | {count} sets",
+    "solveCount": "{count} solve | {count} solves",
+    "setup": "Setup | Setup ({count})",
+    "train": "Train",
+    "trainAll": "Train all {set}",
+    "addToList": "Add to list",
+    "3x3x3": {
+      "header": {
+        "title": "Train 3x3x3 algorithms",
+        "subtitle": "Practice algorithms set by set and master every case"
+      },
+      "pll": {
+        "name": "PLL",
+        "description": "Practice PLL algorithms",
+        "cases": {
+          "u-clockwise": "U case (clockwise)",
+          "u-anticlockwise": "U case (counter-clockwise)",
+          "a-clockwise": "A case (clockwise)",
+          "a-anticlockwise": "A case (counter-clockwise)",
+          "h": "H case",
+          "z": "Z case",
+          "t": "T case",
+          "f": "F case",
+          "y": "Y case",
+          "e": "E case",
+          "v": "V case",
+          "ra": "Ra case",
+          "rb": "Rb case",
+          "ja": "Ja case",
+          "jb": "Jb case",
+          "na": "Na case",
+          "nb": "Nb case",
+          "ga": "Ga case",
+          "gb": "Gb case",
+          "gc": "Gc case",
+          "gd": "Gd case"
+        }
+      }
+    },
+    "removeFromList": "Remove from list",
+    "selection": {
+      "count": "{count} case selected | {count} cases selected",
+      "trainSelected": "Train selected",
+      "createPlaylist": "Create playlist",
+      "clear": "Clear selection",
+      "comingSoon": "Coming soon"
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — Free Speedcubing Timer & Statistics",
@@ -259,6 +310,12 @@
     "training": {
       "title": "Algorithm Training",
       "description": "Practice specific algorithms and cases to improve your solve times."
+    },
+    "puzzle": {
+      "3x3x3": {
+        "title": "3x3x3 Algorithm Training",
+        "description": "Train the 3x3x3 OLL and PLL algorithms and master every case to improve your solve times."
+      }
     },
     "settings": {
       "title": "Settings",
