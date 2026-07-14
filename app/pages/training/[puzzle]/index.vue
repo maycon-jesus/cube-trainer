@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { useCustomTimerStore } from '~/stores/customTimer';
-import { cubesDefinition, type TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
+import { cubesDefinition, type TrainingAlgorithm, type TrainingSet } from '~~/lib/cube/cubesDefinition';
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -42,7 +42,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if(!puzzle.trainingSets) {
+if(!puzzle.loadTrainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -54,7 +54,10 @@ const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
-const trainingSets = puzzle.trainingSets
+const trainingSets = ref<TrainingSet[]>([])
+puzzle.loadTrainingSets().then((sets) => {
+  trainingSets.value = sets
+})
 const sections = new Map<string, HTMLElement>()
 const customTimerStore = useCustomTimerStore()
 
@@ -107,7 +110,7 @@ function trainSelected() {
   navigateTo(localePath({ name: 'training-timer' }))
 }
 
-function trainSet(set: typeof trainingSets[number]) {
+function trainSet(set: TrainingSet) {
   customTimerStore.useTrainingSet(set)
   navigateTo(localePath({ name: 'training-timer' }))
 }

@@ -10,19 +10,30 @@ function getPuzzleRoute(puzzleId: string) {
   return localePath(`/training/${puzzleId}`)
 }
 
+const setsCounts = ref<Record<string, number>>({})
+
+const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadTrainingSets)
+
+onMounted(async () => {
+  await Promise.all(
+    trainablePuzzles.map(async (puzzle) => {
+      const sets = await puzzle.loadTrainingSets!()
+      setsCounts.value[puzzle.id] = sets.length
+    }),
+  )
+})
+
 const trainingCubes = computed(() => {
-  return Object.entries(cubesDefinition)
-    .filter(([_, puzzle]) => !!puzzle.trainingSets?.length)
-    .map(([_, puzzle]) => {
-      const setsCount = puzzle.trainingSets?.length ?? 0
-      return {
-        title: t(`cube.${puzzle.id}`),
-        value: puzzle.id,
-        imageUrl: puzzle.imageUrl || '',
-        path: getPuzzleRoute(puzzle.id),
-        sets: t('training.sets', setsCount),
-      }
-    })
+  return trainablePuzzles.map((puzzle) => {
+    const setsCount = setsCounts.value[puzzle.id] ?? 0
+    return {
+      title: t(`cube.${puzzle.id}`),
+      value: puzzle.id,
+      imageUrl: puzzle.imageUrl || '',
+      path: getPuzzleRoute(puzzle.id),
+      sets: t('training.sets', setsCount),
+    }
+  })
 })
 </script>
 
