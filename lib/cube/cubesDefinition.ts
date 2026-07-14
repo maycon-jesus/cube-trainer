@@ -59,7 +59,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-u-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-u-clockwise.png',
                         setups: [
-                            "R R R"
+                            "F2 U2 R2 B2 L2 D' L2 B2 R2 U F2 U'",
+                            "R2 U F2 L2 B2 D' B2 L2 F2 U2 R2",
+                            "R2 U2 F2 L2 B2 D' B2 L2 F2 U R2 U'",
+                            "R2 U F2 L2 B2 D' B2 L2 F2 U2 R2 U'",
+                            "R2 U F2 R2 F2 U2 F2 R2 F2 U R2",
+                            "R2 U2 F2 L2 B2 D' B2 L2 F2 U R2",
+                            "F2 U2 R2 B2 L2 D' L2 B2 R2 U F2",
+                            "R2 U F2 L2 B2 D' B2 L2 F2 U2 R2 U",
+                            "R2 U F2 R2 F2 U2 F2 R2 F2 U R2 U'",
+                            "F2 U2 R2 B2 L2 D' L2 B2 R2 U F2 U2",
+                            "R2 U F2 R2 F2 U2 F2 R2 F2 U R2 U2",
+                            "R2 U F2 R2 F2 U2 F2 R2 F2 U R2 U",
                         ],
                         solves: [
                             "R' U R' U' R' U' R' U R U R2"
@@ -70,7 +81,11 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-u-anti-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-u-anticlockwise.png',
                         setups: [
-                            "R R R"
+                            "R2 U' F2 R2 F2 U2 F2 R2 F2 U' R2 U",
+                            "R2 U' F2 L2 B2 D B2 L2 F2 U2 R2 U'",
+                            "F2 U' R2 B2 L2 D L2 B2 R2 U2 F2 U",
+                            "R2 U' F2 R2 F2 U2 F2 R2 F2 U' R2 U'",
+                            "R2 U2 F2 L2 B2 D B2 L2 F2 U' R2"
                         ],
                         solves: [
                             "R2 U' R' U' R U R U R U' R"
@@ -81,7 +96,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-a-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-a-clockwise.png',
                         setups: [
-                            "R R R"
+                            "R2 D' F2 D B2 D' F2 D B2 R2 U'",
+                            "R2 D' F2 D B2 D' F2 D B2 R2 U",
+                            "R2 U' F2 U B2 U' F2 U B2 R2",
+                            "R2 F2 D B2 D' F2 D B2 D' R2 U'",
+                            "R2 U' F2 U B2 U' F2 U B2 R2 U'",
+                            "F2 D' F2 D R2 F2 U F2 U' R2",
+                            "R2 F2 D B2 D' F2 D B2 D' R2",
+                            "R2 U' F2 U B2 U' F2 U B2 R2 U",
+                            "R2 D' F2 D B2 D' F2 D B2 R2",
+                            "R2 F2 D B2 D' F2 D B2 D' R2 U",
+                            "R2 F2 D B2 D' F2 D B2 D' R2 U2",
                         ],
                         solves: [
                             "x R' U R' D2 R U' R' D2 R2 x'"
@@ -92,7 +117,19 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-a-anti-horario',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-a-anticlockwise.png',
                         setups: [
-                            "R R R"
+                            "R2 U B2 U' F2 U B2 U' F2 R2 U'",
+                            "R2 D B2 D' F2 D B2 D' F2 R2 U2",
+                            "R2 D B2 D' F2 D B2 D' F2 R2",
+                            "R2 B2 U' F2 U B2 U' F2 U R2 U",
+                            "R2 B2 U' F2 U B2 U' F2 U R2 U'",
+                            "R2 D B2 D' F2 D B2 D' F2 R2 U",
+                            "R2 B2 D' F2 D B2 D' F2 D R2",
+                            "R2 U B2 U' F2 U B2 U' F2 R2 U2",
+                            "R2 B2 U' F2 U B2 U' F2 U R2",
+                            "R2 B2 D' F2 D B2 D' F2 D R2 U'",
+                            "R2 D B2 D' F2 D B2 D' F2 R2 U'",
+                            "R2 B2 U' F2 U B2 U' F2 U R2 U2",
+                            "R2 U B2 U' F2 U B2 U' F2 R2",
                         ],
                         solves: [
                             "x R2' D2 R U R'D2 R U' R x'"
@@ -103,7 +140,8 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-h',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-h.png',
                         setups: [
-                            "R R R"
+                            "L2 B2 F2 R2 D L2 B2 F2 R2 U'",
+                            "L2 B2 F2 R2 D L2 B2 F2 R2"
                         ],
                         solves: [
                             "M2 U M2 U2 M2 U M2"
@@ -114,7 +152,13 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-z',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-z.png',
                         setups: [
-                            "R R R"
+                            "F2 R2 U' F2 U R2 F2 R2 U R2 U' R2",
+                            "U2 F2 U F2 U F2 U F2 U F2 U L' R U2 L R'",
+                            "U2 F2 U' F2 U' F2 U' F2 U' F2 U' L' R U2 L R'",
+                            "L2 R2 D' L2 R2 U' L2 B2 L2 R2 F2 R2",
+                            "F2 U' F2 U' F2 U' F2 U' F2 U' L' R U2 L R'",
+                            "L2 R2 D L2 R2 U L2 B2 L2 R2 F2 R2",
+                            "B2 R2 U B2 U' R2 B2 R2 U' R2 U R2"
                         ],
                         solves: [
                             "M2 U M2 U M' U2 M2 U2 M'"
@@ -125,7 +169,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-t',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-t.png',
                         setups: [
-                            "R R R"
+                            "R2 D B2 U' B2 R2 D' F2 U F2",
+                            "B2 D' R2 U R2 B2 D L2 U' L2",
+                            "B2 D' R2 U R2 B2 D L2 U' L2 U'",
+                            "B2 D L2 U' L2 B2 D' R2 U R2 U'",
+                            "R2 D B2 U' B2 R2 D' F2 U F2 U'",
+                            "L2 D' B2 U B2 L2 D F2 U' F2 U'",
+                            "B2 D L2 U' L2 B2 D' R2 U R2",
+                            "R2 D' F2 U F2 R2 D B2 U' B2",
+                            "F2 D R2 U' R2 F2 D' L2 U L2 U'",
+                            "F2 D' L2 U L2 F2 D R2 U' R2",
+                            "L2 D F2 U' F2 L2 D' B2 U B2",
                         ],
                         solves: [
                             "R U R' U' R' F R2 U' R' U' R U R' F'"
@@ -136,7 +190,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-f',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-f.png',
                         setups: [
-                            "R R R"
+                            "R2 D R2 D' L2 D' B2 L2 F2 U2 L2 D L R' U2 L R'",
+                            "B2 U' B2 U' B2 U2 L2 U B2 U' B2 U' L' R' U2 L' R",
+                            "F2 D F2 D' B2 D' R2 B2 L2 U2 B2 D B F' U2 B F' U'",
+                            "B2 D2 L2 B2 R2 U' B2 D' L2 U L2 U' B F' D2 B F'",
+                            "F2 D2 L2 F2 R2 U F2 D L2 U' L2 U B F' D2 B F'",
+                            "B2 D' B2 D F2 D R2 F2 L2 U2 F2 D' B F' U2 B F'",
+                            "L2 D' L2 D R2 D B2 R2 F2 U2 R2 D' L R' U2 L R'",
+                            "R2 D R2 D' L2 D' B2 L2 F2 U2 L2 D L R' U2 L R' U'",
+                            "F2 D2 L2 F2 R2 U F2 D L2 U' L2 U B F' D2 B F' U'",
+                            "L2 U' L2 U' L2 U2 F2 U L2 U' L2 U' B' F' U2 B F'",
+                            "F2 D F2 D' B2 D' R2 B2 L2 U2 B2 D B F' U2 B F'",
+                            "F2 U' F2 U' F2 U2 R2 U F2 U' F2 U' L' R' U2 L R'",
                         ],
                         solves: [
                             "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"
@@ -147,7 +212,19 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-y',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-y.png',
                         setups: [
-                            "R R R"
+                            "B2 U2 L2 U' B2 U2 L2 U B2 U2 L2 U L' R B2 L R'",
+                            "B2 D F2 D' R2 U F2 D F2 U' B2 U L' R U2 L' R'",
+                            "R2 U' R2 D B2 D' B2 U' L2 U L2 U L R B2 L' R'",
+                            "R2 U L2 D' F2 D L2 U R2 U' R2 U L R U2 L' R",
+                            "R2 U2 F2 U' R2 U2 F2 U R2 U2 F2 U' L R' F2 L' R",
+                            "R2 U2 B2 U R2 U2 B2 U' R2 U2 B2 U L' R B2 L R'",
+                            "F2 D B2 D' L2 U B2 D B2 U' F2 U L R' U2 L' R'",
+                            "B2 U2 R2 U B2 U2 R2 U' B2 U2 R2 U' L' R B2 L R'",
+                            "L2 U' L2 D F2 D' F2 U' R2 U R2 U L R F2 L' R'",
+                            "L2 U' R2 D F2 D' R2 U' L2 U L2 U' L' R' U2 L' R",
+                            "L2 U R2 D' B2 D R2 U L2 U' L2 U L R U2 L R'",
+                            "L2 U2 F2 U L2 U2 F2 U' L2 U2 F2 U L R' F2 L' R",
+                            "R2 U' L2 D B2 D' L2 U' R2 U R2 U' L' R' U2 L R'",
                         ],
                         solves: [
                             "F R U' R' U' R U R' F' R U R' U' R' F R F'"
@@ -158,7 +235,13 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-e',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-e.png',
                         setups: [
-                            "R R R"
+                            "B2 U' L2 U2 F2 U R2 U' F2 U2 L2 U' B F R2 B' F'",
+                            "B2 U' L2 U2 F2 U R2 U' F2 U2 L2 U' B F R2 B' F' U'",
+                            "B2 U' L2 U2 F2 U R2 U' F2 U2 L2 U' B F R2 B' F' U2",
+                            "R2 U' B2 U2 L2 U F2 U' L2 U2 B2 U' L R F2 L' R'",
+                            "R2 U' B2 U2 L2 U F2 U' L2 U2 B2 U' L R F2 L' R' U'",
+                            "R2 U' B2 U2 L2 U F2 U' L2 U2 B2 U' L R F2 L' R' U",
+                            "B2 U' L2 U2 F2 U R2 U' F2 U2 L2 U' B F R2 B' F' U",
                         ],
                         solves: [
                             "x' R U' R' D R U R' D' R U R' D R U' R' D' x"
@@ -169,7 +252,19 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-v',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-v.png',
                         setups: [
-                            "R R R"
+                            "B2 U' L2 R2 D' L2 D F2 D2 R2 U' B2 L R' F2 L R",
+                            "L2 U B2 F2 D B2 D' R2 D2 F2 U L2 B' F R2 B' F'",
+                            "F2 U L2 R2 D L2 D' B2 D2 R2 U F2 L' R B2 L' R'",
+                            "B2 U L2 R2 D R2 D' F2 D2 L2 U B2 L R' F2 L' R'",
+                            "B2 D2 R2 U F2 D2 R2 U B2 U2 R2 U' L' R B2 L' R",
+                            "L2 U2 F2 U' R2 U2 F2 U' R2 U2 F2 U' L R' F2 L R'",
+                            "F2 D2 L2 U B2 D2 L2 U F2 U2 L2 U' L R' F2 L R'",
+                            "R2 U' B2 F2 D' B2 D L2 D2 F2 U' R2 B F' L2 B F",
+                            "L2 U' B2 F2 D' F2 D R2 D2 B2 U' L2 B' F R2 B F",
+                            "R2 U2 F2 U L2 U2 F2 U L2 U2 F2 U L R' F2 L R'",
+                            "B2 D2 L2 U' F2 D2 L2 U' B2 U2 L2 U L' R B2 L' R",
+                            "L2 U2 B2 U R2 U2 B2 U R2 U2 B2 U L' R B2 L' R",
+                            "F2 U' L2 R2 D' R2 D B2 D2 L2 U' F2 L' R B2 L R",
                         ],
                         solves: [
                             "R' U R' Dw' R' F' R2 U' R' U R' F R F"
@@ -180,7 +275,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-ra',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-ra.png',
                         setups: [
-                            "R R R"
+                            "L2 D' R2 F2 U' R2 U L2 U' B2 L R' F2 L' R",
+                            "R2 D' R2 B2 U' R2 U L2 U' B2 F2 L R' U2 L R'",
+                            "R2 D' R2 B2 U' R2 U L2 U' F2 L R' B2 L R'",
+                            "U F2 L2 R2 D R2 D' L2 D F2 L2 U L R B2 L R'",
+                            "U B2 L2 R2 D L2 D' R2 D B2 R2 U L R F2 L' R",
+                            "U R2 D' R2 B2 U' R2 U L2 U' F2 L R' B2 L R'",
+                            "F2 D' L2 D F2 L2 U F2 U' L2 U L R' F2 L' R",
+                            "U' F2 L2 R2 D R2 D' L2 D F2 L2 U L R B2 L R'",
+                            "L2 B2 D' R2 F2 L2 R2 U' F2 U B2 U' L' R' U2 L R'",
+                            "B2 L2 R2 D L2 D' R2 D B2 R2 U L R F2 L' R",
+                            "L2 F2 L2 F2 D L2 D' B2 U B2 U' L' R U2 L R'",
                         ],
                         solves: [
                             "R U' R' U' R U R D R' U' R D' R' U2 R' U'"
@@ -191,7 +296,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-rb',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-rb.png',
                         setups: [
-                            "R R R"
+                            "L2 F2 D B2 D' L2 D F2 L2 U B2 L' R' U2 L' R'",
+                            "F2 L2 R2 D' L2 D R2 D' F2 R2 U' L' R' B2 L R'",
+                            "L2 D L2 B2 U L2 U' R2 U F2 L R' B2 L R'",
+                            "R2 F2 R2 F2 D' R2 D B2 U' B2 U L' R U2 L R'",
+                            "U L2 D L2 B2 U L2 U' R2 U F2 L R' B2 L R'",
+                            "D B2 L2 D R2 D' B2 U B2 R2 U F2 L' R' U2 L' R'",
+                            "U' L2 F2 D B2 D' L2 D F2 L2 U B2 L' R' U2 L' R'",
+                            "U' R2 B2 D F2 D' R2 D B2 R2 U F2 L' R' U2 L' R'",
+                            "D F2 R2 D L2 D' F2 U F2 L2 U B2 L' R' U2 L' R'",
+                            "B2 L2 R2 D' R2 D L2 D' B2 L2 U' L' R' F2 L' R",
+                            "L2 D L2 B2 U L2 U' R2 U B2 F2 L R' U2 L R'",
                         ],
                         solves: [
                             "R' U2 R U2' R' F R U R' U' R' F' R2 U'"
@@ -202,7 +317,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-ja',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-ja.png',
                         setups: [
-                            "R R R"
+                            "R2 D' F2 D F2 U' F2 U F2 R2 U'",
+                            "F2 D' L2 D L2 U' L2 U L2 F2 U'",
+                            "F2 D' L2 D L2 U' L2 U L2 F2",
+                            "R2 D' F2 D F2 U' F2 U F2 R2",
+                            "F2 L2 U' L2 D F2 D' F2 U F2 U'",
+                            "B2 D' R2 D R2 U' R2 U R2 B2",
+                            "B2 R2 U' R2 D B2 D' B2 U B2",
+                            "B2 R2 U' R2 D B2 D' B2 U B2 U'",
+                            "L2 D' B2 D B2 U' B2 U B2 L2 U'",
+                            "L2 B2 U' B2 D L2 D' L2 U L2 U'",
+                            "F2 L2 U' L2 D F2 D' F2 U F2",
+                            "R2 F2 U' F2 D R2 D' R2 U R2",
                         ],
                         solves: [
                             "x R2 F R F' R U2 Rw' U Rw U2 x'"
@@ -213,7 +339,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-jb',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-jb.png',
                         setups: [
-                            "R R R"
+                            "F2 R2 U R2 D' F2 D F2 U' F2",
+                            "L2 D F2 D' F2 U F2 U' F2 L2 U'",
+                            "B2 L2 U L2 D' B2 D B2 U' B2 U'",
+                            "L2 F2 U F2 D' L2 D L2 U' L2",
+                            "R2 D B2 D' B2 U B2 U' B2 R2 U'",
+                            "F2 R2 U R2 D' F2 D F2 U' F2 U'",
+                            "R2 B2 U B2 D' R2 D R2 U' R2 U'",
+                            "R2 B2 U B2 D' R2 D R2 U' R2",
+                            "F2 D R2 D' R2 U R2 U' R2 F2",
+                            "L2 F2 U F2 D' L2 D L2 U' L2 U'",
+                            "B2 L2 U L2 D' B2 D B2 U' B2",
+                            "F2 D R2 D' R2 U R2 U' R2 F2 U'",
                         ],
                         solves: [
                             "R U R' F' R U R' U' R' F R2 U' R' U'"
@@ -224,7 +361,10 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-na',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-na.png',
                         setups: [
-                            "R R R"
+                            "B2 U2 B U2 R2 B2 R2 F' U2 F2 R2 F' L R' U2 L' R'",
+                            "L2 D2 B2 D L2 U2 L2 B2 D L2 F2 U2 L' R U2 L R'",
+                            "B2 U2 B' R2 F2 D2 F' R2 B2 R2 D2 F' L' R' B2 L R'",
+                            "F2 L2 U2 L2 U' F2 U2 L2 U L2 F2 U2 L' R U2 L R'",
                         ],
                         solves: [
                             "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"
@@ -235,7 +375,10 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-nb',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-nb.png',
                         setups: [
-                            "R R R"
+                            "B2 U2 B L2 B2 U2 F R2 B2 R2 U2 F' L R' U2 L R",
+                            "R2 D2 B2 D' R2 U2 R2 B2 D' R2 F2 U2 L' R U2 L R'",
+                            "B2 U2 B' U2 L2 F2 R2 F D2 F2 R2 F' L R B2 L R'",
+                            "F2 R2 U2 R2 U F2 U2 R2 U' R2 F2 U2 L' R U2 L R'",
                         ],
                         solves: [
                             "R' U R U' R' F' U' F R U R' F R' F' R U' R"
@@ -246,7 +389,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-ga',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-ga.png',
                         setups: [
-                            "R R R"
+                            "B2 D R2 D' F2 U F2 U' B2 L R U2 L' R'",
+                            "F2 L2 D R2 D' R2 U R2 U' L2 R2 F2",
+                            "R2 D L2 F2 D F2 U' F2 U L R' D2 L R'",
+                            "F2 D L2 D' B2 U B2 U' F2 U' L R U2 L' R'",
+                            "U F2 D L2 D' B2 U B2 U' F2 L R U2 L' R'",
+                            "B2 R2 D L2 D' L2 U L2 U' L2 R2 B2",
+                            "B2 D R2 D' F2 U F2 U' B2 U L R U2 L' R'",
+                            "B2 D R2 D' F2 U F2 U' B2 U' L R U2 L' R'",
+                            "R2 F2 D B2 D' B2 U B2 U' B2 F2 R2",
+                            "U B2 D R2 D' F2 U F2 U' B2 L R U2 L' R'",
+                            "U' B2 D R2 D' F2 U F2 U' B2 L R U2 L' R'",
+                            "L2 B2 D F2 D' F2 U F2 U' B2 F2 L2",
                         ],
                         solves: [
                             "R2' Uw R' U R' U' R Uw' R2 y' R' U R"
@@ -257,7 +411,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-gb',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-gb.png',
                         setups: [
-                            "R R R"
+                            "U L2 U B2 R2 U B2 D' B2 F2 R2 D L R' U2 L' R",
+                            "F2 U' R2 U R2 U2 F2 U' L2 U R2 U' L' R' F2 L' R'",
+                            "B2 L2 R2 U L2 D' B2 D B2 U' R2 B2",
+                            "R2 B2 F2 U B2 D' R2 D R2 U' F2 R2",
+                            "F2 L2 U B2 U' L2 B2 D' R2 F2 U' L R' U2 L R'",
+                            "R2 U' R2 B2 U' B2 U L2 U' R2 U L R' B2 L R'",
+                            "U F2 L2 R2 D' R2 U R2 U' B2 R2 D L' R F2 L' R'",
+                            "B2 U' L2 U L2 U2 B2 U' R2 U L2 U' L' R' B2 L' R'",
+                            "F2 L2 R2 U R2 D' F2 D F2 U' L2 F2",
+                            "U' F2 U' R2 U F2 U F2 R2 U2 F2 U' L R F2 L' R'",
+                            "F2 L2 R2 D' R2 U R2 U' B2 R2 D L' R F2 L' R'",
                         ],
                         solves: [
                             "R' U' R U D' R2 U R' U R U' R U' R2 D U'"
@@ -268,7 +432,17 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-gc',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-gc.png',
                         setups: [
-                            "R R R"
+                            "F2 D' R2 D B2 U' B2 U F2 L' R' U2 L R",
+                            "U R2 D' L2 B2 D' B2 U B2 U' L' R D2 L' R",
+                            "U L2 D' R2 F2 D' F2 U F2 U' L R' D2 L R'",
+                            "L2 D' R2 F2 D' F2 U F2 U' L R' D2 L R'",
+                            "R2 D' L2 B2 D' B2 U B2 U' L' R D2 L' R",
+                            "U B2 U' R2 U L2 U' F2 L2 D' L R F2 L' R",
+                            "B2 D' L2 D F2 U' F2 U B2 L' R' U2 L R",
+                            "L2 F2 D' B2 D B2 U' B2 U B2 F2 L2",
+                            "B2 L2 D' R2 D R2 U' R2 U L2 R2 B2",
+                            "F2 R2 D' L2 D L2 U' L2 U L2 R2 F2",
+                            "U' R2 D' L2 B2 D' B2 U B2 U' L' R D2 L' R",
                         ],
                         solves: [
                             "R2 U' R U' R U R' U R2 D' U R U' R' D U'"
@@ -279,7 +453,18 @@ export const cubesDefinition: Record<string, CubeData> = {
                         id: 'pll-gd',
                         imageUrl: '/img/training/3x3x3/pll/pll-case-gd.png',
                         setups: [
-                            "R R R"
+                            "F2 R2 U' B2 U R2 B2 D L2 F2 U L R' U2 L R'",
+                            "L2 U L2 B2 U B2 U' R2 U L2 U' L R' B2 L R'",
+                            "B2 L2 R2 D F2 R2 D L2 D' R2 D' L R' B2 L' R'",
+                            "U F2 R2 U' B2 U R2 B2 D L2 F2 U L R' U2 L R'",
+                            "B2 L2 R2 U' R2 D B2 D' B2 U L2 B2",
+                            "D R2 D' R2 U L2 R2 B2 D' B2 L2 U L R' F2 L' R'",
+                            "R2 B2 F2 U' F2 D R2 D' R2 U B2 R2",
+                            "L2 B2 R2 D B2 D' F2 D F2 U' R2 U L R' U2 L R'",
+                            "D B2 D' B2 L2 D' R2 D L2 R2 B2 U' L R' U2 L' R",
+                            "L2 R2 U R2 U' B2 D B2 L2 U R2 U L R' F2 L' R'",
+                            "F2 L2 R2 U' L2 D F2 D' F2 U R2 F2",
+                            "R2 U R2 F2 U F2 U' L2 U R2 U' L' R F2 L' R",
                         ],
                         solves: [
                             "R U R' y' R2 Uw' R U' R' U R' Uw R2"
