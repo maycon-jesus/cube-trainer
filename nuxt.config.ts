@@ -70,12 +70,28 @@ export default defineNuxtConfig({
           innerHTML: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebApplication',
+            '@id': 'https://cubetrainer.net/#webapp',
             name: 'Cube Trainer',
             url: 'https://cubetrainer.net/',
             description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
             applicationCategory: 'UtilitiesApplication',
             operatingSystem: 'Any',
             browserRequirements: 'Requires JavaScript',
+            softwareVersion: pkg.version,
+            image: 'https://cubetrainer.net/og.png',
+            inLanguage: ['en', 'pt-BR', 'es', 'zh-CN'],
+            isAccessibleForFree: true,
+            featureList: [
+              'WCA-style scramble generator (2x2, 3x3, Megaminx, Pyraminx)',
+              'Speedcubing timer with inspection and penalties',
+              'Solve statistics, averages and progress charts',
+              'Works offline (PWA)',
+            ],
+            creator: {
+              '@type': 'Person',
+              name: 'Maycon Jesus',
+              url: 'https://github.com/maycon-jesus',
+            },
             offers: {
               '@type': 'Offer',
               price: '0',
