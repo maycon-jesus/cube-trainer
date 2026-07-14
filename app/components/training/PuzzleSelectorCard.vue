@@ -5,11 +5,13 @@
         :ripple="false"
     >
         <div class="puzzle-card__media">
-            <v-img
+            <nuxt-img
                 :src="props.imageUrl"
                 :alt="props.title"
                 :aspect-ratio="1"
-                class="puzzle-card__img pa-6"
+                height="300"
+                width="300"
+                class="puzzle-card__img d-block"
             />
         </div>
 
@@ -64,6 +66,9 @@ const props = defineProps<{
 
 .puzzle-card__img {
     transition: transform 0.25s ease;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
 }
 
 .puzzle-card__body {
