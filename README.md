@@ -11,6 +11,7 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 - ⏱️ **Timer** controlado por barra de espaço (segure para armar) ou toque na tela
 - 🔀 **Embaralhamentos** gerados automaticamente para 2x2, 3x3, pyraminx e megaminx (com visualização do cubo no 3x3)
 - 📊 **Estatísticas WCA** — melhor tempo, média de 5/12, média geral (descartando melhor e pior), além de um dashboard com gráficos e streaks
+- 🧠 **Treino de algoritmos** — pratique conjuntos de algoritmos (PLL do 3x3) com timer dedicado, treinando casos individuais, uma seleção ou o conjunto inteiro
 - 🏷️ **Penalidades** `+2` e `DNF`
 - 🗂️ **Sessões** para organizar suas resoluções
 - 📜 **Histórico** de resoluções
@@ -57,7 +58,7 @@ lib/            Código independente de framework (sem Nuxt/Vue)
   db/           Wrapper genérico sobre IndexedDB
 config/         Catálogo de temas do Vuetify
 app/            Aplicação Nuxt (srcDir)
-  pages/        Timer, histórico, estatísticas, sessões, configurações, treino, padrões
+  pages/        Timer, histórico, estatísticas, sessões, configurações, treino de algoritmos, padrões
   components/   Componentes (timer, sessão, dashboard de estatísticas, ícones)
   stores/       Stores Pinia sobre o IndexedDB
   utils/        Formatação de tempo e estatísticas WCA
@@ -66,7 +67,7 @@ i18n/           Traduções (pt / en / es / zh)
 
 ## Status
 
-Em desenvolvimento. 2x2, 3x3, pyraminx e megaminx geram embaralhamentos, mas só o **3x3** possui renderização do cubo; as páginas de treino e padrões ainda são placeholders.
+Em desenvolvimento. 2x2, 3x3, pyraminx e megaminx geram embaralhamentos, mas só o **3x3** possui renderização do cubo. O treino de algoritmos hoje cobre o PLL do 3x3; a página de padrões ainda é um placeholder.
 
 ## Apoie o projeto
 
