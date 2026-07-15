@@ -216,7 +216,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-1',
                 id: 'oll-point-1',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-1.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-1.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R U2 R2' F R F' U2' R' F R F'"),
                 solves: [
                     "R U2 R2' F R F' U2' R' F R F'"
@@ -225,7 +225,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-2',
                 id: 'oll-point-2',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-2.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-2.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("F R U R' U' S R U R' U' Fw'"),
                 solves: [
                     "F R U R' U' S R U R' U' Fw'"
@@ -234,7 +234,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-3',
                 id: 'oll-point-3',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-3.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-3.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Fw R U R' U' Fw' U' F R U R' U' F'"),
                 solves: [
                     "Fw R U R' U' Fw' U' F R U R' U' F'"
@@ -243,7 +243,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-4',
                 id: 'oll-point-4',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-4.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-4.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Fw R U R' U' Fw' U F R U R' U' F'"),
                 solves: [
                     "Fw R U R' U' Fw' U F R U R' U' F'"
@@ -252,7 +252,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-17',
                 id: 'oll-point-17',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-17.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-17.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R' F R F' U2 R' F R F'"),
                 solves: [
                     "R U R' U R' F R F' U2 R' F R F'"
@@ -261,7 +261,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-18',
                 id: 'oll-point-18',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-18.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-18.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Rw U R' U R U2 Rw2 U' R U' R' U2 Rw"),
                 solves: [
                     "Rw U R' U R U2 Rw2 U' R U' R' U2 Rw"
@@ -270,7 +270,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.point-19',
                 id: 'oll-point-19',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-point-19.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-point-19.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("M U R U R' U' M' R' F R F'"),
                 solves: [
                     "M U R U R' U' M' R' F R F'"
@@ -279,7 +279,7 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.square-5',
                 id: 'oll-square-5',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-square-5.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-square-5.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Rw' U2 R U R' U Rw"),
                 solves: [
                     "Rw' U2 R U R' U Rw"
@@ -288,10 +288,118 @@ const trainingSets333: TrainingSet[] = [
             {
                 nameKey: 'training.3x3x3.oll.cases.square-6',
                 id: 'oll-square-6',
-                imageUrl: '/img/training/3x3x3/oll/oll-case-square-6.png',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-square-6.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Rw U2 R' U' R U' Rw'"),
                 solves: [
                     "Rw U2 R' U' R U' Rw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.slbs-7',
+                id: 'oll-slbs-7',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-slbs-7.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U R' U R U2 Rw'"),
+                solves: [
+                    "Rw U R' U R U2 Rw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.slbs-8',
+                id: 'oll-slbs-8',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-slbs-8.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw' U' R U' R' U2 Rw"),
+                solves: [
+                    "Rw' U' R U' R' U2 Rw"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.slbs-11',
+                id: 'oll-slbs-11',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-slbs-11.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw' R2 U R' U R U2 R' U M'"),
+                solves: [
+                    "Rw' R2 U R' U R U2 R' U M'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.slbs-12',
+                id: 'oll-slbs-12',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-slbs-12.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F R U R' U' F' U F R U R' U' F'"),
+                solves: [
+                    "F R U R' U' F' U F R U R' U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.fish-9',
+                id: 'oll-fish-9',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-fish-9.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U' R' F R2 U R' U' F'"),
+                solves: [
+                    "R U R' U' R' F R2 U R' U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.fish-10',
+                id: 'oll-fish-10',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-fish-10.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R' F R F' R U2 R'"),
+                solves: [
+                    "R U R' U R' F R F' R U2 R'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.fish-35',
+                id: 'oll-fish-35',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-fish-35.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U2 R2 F R F' R U2 R'"),
+                solves: [
+                    "R U2 R2 F R F' R U2 R'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.fish-37',
+                id: 'oll-fish-37',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-fish-37.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F R U' R' U' R U R' F'"),
+                solves: [
+                    "F R U' R' U' R U R' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.knight-13',
+                id: 'oll-knight-13',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-knight-13.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U' Rw' U' Rw U Rw' F' U F"),
+                solves: [
+                    "Rw U' Rw' U' Rw U Rw' F' U F"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.knight-14',
+                id: 'oll-knight-14',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-knight-14.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R' F R U R' F' R F U' F'"),
+                solves: [
+                    "R' F R U R' F' R F U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.knight-15',
+                id: 'oll-knight-15',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-knight-15.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw' U' Rw R' U' R U Rw' U Rw"),
+                solves: [
+                    "Rw' U' Rw R' U' R U Rw' U Rw"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.knight-16',
+                id: 'oll-knight-16',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-knight-16.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U Rw' R U R' U' Rw U' Rw'"),
+                solves: [
+                    "Rw U Rw' R U R' U' Rw U' Rw'"
                 ]
             }
         ]
