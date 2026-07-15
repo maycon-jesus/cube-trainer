@@ -71,10 +71,22 @@ export const Cube333MovesCollection: MovesCollection = {
     { srcFace: FaceIndex.D, srcPos: [2, 5, 8], dstFace: FaceIndex.B, dstPos: [8, 5, 2] },
     { srcFace: FaceIndex.B, srcPos: [2, 5, 8], dstFace: FaceIndex.U, dstPos: [8, 5, 2] },
   ],
+  S: [
+    { srcFace: FaceIndex.U, srcPos: [4, 5, 6], dstFace: FaceIndex.R, dstPos: [2, 5, 8] },
+    { srcFace: FaceIndex.R, srcPos: [2, 5, 8], dstFace: FaceIndex.D, dstPos: [6, 5, 4] },
+    { srcFace: FaceIndex.D, srcPos: [4, 5, 6], dstFace: FaceIndex.L, dstPos: [2, 5, 8] },
+    { srcFace: FaceIndex.L, srcPos: [2, 5, 8], dstFace: FaceIndex.U, dstPos: [6, 5, 4] },
+  ],
 }
 
 export const Cube333Rotations: Record<string, string[]> = {
   x: ['R', "M'", "L'"],
+}
+
+// Wide (double-layer) moves.
+export const Cube333WideMoves: Record<string, string[]> = {
+  Rw: ['R', "M'"],
+  Fw: ['F', 'S'],
 }
 
 export class Cube333 {
@@ -93,18 +105,15 @@ export class Cube333 {
     if (move.length === 0) {
       throw new Error('invalid move: empty string')
     }
-    if (move.length > 2) {
-      throw new Error('invalid move: too long')
-    }
 
-    const face = move[0]!
     const last = move[move.length - 1]
     const double = last === '2'
     const reverse = last === "'"
+    const base = double || reverse ? move.slice(0, -1) : move
 
-    const rotation = Cube333Rotations[face]
-    if (rotation) {
-      const seq = reverse ? invertScramble(rotation.join(' ')).split(' ') : rotation
+    const sequence = Cube333Rotations[base] ?? Cube333WideMoves[base]
+    if (sequence) {
+      const seq = reverse ? invertScramble(sequence.join(' ')).split(' ') : sequence
       const times = double ? 2 : 1
       for (let i = 0; i < times; i++) {
         this.applyMoves(seq)
@@ -112,7 +121,7 @@ export class Cube333 {
       return
     }
 
-    const moveSet = Cube333MovesCollection[face]
+    const moveSet = Cube333MovesCollection[base]
     if (!moveSet) {
       throw new Error('invalid move: ' + move)
     }
