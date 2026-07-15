@@ -276,6 +276,21 @@
           "gc": "Gc 情况",
           "gd": "Gd 情况"
         }
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "练习 OLL 公式",
+        "cases": {
+          "point-1": "点 1",
+          "point-2": "点 2",
+          "point-3": "点 3",
+          "point-4": "点 4",
+          "point-17": "点 17",
+          "point-18": "点 18",
+          "point-19": "点 19",
+          "square-5": "方块 5",
+          "square-6": "方块 6"
+        }
       }
     },
     "removeFromList": "从列表移除",

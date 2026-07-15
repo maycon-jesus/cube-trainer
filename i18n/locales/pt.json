@@ -276,6 +276,21 @@
           "gc": "Caso Gc",
           "gd": "Caso Gd"
         }
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "Pratique os algoritmos de OLL",
+        "cases": {
+          "point-1": "Ponto 1",
+          "point-2": "Ponto 2",
+          "point-3": "Ponto 3",
+          "point-4": "Ponto 4",
+          "point-17": "Ponto 17",
+          "point-18": "Ponto 18",
+          "point-19": "Ponto 19",
+          "square-5": "Quadrado 5",
+          "square-6": "Quadrado 6"
+        }
       }
     },
     "removeFromList": "Remover da lista",
