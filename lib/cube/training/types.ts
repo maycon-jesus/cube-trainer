@@ -3,7 +3,7 @@ export type TrainingAlgorithm = {
     name?: string,
     id: string,
     imageUrl: string,
-    setups: string[],
+    generateSetupScramble: ()=> Promise<string>,
     solves: string[],
 }
 

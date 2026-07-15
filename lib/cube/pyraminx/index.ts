@@ -10,7 +10,7 @@ function randomFromArr<T>(arr: T[]): T {
  * to one tip turn per vertex (lowercase u, l, r, b), each independently
  * left untouched, turned clockwise, or turned counterclockwise.
  */
-export function generateScramblePyraminx(movesCount: number = 11): string {
+export function generateScramble(movesCount: number = 11): string {
   const faces = ['U', 'L', 'R', 'B']
   const modifiers = ['', "'"]
   const tips = ['u', 'l', 'r', 'b']

@@ -11,7 +11,7 @@ import {
   CubeFace,
   resolveMoveSet,
   type MovesCollection,
-} from './cube'
+} from '../cube'
 
 export enum FaceIndex {
   L = 0,
@@ -65,6 +65,16 @@ export const Cube333MovesCollection: MovesCollection = {
     { srcFace: FaceIndex.D, srcPos: [1, 4, 7], dstFace: FaceIndex.B, dstPos: [9, 6, 3] },
     { srcFace: FaceIndex.B, srcPos: [3, 6, 9], dstFace: FaceIndex.U, dstPos: [7, 4, 1] },
   ],
+  M: [
+    { srcFace: FaceIndex.U, srcPos: [2, 5, 8], dstFace: FaceIndex.F, dstPos: [2, 5, 8] },
+    { srcFace: FaceIndex.F, srcPos: [2, 5, 8], dstFace: FaceIndex.D, dstPos: [2, 5, 8] },
+    { srcFace: FaceIndex.D, srcPos: [2, 5, 8], dstFace: FaceIndex.B, dstPos: [8, 5, 2] },
+    { srcFace: FaceIndex.B, srcPos: [2, 5, 8], dstFace: FaceIndex.U, dstPos: [8, 5, 2] },
+  ],
+}
+
+export const Cube333Rotations: Record<string, string[]> = {
+  x: ['R', "M'", "L'"],
 }
 
 export class Cube333 {
@@ -91,6 +101,16 @@ export class Cube333 {
     const last = move[move.length - 1]
     const double = last === '2'
     const reverse = last === "'"
+
+    const rotation = Cube333Rotations[face]
+    if (rotation) {
+      const seq = reverse ? invertScramble(rotation.join(' ')).split(' ') : rotation
+      const times = double ? 2 : 1
+      for (let i = 0; i < times; i++) {
+        this.applyMoves(seq)
+      }
+      return
+    }
 
     const moveSet = Cube333MovesCollection[face]
     if (!moveSet) {
@@ -215,7 +235,7 @@ export interface RenderSvgOptions {
   radius?: number
 }
 
-export function createCube333(): Cube333 {
+export function createCube(): Cube333 {
   return new Cube333()
 }
 
@@ -224,7 +244,7 @@ function randomFromArr<T>(arr: T[]): [T, number] {
   return [arr[n]!, n]
 }
 
-export function generateScramble333(movesCount: number = 20): string {
+export function generateScramble(movesCount: number = 20): string {
   const moves: string[] = []
 
   const axisMoves: string[][] = [
@@ -261,4 +281,28 @@ export function generateScramble333(movesCount: number = 20): string {
   }
 
   return moves.join(' ')
+}
+
+export function randomAUFScramble(scramble: string): string {
+  const AUFs: (string|null)[] = ["U", "U'", "U2", null]
+  const [auf, _] = randomFromArr(AUFs)
+  return auf ? auf + ' ' + scramble : scramble
+}
+
+export function invertScramble(scramble: string): string {
+  const moves = scramble.split(' ')
+  const reversedMoves: string[] = []
+
+  for (let i = moves.length - 1; i >= 0; i--) {
+    const move = moves[i]!
+    if (move.endsWith("'")) {
+      reversedMoves.push(move.slice(0, -1))
+    } else if (move.endsWith('2')) {
+      reversedMoves.push(move)
+    } else {
+      reversedMoves.push(move + "'")
+    }
+  }
+
+  return reversedMoves.join(' ')
 }
