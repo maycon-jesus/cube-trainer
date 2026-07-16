@@ -430,8 +430,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.h',
-                id: 'oll-h',
+                nameKey: 'training.3x3x3.oll.cases.ocll-21',
+                id: 'oll-ocll-21',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-21.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R U' R' U R U2 R'"),
                 solves: [
@@ -439,8 +439,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.pi',
-                id: 'oll-pi',
+                nameKey: 'training.3x3x3.oll.cases.ocll-22',
+                id: 'oll-ocll-22',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-22.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R U2 R2 U' R2 U' R2 U2 R"),
                 solves: [
@@ -448,8 +448,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
              {
-                nameKey: 'training.3x3x3.oll.cases.u',
-                id: 'oll-u',
+                nameKey: 'training.3x3x3.oll.cases.ocll-23',
+                id: 'oll-ocll-23',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-23.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R2 D' R U2 R' D R U2 R"),
                 solves: [
@@ -457,8 +457,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.t',
-                id: 'oll-t',
+                nameKey: 'training.3x3x3.oll.cases.ocll-24',
+                id: 'oll-ocll-24',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-24.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("Rw U R' U' Rw' F R F'"),
                 solves: [
@@ -466,8 +466,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.l',
-                id: 'oll-l',
+                nameKey: 'training.3x3x3.oll.cases.ocll-25',
+                id: 'oll-ocll-25',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-25.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("F' Rw U R' U' Rw' F R"),
                 solves: [
@@ -475,8 +475,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.antisune',
-                id: 'oll-antisune',
+                nameKey: 'training.3x3x3.oll.cases.ocll-26',
+                id: 'oll-ocll-26',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-26.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R' U' R U' R' U2 R"),
                 solves: [
@@ -484,8 +484,8 @@ const trainingSets333: TrainingSet[] = [
                 ]
             },
             {
-                nameKey: 'training.3x3x3.oll.cases.sune',
-                id: 'oll-sune',
+                nameKey: 'training.3x3x3.oll.cases.ocll-27',
+                id: 'oll-ocll-27',
                 imageUrl: '/img/training/3x3x3/oll/oll-case-ocll-27.svg',
                 generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R U2 R'"),
                 solves: [
