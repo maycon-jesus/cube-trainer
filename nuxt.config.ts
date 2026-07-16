@@ -61,7 +61,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         // PWA
-        { rel: 'manifest', href: '/manifest.webmanifest' },
+        // { rel: 'manifest', href: '/manifest.webmanifest' },
       ],
       script: [
         // JSON-LD structured data
@@ -110,7 +110,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
-    '@vite-pwa/nuxt',
+    // '@vite-pwa/nuxt',
     '@vercel/analytics',
     '@vercel/speed-insights',
   ],
@@ -165,46 +165,46 @@ export default defineNuxtConfig({
       blueprint: md3
     },
   },
-  pwa: {
-    registerType: 'autoUpdate',
-    workbox: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'],
-      navigateFallback: '/',
-    },
-    manifest: {
-      name: 'Cube Trainer',
-      short_name: 'Cube Trainer',
-      description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
-      lang: 'en',
-      dir: 'ltr',
-      start_url: '/',
-      scope: '/',
-      display_override: ['minimal-ui'],
-      display: 'standalone',
-      orientation: 'portrait',
-      background_color: '#060708',
-      theme_color: '#F56217',
-      categories: ['utilities', 'productivity'],
-      icons: [
-        {
-          src: '/pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: '/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-        {
-          src: '/maskable-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'maskable',
-        },
-      ],
-    },
-  },
+  // pwa: {
+  //   registerType: 'autoUpdate',
+  //   workbox: {
+  //     globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'],
+  //     navigateFallback: '/',
+  //   },
+  //   manifest: {
+  //     name: 'Cube Trainer',
+  //     short_name: 'Cube Trainer',
+  //     description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
+  //     lang: 'en',
+  //     dir: 'ltr',
+  //     start_url: '/',
+  //     scope: '/',
+  //     display_override: ['minimal-ui'],
+  //     display: 'standalone',
+  //     orientation: 'portrait',
+  //     background_color: '#060708',
+  //     theme_color: '#F56217',
+  //     categories: ['utilities', 'productivity'],
+  //     icons: [
+  //       {
+  //         src: '/pwa-192x192.png',
+  //         sizes: '192x192',
+  //         type: 'image/png',
+  //       },
+  //       {
+  //         src: '/pwa-512x512.png',
+  //         sizes: '512x512',
+  //         type: 'image/png',
+  //       },
+  //       {
+  //         src: '/maskable-512x512.png',
+  //         sizes: '512x512',
+  //         type: 'image/png',
+  //         purpose: 'maskable',
+  //       },
+  //     ],
+  //   },
+  // },
   alias: {
     '@icon': fileURLToPath(new URL('./app/components/icon', import.meta.url)),
   },
