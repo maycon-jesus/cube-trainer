@@ -1,4 +1,4 @@
-export function generateScrambleMegaminx(movesCount: number = 10): string {
+export function generateScramble(movesCount: number = 10): string {
     const lines = 7
     const moves: string[] = []
 

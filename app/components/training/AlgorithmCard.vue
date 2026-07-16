@@ -29,27 +29,32 @@
         </code>
       </div>
 
-      <div v-if="algorithm.setups.length" class="mb-4">
+      <div class="mb-4">
         <v-btn
           variant="text"
           size="small"
           color="on-surface"
           class="training-card__setup-toggle px-1 text-none"
           prepend-icon="mdi-cube-scan"
-          :append-icon="showSetups ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-          @click="showSetups = !showSetups"
+          :append-icon="showSetup ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          @click="toggleSetup"
         >
-          {{ setupLabel }}
+          {{ t('training.setup') }}
         </v-btn>
-        <AnimationExpand :model-value="showSetups">
-          <div class="d-flex flex-column ga-1 pt-1">
-            <code
-              v-for="(setup, i) in algorithm.setups"
-              :key="i"
-              class="training-card__setup text-body-large text-on-surface px-2 py-1 rounded"
-            >
-              {{ setup }}
+        <AnimationExpand :model-value="showSetup">
+          <div class="d-flex align-center ga-1 pt-1">
+            <code class="training-card__setup text-body-large text-on-surface px-2 py-1 rounded flex-fill">
+              <template v-if="setup">{{ setup }}</template>
+              <v-progress-circular v-else indeterminate size="16" width="2" />
             </code>
+            <v-btn
+              icon="mdi-refresh"
+              variant="text"
+              size="small"
+              :loading="loadingSetup"
+              :aria-label="t('training.regenerateSetup')"
+              @click="generateSetup"
+            />
           </div>
         </AnimationExpand>
       </div>
@@ -117,7 +122,25 @@ defineEmits<{
 
 const solvesStore = useSolvesStore()
 
-const showSetups = ref(false)
+const showSetup = ref(false)
+const setup = ref('')
+const loadingSetup = ref(false)
+
+async function generateSetup() {
+  loadingSetup.value = true
+  setup.value = ''
+  try {
+    setup.value = await props.algorithm.generateSetupScramble()
+  }
+  finally {
+    loadingSetup.value = false
+  }
+}
+
+function toggleSetup() {
+  showSetup.value = !showSetup.value
+  if (showSetup.value && !setup.value && !loadingSetup.value) generateSetup()
+}
 
 const algorithmName = computed(() =>
   props.algorithm.nameKey ? t(props.algorithm.nameKey) : props.algorithm.name ?? '',
@@ -132,10 +155,6 @@ const statTiles = computed(() => [
     value: avg.value,
   })),
 ])
-
-const setupLabel = computed(() =>
-  t('training.setup', showSetups.value ? 1 : props.algorithm.setups.length),
-)
 </script>
 
 <style scoped lang="scss">

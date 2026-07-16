@@ -100,7 +100,7 @@ const currentAlgorithm = ref<TrainingAlgorithm | null>(null)
 const scramble = ref('')
 
 // Pick a random algorithm from the training set and one of its setup scrambles.
-function newScramble() {
+async function newScramble() {
   const algorithms = trainingSet.value?.algorithms ?? []
   if (algorithms.length === 0) {
     currentAlgorithm.value = null
@@ -108,9 +108,9 @@ function newScramble() {
     return
   }
   const algorithm = algorithms[Math.floor(Math.random() * algorithms.length)]!
-  const setups = algorithm.setups.length ? algorithm.setups : ['']
   currentAlgorithm.value = algorithm
-  scramble.value = setups[Math.floor(Math.random() * setups.length)]!
+  scramble.value = await algorithm.generateSetupScramble()
+
 }
 
 onBeforeMount(async () => {
@@ -119,13 +119,13 @@ onBeforeMount(async () => {
     await navigateTo(localePath({ name: 'training' }))
     return
   }
-  newScramble()
+  await newScramble()
   await refreshSolves()
 })
 
 async function resolved(solve: Solve) {
   await add(solve)
-  newScramble()
+  await newScramble()
   await refreshSolves()
 }
 
@@ -134,7 +134,7 @@ async function refreshSolves() {
 }
 
 watch([() => configStore.sessionId, trainingSetId], async () => {
-  newScramble()
+  await newScramble()
   await refreshSolves()
 })
 
