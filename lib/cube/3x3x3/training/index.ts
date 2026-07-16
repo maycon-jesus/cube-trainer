@@ -491,6 +491,42 @@ const trainingSets333: TrainingSet[] = [
                 solves: [
                     "R U R' U R U2 R'"
                 ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.awkward-29',
+                id: 'oll-awkward-29',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-awkward-29.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("M U R U R' U' R' F R F' M'"),
+                solves: [
+                    "M U R U R' U' R' F R F' M'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.awkward-30',
+                id: 'oll-awkward-30',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-awkward-30.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F U R U2 R' U' R U2 R' U' F'"),
+                solves: [
+                    "F U R U2 R' U' R U2 R' U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.awkward-41',
+                id: 'oll-awkward-41',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-awkward-41.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R U2 R' F R U R' U' F'"),
+                solves: [
+                    "R U R' U R U2 R' F R U R' U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.awkward-42',
+                id: 'oll-awkward-42',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-awkward-42.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R' U' R U' R' U2 R F R U R' U' F'"),
+                solves: [
+                    "R' U' R U' R' U2 R F R U R' U' F'"
+                ]
             }
         ]
     }
