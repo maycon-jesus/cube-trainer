@@ -77,6 +77,12 @@ export const Cube333MovesCollection: MovesCollection = {
     { srcFace: FaceIndex.D, srcPos: [4, 5, 6], dstFace: FaceIndex.L, dstPos: [2, 5, 8] },
     { srcFace: FaceIndex.L, srcPos: [2, 5, 8], dstFace: FaceIndex.U, dstPos: [6, 5, 4] },
   ],
+  E: [
+    { srcFace: FaceIndex.L, srcPos: [4, 5, 6], dstFace: FaceIndex.F, dstPos: [4, 5, 6] },
+    { srcFace: FaceIndex.F, srcPos: [4, 5, 6], dstFace: FaceIndex.R, dstPos: [4, 5, 6] },
+    { srcFace: FaceIndex.R, srcPos: [4, 5, 6], dstFace: FaceIndex.B, dstPos: [4, 5, 6] },
+    { srcFace: FaceIndex.B, srcPos: [4, 5, 6], dstFace: FaceIndex.L, dstPos: [4, 5, 6] },
+  ],
 }
 
 export const Cube333Rotations: Record<string, string[]> = {
@@ -87,6 +93,7 @@ export const Cube333Rotations: Record<string, string[]> = {
 export const Cube333WideMoves: Record<string, string[]> = {
   Rw: ['R', "M'"],
   Fw: ['F', 'S'],
+  Dw: ['D', 'E'],
 }
 
 export class Cube333 {
