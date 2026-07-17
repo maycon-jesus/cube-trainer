@@ -617,6 +617,78 @@ const trainingSets333: TrainingSet[] = [
                 solves: [
                     "R U R' U R U' R' U' R' F R F'"
                 ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.blbs-39',
+                id: 'oll-blbs-39',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-blbs-39.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("L F' L' U' L U F U' L'"),
+                solves: [
+                    "L F' L' U' L U F U' L'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.blbs-40',
+                id: 'oll-blbs-40',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-blbs-40.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R' F R U R' U' F' U R"),
+                solves: [
+                    "R' F R U R' U' F' U R"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.l-47',
+                id: 'oll-l-47',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-47.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F' L' U' L U L' U' L U F"),
+                solves: [
+                    "F' L' U' L U L' U' L U F"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.l-48',
+                id: 'oll-l-48',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-48.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F R U R' U' R U R' U' F'"),
+                solves: [
+                    "F R U R' U' R U R' U' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.l-49',
+                id: 'oll-l-49',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-49.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U' Rw2 U Rw2 U Rw2 U' Rw"),
+                solves: [
+                    "Rw U' Rw2 U Rw2 U Rw2 U' Rw"
+                ]
+            },
+             {
+                nameKey: 'training.3x3x3.oll.cases.l-50',
+                id: 'oll-l-50',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-50.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw' U Rw2 U' Rw2 U' Rw2 U Rw'"),
+                solves: [
+                    "Rw' U Rw2 U' Rw2 U' Rw2 U Rw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.l-53',
+                id: 'oll-l-53',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-53.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw' U' R U' R' U R U' R' U2 Rw"),
+                solves: [
+                    "Rw' U' R U' R' U R U' R' U2 Rw"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.l-54',
+                id: 'oll-l-54',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-l-54.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U R' U R U' R' U R U2 Rw'"),
+                solves: [
+                    "Rw U R' U R U' R' U R U2 Rw'"
+                ]
             }
         ]
     }
