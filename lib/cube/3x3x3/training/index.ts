@@ -689,6 +689,42 @@ const trainingSets333: TrainingSet[] = [
                 solves: [
                     "Rw U R' U R U' R' U R U2 Rw'"
                 ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.i-51',
+                id: 'oll-i-51',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-i-51.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Fw R U R' U' R U R' U' Fw'"),
+                solves: [
+                    "Fw R U R' U' R U R' U' Fw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.i-52',
+                id: 'oll-i-52',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-i-52.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R Dw' R U' R' F'"),
+                solves: [
+                    "R U R' U R Dw' R U' R' F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.i-55',
+                id: 'oll-i-55',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-i-55.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U2 R2 U' R U' R' U2 F R F'"),
+                solves: [
+                    "R U2 R2 U' R U' R' U2 F R F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.i-56',
+                id: 'oll-i-56',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-i-56.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Rw U Rw' U R U' R' U R U' R' Rw U' Rw'"),
+                solves: [
+                    "Rw U Rw' U R U' R' U R U' R' Rw U' Rw'"
+                ]
             }
         ]
     }
