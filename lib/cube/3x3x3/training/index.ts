@@ -599,6 +599,24 @@ const trainingSets333: TrainingSet[] = [
                 solves: [
                     "R' U' R' F R F' U R"
                 ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.w-36',
+                id: 'oll-w-36',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-w-36.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("L' U' L U' L' U L U L F' L' F"),
+                solves: [
+                    "L' U' L U' L' U L U L F' L' F"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.w-38',
+                id: 'oll-w-38',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-w-38.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U R U' R' U' R' F R F'"),
+                solves: [
+                    "R U R' U R U' R' U' R' F R F'"
+                ]
             }
         ]
     }
