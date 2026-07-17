@@ -527,6 +527,60 @@ const trainingSets333: TrainingSet[] = [
                 solves: [
                     "R' U' R U' R' U2 R F R U R' U' F'"
                 ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.p-31',
+                id: 'oll-p-31',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-p-31.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R' U' F U R U' R' F' R"),
+                solves: [
+                    "R' U' F U R U' R' F' R"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.p-32',
+                id: 'oll-p-32',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-p-32.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("S R U R' U' R' F R Fw'"),
+                solves: [
+                    "S R U R' U' R' F R Fw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.p-43',
+                id: 'oll-p-43',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-p-43.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Fw' L' U' L U Fw"),
+                solves: [
+                    "Fw' L' U' L U Fw"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.p-44',
+                id: 'oll-p-44',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-p-44.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("Fw R U R' U' Fw'"),
+                solves: [
+                    "Fw R U R' U' Fw'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.t-33',
+                id: 'oll-t-33',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-t-33.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("R U R' U' R' F R F'"),
+                solves: [
+                    "R U R' U' R' F R F'"
+                ]
+            },
+            {
+                nameKey: 'training.3x3x3.oll.cases.t-45',
+                id: 'oll-t-45',
+                imageUrl: '/img/training/3x3x3/oll/oll-case-t-45.svg',
+                generateSetupScramble: ()=> newAlgorithmSetup("F R U R' U' F'"),
+                solves: [
+                    "F R U R' U' F'"
+                ]
             }
         ]
     }
