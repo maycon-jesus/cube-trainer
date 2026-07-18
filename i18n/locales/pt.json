@@ -238,8 +238,10 @@
   "training": {
     "title": "Treino de algoritmos",
     "subtitle": "Selecione o puzzle que deseja praticar",
+    "viewAll": "Ver tudo",
     "sets": "{count} conjunto | {count} conjuntos",
     "solveCount": "{count} resolução | {count} resoluções",
+    "caseCount": "{count} caso | {count} casos",
     "setup": "Setup",
     "regenerateSetup": "Novo setup",
     "train": "Treinar",
@@ -252,7 +254,7 @@
       },
       "pll": {
         "name": "PLL",
-        "description": "Pratique os algoritmos de PLL",
+        "description": "Permutação da Última Camada: posicione as peças da última camada para finalizar a resolução depois que o topo já está orientado.",
         "cases": {
           "u-clockwise": "Caso U (horário)",
           "u-anticlockwise": "Caso U (anti-horário)",
@@ -279,7 +281,7 @@
       },
       "oll": {
         "name": "OLL",
-        "description": "Pratique os algoritmos de OLL",
+        "description": "Orientação da Última Camada: oriente todas as peças da última camada para deixar o topo com uma única cor.",
         "cases": {
           "point-1": "Ponto 1",
           "point-2": "Ponto 2",
@@ -378,7 +380,17 @@
     "puzzle": {
       "3x3x3": {
         "title": "Treino de Algoritmos 3x3x3",
-        "description": "Treine os algoritmos de OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos."
+        "description": "Treine os algoritmos de OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos.",
+        "sets": {
+          "pll": {
+            "title": "Treino de Algoritmos PLL do 3x3x3",
+            "description": "Aprenda e pratique todos os 21 algoritmos PLL para permutar a última camada do Cubo Mágico. Treine cada caso para acelerar suas resoluções."
+          },
+          "oll": {
+            "title": "Treino de Algoritmos OLL do 3x3x3",
+            "description": "Aprenda e pratique todos os 57 algoritmos OLL para orientar a última camada do Cubo Mágico. Domine cada caso para melhorar seus tempos."
+          }
+        }
       }
     },
     "settings": {

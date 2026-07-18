@@ -238,8 +238,10 @@
   "training": {
     "title": "Entrenamiento de algoritmos",
     "subtitle": "Selecciona el puzzle que quieres practicar",
+    "viewAll": "Ver todo",
     "sets": "{count} conjunto | {count} conjuntos",
     "solveCount": "{count} resolución | {count} resoluciones",
+    "caseCount": "{count} caso | {count} casos",
     "setup": "Setup",
     "regenerateSetup": "Nuevo setup",
     "train": "Entrenar",
@@ -252,7 +254,7 @@
       },
       "pll": {
         "name": "PLL",
-        "description": "Practica los algoritmos de PLL",
+        "description": "Permutación de la Última Capa: coloca las piezas de la última capa para terminar la resolución una vez que la cara superior está orientada.",
         "cases": {
           "u-clockwise": "Caso U (horario)",
           "u-anticlockwise": "Caso U (antihorario)",
@@ -279,7 +281,7 @@
       },
       "oll": {
         "name": "OLL",
-        "description": "Practica los algoritmos de OLL",
+        "description": "Orientación de la Última Capa: orienta todas las piezas de la última capa para que la cara superior quede de un solo color.",
         "cases": {
           "point-1": "Punto 1",
           "point-2": "Punto 2",
@@ -378,7 +380,17 @@
     "puzzle": {
       "3x3x3": {
         "title": "Entrenamiento de Algoritmos 3x3x3",
-        "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos."
+        "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",
+        "sets": {
+          "pll": {
+            "title": "Entrenamiento de Algoritmos PLL del 3x3x3",
+            "description": "Aprende y practica los 21 algoritmos PLL para permutar la última capa del Cubo de Rubik. Entrena cada caso para acelerar tus resoluciones."
+          },
+          "oll": {
+            "title": "Entrenamiento de Algoritmos OLL del 3x3x3",
+            "description": "Aprende y practica los 57 algoritmos OLL para orientar la última capa del Cubo de Rubik. Domina cada caso para mejorar tus tiempos."
+          }
+        }
       }
     },
     "settings": {
