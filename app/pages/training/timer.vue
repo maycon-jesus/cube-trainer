@@ -101,7 +101,7 @@ const scramble = ref('')
 
 // Pick a random algorithm from the training set and one of its setup scrambles.
 async function newScramble() {
-  const algorithms = trainingSet.value?.algorithms ?? []
+  const algorithms = trainingSet.value ? await trainingSet.value.algorithms() : []
   if (algorithms.length === 0) {
     currentAlgorithm.value = null
     scramble.value = ''
@@ -115,7 +115,8 @@ async function newScramble() {
 
 onBeforeMount(async () => {
   // Guard: this screen only makes sense with a training set loaded.
-  if ((trainingSet.value?.algorithms.length ?? 0) === 0) {
+  const algorithms = trainingSet.value ? await trainingSet.value.algorithms() : []
+  if (algorithms.length === 0) {
     await navigateTo(localePath({ name: 'training' }))
     return
   }

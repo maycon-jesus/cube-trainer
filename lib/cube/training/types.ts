@@ -14,5 +14,5 @@ export type TrainingSet = {
     descriptionKey?: string,
     description?: string,
     imageUrl: string,
-    algorithms: TrainingAlgorithm[]
+    algorithms: () => Promise<TrainingAlgorithm[]>
 }

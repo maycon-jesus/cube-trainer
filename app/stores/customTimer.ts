@@ -1,17 +1,19 @@
-import type { TrainingSet } from "~~/lib/cube/cubesDefinition"
+import type { TrainingAlgorithm, TrainingSet } from "~~/lib/cube/cubesDefinition"
 
 export const useCustomTimerStore = defineStore('customTimer', ()=>{
     const trainingSet = ref<TrainingSet|null>(null)
     const puzzle = ref<string|null>(null)
+    const defaultAlgorithms = ref<TrainingAlgorithm[]>([])
 
     function useTrainingSetDefault(puzzleId: string){
         puzzle.value = puzzleId
+        defaultAlgorithms.value = []
         trainingSet.value = {
             id: 'default',
             name: 'Default',
             description: 'Default training set',
             imageUrl: '',
-            algorithms: []
+            algorithms: () => Promise.resolve(defaultAlgorithms.value)
         }
     }
 
@@ -19,10 +21,10 @@ export const useCustomTimerStore = defineStore('customTimer', ()=>{
         trainingSet.value = set
     }
 
-    function addAlgorithmToTrainingSet(algorithm: TrainingSet['algorithms'][0]){
+    function addAlgorithmToTrainingSet(algorithm: TrainingAlgorithm){
         if(!trainingSet.value) return
-        if(trainingSet.value.algorithms.find(a => a.id === algorithm.id)) return
-        trainingSet.value.algorithms.push(algorithm)
+        if(defaultAlgorithms.value.find(a => a.id === algorithm.id)) return
+        defaultAlgorithms.value.push(algorithm)
     }
 
     return {
