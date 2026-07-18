@@ -1,4 +1,4 @@
-import type { TrainingSet } from "~~/lib/cube/cubesDefinition"
+import type { TrainingAlgorithm, TrainingSet } from "~~/lib/cube/cubesDefinition"
 
 export const useCustomTimerStore = defineStore('customTimer', ()=>{
     const trainingSet = ref<TrainingSet|null>(null)
@@ -19,7 +19,7 @@ export const useCustomTimerStore = defineStore('customTimer', ()=>{
         trainingSet.value = set
     }
 
-    function addAlgorithmToTrainingSet(algorithm: TrainingSet['algorithms'][0]){
+    function addAlgorithmToTrainingSet(algorithm: TrainingAlgorithm){
         if(!trainingSet.value) return
         if(trainingSet.value.algorithms.find(a => a.id === algorithm.id)) return
         trainingSet.value.algorithms.push(algorithm)

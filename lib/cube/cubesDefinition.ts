@@ -3,6 +3,7 @@ import { generateScramble as generateScrambleMegaminx } from "./megaminx"
 import { generateScramble as generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
 import type { TrainingSet } from "./training/types"
+import trainingSets333 from "./3x3x3/training"
 import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon, Cube5x5x5Icon, Cube6x6x6Icon, Cube7x7x7Icon, Mirror3x3Icon, PyraminxIcon, OtherIcon} from "@icon"
 import type { Component } from "vue"
 
@@ -15,7 +16,7 @@ export type CubeData = {
     imageUrl?: string,
     generateScramble?: (movesCount?: number) => string,
     icon: Component,
-    loadTrainingSets?: () => Promise<TrainingSet[]>
+    trainingSets?: TrainingSet[]
 }
 
 export const cubesDefinition: Record<string, CubeData> = {
@@ -31,7 +32,7 @@ export const cubesDefinition: Record<string, CubeData> = {
         generateScramble: generateScramble3x3x3,
         icon: Cube3x3x3Icon,
         imageUrl: '/img/puzzle/3x3x3.png',
-        loadTrainingSets: () => import("./3x3x3/training").then(m => m.default)
+        trainingSets: trainingSets333
     },
     "4x4x4": {
         id: "4x4x4",

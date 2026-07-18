@@ -238,8 +238,10 @@
   "training": {
     "title": "算法训练",
     "subtitle": "选择要练习的魔方",
+    "viewAll": "查看全部",
     "sets": "{count} 组",
     "solveCount": "{count} 次还原",
+    "caseCount": "{count} 种情况",
     "setup": "Setup",
     "regenerateSetup": "新打乱",
     "train": "训练",
@@ -252,7 +254,7 @@
       },
       "pll": {
         "name": "PLL",
-        "description": "练习 PLL 公式",
+        "description": "顶层排列：在顶面已定向后，调整顶层各块的位置，完成最后一步还原。",
         "cases": {
           "u-clockwise": "U 情况（顺时针）",
           "u-anticlockwise": "U 情况（逆时针）",
@@ -279,7 +281,7 @@
       },
       "oll": {
         "name": "OLL",
-        "description": "练习 OLL 公式",
+        "description": "顶层定向：调整顶层所有块的朝向，使顶面变成单一颜色。",
         "cases": {
           "point-1": "点 1",
           "point-2": "点 2",
@@ -378,7 +380,17 @@
     "puzzle": {
       "3x3x3": {
         "title": "3x3x3 公式训练",
-        "description": "训练 3x3x3 的 OLL 和 PLL 公式，掌握每个情形，提升你的复原成绩。"
+        "description": "训练 3x3x3 的 OLL 和 PLL 公式，掌握每个情形，提升你的复原成绩。",
+        "sets": {
+          "pll": {
+            "title": "3x3x3 PLL 公式训练",
+            "description": "学习并练习魔方顶层排列的全部 21 个 PLL 公式。反复训练每个情形，加快你的复原速度。"
+          },
+          "oll": {
+            "title": "3x3x3 OLL 公式训练",
+            "description": "学习并练习魔方顶层定向的全部 57 个 OLL 公式。掌握每个情形，提升你的复原成绩。"
+          }
+        }
       }
     },
     "settings": {

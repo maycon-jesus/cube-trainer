@@ -20,7 +20,7 @@
 
     <v-row>
       <v-col
-        v-for="algorithm in set.algorithms"
+        v-for="algorithm in algorithms"
         :key="algorithm.id"
         cols="12"
         sm="6"
@@ -47,6 +47,8 @@ const props = defineProps<{
   set: TrainingSet
   selectedIds?: Set<string>
 }>()
+
+const algorithms = computed<TrainingAlgorithm[]>(() => props.set.algorithms)
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 const setName = computed(() => props.set.nameKey ? t(props.set.nameKey) : props.set.name ?? '')

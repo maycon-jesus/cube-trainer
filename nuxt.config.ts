@@ -2,12 +2,7 @@ import { fileURLToPath } from "node:url";
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
 import { themes, defaultThemeName } from "./config/themes";
-
-function getAllRoutesLocale(route: string){
-  const locales = ['pt', 'es', 'zh']
-  const routes = [route, ...locales.map(locale => `/${locale}${route}`)]
-  return routes
-}
+import { getPrerenderRoutes } from "./lib/prerenderRoutes";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -130,9 +125,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: [
-        ...getAllRoutesLocale('/training/3x3x3'),
-      ]
+      routes: getPrerenderRoutes()
     }
   },
   i18n: {

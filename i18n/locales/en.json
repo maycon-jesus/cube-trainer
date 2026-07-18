@@ -238,8 +238,10 @@
   "training": {
     "title": "Algorithm training",
     "subtitle": "Choose a puzzle to practice",
+    "viewAll": "View all",
     "sets": "{count} set | {count} sets",
     "solveCount": "{count} solve | {count} solves",
+    "caseCount": "{count} case | {count} cases",
     "setup": "Setup",
     "regenerateSetup": "New setup",
     "train": "Train",
@@ -252,7 +254,7 @@
       },
       "pll": {
         "name": "PLL",
-        "description": "Practice PLL algorithms",
+        "description": "Permutation of the Last Layer: permute the last-layer pieces to finish the solve once the top face is oriented.",
         "cases": {
           "u-clockwise": "U case (clockwise)",
           "u-anticlockwise": "U case (counter-clockwise)",
@@ -279,7 +281,7 @@
       },
       "oll": {
         "name": "OLL",
-        "description": "Practice OLL algorithms",
+        "description": "Orientation of the Last Layer: orient every last-layer piece so the top face becomes a single solid color.",
         "cases": {
           "point-1": "Point 1",
           "point-2": "Point 2",
@@ -378,7 +380,17 @@
     "puzzle": {
       "3x3x3": {
         "title": "3x3x3 Algorithm Training",
-        "description": "Train the 3x3x3 OLL and PLL algorithms and master every case to improve your solve times."
+        "description": "Train the 3x3x3 OLL and PLL algorithms and master every case to improve your solve times.",
+        "sets": {
+          "pll": {
+            "title": "3x3x3 PLL Algorithm Training",
+            "description": "Learn and practice all 21 PLL algorithms to permute the last layer of the Rubik's Cube. Drill every case to speed up your solves."
+          },
+          "oll": {
+            "title": "3x3x3 OLL Algorithm Training",
+            "description": "Learn and practice all 57 OLL algorithms to orient the last layer of the Rubik's Cube. Master every case to improve your times."
+          }
+        }
       }
     },
     "settings": {

@@ -1,38 +1,35 @@
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
+    <v-btn
+      variant="text"
+      class="mb-2 px-2 text-none"
+      prepend-icon="mdi-arrow-left"
+      :to="localePath('/training')"
+    >
+      {{ t('training.title') }}
+    </v-btn>
+
     <LayoutsPageHeader
       :title="t(`training.${puzzleId}.header.title`)"
       :subtitle="t(`training.${puzzleId}.header.subtitle`)"
-    />
+    >
+      <template #append>
+        <span
+          v-if="setItems.length"
+          class="training-set-count d-inline-flex align-center ga-2 text-body-medium font-weight-medium"
+        >
+          <v-icon icon="mdi-layers-triple-outline" size="18" />
+          {{ t('training.sets', setItems.length) }}
+        </span>
+      </template>
+    </LayoutsPageHeader>
 
-    <TrainingSetSelector
-      :sets="trainingSets"
-      class="mb-8"
-      @select="scrollToSet"
-    />
-
-    <TrainingSection
-      v-for="set in trainingSets"
-      :key="set.id"
-      :ref="(el) => registerSection(set.id, el)"
-      :set="set"
-      :selected-ids="selectedIds"
-      @add-to-list="toggleSelection"
-      @train="trainSingle"
-      @train-set="trainSet"
-    />
-
-    <TrainingSelectionToolbar
-      :count="selectedAlgorithms.length"
-      @train="trainSelected"
-      @clear="clearSelection"
-    />
+    <TrainingPuzzleSelector :items="setItems" />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { useCustomTimerStore } from '~/stores/customTimer';
-import { cubesDefinition, type TrainingAlgorithm, type TrainingSet } from '~~/lib/cube/cubesDefinition';
+import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -42,7 +39,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if(!puzzle.loadTrainingSets) {
+if (!puzzle.trainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -54,64 +51,31 @@ const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
-const trainingSets = ref<TrainingSet[]>([])
-puzzle.loadTrainingSets().then((sets) => {
-  trainingSets.value = sets
-})
-const sections = new Map<string, HTMLElement>()
-const customTimerStore = useCustomTimerStore()
+const trainingSets = puzzle.trainingSets
 
-// Algorithms picked via "add to list" build a selection surfaced in the toolbar.
-const selectedAlgorithms = ref<TrainingAlgorithm[]>([])
-const selectedIds = computed(() => new Set(selectedAlgorithms.value.map((a) => a.id)))
-
-function registerSection(id: string, el: Element | ComponentPublicInstance | null) {
-  const dom = el instanceof HTMLElement ? el : (el as ComponentPublicInstance | null)?.$el
-  if (dom instanceof HTMLElement) {
-    sections.set(id, dom)
-  } else {
-    sections.delete(id)
-  }
-}
-
-function scrollToSet(id: string) {
-  sections.get(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
-
-onMounted(()=>{
-  customTimerStore.useTrainingSetDefault(puzzleId)
-})
-
-function toggleSelection(algorithm: TrainingAlgorithm) {
-  const index = selectedAlgorithms.value.findIndex((a) => a.id === algorithm.id)
-  if (index >= 0) {
-    selectedAlgorithms.value.splice(index, 1)
-  } else {
-    selectedAlgorithms.value.push(algorithm)
-  }
-}
-
-function clearSelection() {
-  selectedAlgorithms.value = []
-}
-
-function trainSingle(algorithm: TrainingAlgorithm) {
-  customTimerStore.useTrainingSetDefault(puzzleId)
-  customTimerStore.addAlgorithmToTrainingSet(algorithm)
-  navigateTo(localePath({ name: 'training-timer' }))
-}
-
-function trainSelected() {
-  if (!selectedAlgorithms.value.length) return
-  customTimerStore.useTrainingSetDefault(puzzleId)
-  for (const algorithm of selectedAlgorithms.value) {
-    customTimerStore.addAlgorithmToTrainingSet(algorithm)
-  }
-  navigateTo(localePath({ name: 'training-timer' }))
-}
-
-function trainSet(set: TrainingSet) {
-  customTimerStore.useTrainingSet(set)
-  navigateTo(localePath({ name: 'training-timer' }))
-}
+// Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
+const setItems = computed(() =>
+  trainingSets.map((set) => {
+    const count = set.algorithms.length
+    return {
+      title: set.nameKey ? t(set.nameKey) : set.name ?? '',
+      value: set.id,
+      imageUrl: set.imageUrl || undefined,
+      path: localePath(`/training/${puzzleId}/${set.id}`),
+      meta: set.descriptionKey ? t(set.descriptionKey) : set.description ?? undefined,
+      badge: count != null ? t('training.caseCount', count) : undefined,
+      badgeIcon: 'mdi-view-grid-outline',
+    }
+  }),
+)
 </script>
+
+<style scoped lang="scss">
+.training-set-count {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: rgba(var(--v-theme-on-surface), 0.75);
+  background: rgba(var(--v-theme-on-surface), 0.05);
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+}
+</style>
