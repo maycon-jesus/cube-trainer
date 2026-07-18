@@ -48,10 +48,7 @@ const props = defineProps<{
   selectedIds?: Set<string>
 }>()
 
-const algorithms = ref<TrainingAlgorithm[]>([])
-watch(() => props.set, async (set) => {
-  algorithms.value = await set.algorithms()
-}, { immediate: true })
+const algorithms = computed<TrainingAlgorithm[]>(() => props.set.algorithms)
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 const setName = computed(() => props.set.nameKey ? t(props.set.nameKey) : props.set.name ?? '')

@@ -6,31 +6,24 @@ const localePath = useLocalePath()
 
 usePageSeo('training')
 
-const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadTrainingSets)
+const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.trainingSets)
 
-const setsByPuzzle = ref<Record<string, TrainingSet[]>>({})
-const caseCounts = ref<Record<string, number>>({})
+const setsByPuzzle: Record<string, TrainingSet[]> = {}
+const caseCounts: Record<string, number> = {}
 
-onMounted(async () => {
-  await Promise.all(
-    trainablePuzzles.map(async (puzzle) => {
-      const sets = await puzzle.loadTrainingSets!()
-      setsByPuzzle.value[puzzle.id] = sets
-      // Load each set's algorithms once to surface the case count on the card.
-      await Promise.all(
-        sets.map(async (set) => {
-          const algorithms = await set.algorithms()
-          caseCounts.value[`${puzzle.id}:${set.id}`] = algorithms.length
-        }),
-      )
-    }),
-  )
-})
+for (const puzzle of trainablePuzzles) {
+  const sets = puzzle.trainingSets!
+  setsByPuzzle[puzzle.id] = sets
+  // Surface each set's case count on the card.
+  for (const set of sets) {
+    caseCounts[`${puzzle.id}:${set.id}`] = set.algorithms.length
+  }
+}
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 function setItems(puzzleId: string) {
-  return (setsByPuzzle.value[puzzleId] ?? []).map((set) => {
-    const count = caseCounts.value[`${puzzleId}:${set.id}`]
+  return (setsByPuzzle[puzzleId] ?? []).map((set) => {
+    const count = caseCounts[`${puzzleId}:${set.id}`]
     return {
       title: set.nameKey ? t(set.nameKey) : set.name ?? '',
       value: set.id,

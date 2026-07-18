@@ -40,7 +40,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.loadTrainingSets) {
+if (!puzzle.trainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -63,8 +63,7 @@ onMounted(() => {
   customTimerStore.useTrainingSetDefault(puzzleId)
 })
 
-const sets = await puzzle.loadTrainingSets()
-const found = sets.find((set) => set.id === setId)
+const found = puzzle.trainingSets.find((set) => set.id === setId)
 if (!found) {
   throw createError({
     statusCode: 404,

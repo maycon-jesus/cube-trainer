@@ -15,7 +15,7 @@
     >
       <template #append>
         <span
-          v-if="!loading && setItems.length"
+          v-if="setItems.length"
           class="training-set-count d-inline-flex align-center ga-2 text-body-medium font-weight-medium"
         >
           <v-icon icon="mdi-layers-triple-outline" size="18" />
@@ -24,12 +24,12 @@
       </template>
     </LayoutsPageHeader>
 
-    <TrainingPuzzleSelector :items="setItems" :loading="loading" />
+    <TrainingPuzzleSelector :items="setItems" />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { cubesDefinition, type TrainingSet } from '~~/lib/cube/cubesDefinition';
+import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -39,7 +39,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.loadTrainingSets) {
+if (!puzzle.trainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -51,27 +51,12 @@ const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
-const trainingSets = ref<TrainingSet[]>([])
-const caseCounts = ref<Record<string, number>>({})
-const loading = ref(true)
-
-onMounted(async () => {
-  const sets = await puzzle.loadTrainingSets!()
-  trainingSets.value = sets
-  // Load each set's algorithms once to surface the case count on the card.
-  await Promise.all(
-    sets.map(async (set) => {
-      const algorithms = await set.algorithms()
-      caseCounts.value[set.id] = algorithms.length
-    }),
-  )
-  loading.value = false
-})
+const trainingSets = puzzle.trainingSets
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 const setItems = computed(() =>
-  trainingSets.value.map((set) => {
-    const count = caseCounts.value[set.id]
+  trainingSets.map((set) => {
+    const count = set.algorithms.length
     return {
       title: set.nameKey ? t(set.nameKey) : set.name ?? '',
       value: set.id,
