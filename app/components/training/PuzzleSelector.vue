@@ -1,14 +1,6 @@
 <template>
     <div class="puzzle-grid">
-        <template v-if="props.loading">
-            <v-skeleton-loader
-                v-for="n in props.skeletonCount ?? 3"
-                :key="`skeleton-${n}`"
-                type="image, list-item-two-line"
-                class="puzzle-skeleton rounded-xl"
-            />
-        </template>
-        <template v-for="value in props.items" v-else :key="value.value">
+        <template v-for="value in props.items" :key="value.value">
             <NuxtLink
                 v-if="!value.disabled && value.path"
                 :to="value.path"
@@ -54,8 +46,6 @@ type Puzzle = {
 }
 const props = defineProps<{
     items: Puzzle[]
-    loading?: boolean
-    skeletonCount?: number
 }>()
 defineEmits<{
     (e: 'select', value: string): void
@@ -67,16 +57,6 @@ defineEmits<{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
-}
-
-.puzzle-skeleton {
-    border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-    overflow: hidden;
-
-    :deep(.v-skeleton-loader__image) {
-        aspect-ratio: 1 / 1;
-        height: auto;
-    }
 }
 
 @media (max-width: 599px) {
