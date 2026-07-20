@@ -1,40 +1,44 @@
 <template>
   <v-dialog v-model="model" max-width="760" scrollable>
-    <v-card>
-      <v-card-item>
-        <template #prepend>
-          <v-icon :icon="isEdit ? 'mdi-playlist-edit' : 'mdi-playlist-plus'" color="primary" />
-        </template>
-        <v-card-title>{{ isEdit ? t('training.playlists.edit') : t('training.playlists.create') }}</v-card-title>
-      </v-card-item>
-
-      <v-card-text>
-        <v-text-field
-          v-model="name"
-          :label="t('training.playlists.nameLabel')"
-          variant="outlined"
-          autofocus
-          hide-details
-          class="mb-4"
-        />
-
-        <v-select
-          v-model="puzzleId"
-          :items="puzzleItems"
-          :label="t('training.playlists.puzzleLabel')"
-          variant="outlined"
-          hide-details
-          :disabled="puzzleItems.length <= 1"
-          class="mb-4"
-        />
+    <CustomCard
+      :title="isEdit ? t('training.playlists.edit') : t('training.playlists.create')"
+      :icon="isEdit ? 'mdi-playlist-edit' : 'mdi-playlist-plus'"
+      icon-color="primary"
+    >
+        <v-row dense>
+          <v-col cols="12" sm="7">
+            <v-text-field
+              v-model="name"
+              :label="t('training.playlists.nameLabel')"
+              variant="outlined"
+              autofocus
+              hide-details
+            />
+          </v-col>
+          <v-col cols="12" sm="5">
+            <v-select
+              v-model="puzzleId"
+              :items="puzzleItems"
+              :label="t('training.playlists.puzzleLabel')"
+              variant="outlined"
+              hide-details
+              :disabled="puzzleItems.length <= 1"
+            />
+          </v-col>
+        </v-row>
 
         <template v-if="sets.length">
-          <div class="d-flex align-center justify-space-between mb-2">
-            <span class="text-body-medium font-weight-medium">{{ t('training.playlists.selectAlgorithms') }}</span>
-            <span class="text-body-medium text-medium-emphasis">
-              {{ t('training.playlists.selectedCount', selectedCount) }}
-            </span>
-          </div>
+          <v-row dense align="center" class="mt-4 mb-2">
+            <v-col cols="auto">
+              <span class="text-body-medium font-weight-medium">{{ t('training.playlists.selectAlgorithms') }}</span>
+            </v-col>
+            <v-spacer />
+            <v-col cols="auto">
+              <span class="text-body-medium text-medium-emphasis">
+                {{ t('training.playlists.selectedCount', selectedCount) }}
+              </span>
+            </v-col>
+          </v-row>
 
           <v-expansion-panels multiple>
             <v-expansion-panel v-for="set in sets" :key="set.id">
@@ -55,39 +59,45 @@
                 </div>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <div class="playlist-alg-grid">
-                  <button
+                <v-row dense>
+                  <v-col
                     v-for="alg in set.algorithms"
                     :key="alg.id"
-                    type="button"
-                    class="playlist-alg d-flex flex-column align-center ga-1 pa-2 rounded"
-                    :class="{ 'playlist-alg--selected': isSelected(set.id, alg.id) }"
-                    @click="toggleAlgorithm(set.id, alg.id)"
+                    cols="4"
+                    sm="3"
+                    md="2"
                   >
-                    <nuxt-img
-                      :src="alg.imageUrl"
-                      :alt="algName(alg)"
-                      width="64"
-                      height="64"
-                      class="rounded"
-                    />
-                    <span class="playlist-alg__name text-body-small text-center">{{ algName(alg) }}</span>
-                    <v-icon
-                      v-if="isSelected(set.id, alg.id)"
-                      icon="mdi-check-circle"
-                      color="primary"
-                      size="18"
-                      class="playlist-alg__check"
-                    />
-                  </button>
-                </div>
+                    <button
+                      type="button"
+                      class="playlist-alg d-flex flex-column align-center ga-1 pa-2 rounded"
+                      :class="{ 'playlist-alg--selected': isSelected(set.id, alg.id) }"
+                      @click="toggleAlgorithm(set.id, alg.id)"
+                    >
+                      <nuxt-img
+                        :src="alg.imageUrl"
+                        :alt="algName(alg)"
+                        width="64"
+                        height="64"
+                        class="rounded"
+                      />
+                      <span class="playlist-alg__name text-body-small text-center">{{ algName(alg) }}</span>
+                      <v-icon
+                        v-if="isSelected(set.id, alg.id)"
+                        icon="mdi-check-circle"
+                        color="primary"
+                        size="18"
+                        class="playlist-alg__check"
+                      />
+                    </button>
+                  </v-col>
+                </v-row>
               </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
         </template>
-      </v-card-text>
 
-      <v-card-actions class="justify-end">
+      <template #actions>
+        <v-spacer />
         <v-btn :disabled="saving" @click="model = false">
           {{ t('training.playlists.cancel') }}
         </v-btn>
@@ -100,8 +110,8 @@
         >
           {{ isEdit ? t('training.playlists.saveChanges') : t('training.playlists.save') }}
         </v-btn>
-      </v-card-actions>
-    </v-card>
+      </template>
+    </CustomCard>
   </v-dialog>
 </template>
 
@@ -225,14 +235,9 @@ watch(puzzleId, () => {
 </script>
 
 <style scoped lang="scss">
-.playlist-alg-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-  gap: 8px;
-}
-
 .playlist-alg {
   position: relative;
+  width: 100%;
   border: 1px solid rgba(var(--v-theme-on-surface), 0.12);
   background: rgba(var(--v-theme-on-surface), 0.02);
   cursor: pointer;
