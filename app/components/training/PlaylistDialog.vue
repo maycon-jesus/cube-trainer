@@ -5,7 +5,7 @@
       :icon="isEdit ? 'mdi-playlist-edit' : 'mdi-playlist-plus'"
       icon-color="primary"
     >
-        <v-row dense>
+        <v-row dense class="pt-2">
           <v-col cols="12" sm="7">
             <v-text-field
               v-model="name"
