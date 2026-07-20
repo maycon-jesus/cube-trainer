@@ -350,6 +350,22 @@
       "createPlaylist": "创建训练列表",
       "clear": "清除选择",
       "comingSoon": "即将推出"
+    },
+    "playlists": {
+      "title": "我的训练列表",
+      "create": "创建训练列表",
+      "empty": "你还没有创建任何训练列表。创建一个来训练自定义的算法集合。",
+      "nameLabel": "训练列表名称",
+      "puzzleLabel": "魔方",
+      "selectAlgorithms": "选择算法",
+      "selectedCount": "已选择 {count} 个算法",
+      "save": "保存",
+      "cancel": "取消",
+      "delete": "删除",
+      "deleteConfirmTitle": "删除训练列表",
+      "deleteConfirmText": "确定要删除“{name}”吗？",
+      "edit": "编辑训练列表",
+      "saveChanges": "保存更改"
     }
   },
   "seo": {

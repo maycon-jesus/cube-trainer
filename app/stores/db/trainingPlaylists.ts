@@ -13,7 +13,6 @@ export type TrainingPlaylist = Stored<{
   createdAt: number
 }>
 
-// Shared instance
 const db = new Database<TrainingPlaylist>('training-playlists', 'training-playlists', {
   version: 1,
   indexes: [
@@ -26,8 +25,6 @@ export const useTrainingPlaylistsStore = defineStore('trainingPlaylists', () => 
   async function getAll(): Promise<TrainingPlaylist[]> {
     if (!import.meta.client) return []
     const all = await db.getAll()
-
-    // Newest first.
     return all.sort((a, b) => b.createdAt - a.createdAt)
   }
 

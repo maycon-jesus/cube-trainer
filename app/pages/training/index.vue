@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { cubesDefinition, type TrainingSet } from '~~/lib/cube/cubesDefinition';
+import { useTrainingPlaylistsStore, type TrainingPlaylist } from '~/stores/db/trainingPlaylists';
+import { useCustomTimerStore } from '~/stores/customTimer';
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -7,6 +9,51 @@ const localePath = useLocalePath()
 usePageSeo('training')
 
 const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.trainingSets)
+
+const playlistsStore = useTrainingPlaylistsStore()
+const customTimerStore = useCustomTimerStore()
+
+const playlists = ref<TrainingPlaylist[]>([])
+const dialogOpen = ref(false)
+const editTarget = ref<TrainingPlaylist | null>(null)
+const deleteTarget = ref<TrainingPlaylist | null>(null)
+const deleting = ref(false)
+
+async function refreshPlaylists() {
+  playlists.value = await playlistsStore.getAll()
+}
+
+onMounted(refreshPlaylists)
+
+function openCreate() {
+  editTarget.value = null
+  dialogOpen.value = true
+}
+
+function openEdit(playlist: TrainingPlaylist) {
+  editTarget.value = playlist
+  dialogOpen.value = true
+}
+
+function trainPlaylist(playlist: TrainingPlaylist) {
+  const sets = cubesDefinition[playlist.puzzleId]?.trainingSets ?? []
+  customTimerStore.useTrainingSetDefault(playlist.puzzleId)
+  for (const trainingCase of playlist.trainingCases) {
+    const set = sets.find((s) => s.id === trainingCase.trainingSetId)
+    const algorithm = set?.algorithms.find((a) => a.id === trainingCase.algorithmId)
+    if (algorithm) customTimerStore.addAlgorithmToTrainingSet(algorithm)
+  }
+  navigateTo(localePath({ name: 'training-timer' }))
+}
+
+async function confirmDelete() {
+  if (!deleteTarget.value?.id) return
+  deleting.value = true
+  await playlistsStore.remove(deleteTarget.value.id)
+  deleting.value = false
+  deleteTarget.value = null
+  await refreshPlaylists()
+}
 
 const setsByPuzzle: Record<string, TrainingSet[]> = {}
 const caseCounts: Record<string, number> = {}
@@ -41,6 +88,45 @@ function setItems(puzzleId: string) {
   <v-container class="py-6" style="max-width: 1200px;">
     <LayoutsPageHeader :title="t('training.title')" :subtitle="t('training.subtitle')" />
 
+    <section class="mb-10">
+      <div class="d-flex flex-wrap align-center ga-3 mb-4">
+        <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t('training.playlists.title') }}</h2>
+        <v-btn
+          color="primary"
+          variant="flat"
+          rounded="pill"
+          prepend-icon="mdi-playlist-plus"
+          class="ms-auto"
+          @click="openCreate"
+        >
+          {{ t('training.playlists.create') }}
+        </v-btn>
+      </div>
+
+      <v-row v-if="playlists.length">
+        <v-col
+          v-for="playlist in playlists"
+          :key="playlist.id"
+          cols="12"
+          sm="6"
+          lg="4"
+          xl="3"
+        >
+          <TrainingPlaylistCard
+            :playlist="playlist"
+            @train="trainPlaylist"
+            @edit="openEdit"
+            @delete="deleteTarget = $event"
+          />
+        </v-col>
+      </v-row>
+
+      <v-card v-else variant="tonal" rounded="lg" class="pa-6 text-center text-medium-emphasis">
+        <v-icon icon="mdi-playlist-music-outline" size="40" class="mb-2 d-block mx-auto" />
+        {{ t('training.playlists.empty') }}
+      </v-card>
+    </section>
+
     <section
       v-for="puzzle in trainablePuzzles"
       :key="puzzle.id"
@@ -62,6 +148,30 @@ function setItems(puzzleId: string) {
 
       <TrainingPuzzleSelector :items="setItems(puzzle.id)" />
     </section>
+
+    <TrainingPlaylistDialog v-model="dialogOpen" :playlist="editTarget" @saved="refreshPlaylists" />
+
+    <v-dialog :model-value="!!deleteTarget" max-width="440" @update:model-value="deleteTarget = null">
+      <v-card>
+        <v-card-item>
+          <template #prepend>
+            <v-icon icon="mdi-alert-outline" color="error" />
+          </template>
+          <v-card-title>{{ t('training.playlists.deleteConfirmTitle') }}</v-card-title>
+        </v-card-item>
+        <v-card-text class="text-body-medium text-medium-emphasis">
+          {{ t('training.playlists.deleteConfirmText', { name: deleteTarget?.name ?? '' }) }}
+        </v-card-text>
+        <v-card-actions class="justify-end">
+          <v-btn :disabled="deleting" @click="deleteTarget = null">
+            {{ t('training.playlists.cancel') }}
+          </v-btn>
+          <v-btn color="error" variant="flat" rounded="xl" :loading="deleting" @click="confirmDelete">
+            {{ t('training.playlists.delete') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 

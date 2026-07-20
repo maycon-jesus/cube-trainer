@@ -350,6 +350,22 @@
       "createPlaylist": "Crear playlist",
       "clear": "Limpiar selección",
       "comingSoon": "Próximamente"
+    },
+    "playlists": {
+      "title": "Mis playlists",
+      "create": "Crear playlist",
+      "empty": "Aún no has creado ninguna playlist. Crea una para entrenar un conjunto personalizado de algoritmos.",
+      "nameLabel": "Nombre de la playlist",
+      "puzzleLabel": "Puzzle",
+      "selectAlgorithms": "Selecciona los algoritmos",
+      "selectedCount": "{count} algoritmo seleccionado | {count} algoritmos seleccionados",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "deleteConfirmTitle": "Eliminar playlist",
+      "deleteConfirmText": "¿Seguro que quieres eliminar \"{name}\"?",
+      "edit": "Editar playlist",
+      "saveChanges": "Guardar cambios"
     }
   },
   "seo": {
