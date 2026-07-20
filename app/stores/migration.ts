@@ -1,6 +1,7 @@
 import { useConfigStore } from "./db/config"
 import { useSessionsStore } from "./db/sessions"
 import { useSolvesStore } from "./db/solves"
+import { useTrainingPlaylistsStore } from "./db/trainingPlaylists"
 
 function downloadFile(content:BlobPart[], filename:string, mimeType = 'text/plain') {
   const blob = new Blob(content, { type: mimeType });
@@ -68,6 +69,7 @@ export const useMigrationStore = defineStore('migration', () => {
     const modules: DatabaseMigration[] = [
         useSessionsStore(),
         useSolvesStore(),
+        useTrainingPlaylistsStore(),
         useConfigStore(),
     ]
 
