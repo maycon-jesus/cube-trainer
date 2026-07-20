@@ -27,10 +27,9 @@
           variant="tonal"
           rounded="pill"
           prepend-icon="mdi-playlist-plus"
-          disabled
+          @click="emit('create-playlist')"
         >
           {{ t('training.selection.createPlaylist') }}
-          <v-tooltip activator="parent" location="top">{{ t('training.selection.comingSoon') }}</v-tooltip>
         </v-btn>
 
         <v-btn
@@ -55,7 +54,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'train' | 'clear'): void
+  (e: 'train' | 'clear' | 'create-playlist'): void
 }>()
 </script>
 

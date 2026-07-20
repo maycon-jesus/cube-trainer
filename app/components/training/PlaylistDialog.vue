@@ -110,7 +110,10 @@ import { cubesDefinition, type TrainingAlgorithm, type TrainingSet } from '~~/li
 import { useTrainingPlaylistsStore, type TrainingCase, type TrainingPlaylist } from '~/stores/db/trainingPlaylists';
 
 const model = defineModel<boolean>()
-const props = defineProps<{ playlist?: TrainingPlaylist | null }>()
+const props = defineProps<{
+  playlist?: TrainingPlaylist | null
+  preset?: { puzzleId: string, trainingCases: TrainingCase[] } | null
+}>()
 const emit = defineEmits<{ (e: 'saved'): void }>()
 
 const { t } = useI18n()
@@ -180,6 +183,12 @@ function hydrate() {
     puzzleId.value = props.playlist.puzzleId
     selectedKeys.value = new Set(
       props.playlist.trainingCases.map((c) => key(c.trainingSetId, c.algorithmId)),
+    )
+  } else if (props.preset) {
+    name.value = ''
+    puzzleId.value = props.preset.puzzleId
+    selectedKeys.value = new Set(
+      props.preset.trainingCases.map((c) => key(c.trainingSetId, c.algorithmId)),
     )
   } else {
     name.value = ''

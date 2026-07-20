@@ -22,6 +22,13 @@
       :count="selectedAlgorithms.length"
       @train="trainSelected"
       @clear="clearSelection"
+      @create-playlist="playlistDialogOpen = true"
+    />
+
+    <TrainingPlaylistDialog
+      v-model="playlistDialogOpen"
+      :preset="playlistPreset"
+      @saved="onPlaylistSaved"
     />
   </v-container>
 </template>
@@ -29,6 +36,7 @@
 <script setup lang="ts">
 import { useCustomTimerStore } from '~/stores/customTimer';
 import { cubesDefinition, type TrainingAlgorithm, type TrainingSet } from '~~/lib/cube/cubesDefinition';
+import type { TrainingCase } from '~/stores/db/trainingPlaylists';
 
 const route = useRoute()
 const puzzleId = route.params.puzzle as string
@@ -59,6 +67,12 @@ const trainingSet = ref<TrainingSet | null>(null)
 const selectedAlgorithms = ref<TrainingAlgorithm[]>([])
 const selectedIds = computed(() => new Set(selectedAlgorithms.value.map((a) => a.id)))
 
+const playlistDialogOpen = ref(false)
+const playlistPreset = computed(() => ({
+  puzzleId,
+  trainingCases: selectedAlgorithms.value.map<TrainingCase>((a) => ({ trainingSetId: setId, algorithmId: a.id })),
+}))
+
 onMounted(() => {
   customTimerStore.useTrainingSetDefault(puzzleId)
 })
@@ -83,6 +97,11 @@ function toggleSelection(algorithm: TrainingAlgorithm) {
 
 function clearSelection() {
   selectedAlgorithms.value = []
+}
+
+function onPlaylistSaved() {
+  playlistDialogOpen.value = false
+  clearSelection()
 }
 
 function trainSingle(algorithm: TrainingAlgorithm) {
