@@ -247,6 +247,25 @@
     "train": "训练",
     "trainAll": "训练全部 {set}",
     "addToList": "添加到列表",
+    "2x2x2": {
+      "header": {
+        "title": "训练 2x2x2 算法",
+        "subtitle": "逐组练习算法，掌握每一种情况"
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "顶层定向：调整顶层所有角块的朝向，使顶面变成单一颜色。",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "U 情况",
+          "oll-4": "T 情况",
+          "oll-5": "H 情况",
+          "oll-6": "Pi 情况",
+          "oll-7": "L 情况"
+        }
+      }
+    },
     "3x3x3": {
       "header": {
         "title": "训练 3x3x3 算法",
@@ -394,6 +413,16 @@
       "description": "练习特定公式与情形，提升你的复原成绩。"
     },
     "puzzle": {
+      "2x2x2": {
+        "title": "2x2x2 公式训练",
+        "description": "训练 2x2x2 的 OLL 公式，掌握每个情形，提升你的复原成绩。",
+        "sets": {
+          "oll": {
+            "title": "2x2x2 OLL 公式训练",
+            "description": "学习并练习 2x2 魔方顶层定向的全部 7 个 OLL 公式。掌握每个情形，提升你的复原成绩。"
+          }
+        }
+      },
       "3x3x3": {
         "title": "3x3x3 公式训练",
         "description": "训练 3x3x3 的 OLL 和 PLL 公式，掌握每个情形，提升你的复原成绩。",

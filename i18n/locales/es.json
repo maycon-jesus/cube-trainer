@@ -247,6 +247,25 @@
     "train": "Entrenar",
     "trainAll": "Entrenar todo el {set}",
     "addToList": "Añadir a la lista",
+    "2x2x2": {
+      "header": {
+        "title": "Entrenar algoritmos 2x2x2",
+        "subtitle": "Practica los algoritmos por conjunto y domina cada caso"
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "Orientación de la Última Capa: orienta todas las esquinas de la última capa para que la cara superior quede de un solo color.",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "Caso U",
+          "oll-4": "Caso T",
+          "oll-5": "Caso H",
+          "oll-6": "Caso Pi",
+          "oll-7": "Caso L"
+        }
+      }
+    },
     "3x3x3": {
       "header": {
         "title": "Entrenar algoritmos 3x3x3",
@@ -394,6 +413,16 @@
       "description": "Practica algoritmos y casos específicos para mejorar tus tiempos de resolución."
     },
     "puzzle": {
+      "2x2x2": {
+        "title": "Entrenamiento de Algoritmos 2x2x2",
+        "description": "Entrena los algoritmos OLL del 2x2x2 y domina cada caso para mejorar tus tiempos.",
+        "sets": {
+          "oll": {
+            "title": "Entrenamiento de Algoritmos OLL del 2x2x2",
+            "description": "Aprende y practica los 7 algoritmos OLL para orientar la última capa del cubo 2x2. Domina cada caso para mejorar tus tiempos."
+          }
+        }
+      },
       "3x3x3": {
         "title": "Entrenamiento de Algoritmos 3x3x3",
         "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",

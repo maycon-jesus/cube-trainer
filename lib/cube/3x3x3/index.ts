@@ -13,6 +13,8 @@ import {
   type MovesCollection,
 } from '../cube'
 
+import {randomFromArr} from "../../utils/array"
+
 export enum FaceIndex {
   L = 0,
   U,
@@ -253,11 +255,6 @@ export interface RenderSvgOptions {
 
 export function createCube(): Cube333 {
   return new Cube333()
-}
-
-function randomFromArr<T>(arr: T[]): [T, number] {
-  const n = Math.floor(Math.random() * arr.length)
-  return [arr[n]!, n]
 }
 
 export function generateScramble(movesCount: number = 20): string {

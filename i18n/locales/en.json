@@ -247,6 +247,25 @@
     "train": "Train",
     "trainAll": "Train all {set}",
     "addToList": "Add to list",
+    "2x2x2": {
+      "header": {
+        "title": "Train 2x2x2 algorithms",
+        "subtitle": "Practice algorithms set by set and master every case"
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "Orientation of the Last Layer: orient every last-layer corner so the top face becomes a single solid color.",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "U case",
+          "oll-4": "T case",
+          "oll-5": "H case",
+          "oll-6": "Pi case",
+          "oll-7": "L case"
+        }
+      }
+    },
     "3x3x3": {
       "header": {
         "title": "Train 3x3x3 algorithms",
@@ -394,6 +413,16 @@
       "description": "Practice specific algorithms and cases to improve your solve times."
     },
     "puzzle": {
+      "2x2x2": {
+        "title": "2x2x2 Algorithm Training",
+        "description": "Train the 2x2x2 OLL algorithms and master every case to improve your solve times.",
+        "sets": {
+          "oll": {
+            "title": "2x2x2 OLL Algorithm Training",
+            "description": "Learn and practice all 7 OLL algorithms to orient the last layer of the 2x2 cube. Master every case to improve your times."
+          }
+        }
+      },
       "3x3x3": {
         "title": "3x3x3 Algorithm Training",
         "description": "Train the 3x3x3 OLL and PLL algorithms and master every case to improve your solve times.",

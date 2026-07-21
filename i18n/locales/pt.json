@@ -247,6 +247,25 @@
     "train": "Treinar",
     "trainAll": "Treinar todo o {set}",
     "addToList": "Adicionar à lista",
+    "2x2x2": {
+      "header": {
+        "title": "Treinar algoritmos 2x2x2",
+        "subtitle": "Pratique os algoritmos por conjunto e domine cada caso"
+      },
+      "oll": {
+        "name": "OLL",
+        "description": "Orientação da Última Camada: oriente todos os cantos da última camada para deixar o topo com uma única cor.",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "Caso U",
+          "oll-4": "Caso T",
+          "oll-5": "Caso H",
+          "oll-6": "Caso Pi",
+          "oll-7": "Caso L"
+        }
+      }
+    },
     "3x3x3": {
       "header": {
         "title": "Treinar algoritmos 3x3x3",
@@ -394,6 +413,16 @@
       "description": "Treine algoritmos e casos específicos para melhorar seus tempos."
     },
     "puzzle": {
+      "2x2x2": {
+        "title": "Treino de Algoritmos 2x2x2",
+        "description": "Treine os algoritmos de OLL do 2x2x2 e domine cada caso para melhorar seus tempos.",
+        "sets": {
+          "oll": {
+            "title": "Treino de Algoritmos OLL do 2x2x2",
+            "description": "Aprenda e pratique todos os 7 algoritmos OLL para orientar a última camada do cubo 2x2. Domine cada caso para melhorar seus tempos."
+          }
+        }
+      },
       "3x3x3": {
         "title": "Treino de Algoritmos 3x3x3",
         "description": "Treine os algoritmos de OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos.",

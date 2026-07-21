@@ -35,12 +35,10 @@ export type CubeFaceFiller<Piece> = Piece | Piece[]
 
 export class CubeFace<Piece> {
   private size: number
-  private filler: CubeFaceFiller<Piece>
   pieces: Piece[]
 
   constructor(size: number, filler: CubeFaceFiller<Piece>) {
     this.size = size
-    this.filler = filler
 
     this.pieces = new Array<Piece>(size)
     if (Array.isArray(filler)) {
