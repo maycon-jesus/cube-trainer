@@ -5,8 +5,6 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - esbuild@0.28.1
-overrides:
-  h3: 1.15.11
 supportedArchitectures:
   os:
     - current
