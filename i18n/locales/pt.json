@@ -198,7 +198,8 @@
     "hint": "Segure {key} e solte para iniciar · pressione para parar",
     "hintKey": "espaço",
     "scramble": {
-      "title": "Embaralhamento"
+      "title": "Embaralhamento",
+      "preview": "Pré-visualização"
     },
     "stats": {
       "title": "Estatísticas",
@@ -211,6 +212,9 @@
       "clearConfirm": "Apagar todos os tempos?",
       "remove": "Remover",
       "empty": "Nenhum tempo ainda. Resolva o cubo!"
+    },
+    "actions": {
+      "ok": "OK"
     }
   },
   "solve": {

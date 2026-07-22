@@ -198,7 +198,8 @@
     "hint": "Hold {key} and release to start · press to stop",
     "hintKey": "space",
     "scramble": {
-      "title": "Scramble"
+      "title": "Scramble",
+      "preview": "Preview"
     },
     "stats": {
       "title": "Statistics",
@@ -211,6 +212,9 @@
       "clearConfirm": "Delete all times?",
       "remove": "Remove",
       "empty": "No times yet. Solve the cube!"
+    },
+    "actions": {
+      "ok": "OK"
     }
   },
   "solve": {

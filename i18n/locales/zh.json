@@ -198,7 +198,8 @@
     "hint": "按住{key}并松开以开始 · 按下以停止",
     "hintKey": "空格键",
     "scramble": {
-      "title": "打乱"
+      "title": "打乱",
+      "preview": "预览"
     },
     "stats": {
       "title": "统计",
@@ -211,6 +212,9 @@
       "clearConfirm": "删除所有成绩？",
       "remove": "移除",
       "empty": "暂无成绩，去复原魔方吧！"
+    },
+    "actions": {
+      "ok": "确定"
     }
   },
   "solve": {

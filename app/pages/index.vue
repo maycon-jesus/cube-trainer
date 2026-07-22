@@ -27,18 +27,20 @@
             <!-- Timer surface -->
             <v-row density="comfortable">
               <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @start="started=true" @stop="started=false" />
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'normal'" :puzzle="configStore.puzzle" @solve="resolved" @penalty="setLastPenalty" @delete="deleteLast" @start="started=true" @stop="started=false" />
             </v-col>
             </v-row>
 
             <!-- Scramble preview -->
             <v-row density="comfortable">
               <v-col cols="12">
-                <v-card v-if="configStore.puzzle === '3x3x3'" class="pa-4 d-flex justify-center">
-                  <ClientOnly>
-                    <ScrambleCube :scramble="scramble" />
-                  </ClientOnly>
-                </v-card>
+                <CustomCard v-if="configStore.puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
+                  <div class="d-flex justify-center py-2">
+                    <ClientOnly>
+                      <ScrambleCube :scramble="scramble" class="scramble-preview" />
+                    </ClientOnly>
+                  </div>
+                </CustomCard>
               </v-col>
             </v-row>
           </v-col>
@@ -92,8 +94,21 @@ async function resolved(solve: Solve) {
   await refrehSolves()
 }
 
+async function setLastPenalty(penalty: Solve['penalty']) {
+  const last = solves.value[0]
+  if (!last) return
+  await solvesStore.update({ ...last, penalty })
+  await refrehSolves()
+}
+
+async function deleteLast() {
+  const last = solves.value[0]
+  if (last?.id !== undefined) await solvesStore.remove(last.id)
+  await refrehSolves()
+}
+
 async function refrehSolves() {
-  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '', '')
+  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
 }
 
 watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{
@@ -112,5 +127,11 @@ watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{
   height: 99vh;
   z-index: 10000;
   border: 0.5rem solid rgb(var(--v-theme-primary));
+}
+
+.scramble-preview {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
 }
 </style>

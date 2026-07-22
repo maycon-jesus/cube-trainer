@@ -9,6 +9,7 @@ export type SolvesFilter = {
   sessionId?: number
   puzzle?: string
   trainingAlgorithmId?: string
+  trainingAlgorithmIds?: string[]
 }
 
 export type Solve = Stored<{
@@ -105,6 +106,7 @@ export const useSolvesStore = defineStore('solves', () => {
       if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
       if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
       if(filter.trainingAlgorithmId && solve.trainingAlgorithmId !== filter.trainingAlgorithmId) return false
+      if(filter.trainingAlgorithmIds && !filter.trainingAlgorithmIds.includes(solve.trainingAlgorithmId) ) return false
       return true
     }
   }

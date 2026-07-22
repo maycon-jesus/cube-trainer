@@ -41,18 +41,20 @@
             <!-- Timer surface -->
             <v-row density="comfortable">
               <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @start="started=true" @stop="started=false" />
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @penalty="setLastPenalty" @delete="deleteLast" @start="started=true" @stop="started=false" />
             </v-col>
             </v-row>
 
             <!-- Scramble preview -->
             <v-row density="comfortable">
               <v-col cols="12">
-                <v-card v-if="puzzle === '3x3x3'" class="pa-4 d-flex justify-center">
-                  <ClientOnly>
-                    <ScrambleCube :scramble="scramble" />
-                  </ClientOnly>
-                </v-card>
+                <CustomCard v-if="puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
+                  <div class="d-flex justify-center py-2">
+                    <ClientOnly>
+                      <ScrambleCube :scramble="scramble" class="scramble-preview" />
+                    </ClientOnly>
+                  </div>
+                </CustomCard>
               </v-col>
             </v-row>
           </v-col>
@@ -129,8 +131,29 @@ async function resolved(solve: Solve) {
   await refreshSolves()
 }
 
+async function setLastPenalty(penalty: Solve['penalty']) {
+  const last = solves.value[0]
+  if (!last) return
+  await solvesStore.update({ ...last, penalty })
+  await refreshSolves()
+}
+
+async function deleteLast() {
+  const last = solves.value[0]
+  if (last?.id !== undefined) await solvesStore.remove(last.id)
+  await refreshSolves()
+}
+
 async function refreshSolves() {
-  solves.value = await solvesStore.getAll('training', configStore.sessionId, puzzle.value, currentAlgorithm.value?.id ?? '')
+  const trainingAlgorithmIds = trainingSet.value?.algorithms.map((algorithm) => algorithm.id) ?? []
+  solves.value = await solvesStore.getAllWithFilter({
+    type: 'training',
+    sessionId: configStore.sessionId,
+    puzzle: puzzle.value,
+    trainingAlgorithmIds,
+    pageSize: 1000,
+    page: 1,
+  })
 }
 
 watch([() => configStore.sessionId, () => trainingSet.value?.id], async () => {
@@ -164,5 +187,11 @@ const currentAlgorithmName = computed(() => {
   height: 99vh;
   z-index: 10000;
   border: 0.5rem solid rgb(var(--v-theme-primary));
+}
+
+.scramble-preview {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
 }
 </style>

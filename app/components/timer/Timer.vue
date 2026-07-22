@@ -1,20 +1,48 @@
 <template>
     <v-card
         class="timer-surface d-flex flex-column align-center justify-center flex-grow-1 pa-4"
+        :class="`is-${phase}`"
         @touchstart.prevent="onTouchStart" @touchend.prevent="onTouchEnd">
         <div class="timer-value font-weight-bold" :class="timerColor">
             {{ display }}
         </div>
-        <i18n-t keypath="timer.hint" tag="div" class="text-medium-emphasis mt-4" scope="global">
-            <template #key>
-                <kbd>{{ t('timer.hintKey') }}</kbd>
-            </template>
-        </i18n-t>
+        <Transition name="hint-fade" mode="out-in">
+            <div v-if="showActions" key="actions" class="timer-actions mt-6" @touchstart.stop @touchend.stop>
+                <v-btn
+                    size="small" class="text-none" color="success"
+                    :variant="lastSolve?.penalty === 'none' ? 'flat' : 'outlined'"
+                    @click="setPenalty('none')">
+                    {{ t('timer.actions.ok') }}
+                </v-btn>
+                <v-btn
+                    size="small" class="text-none" color="warning"
+                    :variant="lastSolve?.penalty === '+2' ? 'flat' : 'outlined'"
+                    @click="setPenalty('+2')">
+                    +2
+                </v-btn>
+                <v-btn
+                    size="small" class="text-none" color="error"
+                    :variant="lastSolve?.penalty === 'dnf' ? 'flat' : 'outlined'"
+                    @click="setPenalty('dnf')">
+                    DNF
+                </v-btn>
+                <v-btn
+                    size="small" variant="text" color="error" icon="mdi-delete-outline"
+                    :title="t('timer.solves.remove')" @click="deleteSolve()" />
+            </div>
+            <i18n-t
+                v-else-if="phase !== 'running'"
+                key="hint" keypath="timer.hint" tag="div" class="timer-hint mt-6" scope="global">
+                <template #key>
+                    <kbd>{{ t('timer.hintKey') }}</kbd>
+                </template>
+            </i18n-t>
+        </Transition>
     </v-card>
 </template>
 
 <script setup lang="ts">
-import type { Type, Solve } from '~/stores/db/solves';
+import type { Type, Solve, Penalty } from '~/stores/db/solves';
 
 const { t } = useI18n()
 
@@ -28,8 +56,24 @@ const props = defineProps<{
 }>()
 const emits = defineEmits<{
     (e: 'solve', solve: Solve): void
-    (e: 'start' | 'stop'): void
+    (e: 'start' | 'stop' | 'delete'): void
+    (e: 'penalty', penalty: Penalty): void
 }>()
+
+// Quick-adjust controls for the just-finished solve (below the time).
+const showActions = computed(() => phase.value === 'idle' && !!props.lastSolve)
+
+function blurActive() {
+  (document.activeElement as HTMLElement | null)?.blur()
+}
+function setPenalty(penalty: Penalty) {
+  emits('penalty', penalty)
+  blurActive()
+}
+function deleteSolve() {
+  emits('delete')
+  blurActive()
+}
 
 // --- Timer state machine --------------------------------------------------
 // idle -> holding -> ready -> running -> idle
@@ -50,9 +94,9 @@ const display = computed(() => {
 })
 
 const timerColor = computed(() => {
-  if (phase.value === 'ready') return 'text-green-accent-3'
-  if (phase.value === 'holding') return 'text-amber-accent-3'
-  return 'text-white'
+  if (phase.value === 'ready') return 'text-success'
+  if (phase.value === 'holding') return 'text-warning'
+  return 'text-high-emphasis'
 })
 
 function tick() {
@@ -153,21 +197,72 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .timer-surface {
-  min-height: 320px;
+  min-height: 340px;
   user-select: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
 }
+
+.timer-surface.is-holding {
+  border-color: rgba(var(--v-theme-warning), 0.55);
+  background-color: rgba(var(--v-theme-warning), 0.04);
+}
+
+.timer-surface.is-ready {
+  border-color: rgba(var(--v-theme-success), 0.7);
+  background-color: rgba(var(--v-theme-success), 0.06);
+  box-shadow: 0 0 44px rgba(var(--v-theme-success), 0.18);
+}
+
+.timer-surface.is-running {
+  border-color: rgba(var(--v-theme-primary), 0.35);
+}
+
 .timer-value {
-  font-size: clamp(3.5rem, 14vw, 9rem);
+  font-size: clamp(3.5rem, 15vw, 10rem);
   line-height: 1;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  transition: color 0.1s ease;
+  transition: color 0.12s ease, transform 0.18s ease;
+}
+
+.is-ready .timer-value {
+  transform: scale(1.04);
+}
+
+.timer-hint {
+  color: rgba(var(--v-theme-on-surface), 0.6);
+  font-size: 0.9rem;
+}
+
+.timer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 kbd {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
-  padding: 1px 6px;
-  font-size: 0.85em;
+  background: rgba(var(--v-theme-on-surface), 0.1);
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.16);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+}
+
+.hint-fade-enter-active,
+.hint-fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+
+.hint-fade-enter-from,
+.hint-fade-leave-to {
+  opacity: 0;
 }
 </style>
