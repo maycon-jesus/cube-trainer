@@ -108,7 +108,13 @@ async function deleteLast() {
 }
 
 async function refrehSolves() {
-  solves.value = await solvesStore.getAll('normal', configStore.sessionId, configStore.puzzle, '')
+  solves.value = await solvesStore.getAllWithFilter({
+    type: 'normal',
+    sessionId: configStore.sessionId,
+    puzzle: configStore.puzzle,
+    pageSize: 1000,
+    page: 1,
+  })
 }
 
 watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{
