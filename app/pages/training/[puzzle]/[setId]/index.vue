@@ -70,7 +70,7 @@ const selectedIds = computed(() => new Set(selectedAlgorithms.value.map((a) => a
 const playlistDialogOpen = ref(false)
 const playlistPreset = computed(() => ({
   puzzleId,
-  trainingCases: selectedAlgorithms.value.map<TrainingCase>((a) => ({ trainingSetId: setId, algorithmId: a.id })),
+  trainingCases: selectedAlgorithms.value.map<TrainingCase>((a) => ({ setId, algorithmId: a.id })),
 }))
 
 onMounted(() => {

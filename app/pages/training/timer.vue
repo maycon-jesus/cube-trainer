@@ -41,7 +41,7 @@
             <!-- Timer surface -->
             <v-row density="comfortable">
               <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-set-id="trainingSetId" :algorithm-id="currentAlgorithm?.id" @solve="resolved" @start="started=true" @stop="started=false" />
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-set-id="trainingSetId" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @start="started=true" @stop="started=false" />
             </v-col>
             </v-row>
 

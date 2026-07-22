@@ -39,7 +39,7 @@ function trainPlaylist(playlist: TrainingPlaylist) {
   const sets = cubesDefinition[playlist.puzzleId]?.trainingSets ?? []
   customTimerStore.useTrainingSetDefault(playlist.puzzleId)
   for (const trainingCase of playlist.trainingCases) {
-    const set = sets.find((s) => s.id === trainingCase.trainingSetId)
+    const set = sets.find((s) => s.id === trainingCase.setId)
     const algorithm = set?.algorithms.find((a) => a.id === trainingCase.algorithmId)
     if (algorithm) customTimerStore.addAlgorithmToTrainingSet(algorithm)
   }

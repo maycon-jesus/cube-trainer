@@ -146,7 +146,7 @@ const algorithmName = computed(() =>
   props.algorithm.nameKey ? t(props.algorithm.nameKey) : props.algorithm.name ?? '',
 )
 
-const caseSolves = computed(() => solvesStore.getByAlgorithmId(props.algorithm.id))
+const caseSolves = computed(() => solvesStore.getByTrainingAlgorithmId(props.algorithm.id))
 
 const statTiles = computed(() => [
   { label: t('statLabels.best'), value: bestOf(caseSolves.value) },

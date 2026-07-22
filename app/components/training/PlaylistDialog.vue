@@ -192,13 +192,13 @@ function hydrate() {
     name.value = props.playlist.name
     puzzleId.value = props.playlist.puzzleId
     selectedKeys.value = new Set(
-      props.playlist.trainingCases.map((c) => key(c.trainingSetId, c.algorithmId)),
+      props.playlist.trainingCases.map((c) => key(c.setId, c.algorithmId)),
     )
   } else if (props.preset) {
     name.value = ''
     puzzleId.value = props.preset.puzzleId
     selectedKeys.value = new Set(
-      props.preset.trainingCases.map((c) => key(c.trainingSetId, c.algorithmId)),
+      props.preset.trainingCases.map((c) => key(c.setId, c.algorithmId)),
     )
   } else {
     name.value = ''
@@ -212,8 +212,8 @@ async function save() {
   if (!canSave.value) return
   saving.value = true
   const trainingCases: TrainingCase[] = [...selectedKeys.value].map((k) => {
-    const [trainingSetId, algorithmId] = k.split('::')
-    return { trainingSetId: trainingSetId!, algorithmId: algorithmId! }
+    const [setId, algorithmId] = k.split('::')
+    return { setId: setId!, algorithmId: algorithmId! }
   })
   if (props.playlist?.id != null) {
     await playlistsStore.update({ ...props.playlist, name: name.value.trim(), puzzleId: puzzleId.value, trainingCases })

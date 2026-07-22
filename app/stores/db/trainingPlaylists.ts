@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { Database, type Stored } from '~~/lib/db/database'
 
 export type TrainingCase = {
-  trainingSetId: string
+  setId: string
   algorithmId: string
 }
 
