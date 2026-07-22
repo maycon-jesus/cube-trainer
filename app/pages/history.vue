@@ -3,6 +3,7 @@
         <LayoutsPageHeader :title="t('nav.history')" :subtitle="t('history.subtitle')">
             <template #append>
                 <div class="filters d-flex flex-wrap ga-3">
+                    <SolveTypeSelector v-model="type" show-all-option />
                     <SessionSelector v-model="sessionId" show-all-option />
                     <CubeSelector v-model="puzzle" show-all-option />
                 </div>
@@ -10,10 +11,13 @@
         </LayoutsPageHeader>
 
         <CustomCard :title="t('history.solves')" :subtitle="t('history.count', { count: total }, total)">
-            <v-list v-if="solves.length" density="compact" bg-color="transparent">
-                <v-list-item v-for="solve in solves" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
+            <v-list v-if="rows.length" density="compact" bg-color="transparent">
+                <v-list-item v-for="{ solve, training } in rows" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
                     <template #prepend>
-                        <v-icon v-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1">
+                        <v-avatar v-if="training?.algorithm?.imageUrl" rounded="lg" size="32" class="mr-2">
+                            <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
+                        </v-avatar>
+                        <v-icon v-else-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1">
                             <component :is="cubesDefinition[solve.puzzle]!.icon" />
                         </v-icon>
                     </template>
@@ -22,8 +26,17 @@
                         :class="{ 'text-decoration-line-through text-medium-emphasis': solve.penalty === 'dnf' }">
                         {{ formatSolve(solve) }}
                     </v-list-item-title>
-                    <v-list-item-subtitle>
-                        {{ t(`cube.${solve.puzzle}`) }}
+                    <v-list-item-subtitle class="d-flex align-center flex-wrap ga-2">
+                        <span>{{ t(`cube.${solve.puzzle}`) }}</span>
+                        <v-chip
+                            v-if="training"
+                            size="x-small"
+                            color="primary"
+                            variant="tonal"
+                            label
+                            prepend-icon="mdi-school-outline">
+                            {{ [training.setName, training.algorithmName].filter(Boolean).join(' · ') }}
+                        </v-chip>
                     </v-list-item-subtitle>
                     <template #append>
                         <span class="text-caption text-medium-emphasis">
@@ -56,18 +69,21 @@
 </template>
 
 <script setup lang="ts">
-import { useSolvesStore, type Penalty, type Solve, type SolvesFilter } from '~/stores/db/solves'
+import { useSolvesStore, type Penalty, type Solve, type SolvesFilter, type Type } from '~/stores/db/solves'
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
+import SolveTypeSelector from '~/components/solve/TypeSelector.vue'
 
 const { locale, t } = useI18n()
 const solvesStore = useSolvesStore()
+const trainingLabels = useTrainingLabels()
 
 usePageSeo('history')
 
 const PAGE_SIZE = 20
 
+const type = ref<Type | typeof ALL_TYPES>(ALL_TYPES)
 const sessionId = ref<number>(ALL_SESSIONS)
 const puzzle = ref<string>(ALL_PUZZLES)
 
@@ -79,9 +95,15 @@ const loading = ref(false)
 const pageCount = computed(() => Math.ceil(total.value / PAGE_SIZE))
 
 const filter = computed<SolvesFilter>(() => ({
+    type: type.value === ALL_TYPES ? undefined : type.value,
     sessionId: sessionId.value === ALL_SESSIONS ? undefined : sessionId.value,
     puzzle: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
 }))
+
+const rows = computed(() => solves.value.map(solve => ({
+    solve,
+    training: trainingLabels.ofSolve(solve),
+})))
 
 async function loadPage() {
     if (!import.meta.client) return

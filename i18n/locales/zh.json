@@ -219,7 +219,15 @@
       "scramble": "打乱",
       "puzzle": "魔方类型",
       "date": "日期",
-      "close": "关闭"
+      "close": "关闭",
+      "training": "训练",
+      "trainingUnknownCase": "未知情况"
+    },
+    "type": {
+      "label": "类型",
+      "all": "全部",
+      "normal": "普通",
+      "training": "训练"
     }
   },
   "cube": {

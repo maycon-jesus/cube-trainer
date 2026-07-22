@@ -219,7 +219,15 @@
       "scramble": "Mezcla",
       "puzzle": "Puzzle",
       "date": "Fecha",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "training": "Entrenamiento",
+      "trainingUnknownCase": "Caso desconocido"
+    },
+    "type": {
+      "label": "Tipo",
+      "all": "Todos",
+      "normal": "Normales",
+      "training": "Entrenamientos"
     }
   },
   "cube": {

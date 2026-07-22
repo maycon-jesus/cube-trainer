@@ -219,7 +219,15 @@
       "scramble": "Scramble",
       "puzzle": "Puzzle",
       "date": "Date",
-      "close": "Close"
+      "close": "Close",
+      "training": "Training",
+      "trainingUnknownCase": "Unknown case"
+    },
+    "type": {
+      "label": "Type",
+      "all": "All",
+      "normal": "Normal",
+      "training": "Training"
     }
   },
   "cube": {

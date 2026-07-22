@@ -56,10 +56,14 @@ export class Database<T extends Record<string, unknown>> {
                         autoIncrement: this.autoIncrement,
                     })
 
+                const wanted = new Set(this.indexes.map((index) => index.name))
+                for (const name of Array.from(store.indexNames)) {
+                    if (!wanted.has(name)) store.deleteIndex(name)
+                }
+
                 for (const index of this.indexes) {
-                    if (!store.indexNames.contains(index.name)) {
-                        store.createIndex(index.name, index.keyPath, index.options)
-                    }
+                    if (store.indexNames.contains(index.name)) store.deleteIndex(index.name)
+                    store.createIndex(index.name, index.keyPath, index.options)
                 }
             }
             req.onsuccess = () => resolve(req.result)
@@ -94,21 +98,35 @@ export class Database<T extends Record<string, unknown>> {
             const store = transaction.objectStore(this.store)
             const results: T[] = []
             const cursorReq = store.openCursor(indexQuery, direction)
-            let offsetCount = offset
+
+            let pendingAdvance = filter ? 0 : offset
+            let skipped = 0
+
             cursorReq.onsuccess = () => {
                 const cursor = cursorReq.result
-                
-                if (cursor && results.length < size) {
-                    if (offsetCount > 0) {
-                        cursor.advance(offsetCount)
-                        offsetCount=0
-                    }else if (!filter || filter(cursor.value)) {
-                        results.push(cursor.value)
-                        cursor.continue()
-                    }
-                } else {
+                if (!cursor) {
                     resolve(results)
+                    return
                 }
+
+                if (pendingAdvance > 0) {
+                    const step = pendingAdvance
+                    pendingAdvance = 0
+                    cursor.advance(step)
+                    return
+                }
+
+                if (!filter || filter(cursor.value)) {
+                    if (skipped < offset && filter) skipped++
+                    else results.push(cursor.value)
+                }
+
+                if (results.length >= size) {
+                    resolve(results)
+                    return
+                }
+
+                cursor.continue()
             }
             cursorReq.onerror = () => reject(cursorReq.error)
         })

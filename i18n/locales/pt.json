@@ -219,7 +219,15 @@
       "scramble": "Embaralhamento",
       "puzzle": "Quebra-cabeça",
       "date": "Data",
-      "close": "Fechar"
+      "close": "Fechar",
+      "training": "Treino",
+      "trainingUnknownCase": "Caso desconhecido"
+    },
+    "type": {
+      "label": "Tipo",
+      "all": "Todos",
+      "normal": "Normais",
+      "training": "Treinos"
     }
   },
   "cube": {

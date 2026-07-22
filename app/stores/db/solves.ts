@@ -8,7 +8,6 @@ export type SolvesFilter = {
   type?: Type
   sessionId?: number
   puzzle?: string
-  trainingSetId?: string
   trainingAlgorithmId?: string
 }
 
@@ -20,18 +19,17 @@ export type Solve = Stored<{
   puzzle: string
   type: Type
   sessionId: number
-  trainingSetId: string
   trainingAlgorithmId: string
 }>
 
 // Shared instance
 const db = new Database<Solve>('solves-history', 'solves', {
   version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingSetId', keyPath: 'trainingSetId' },{ name: 'trainingAlgorithmId', keyPath: 'trainingAlgorithmId' }, { name: 'puzzle', keyPath: 'puzzle' },
+  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingAlgorithmId', keyPath: 'trainingAlgorithmId' }, { name: 'puzzle', keyPath: 'puzzle' },
   { name: 'type', keyPath: 'type' },
   {
     name: 'all-solves',
-    keyPath: ['type', 'sessionId', 'puzzle', 'trainingSetId', 'trainingAlgorithmId'],
+    keyPath: ['type', 'sessionId', 'puzzle', 'trainingAlgorithmId'],
     options: { unique: false },
   },
   ],
@@ -96,17 +94,16 @@ export const useSolvesStore = defineStore('solves', () => {
     return solves.value.filter((solve) => solve.trainingAlgorithmId === trainingAlgorithmId).slice(0, limit)
   }
 
-  async function getAll(type: Type, sessionId: number, puzzle: string, trainingSetId: string, trainingAlgorithmId: string): Promise<Solve[]> {
-    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingSetId, trainingAlgorithmId])
+  async function getAll(type: Type, sessionId: number, puzzle: string, trainingAlgorithmId: string): Promise<Solve[]> {
+    const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingAlgorithmId])
     return solves.sort((a, b) => b.createdAt - a.createdAt)
   }
 
   function matchesFilter(filter: SolvesFilter) {
     return (solve: Solve) => {
-      if(filter.type && solve.type !== filter.type) return false
+      if(filter.type && (solve.type ?? 'normal') !== filter.type) return false
       if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
       if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
-      if(filter.trainingSetId && solve.trainingSetId !== filter.trainingSetId) return false
       if(filter.trainingAlgorithmId && solve.trainingAlgorithmId !== filter.trainingAlgorithmId) return false
       return true
     }

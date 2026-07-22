@@ -40,6 +40,20 @@
                             </v-card-text>
                         </v-card>
                     </v-col>
+                    <v-col v-if="training" cols="12">
+                        <v-card variant="tonal">
+                            <v-card-title class="text-body-small">{{ t('solve.details.training') }}</v-card-title>
+                            <v-card-text class="d-flex align-center ga-3">
+                                <v-avatar v-if="training.algorithm?.imageUrl" rounded="lg" size="48">
+                                    <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
+                                </v-avatar>
+                                <div>
+                                    <p class="text-body-large">{{ training.algorithmName || t('solve.details.trainingUnknownCase') }}</p>
+                                    <p class="text-medium-emphasis">{{ training.setName }}</p>
+                                </div>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
                     <v-col cols="12">
                         <v-card variant="tonal">
                             <v-card-title class="text-body-small">{{ t('solve.details.date') }}</v-card-title>
@@ -73,6 +87,9 @@ const emits = defineEmits<{
 const model = defineModel<boolean>()
 
 const cube = computed(() => cubesDefinition[props.solve.puzzle])
+
+const trainingLabels = useTrainingLabels()
+const training = computed(() => trainingLabels.ofSolve(props.solve))
 
 </script>
 

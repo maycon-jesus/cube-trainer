@@ -41,7 +41,7 @@
             <!-- Timer surface -->
             <v-row density="comfortable">
               <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-set-id="trainingSetId" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @start="started=true" @stop="started=false" />
+              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @start="started=true" @stop="started=false" />
             </v-col>
             </v-row>
 
@@ -94,7 +94,6 @@ const started = ref(false)
 // --- Training set (predefined scrambles) ----------------------------------
 const trainingSet = computed(() => customTimerStore.trainingSet)
 const puzzle = computed(() => customTimerStore.puzzle ?? '')
-const trainingSetId = computed(() => trainingSet.value?.id ?? '')
 
 const currentAlgorithm = ref<TrainingAlgorithm | null>(null)
 const scramble = ref('')
@@ -131,10 +130,10 @@ async function resolved(solve: Solve) {
 }
 
 async function refreshSolves() {
-  solves.value = await solvesStore.getAll('training', configStore.sessionId, puzzle.value, trainingSetId.value, currentAlgorithm.value?.id ?? '')
+  solves.value = await solvesStore.getAll('training', configStore.sessionId, puzzle.value, currentAlgorithm.value?.id ?? '')
 }
 
-watch([() => configStore.sessionId, trainingSetId], async () => {
+watch([() => configStore.sessionId, () => trainingSet.value?.id], async () => {
   await newScramble()
   await refreshSolves()
 })
