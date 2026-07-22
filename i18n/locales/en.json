@@ -220,8 +220,7 @@
       "puzzle": "Puzzle",
       "date": "Date",
       "close": "Close",
-      "training": "Training",
-      "trainingUnknownCase": "Unknown case"
+      "training": "Training"
     },
     "type": {
       "label": "Type",

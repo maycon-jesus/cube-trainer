@@ -48,7 +48,7 @@
                                     <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
                                 </v-avatar>
                                 <div>
-                                    <p class="text-body-large">{{ training.algorithmName || t('solve.details.trainingUnknownCase') }}</p>
+                                    <p class="text-body-large">{{ training.algorithmName }}</p>
                                     <p class="text-medium-emphasis">{{ training.setName }}</p>
                                 </div>
                             </v-card-text>

@@ -220,8 +220,7 @@
       "puzzle": "魔方类型",
       "date": "日期",
       "close": "关闭",
-      "training": "训练",
-      "trainingUnknownCase": "未知情况"
+      "training": "训练"
     },
     "type": {
       "label": "类型",

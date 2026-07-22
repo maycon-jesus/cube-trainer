@@ -220,8 +220,7 @@
       "puzzle": "Quebra-cabeça",
       "date": "Data",
       "close": "Fechar",
-      "training": "Treino",
-      "trainingUnknownCase": "Caso desconhecido"
+      "training": "Treino"
     },
     "type": {
       "label": "Tipo",

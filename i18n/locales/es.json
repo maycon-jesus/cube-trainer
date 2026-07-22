@@ -220,8 +220,7 @@
       "puzzle": "Puzzle",
       "date": "Fecha",
       "close": "Cerrar",
-      "training": "Entrenamiento",
-      "trainingUnknownCase": "Caso desconocido"
+      "training": "Entrenamiento"
     },
     "type": {
       "label": "Tipo",
