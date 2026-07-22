@@ -10,7 +10,6 @@ export type SolvesFilter = {
   puzzle?: string
   trainingSetId?: string
   trainingAlgorithmId?: string
-  tagsId?: number[]
 }
 
 export type Solve = Stored<{
@@ -23,7 +22,6 @@ export type Solve = Stored<{
   sessionId: number
   trainingSetId: string
   trainingAlgorithmId: string
-  tagsId: number[]
 }>
 
 // Shared instance
@@ -110,7 +108,6 @@ export const useSolvesStore = defineStore('solves', () => {
       if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
       if(filter.trainingSetId && solve.trainingSetId !== filter.trainingSetId) return false
       if(filter.trainingAlgorithmId && solve.trainingAlgorithmId !== filter.trainingAlgorithmId) return false
-      if(filter.tagsId && !filter.tagsId.every(tag => (solve.tagsId ?? []).includes(tag))) return false
       return true
     }
   }
