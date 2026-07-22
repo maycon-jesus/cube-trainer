@@ -64,7 +64,8 @@
     "subtitle": "浏览你记录的所有复原成绩",
     "solves": "成绩",
     "count": "{count} 次复原",
-    "empty": "没有符合筛选条件的成绩。"
+    "empty": "没有符合筛选条件的成绩。",
+    "unknownSession": "未知分组"
   },
   "stats": {
     "subtitle": "分析你的复原记录并追踪长期进步",

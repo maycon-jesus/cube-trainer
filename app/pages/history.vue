@@ -12,12 +12,12 @@
 
         <CustomCard :title="t('history.solves')" :subtitle="t('history.count', { count: total }, total)">
             <v-list v-if="rows.length" density="compact" bg-color="transparent">
-                <v-list-item v-for="{ solve, training } in rows" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
+                <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
                     <template #prepend>
                         <v-avatar v-if="training?.algorithm?.imageUrl" rounded="lg" size="32" class="mr-2">
                             <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
                         </v-avatar>
-                        <v-icon v-else-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1">
+                        <v-icon v-else-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1" size="32">
                             <component :is="cubesDefinition[solve.puzzle]!.icon" />
                         </v-icon>
                     </template>
@@ -28,6 +28,8 @@
                     </v-list-item-title>
                     <v-list-item-subtitle class="d-flex align-center flex-wrap ga-2">
                         <span>{{ t(`cube.${solve.puzzle}`) }}</span>
+                        <span>·</span>
+                        <span>{{ sessionName(solve.sessionId) }}</span>
                         <v-chip
                             v-if="training"
                             size="x-small"
@@ -39,9 +41,10 @@
                         </v-chip>
                     </v-list-item-subtitle>
                     <template #append>
-                        <span class="text-caption text-medium-emphasis">
-                            {{ formatTimestamp(locale, solve.createdAt) }}
-                        </span>
+                        <div class="d-flex flex-column text-end text-caption text-medium-emphasis" style="line-height: 1.2">
+                            <span>{{ timestamp.date }}</span>
+                            <span>{{ timestamp.time }}</span>
+                        </div>
                     </template>
                 </v-list-item>
             </v-list>
@@ -70,6 +73,7 @@
 
 <script setup lang="ts">
 import { useSolvesStore, type Penalty, type Solve, type SolvesFilter, type Type } from '~/stores/db/solves'
+import { useSessionsStore } from '~/stores/db/sessions'
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
@@ -77,7 +81,14 @@ import SolveTypeSelector from '~/components/solve/TypeSelector.vue'
 
 const { locale, t } = useI18n()
 const solvesStore = useSolvesStore()
+const sessionsStore = useSessionsStore()
 const trainingLabels = useTrainingLabels()
+
+const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
+
+function sessionName(id: number) {
+    return sessionNames.value.get(id) ?? t('history.unknownSession')
+}
 
 usePageSeo('history')
 
@@ -103,6 +114,7 @@ const filter = computed<SolvesFilter>(() => ({
 const rows = computed(() => solves.value.map(solve => ({
     solve,
     training: trainingLabels.ofSolve(solve),
+    timestamp: formatTimestampParts(locale.value, solve.createdAt),
 })))
 
 async function loadPage() {
