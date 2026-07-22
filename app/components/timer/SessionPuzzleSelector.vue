@@ -1,16 +1,14 @@
 <template>
-    <v-card class="center">
-        <v-card-text>
-            <v-row>
-                <v-col cols="12">
-                    <SessionSelector v-model="configStore.sessionId"/>
-                </v-col>
-                <v-col cols="12">
-                    <SessionCubeSelector v-model="configStore.puzzle" />
-                </v-col>
-            </v-row>
-        </v-card-text>
-    </v-card>
+    <CustomCard class="center">
+        <v-row>
+            <v-col cols="12">
+                <SessionSelector v-model="configStore.sessionId"/>
+            </v-col>
+            <v-col cols="12">
+                <SessionCubeSelector v-model="configStore.puzzle" />
+            </v-col>
+        </v-row>
+    </CustomCard>
 </template>
 
 <script setup lang="ts">
