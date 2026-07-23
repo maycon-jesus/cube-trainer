@@ -245,7 +245,10 @@
     "pyraminx": "Pyraminx",
     "megaminx": "Megaminx",
     "mirror-3x3x3": "Mirror 3x3x3",
-    "mirror-2x2x2": "Mirror 2x2x2"
+    "mirror-2x2x2": "Mirror 2x2x2",
+    "gear-2x2x2": "Gear Cube 2x2x2",
+    "gear-3x3x3": "Gear Cube 3x3x3",
+    "fto": "FTO"
   },
   "training": {
     "title": "Treino de algoritmos",

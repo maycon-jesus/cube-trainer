@@ -245,7 +245,10 @@
     "pyraminx": "金字塔",
     "megaminx": "五魔方",
     "mirror-3x3x3": "镜面 3x3x3",
-    "mirror-2x2x2": "镜面 2x2x2"
+    "mirror-2x2x2": "镜面 2x2x2",
+    "gear-2x2x2": "齿轮魔方 2x2x2",
+    "gear-3x3x3": "齿轮魔方 3x3x3",
+    "fto": "八面体 (FTO)"
   },
   "training": {
     "title": "算法训练",

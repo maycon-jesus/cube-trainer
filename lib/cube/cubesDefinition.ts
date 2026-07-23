@@ -5,7 +5,7 @@ import type { CubeEngine } from "./cube"
 import type { TrainingSet } from "./training/types"
 import trainingSets333 from "./3x3x3/training"
 import {trainingSets as trainingSets222} from "./2x2x2/training"
-import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon, Cube5x5x5Icon, Cube6x6x6Icon, Cube7x7x7Icon, Mirror3x3Icon, PyraminxIcon, OtherIcon} from "@icon"
+import {MegaminxIcon, Mirror2x2Icon, Cube2x2x2Icon, Cube3x3x3Icon, Cube4x4x4Icon, Cube5x5x5Icon, Cube6x6x6Icon, Cube7x7x7Icon, Mirror3x3Icon, PyraminxIcon, GearCube2x2x2Icon, GearCube3x3x3Icon, FTOIcon, OtherIcon} from "@icon"
 import type { Component } from "vue"
 
 export type { TrainingAlgorithm, TrainingSet } from "./training/types"
@@ -78,6 +78,21 @@ export const cubesDefinition: Record<string, CubeData> = {
         id: "mirror-2x2x2",
         name: "Mirror 2x2x2",
         icon: Mirror2x2Icon
+    },
+    "gear-2x2x2": {
+        id: "gear-2x2x2",
+        name: "Gear Cube 2x2x2",
+        icon: GearCube2x2x2Icon
+    },
+    "gear-3x3x3": {
+        id: "gear-3x3x3",
+        name: "Gear Cube 3x3x3",
+        icon: GearCube3x3x3Icon
+    },
+    "fto": {
+        id: "fto",
+        name: "FTO",
+        icon: FTOIcon
     },
     "other": {
         id: "other",

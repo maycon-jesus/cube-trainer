@@ -8,4 +8,7 @@ export const MegaminxIcon =  defineAsyncComponent(() => import("@icon/Megaminx.v
 export const Mirror2x2Icon = defineAsyncComponent(() => import("@icon/Mirror2x2.vue"))
 export const Mirror3x3Icon = defineAsyncComponent(() => import("@icon/Mirror3x3.vue"))
 export const PyraminxIcon = defineAsyncComponent(() => import("@icon/Pyraminx.vue"))
+export const GearCube2x2x2Icon = defineAsyncComponent(() => import("@icon/GearCube2x2x2.vue"))
+export const GearCube3x3x3Icon = defineAsyncComponent(() => import("@icon/GearCube3x3x3.vue"))
+export const FTOIcon = defineAsyncComponent(() => import("@icon/FTO.vue"))
 export const OtherIcon = defineAsyncComponent(() => import("@icon/Puzzle.vue"))
