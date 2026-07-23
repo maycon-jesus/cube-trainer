@@ -200,7 +200,6 @@ onBeforeUnmount(() => {
   min-height: 340px;
   user-select: none;
   cursor: pointer;
-  position: relative;
   overflow: hidden;
   border: 2px solid transparent;
   transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
