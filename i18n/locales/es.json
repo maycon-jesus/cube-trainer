@@ -208,8 +208,6 @@
     "solves": {
       "title": "Tiempos",
       "subtitle": "Última resolución | Últimas {count} resoluciones",
-      "clear": "Borrar",
-      "clearConfirm": "¿Eliminar todos los tiempos?",
       "remove": "Quitar",
       "empty": "Aún no hay tiempos. ¡Resuelve el cubo!"
     },

@@ -1,11 +1,5 @@
 <template>
     <CustomCard :title="t('timer.solves.title')" :subtitle="t('timer.solves.subtitle',{count: solves.length})">
-        <template #title-append>
-            <v-btn variant="text" color="error" :disabled="!solves.length" @click="clearAll">
-                {{ t('timer.solves.clear') }}
-            </v-btn>
-        </template>
-
         <v-list v-if="solves.length" density="compact" bg-color="transparent" class="times-list">
             <v-list-item v-for="(solve, i) in solves" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
                 <template #prepend>
@@ -68,11 +62,6 @@ async function removeSolve(solve: Solve) {
   openModalSolve.value = false
     emits('solves-updated')
 }
-async function clearAll() {
-  if (confirm(t('timer.solves.clearConfirm'))) await solvesStore.clear()
-    emits('solves-updated')
-}
-
 function openSolveDetails(solve: Solve) {
   modalSolve.value = solve
   openModalSolve.value = true

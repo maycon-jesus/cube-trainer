@@ -208,8 +208,6 @@
     "solves": {
       "title": "Times",
       "subtitle": "Last solve | Last {count} solves",
-      "clear": "Clear",
-      "clearConfirm": "Delete all times?",
       "remove": "Remove",
       "empty": "No times yet. Solve the cube!"
     },

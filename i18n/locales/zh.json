@@ -208,8 +208,6 @@
     "solves": {
       "title": "成绩",
       "subtitle": "最近一次成绩 | 最近 {count} 次成绩",
-      "clear": "清空",
-      "clearConfirm": "删除所有成绩？",
       "remove": "移除",
       "empty": "暂无成绩，去复原魔方吧！"
     },
