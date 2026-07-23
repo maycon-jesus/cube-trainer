@@ -126,11 +126,10 @@ watch([() => configStore.puzzle, ()=> configStore.sessionId], async ()=>{
 <style scoped>
 .elevated{
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 99vw;
-  height: 99vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   z-index: 10000;
   border: 0.5rem solid rgb(var(--v-theme-primary));
 }
