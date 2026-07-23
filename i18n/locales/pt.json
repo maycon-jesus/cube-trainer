@@ -257,6 +257,10 @@
     "setup": "Setup",
     "regenerateSetup": "Novo setup",
     "train": "Treinar",
+    "currentCase": "Caso atual",
+    "showSolutions": "Mostrar soluções",
+    "hideSolutions": "Ocultar soluções",
+    "noSolutions": "Nenhuma solução disponível",
     "trainAll": "Treinar todo o {set}",
     "addToList": "Adicionar à lista",
     "2x2x2": {

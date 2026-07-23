@@ -257,6 +257,10 @@
     "setup": "Setup",
     "regenerateSetup": "新打乱",
     "train": "训练",
+    "currentCase": "当前情况",
+    "showSolutions": "显示解法",
+    "hideSolutions": "隐藏解法",
+    "noSolutions": "暂无解法",
     "trainAll": "训练全部 {set}",
     "addToList": "添加到列表",
     "2x2x2": {

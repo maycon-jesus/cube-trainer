@@ -6,18 +6,7 @@
               <v-col cols="12" md="6" lg="12">
                   <CustomCard :title="trainingSetName" :subtitle="trainingSetDescription">
                       <SessionSelector v-model="configStore.sessionId" />
-                  <v-list-item
-                    v-if="currentAlgorithm"
-                    class="px-0 mt-4"
-                    :title="currentAlgorithmName"
-                    subtitle="Caso atual"
-                  >
-                    <template #prepend>
-                      <v-avatar v-if="currentAlgorithm.imageUrl" rounded="lg" size="48">
-                        <v-img :src="currentAlgorithm.imageUrl" :alt="currentAlgorithmName" />
-                      </v-avatar>
-                    </template>
-                  </v-list-item>
+                  <TrainingCurrentCase v-if="currentAlgorithm" :algorithm="currentAlgorithm" class="mt-4" />
                 </CustomCard>
               </v-col>
               <v-col v-if="display.mdAndUp.value" cols="12" md="6" lg="12">
@@ -169,11 +158,6 @@ const trainingSetName = computed(() => {
 const trainingSetDescription = computed(() => {
   if (!trainingSet.value) return undefined
   return trainingSet.value.description ?? (trainingSet.value.descriptionKey? t(trainingSet.value.descriptionKey) : undefined)
-})
-
-const currentAlgorithmName = computed(() => {
-  if (!currentAlgorithm.value) return ''
-  return currentAlgorithm.value.name ?? t(currentAlgorithm.value.nameKey??'')
 })
 </script>
 
