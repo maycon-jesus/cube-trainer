@@ -233,6 +233,37 @@ export function performanceOverTime(
   return points.filter((p) => p.createdAt >= cutoff)
 }
 
+// --- Solves per puzzle -----------------------------------------------------
+
+export type PuzzleCount = {
+  puzzle: string
+  count: number
+  /** Fraction of the total solve count (0..1). */
+  share: number
+}
+
+/** Solve counts grouped by puzzle, most solved first. */
+export function solvesByPuzzle(solves: Solve[]): PuzzleCount[] {
+  const counts = new Map<string, number>()
+  for (const solve of solves) {
+    const previous = counts.get(solve.puzzle) ?? 0
+    counts.set(solve.puzzle, previous + 1)
+  }
+
+  const result: PuzzleCount[] = []
+  for (const [puzzle, count] of counts) {
+    result.push({ puzzle, count, share: count / solves.length })
+  }
+
+  // Most solved first; ties broken alphabetically so the order stays stable.
+  result.sort((a, b) => {
+    if (a.count !== b.count) return b.count - a.count
+    return a.puzzle.localeCompare(b.puzzle)
+  })
+
+  return result
+}
+
 // --- Practice calendar (GitHub-style heatmap) ------------------------------
 
 export type CalendarDay = { date: number, count: number }

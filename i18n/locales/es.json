@@ -111,6 +111,10 @@
       "title": "Distribución",
       "empty": "No hay datos suficientes para la distribución"
     },
+    "byPuzzle": {
+      "title": "Resoluciones por cubo",
+      "empty": "Aún no hay resoluciones"
+    },
     "calendar": {
       "title": "Calendario de práctica",
       "less": "Menos",

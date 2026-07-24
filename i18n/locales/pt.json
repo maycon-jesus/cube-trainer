@@ -111,6 +111,10 @@
       "title": "Distribuição",
       "empty": "Dados insuficientes para distribuição"
     },
+    "byPuzzle": {
+      "title": "Solves por cubo",
+      "empty": "Nenhum solve ainda"
+    },
     "calendar": {
       "title": "Calendário de prática",
       "less": "Menos",

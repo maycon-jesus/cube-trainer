@@ -111,6 +111,10 @@
       "title": "Distribution",
       "empty": "Not enough data for distribution"
     },
+    "byPuzzle": {
+      "title": "Solves per puzzle",
+      "empty": "No solves yet"
+    },
     "calendar": {
       "title": "Practice calendar",
       "less": "Less",

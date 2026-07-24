@@ -111,6 +111,10 @@
       "title": "分布",
       "empty": "数据不足，无法显示分布"
     },
+    "byPuzzle": {
+      "title": "各魔方还原次数",
+      "empty": "暂无还原记录"
+    },
     "calendar": {
       "title": "练习日历",
       "less": "较少",

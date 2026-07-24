@@ -41,6 +41,13 @@
             </v-col>
         </v-row>
 
+        <!-- Solves per puzzle -->
+        <v-row density="comfortable">
+            <v-col cols="12">
+                <StatsSolvesByPuzzle :solves="solvesAllPuzzles" />
+            </v-col>
+        </v-row>
+
         <!-- Practice calendar -->
         <v-row density="comfortable">
             <v-col cols="12">
@@ -92,11 +99,25 @@ const filter = computed<SolvesFilter>(() => ({
 }))
 
 const solves = ref<Solve[]>([])
+// Puzzle breakdown ignores the puzzle filter, otherwise it would show a single bar.
+const solvesAllPuzzles = ref<Solve[]>([])
 
 async function loadSolves() {
     if (!import.meta.client) return
     const result = await solvesStore.getAllWithFilter({ ...filter.value, page: 1, pageSize: MAX_SOLVES })
     solves.value = result.sort((a, b) => b.createdAt - a.createdAt)
+
+    if (filter.value.puzzle === undefined) {
+        solvesAllPuzzles.value = solves.value
+        return
+    }
+    const allPuzzles = await solvesStore.getAllWithFilter({
+        ...filter.value,
+        puzzle: undefined,
+        page: 1,
+        pageSize: MAX_SOLVES,
+    })
+    solvesAllPuzzles.value = allPuzzles.sort((a, b) => b.createdAt - a.createdAt)
 }
 
 watch(filter, loadSolves)
