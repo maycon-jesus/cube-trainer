@@ -6,7 +6,12 @@
     "newScramble": "Novo embaralhamento"
   },
   "common": {
-    "underConstruction": "Em construção"
+    "underConstruction": "Em construção",
+    "wakeLock": {
+      "active": "Wake lock ativo — a tela vai continuar ligada",
+      "inactive": "Wake lock inativo — a tela pode desligar",
+      "unsupported": "Wake lock de tela não é suportado neste navegador"
+    }
   },
   "statLabels": {
     "best": "melhor",

@@ -24,10 +24,23 @@ onMounted(() => {
 })
 
 const wakeLock = ref<WakeLockSentinel|null>(null);
+const wakeLockSupported = ref(false);
+const wakeLockActive = computed(() => wakeLock.value !== null)
+
+const wakeLockTooltip = computed(() => {
+  if (!wakeLockSupported.value) return t('common.wakeLock.unsupported')
+  return wakeLockActive.value ? t('common.wakeLock.active') : t('common.wakeLock.inactive')
+})
 
 async function requestWakeLock() {
+  if (!wakeLockSupported.value || wakeLock.value !== null) return
   try {
-    wakeLock.value = await navigator.wakeLock.request('screen');
+    const sentinel = await navigator.wakeLock.request('screen');
+    // The browser releases the lock on its own when the tab is hidden.
+    sentinel.addEventListener('release', () => {
+      if (wakeLock.value === sentinel) wakeLock.value = null
+    })
+    wakeLock.value = sentinel;
   } catch (err: unknown) {
     console.error(err)
   }
@@ -41,10 +54,17 @@ async function releaseWakeLock() {
   }
 }
 
+function onVisibilityChange() {
+  if (document.visibilityState === 'visible') requestWakeLock()
+}
+
 onBeforeMount(()=>{
+  wakeLockSupported.value = import.meta.client && 'wakeLock' in navigator
   requestWakeLock()
+  if (import.meta.client) document.addEventListener('visibilitychange', onVisibilityChange)
 })
 onBeforeUnmount(()=>{
+  if (import.meta.client) document.removeEventListener('visibilitychange', onVisibilityChange)
   releaseWakeLock()
 })
 </script>
@@ -64,6 +84,16 @@ onBeforeUnmount(()=>{
         </NuxtLink>
       </div>
       </v-app-bar-title>
+      <template #append>
+        <span class="d-inline-flex align-center mr-2">
+          <v-icon
+            :icon="wakeLockActive ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off-outline'"
+            :color="wakeLockActive ? 'primary' : undefined"
+            :class="{ 'text-medium-emphasis': !wakeLockActive }"
+          />
+          <v-tooltip activator="parent" location="bottom">{{ wakeLockTooltip }}</v-tooltip>
+        </span>
+      </template>
     </v-app-bar>
 
     <LayoutsNavDrawer />

@@ -6,7 +6,12 @@
     "newScramble": "新打乱"
   },
   "common": {
-    "underConstruction": "建设中"
+    "underConstruction": "建设中",
+    "wakeLock": {
+      "active": "屏幕常亮已启用 — 屏幕将保持点亮",
+      "inactive": "屏幕常亮未启用 — 屏幕可能会关闭",
+      "unsupported": "此浏览器不支持屏幕常亮"
+    }
   },
   "statLabels": {
     "best": "最佳",

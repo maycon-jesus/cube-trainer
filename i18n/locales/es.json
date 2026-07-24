@@ -6,7 +6,12 @@
     "newScramble": "Nueva mezcla"
   },
   "common": {
-    "underConstruction": "En construcción"
+    "underConstruction": "En construcción",
+    "wakeLock": {
+      "active": "Wake lock activo — la pantalla seguirá encendida",
+      "inactive": "Wake lock inactivo — la pantalla puede apagarse",
+      "unsupported": "Este navegador no admite el wake lock de pantalla"
+    }
   },
   "statLabels": {
     "best": "mejor",

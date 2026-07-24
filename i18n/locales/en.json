@@ -6,7 +6,12 @@
     "newScramble": "New scramble"
   },
   "common": {
-    "underConstruction": "Under construction"
+    "underConstruction": "Under construction",
+    "wakeLock": {
+      "active": "Screen wake lock active — the screen will stay on",
+      "inactive": "Screen wake lock inactive — the screen may turn off",
+      "unsupported": "Screen wake lock is not supported in this browser"
+    }
   },
   "statLabels": {
     "best": "best",
