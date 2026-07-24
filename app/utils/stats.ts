@@ -22,6 +22,16 @@ export function formatMs(ms: number | null | undefined): string {
   return `${s}.${cc}`
 }
 
+/** Splits a duration in ms into whole hours, minutes and seconds. */
+export function splitDuration(ms: number): { hours: number; minutes: number; seconds: number } {
+  const totalS = Math.max(0, Math.floor(ms / 1000))
+  return {
+    hours: Math.floor(totalS / 3600),
+    minutes: Math.floor(totalS / 60) % 60,
+    seconds: totalS % 60,
+  }
+}
+
 /** Display string for a single solve, including its penalty. */
 export function formatSolve(solve: Solve): string {
   if (solve.penalty === 'dnf') return 'DNF'

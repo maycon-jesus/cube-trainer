@@ -83,6 +83,31 @@
       "currentStreak": "Current streak",
       "daysPracticed": "Days practiced"
     },
+    "timeSpent": {
+      "title": "Time spent",
+      "subtitle": {
+        "today": "Practiced today",
+        "week": "Practiced in the last 7 days",
+        "month": "Practiced in the last 30 days",
+        "year": "Practiced in the last 365 days"
+      },
+      "ranges": {
+        "today": "Today",
+        "week": "Week",
+        "month": "Month",
+        "year": "Year"
+      },
+      "units": {
+        "hour": "h",
+        "minute": "min",
+        "second": "s"
+      },
+      "solves": "Solves",
+      "perSolve": "Per solve",
+      "activeDays": "Active days",
+      "perDay": "Per active day",
+      "delta": "{value} vs. previous period"
+    },
     "bestAverages": {
       "title": "Best averages"
     },

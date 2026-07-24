@@ -83,6 +83,31 @@
       "currentStreak": "Sequência atual",
       "daysPracticed": "Dias praticados"
     },
+    "timeSpent": {
+      "title": "Tempo gasto",
+      "subtitle": {
+        "today": "Praticado hoje",
+        "week": "Praticado nos últimos 7 dias",
+        "month": "Praticado nos últimos 30 dias",
+        "year": "Praticado nos últimos 365 dias"
+      },
+      "ranges": {
+        "today": "Hoje",
+        "week": "Semana",
+        "month": "Mês",
+        "year": "Ano"
+      },
+      "units": {
+        "hour": "h",
+        "minute": "min",
+        "second": "s"
+      },
+      "solves": "Solves",
+      "perSolve": "Por solve",
+      "activeDays": "Dias ativos",
+      "perDay": "Por dia ativo",
+      "delta": "{value} vs. período anterior"
+    },
     "bestAverages": {
       "title": "Melhores médias"
     },

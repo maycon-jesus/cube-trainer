@@ -14,6 +14,13 @@
         <!-- Headline KPIs -->
         <StatsKpiRow :solves="solves" />
 
+        <!-- Time spent -->
+        <v-row density="comfortable">
+            <v-col cols="12">
+                <StatsTimeSpent :solves="solves" />
+            </v-col>
+        </v-row>
+
         <!-- Averages + streaks -->
         <v-row density="comfortable">
             <v-col cols="12" lg="6">

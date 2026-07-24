@@ -83,6 +83,31 @@
       "currentStreak": "当前连续天数",
       "daysPracticed": "练习天数"
     },
+    "timeSpent": {
+      "title": "练习时长",
+      "subtitle": {
+        "today": "今日练习时长",
+        "week": "最近 7 天练习时长",
+        "month": "最近 30 天练习时长",
+        "year": "最近 365 天练习时长"
+      },
+      "ranges": {
+        "today": "今日",
+        "week": "周",
+        "month": "月",
+        "year": "年"
+      },
+      "units": {
+        "hour": "小时",
+        "minute": "分",
+        "second": "秒"
+      },
+      "solves": "还原次数",
+      "perSolve": "平均单次",
+      "activeDays": "练习天数",
+      "perDay": "日均时长",
+      "delta": "较上一周期 {value}"
+    },
     "bestAverages": {
       "title": "最佳平均"
     },

@@ -233,6 +233,67 @@ export function performanceOverTime(
   return points.filter((p) => p.createdAt >= cutoff)
 }
 
+// --- Time spent ------------------------------------------------------------
+
+export type TimeRange = 'today' | 'week' | 'month' | 'year'
+
+/** How many calendar days each range covers, counting today. */
+const RANGE_DAYS: Record<TimeRange, number> = {
+  today: 1,
+  week: 7,
+  month: 30,
+  year: 365,
+}
+
+export type TimeSpent = {
+  range: TimeRange
+  /** Raw time on the timer (penalties excluded, DNFs still count). */
+  ms: number
+  solves: number
+  /** Mean raw time per solve, null when the range has no solves. */
+  avgMs: number | null
+  /** Distinct days with at least one solve inside the range. */
+  activeDays: number
+  /** Mean time per active day, null when there was no practice. */
+  avgPerActiveDayMs: number | null
+  /** Same amount of time spent on the preceding window of equal length. */
+  previousMs: number
+  /** Change against that window as a fraction, null when it was empty. */
+  deltaShare: number | null
+}
+
+export function timeSpent(solves: Solve[], range: TimeRange, now = Date.now()): TimeSpent {
+  const windowMs = RANGE_DAYS[range] * DAY_MS
+  const start = startOfDay(now) - (RANGE_DAYS[range] - 1) * DAY_MS
+  const previousStart = start - windowMs
+
+  let ms = 0
+  let count = 0
+  let previousMs = 0
+  const days = new Set<number>()
+
+  for (const solve of solves) {
+    if (solve.createdAt >= start) {
+      ms += solve.ms
+      count++
+      days.add(startOfDay(solve.createdAt))
+    } else if (solve.createdAt >= previousStart) {
+      previousMs += solve.ms
+    }
+  }
+
+  return {
+    range,
+    ms,
+    solves: count,
+    avgMs: count ? ms / count : null,
+    activeDays: days.size,
+    avgPerActiveDayMs: days.size ? ms / days.size : null,
+    previousMs,
+    deltaShare: previousMs > 0 ? (ms - previousMs) / previousMs : null,
+  }
+}
+
 // --- Solves per puzzle -----------------------------------------------------
 
 export type PuzzleCount = {

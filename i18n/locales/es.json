@@ -83,6 +83,31 @@
       "currentStreak": "Racha actual",
       "daysPracticed": "Días practicados"
     },
+    "timeSpent": {
+      "title": "Tiempo dedicado",
+      "subtitle": {
+        "today": "Practicado hoy",
+        "week": "Practicado en los últimos 7 días",
+        "month": "Practicado en los últimos 30 días",
+        "year": "Practicado en los últimos 365 días"
+      },
+      "ranges": {
+        "today": "Hoy",
+        "week": "Semana",
+        "month": "Mes",
+        "year": "Año"
+      },
+      "units": {
+        "hour": "h",
+        "minute": "min",
+        "second": "s"
+      },
+      "solves": "Resoluciones",
+      "perSolve": "Por resolución",
+      "activeDays": "Días activos",
+      "perDay": "Por día activo",
+      "delta": "{value} vs. período anterior"
+    },
     "bestAverages": {
       "title": "Mejores promedios"
     },
