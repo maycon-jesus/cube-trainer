@@ -10,7 +10,7 @@
                 <TimerStats :solves="solves" />
               </v-col>
               <v-col v-if="display.lgAndUp.value" cols="12">
-                <TimerSolves :solves="solves.slice(0, 12)" @solves-updated="refrehSolves()" />
+                <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="configStore.puzzle" :type="'normal'" @solves-updated="refrehSolves()" />
               </v-col>
             </v-row>
           </v-col>
@@ -52,7 +52,7 @@
                 <TimerStats :solves="solves" />
               </v-col>
               <v-col cols="12">
-                <TimerSolves :solves="solves.slice(0, 12)" @solves-updated="refrehSolves()" />
+                <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="configStore.puzzle" :type="'normal'" @solves-updated="refrehSolves()" />
               </v-col>
             </v-row>
         </v-col>

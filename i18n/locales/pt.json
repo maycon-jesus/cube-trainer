@@ -243,7 +243,18 @@
       "title": "Tempos",
       "subtitle": "Ultima resolução | Ultimas {count} resoluções",
       "remove": "Remover",
-      "empty": "Nenhum tempo ainda. Resolva o cubo!"
+      "empty": "Nenhum tempo ainda. Resolva o cubo!",
+      "add": {
+        "action": "Adicionar tempo manualmente",
+        "title": "Adicionar tempo",
+        "time": "Tempo",
+        "timeHint": "Formato: s.cc ou m:ss.cc",
+        "scramble": "Embaralhamento (opcional)",
+        "scramblePlaceholder": "R U R' U'",
+        "penaltyNone": "OK",
+        "cancel": "Cancelar",
+        "confirm": "Adicionar"
+      }
     },
     "actions": {
       "ok": "OK"

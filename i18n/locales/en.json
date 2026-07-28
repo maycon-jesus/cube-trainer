@@ -243,7 +243,18 @@
       "title": "Times",
       "subtitle": "Last solve | Last {count} solves",
       "remove": "Remove",
-      "empty": "No times yet. Solve the cube!"
+      "empty": "No times yet. Solve the cube!",
+      "add": {
+        "action": "Add time manually",
+        "title": "Add time",
+        "time": "Time",
+        "timeHint": "Format: s.cc or m:ss.cc",
+        "scramble": "Scramble (optional)",
+        "scramblePlaceholder": "R U R' U'",
+        "penaltyNone": "OK",
+        "cancel": "Cancel",
+        "confirm": "Add"
+      }
     },
     "actions": {
       "ok": "OK"

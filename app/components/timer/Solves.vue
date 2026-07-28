@@ -1,5 +1,10 @@
 <template>
     <CustomCard :title="t('timer.solves.title')" :subtitle="t('timer.solves.subtitle',{count: solves.length})">
+        <template #title-append>
+            <v-btn
+icon="mdi-plus" size="small" variant="text" color="primary"
+                :title="t('timer.solves.add.action')" @click="openAddModal = true" />
+        </template>
         <v-list v-if="solves.length" density="compact" bg-color="transparent" class="times-list">
             <v-list-item v-for="(solve, i) in solves" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
                 <template #prepend>
@@ -31,14 +36,21 @@ icon="mdi-delete-outline" size="x-small" variant="text" color="error" :title="t(
             {{ t('timer.solves.empty') }}
         </div>
         <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty" @delete-solve="removeSolve" />
+        <LazySolveAddDialog
+v-model="openAddModal" :session-id="sessionId" :puzzle="puzzle" :type="type"
+            :training-algorithm-id="trainingAlgorithmId" @added="emits('solves-updated')" />
     </CustomCard>
 </template>
 
 <script setup lang="ts">
-import { useSolvesStore, type Penalty, type Solve } from '~/stores/db/solves';
+import { useSolvesStore, type Penalty, type Solve, type Type } from '~/stores/db/solves';
 
-const props = defineProps<{
+defineProps<{
     solves: Solve[],
+    sessionId: number,
+    puzzle: string,
+    type: Type,
+    trainingAlgorithmId?: string,
 }>()
 
 const emits = defineEmits<{
@@ -49,6 +61,7 @@ const { t } = useI18n()
 const solvesStore = useSolvesStore()
 const modalSolve = ref<Solve | null>(null)
 const openModalSolve = ref(false)
+const openAddModal = ref(false)
 
 // --- Solve actions --------------------------------------------------------
 async function setPenalty(solve: Solve, penalty: Penalty) {

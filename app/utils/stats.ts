@@ -9,7 +9,7 @@ export function effectiveMs(solve: Solve): number {
   return solve.ms
 }
 
-/** Formats milliseconds as cstimer does: `s.cc` or `m:ss.cc`. */
+/** Formats milliseconds as `s.cc` or `m:ss.cc`. */
 export function formatMs(ms: number | null | undefined): string {
   if (ms === null || ms === undefined || !isFinite(ms)) return ms === Infinity ? 'DNF' : '—'
   const totalCs = Math.round(ms / 10)
@@ -20,6 +20,35 @@ export function formatMs(ms: number | null | undefined): string {
   const cc = cs.toString().padStart(2, '0')
   if (m > 0) return `${m}:${s.toString().padStart(2, '0')}.${cc}`
   return `${s}.${cc}`
+}
+
+/**
+ * Parses a user-typed time (`s`, `s.cc`, `m:ss.cc`) into ms, or null when it
+ * can't be read. Accepts `.` or `,` as the decimal separator; fractions of any
+ * length are read as ms (1-3 digits, padded/truncated to hundredths precision).
+ */
+export function parseTimeToMs(input: string): number | null {
+  const match = input.trim().match(/^(?:(\d+):)?(\d+)(?:[.,](\d{1,3}))?$/)
+  if (!match) return null
+  const minutes = match[1] ? parseInt(match[1], 10) : 0
+  const seconds = parseInt(match[2]!, 10)
+  const cs = match[3] ? parseInt(match[3].padEnd(2, '0').slice(0, 2), 10) : 0
+  return (minutes * 60 + seconds) * 1000 + cs * 10
+}
+
+/**
+ * Formats a right-to-left digit buffer (timer-style time entry) as it's
+ * typed: the last two digits are centiseconds, the next two seconds, the rest
+ * minutes — e.g. `1234` -> `12.34`, `12345` -> `1:23.45`. Empty stays empty.
+ */
+export function formatTimeDigits(digits: string): string {
+  if (!digits) return ''
+  const n = digits.padStart(3, '0')
+  const cc = n.slice(-2)
+  const s = n.slice(-4, -2)
+  const m = n.slice(0, -4)
+  if (m) return `${parseInt(m, 10)}:${s.padStart(2, '0')}.${cc}`
+  return `${parseInt(s, 10)}.${cc}`
 }
 
 /** Splits a duration in ms into whole hours, minutes and seconds. */

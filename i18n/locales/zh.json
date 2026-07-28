@@ -243,7 +243,18 @@
       "title": "成绩",
       "subtitle": "最近一次成绩 | 最近 {count} 次成绩",
       "remove": "移除",
-      "empty": "暂无成绩，去复原魔方吧！"
+      "empty": "暂无成绩，去复原魔方吧！",
+      "add": {
+        "action": "手动添加成绩",
+        "title": "添加成绩",
+        "time": "时间",
+        "timeHint": "格式：s.cc 或 m:ss.cc",
+        "scramble": "打乱（可选）",
+        "scramblePlaceholder": "R U R' U'",
+        "penaltyNone": "正常",
+        "cancel": "取消",
+        "confirm": "添加"
+      }
     },
     "actions": {
       "ok": "确定"
