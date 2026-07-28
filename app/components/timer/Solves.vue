@@ -1,6 +1,6 @@
 <template>
     <CustomCard :title="t('timer.solves.title')" :subtitle="t('timer.solves.subtitle',{count: solves.length})">
-        <template #title-append>
+        <template v-if="type !== 'training'" #title-append>
             <v-btn
 icon="mdi-plus" size="small" variant="text" color="primary"
                 :title="t('timer.solves.add.action')" @click="openAddModal = true" />
