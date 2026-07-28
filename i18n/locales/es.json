@@ -253,7 +253,9 @@
         "scramblePlaceholder": "R U R' U'",
         "penaltyNone": "OK",
         "cancel": "Cancelar",
-        "confirm": "Añadir"
+        "confirm": "Añadir",
+        "date": "Fecha",
+        "clock": "Hora del día"
       }
     },
     "actions": {

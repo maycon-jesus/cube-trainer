@@ -11,6 +11,11 @@
         </LayoutsPageHeader>
 
         <CustomCard :title="t('history.solves')" :subtitle="t('history.count', { count: total }, total)">
+            <template #title-append>
+                <v-btn
+                    icon="mdi-plus" size="small" variant="text" color="primary"
+                    :title="t('timer.solves.add.action')" @click="openAddModal = true" />
+            </template>
             <v-list v-if="rows.length" density="compact" bg-color="transparent">
                 <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
                     <template #prepend>
@@ -62,6 +67,14 @@
                 class="mt-4" />
         </CustomCard>
 
+        <LazySolveAddDialog
+            v-model="openAddModal"
+            editable
+            :session-id="initialSessionId"
+            :puzzle="initialPuzzle"
+            type="normal"
+            @added="onSolveAdded" />
+
         <LazySolveDetailsDialog
             v-if="modalSolve"
             v-model="openModalSolve"
@@ -78,10 +91,12 @@ import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
 import SolveTypeSelector from '~/components/solve/TypeSelector.vue'
+import { useConfigStore } from '~/stores/db/config'
 
 const { locale, t } = useI18n()
 const solvesStore = useSolvesStore()
 const sessionsStore = useSessionsStore()
+const configStore = useConfigStore()
 const trainingLabels = useTrainingLabels()
 
 const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
@@ -150,6 +165,16 @@ onMounted(async()=>{
     await loadPage()
     await loadPagination()
 })
+
+// --- Add solve manually ----------------------------------------------------
+const openAddModal = ref(false)
+const initialSessionId = computed(() => sessionId.value === ALL_SESSIONS ? configStore.sessionId : sessionId.value)
+const initialPuzzle = computed(() => puzzle.value === ALL_PUZZLES ? configStore.puzzle : puzzle.value)
+
+async function onSolveAdded() {
+    await loadPage()
+    await loadPagination()
+}
 
 // --- Solve details ---------------------------------------------------------
 const modalSolve = ref<Solve | null>(null)

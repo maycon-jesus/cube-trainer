@@ -253,7 +253,9 @@
         "scramblePlaceholder": "R U R' U'",
         "penaltyNone": "正常",
         "cancel": "取消",
-        "confirm": "添加"
+        "confirm": "添加",
+        "date": "日期",
+        "clock": "时间"
       }
     },
     "actions": {
