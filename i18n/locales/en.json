@@ -424,6 +424,19 @@
           "i-55": "I 55",
           "i-56": "I 56"
         }
+      },
+      "f2l": {
+        "name": "F2L",
+        "description": "First Two Layers: pair each corner with its edge and insert them into the slot to finish the first two layers in one go.",
+        "cases": {
+          "case-1": "Case 1",
+          "case-2": "Case 2",
+          "case-3": "Case 3",
+          "case-4": "Case 4",
+          "case-5": "Case 5",
+          "case-6": "Case 6",
+          "case-7": "Case 7"
+        }
       }
     },
     "removeFromList": "Remove from list",
@@ -489,7 +502,7 @@
       },
       "3x3x3": {
         "title": "3x3x3 Algorithm Training",
-        "description": "Train the 3x3x3 OLL and PLL algorithms and master every case to improve your solve times.",
+        "description": "Train the 3x3x3 F2L, OLL and PLL algorithms and master every case to improve your solve times.",
         "sets": {
           "pll": {
             "title": "3x3x3 PLL Algorithm Training",
@@ -498,6 +511,10 @@
           "oll": {
             "title": "3x3x3 OLL Algorithm Training",
             "description": "Learn and practice all 57 OLL algorithms to orient the last layer of the Rubik's Cube. Master every case to improve your times."
+          },
+          "f2l": {
+            "title": "3x3x3 F2L Algorithm Training",
+            "description": "Learn and practice the F2L cases to pair the corner with its edge and insert them into the slot. Drill every case to speed up your solves."
           }
         }
       }

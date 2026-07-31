@@ -424,6 +424,19 @@
           "i-55": "I 55",
           "i-56": "I 56"
         }
+      },
+      "f2l": {
+        "name": "F2L",
+        "description": "Primeras Dos Capas: empareja cada esquina con su arista e insértalas en el hueco para completar las dos primeras capas de una vez.",
+        "cases": {
+          "case-1": "Caso 1",
+          "case-2": "Caso 2",
+          "case-3": "Caso 3",
+          "case-4": "Caso 4",
+          "case-5": "Caso 5",
+          "case-6": "Caso 6",
+          "case-7": "Caso 7"
+        }
       }
     },
     "removeFromList": "Quitar de la lista",
@@ -489,7 +502,7 @@
       },
       "3x3x3": {
         "title": "Entrenamiento de Algoritmos 3x3x3",
-        "description": "Entrena los algoritmos OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",
+        "description": "Entrena los algoritmos F2L, OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",
         "sets": {
           "pll": {
             "title": "Entrenamiento de Algoritmos PLL del 3x3x3",
@@ -498,6 +511,10 @@
           "oll": {
             "title": "Entrenamiento de Algoritmos OLL del 3x3x3",
             "description": "Aprende y practica los 57 algoritmos OLL para orientar la última capa del Cubo de Rubik. Domina cada caso para mejorar tus tiempos."
+          },
+          "f2l": {
+            "title": "Entrenamiento de Algoritmos F2L del 3x3x3",
+            "description": "Aprende y practica los casos de F2L para emparejar la esquina con su arista e insertarlas en el hueco. Entrena cada caso para acelerar tus resoluciones."
           }
         }
       }
