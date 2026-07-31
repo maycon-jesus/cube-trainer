@@ -89,6 +89,8 @@ export const Cube333MovesCollection: MovesCollection = {
 
 export const Cube333Rotations: Record<string, string[]> = {
   x: ['R', "M'", "L'"],
+  y: ['U', "E'", "D'"],
+  z: ['F', 'S', "B'"],
 }
 
 // Wide (double-layer) moves.
