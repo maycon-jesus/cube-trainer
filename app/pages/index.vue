@@ -18,9 +18,9 @@
           <!-- Timer column -->
           <v-col cols="12" lg="8">
             <!-- Scramble -->
-            <v-row density="comfortable">
+            <v-row v-if="scramble" density="comfortable">
               <v-col cols="12">
-              <TimerScramble v-show="scramble" :scramble="scramble" @refresh="newScramble()" />
+              <TimerScramble :scramble="scramble" @refresh="newScramble()" />
             </v-col>
             </v-row>
 
