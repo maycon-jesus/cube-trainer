@@ -464,6 +464,78 @@
       "saveChanges": "保存更改"
     }
   },
+  "patterns": {
+    "title": "花样",
+    "subtitle": "把还原好的魔方变成艺术品",
+    "viewAll": "查看全部",
+    "tip": "从还原状态开始，按顺序执行公式。想复原时执行逆公式即可。",
+    "moveCount": "{count} 步",
+    "patternCount": "{count} 个花样",
+    "algorithm": "公式",
+    "fromSolved": "从还原状态开始",
+    "reverse": "逆公式",
+    "backToSolved": "回到还原状态",
+    "copy": "复制",
+    "close": "关闭",
+    "empty": "没有符合该筛选条件的花样。",
+    "difficulty": {
+      "easy": "简单",
+      "medium": "中等",
+      "hard": "困难"
+    },
+    "3x3x3": {
+      "header": {
+        "title": "3x3x3 图案",
+        "subtitle": "选择一个图案，从复原状态开始依次执行公式"
+      },
+      "cases": {
+        "checkerboard": {
+          "name": "棋盘",
+          "description": "每个面都变成两种对色交错的棋盘图案。"
+        },
+        "wire": {
+          "name": "电线",
+          "description": "只需四步：前后两面的中心上下各出现一个色点。"
+        },
+        "plus-minus": {
+          "name": "加减号",
+          "description": "前后两面呈加号，左右两面呈横条纹。"
+        },
+        "four-spots": {
+          "name": "四点",
+          "description": "四个侧面互换中心块，顶面和底面保持纯色。"
+        },
+        "six-spots": {
+          "name": "六点",
+          "description": "六个面都保持纯色，只有中心块换了颜色，形成六个点。"
+        },
+        "tetris": {
+          "name": "俄罗斯方块",
+          "description": "色块相互交错，就像下落的俄罗斯方块。"
+        },
+        "cube-in-cube": {
+          "name": "方中方",
+          "description": "每个面上都有一个嵌在角落里的小方块。"
+        },
+        "cross": {
+          "name": "十字",
+          "description": "六个面上都出现一个对比色的十字。"
+        },
+        "vertical-stripes": {
+          "name": "竖条纹",
+          "description": "竖条纹环绕四个侧面，顶面和底面保持纯色。"
+        },
+        "cube-in-cube-in-cube": {
+          "name": "方中方中方",
+          "description": "每个面上有三层层层嵌套的方块。"
+        },
+        "superflip": {
+          "name": "超级翻转",
+          "description": "所有角块归位、12 个棱块全部翻转 —— 距离还原恰好 20 步，是最难的状态。"
+        }
+      }
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — 免费速拧计时器与统计",
@@ -483,7 +555,13 @@
     },
     "patterns": {
       "title": "魔方花样",
-      "description": "一步步学习在魔方上制作酷炫花样。"
+      "description": "一步步学习在魔方上制作酷炫花样。",
+      "puzzles": {
+        "3x3x3": {
+          "title": "3x3x3 魔方图案",
+          "description": "一步步学习棋盘格、魔方套魔方、超级翻转等 3x3x3 图案的做法。"
+        }
+      }
     },
     "training": {
       "title": "公式训练",

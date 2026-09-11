@@ -464,6 +464,78 @@
       "saveChanges": "Salvar alterações"
     }
   },
+  "patterns": {
+    "title": "Padrões",
+    "subtitle": "Transforme um cubo resolvido em obra de arte",
+    "viewAll": "Ver tudo",
+    "tip": "Comece com o cubo resolvido e aplique os movimentos na ordem. Use o algoritmo inverso para voltar ao resolvido.",
+    "moveCount": "{count} movimento | {count} movimentos",
+    "patternCount": "{count} padrão | {count} padrões",
+    "algorithm": "Algoritmo",
+    "fromSolved": "A partir do cubo resolvido",
+    "reverse": "Inverso",
+    "backToSolved": "De volta ao resolvido",
+    "copy": "Copiar",
+    "close": "Fechar",
+    "empty": "Nenhum padrão corresponde a esse filtro.",
+    "difficulty": {
+      "easy": "Fácil",
+      "medium": "Médio",
+      "hard": "Difícil"
+    },
+    "3x3x3": {
+      "header": {
+        "title": "Padrões do 3x3x3",
+        "subtitle": "Escolha um padrão e aplique os movimentos a partir do cubo resolvido"
+      },
+      "cases": {
+        "checkerboard": {
+          "name": "Xadrez",
+          "description": "Todas as faces viram um tabuleiro de xadrez com duas cores opostas."
+        },
+        "wire": {
+          "name": "Fio",
+          "description": "Só quatro movimentos: as faces da frente e de trás ganham um ponto acima e abaixo do centro."
+        },
+        "plus-minus": {
+          "name": "Mais e Menos",
+          "description": "Um sinal de mais nas faces da frente e de trás e listras horizontais nas laterais."
+        },
+        "four-spots": {
+          "name": "Quatro Pontos",
+          "description": "As quatro faces laterais trocam de centro enquanto o topo e a base continuam sólidos."
+        },
+        "six-spots": {
+          "name": "Seis Pontos",
+          "description": "As seis faces ficam sólidas com o centro trocado, formando seis pontos."
+        },
+        "tetris": {
+          "name": "Tetris",
+          "description": "Blocos de cor encaixados, como peças de Tetris caindo."
+        },
+        "cube-in-cube": {
+          "name": "Cubo no Cubo",
+          "description": "Cada face mostra um cubo menor encaixado em um dos cantos."
+        },
+        "cross": {
+          "name": "Cruzes",
+          "description": "Uma cruz de cor contrastante em todas as seis faces."
+        },
+        "vertical-stripes": {
+          "name": "Listras Verticais",
+          "description": "Listras verticais dão a volta nas quatro faces laterais enquanto o topo e a base continuam sólidos."
+        },
+        "cube-in-cube-in-cube": {
+          "name": "Cubo no Cubo no Cubo",
+          "description": "Três cubos aninhados um dentro do outro em cada face."
+        },
+        "superflip": {
+          "name": "Superflip",
+          "description": "Todos os cantos resolvidos e as 12 arestas invertidas — o estado mais difícil, a exatos 20 movimentos do resolvido."
+        }
+      }
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — Timer de Speedcubing Grátis e Estatísticas",
@@ -483,7 +555,13 @@
     },
     "patterns": {
       "title": "Padrões do Cubo Mágico",
-      "description": "Aprenda a montar padrões incríveis no seu cubo mágico, passo a passo."
+      "description": "Aprenda a montar padrões incríveis no seu cubo mágico, passo a passo.",
+      "puzzles": {
+        "3x3x3": {
+          "title": "Padrões do Cubo Mágico 3x3x3",
+          "description": "Aprenda a fazer o checkerboard, cubo dentro do cubo, superflip e outros padrões do 3x3x3 passo a passo."
+        }
+      }
     },
     "training": {
       "title": "Treino de Algoritmos",

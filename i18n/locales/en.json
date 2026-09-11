@@ -464,6 +464,78 @@
       "saveChanges": "Save changes"
     }
   },
+  "patterns": {
+    "title": "Patterns",
+    "subtitle": "Turn a solved cube into a work of art",
+    "viewAll": "View all",
+    "tip": "Start from a solved cube and apply the moves in order. Use the reverse algorithm to get back to solved.",
+    "moveCount": "{count} move | {count} moves",
+    "patternCount": "{count} pattern | {count} patterns",
+    "algorithm": "Algorithm",
+    "fromSolved": "From a solved cube",
+    "reverse": "Reverse",
+    "backToSolved": "Back to solved",
+    "copy": "Copy",
+    "close": "Close",
+    "empty": "No patterns match this filter.",
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "3x3x3": {
+      "header": {
+        "title": "3x3x3 patterns",
+        "subtitle": "Pick a pattern and apply the moves from a solved cube"
+      },
+      "cases": {
+        "checkerboard": {
+          "name": "Checkerboard",
+          "description": "Every face becomes a checkerboard of two opposite colors."
+        },
+        "wire": {
+          "name": "Wire",
+          "description": "Only four moves: the front and back faces get a dot above and below the center."
+        },
+        "plus-minus": {
+          "name": "Plus Minus",
+          "description": "A plus sign on the front and back faces and horizontal stripes on the sides."
+        },
+        "four-spots": {
+          "name": "Four Spots",
+          "description": "The four side faces swap their centers while the top and bottom stay solid."
+        },
+        "six-spots": {
+          "name": "Six Spots",
+          "description": "All six faces stay solid with a swapped center, forming six dots."
+        },
+        "tetris": {
+          "name": "Tetris",
+          "description": "Interlocking blocks of color, like falling Tetris pieces."
+        },
+        "cube-in-cube": {
+          "name": "Cube in a Cube",
+          "description": "Every face shows a smaller cube nested in one of its corners."
+        },
+        "cross": {
+          "name": "Crosses",
+          "description": "A cross in a contrasting color on all six faces."
+        },
+        "vertical-stripes": {
+          "name": "Vertical Stripes",
+          "description": "Vertical stripes wrap around the four side faces while the top and bottom stay solid."
+        },
+        "cube-in-cube-in-cube": {
+          "name": "Cube in a Cube in a Cube",
+          "description": "Three cubes nested one inside the other on every face."
+        },
+        "superflip": {
+          "name": "Superflip",
+          "description": "Every corner solved and all 12 edges flipped — the hardest state, exactly 20 moves from solved."
+        }
+      }
+    }
+  },
   "seo": {
     "index": {
       "title": "Cube Trainer — Free Speedcubing Timer & Statistics",
@@ -483,7 +555,13 @@
     },
     "patterns": {
       "title": "Rubik's Cube Patterns",
-      "description": "Learn to make cool patterns on your Rubik's Cube, step by step."
+      "description": "Learn to make cool patterns on your Rubik's Cube, step by step.",
+      "puzzles": {
+        "3x3x3": {
+          "title": "3x3x3 Rubik's Cube Patterns",
+          "description": "Learn how to make the checkerboard, cube in a cube, superflip and other 3x3x3 patterns step by step."
+        }
+      }
     },
     "training": {
       "title": "Algorithm Training",
