@@ -149,6 +149,7 @@ export default defineNuxtConfig({
   vuetify: {
     moduleOptions: {
       styles: { configFile: 'assets/vuetify-settings.scss' },
+      enableRules: false,
     },
     vuetifyOptions: {
       theme: {
