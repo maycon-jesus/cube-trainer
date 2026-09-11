@@ -493,17 +493,129 @@
         "subtitle": "Elige un patrón y aplica los movimientos desde el cubo resuelto"
       },
       "cases": {
-        "checkerboard": {
+        "the-superflip": {
+          "name": "Superflip",
+          "description": "Todas las esquinas resueltas y las 12 aristas volteadas: el estado más revuelto posible, a exactamente 20 movimientos del resuelto."
+        },
+        "the-easy-checkerboard": {
           "name": "Damero",
-          "description": "Todas las caras se convierten en un damero de dos colores opuestos."
+          "description": "Todas las caras se convierten en un damero de dos colores opuestos usando solo movimientos de capa central."
+        },
+        "speedsolving-logo": {
+          "name": "Logo de SpeedSolving",
+          "description": "Recrea el logotipo de la cabecera del sitio de la comunidad SpeedSolving.com."
+        },
+        "3sidessolved": {
+          "name": "3 Caras Resueltas",
+          "description": "Tres caras completas permanecen resueltas mientras el resto del cubo parece revuelto."
+        },
+        "all-flags-and-crest": {
+          "name": "Banderas y Escudo",
+          "description": "Tres franjas de color con un escudo en el medio, como una bandera nacional tricolor."
         },
         "wire": {
           "name": "Cable",
-          "description": "Solo cuatro movimientos: las caras frontal y trasera ganan un punto arriba y abajo del centro."
+          "description": "Finas líneas diagonales de color atraviesan cada cara como cables tensados."
+        },
+        "checkerboard-in-the-cube": {
+          "name": "Damero en el Cubo",
+          "description": "Un motivo de damero encajado dentro de un cubo más pequeño en cada cara."
+        },
+        "perfect-scramble": {
+          "name": "Mezcla Perfecta",
+          "description": "Todos los colores aparecen en todas las caras sin que dos pegatinas iguales se toquen, la mezcla más equilibrada posible."
+        },
+        "perfect-storm": {
+          "name": "Tormenta Perfecta",
+          "description": "Una mezcla densa y caótica de colores en cada cara, descubierta por Mugur."
+        },
+        "minority-cross": {
+          "name": "Cruz Minoritaria",
+          "description": "Todos los colores aparecen en todas las caras con las esquinas resueltas y ningún color de la cruz repetido junto a otro igual."
+        },
+        "perpendicular-lines": {
+          "name": "Líneas Perpendiculares",
+          "description": "Líneas rectas se cruzan en ángulo recto en cada cara."
+        },
+        "flipped-tips-yeah": {
+          "name": "Puntas Volteadas",
+          "description": "Las piezas de esquina parecen giradas en su sitio mientras el resto de las caras queda limpio."
         },
         "plus-minus": {
           "name": "Más y Menos",
-          "description": "Un signo de más en las caras frontal y trasera y rayas horizontales en los laterales."
+          "description": "Un signo de más en dos caras opuestas con rayas horizontales alrededor de los laterales."
+        },
+        "tablecloth": {
+          "name": "Mantel",
+          "description": "Un patrón cuadriculado, como un tejido, cubre uniformemente cada cara."
+        },
+        "deckerboard": {
+          "name": "Medio Damero",
+          "description": "Una variante de medio damero, donde solo parte de cada cara alterna los colores."
+        },
+        "spiral-pattern": {
+          "name": "Espiral",
+          "description": "Rastros de color se curvan hacia afuera desde el centro de cada cara, como una espiral."
+        },
+        "fruit-bowl": {
+          "name": "Frutero",
+          "description": "Una mezcla alegre de bloques de color repartidos por las caras, como frutas en un frutero."
+        },
+        "flower-with-stem": {
+          "name": "Flor",
+          "description": "Una flor con tallo aparece en cada cara."
+        },
+        "vertical-stripes": {
+          "name": "Rayas Verticales",
+          "description": "Rayas verticales rodean las cuatro caras laterales mientras arriba y abajo siguen sólidas."
+        },
+        "gift-box": {
+          "name": "Caja de Regalo",
+          "description": "Una cruz en forma de cinta envuelve cada cara, como si el cubo estuviera envuelto como un regalo."
+        },
+        "opposite-corners": {
+          "name": "Esquinas Opuestas",
+          "description": "Las piezas de esquina en caras opuestas intercambian color, enmarcando cada centro con un borde contrastante."
+        },
+        "cross-2": {
+          "name": "Cruz",
+          "description": "Una cruz de color contrastante aparece en las seis caras."
+        },
+        "four-crosses": {
+          "name": "4 Cruces",
+          "description": "Cuatro de las seis caras muestran una cruz limpia en forma de signo más."
+        },
+        "cross": {
+          "name": "Union Jack",
+          "description": "Un patrón de cruz diagonal que recuerda a la bandera del Reino Unido, en caras opuestas."
+        },
+        "twisted-cube-in-the-big-cube": {
+          "name": "Cubo en el Cubo",
+          "description": "Cada cara muestra un cubo más pequeño encajado en una de sus esquinas."
+        },
+        "cube-in-a-cube-in-a-cube": {
+          "name": "Cubo en el Cubo en el Cubo",
+          "description": "Tres cubos anidados uno dentro de otro en cada cara."
+        },
+        "anaconda": {
+          "name": "Anaconda",
+          "description": "Una franja gruesa de color, como una serpiente, se desliza por las caras."
+        },
+        "python": {
+          "name": "Pitón",
+          "description": "Un rastro sinuoso y segmentado de color se desliza por el cubo como una serpiente."
+        },
+        "black-mamba": {
+          "name": "Mamba Negra",
+          "description": "Una franja serpenteante oscura y estrecha se enrolla por las caras."
+        },
+        "green-mamba": {
+          "name": "Mamba Verde",
+          "description": "Otro enrollado serpenteante, una variante de color de la familia de patrones mamba."
+        },
+        "tangled-cube": {
+          "name": "Enredado",
+          "description": "Franjas entrelazadas parecen anudadas entre sí en las caras."
         },
         "four-spots": {
           "name": "Cuatro Puntos",
@@ -513,29 +625,313 @@
           "name": "Seis Puntos",
           "description": "Las seis caras quedan sólidas con el centro cambiado, formando seis puntos."
         },
+        "twister": {
+          "name": "Torsión",
+          "description": "Franjas de color parecen retorcerse en cada cara, como un paño escurrido."
+        },
+        "kilt": {
+          "name": "Kilt",
+          "description": "Rayas superpuestas forman un patrón tipo tartán, recordando a un kilt escocés."
+        },
         "tetris": {
           "name": "Tetris",
           "description": "Bloques de color encajados, como piezas de Tetris cayendo."
         },
-        "cube-in-cube": {
-          "name": "Cubo en el Cubo",
-          "description": "Cada cara muestra un cubo más pequeño encajado en una de sus esquinas."
+        "dont-cross-line": {
+          "name": "Línea Sin Cruzar",
+          "description": "Una única línea recta rodea la capa central sin cruzarse nunca."
         },
-        "cross": {
-          "name": "Cruces",
-          "description": "Una cruz de color contrastante en las seis caras."
+        "hi": {
+          "name": "Hola",
+          "description": "Una secuencia corta y simpática de cuatro movimientos que deja un motivo simple, como un saludo, en las caras."
         },
-        "vertical-stripes": {
-          "name": "Rayas Verticales",
-          "description": "Rayas verticales rodean las cuatro caras laterales mientras arriba y abajo siguen sólidas."
+        "hi-all-around": {
+          "name": "Hola por Todos Lados",
+          "description": "El mismo motivo simpático se repite hasta aparecer en todas las caras."
         },
-        "cube-in-cube-in-cube": {
-          "name": "Cubo en el Cubo en el Cubo",
-          "description": "Tres cubos anidados uno dentro de otro en cada cara."
+        "spicy": {
+          "name": "Motivo Desplazado",
+          "description": "Los colores se desplazan lo justo para crear una mezcla irregular y “picante”."
         },
-        "superflip": {
-          "name": "Superflip",
-          "description": "Todas las esquinas resueltas y las 12 aristas invertidas: el estado más difícil, a exactamente 20 movimientos del resuelto."
+        "hi-there": {
+          "name": "¿Estás Alto?",
+          "description": "Un motivo alto y simétrico se extiende verticalmente por las caras opuestas."
+        },
+        "see-you-around": {
+          "name": "Nos Vemos",
+          "description": "Un patrón irregular, casi como una mezcla, que aún conserva un motivo reconocible en cada cara."
+        },
+        "order-in-chaos": {
+          "name": "Orden en el Caos",
+          "description": "Un cubo aparentemente revuelto que aún esconde una estructura repetida reconocible."
+        },
+        "well-spread": {
+          "name": "Bien Distribuido",
+          "description": "Cada cara muestra los seis colores sin que dos iguales se toquen, repartidos de la forma más equilibrada posible."
+        },
+        "the-hole": {
+          "name": "El Agujero",
+          "description": "Una secuencia corta de seis movimientos que deja un hueco vacío en las caras."
+        },
+        "no-entry": {
+          "name": "Prohibido el Paso",
+          "description": "Una franja de color intensa rodea cada cara, como la raya de una señal de prohibido el paso."
+        },
+        "plus-apostr": {
+          "name": "Más",
+          "description": "Un simple signo de más aparece centrado en las caras opuestas."
+        },
+        "3c3w": {
+          "name": "3C3W",
+          "description": "Tres esquinas y tres “alas” de color se reorganizan formando un motivo tipo molinillo."
+        },
+        "pong": {
+          "name": "Pong",
+          "description": "Dos pequeños cuadrados se enfrentan en los lados del cubo, como las palas del juego Pong."
+        },
+        "spun-ts": {
+          "name": "T's Giradas",
+          "description": "Bloques de color en forma de T aparecen girados por las caras."
+        },
+        "wifi-downstairs": {
+          "name": "Wifi Abajo",
+          "description": "Franjas concéntricas, como una señal de wifi, irradian desde el centro de cada cara."
+        },
+        "opposite-pillars-mem": {
+          "name": "Pilares Opuestos",
+          "description": "Pilares altos de color se alzan en las caras opuestas del cubo."
+        },
+        "viaduct-u": {
+          "name": "Viaducto",
+          "description": "Una franja de color elevada, como un puente, se arquea por las caras."
+        },
+        "2-small-cubes-in-scrambled": {
+          "name": "Resuelto en lo Revuelto",
+          "description": "Dos cubitos permanecen intactos con bordes que no combinan, escondiendo orden dentro de un cubo que parece revuelto."
+        },
+        "hi-ohio-peace": {
+          "name": "Hola Ohio",
+          "description": "Un motivo corto y simétrico que se lee igual desde ambos lados, como el palíndromo “Ohio”."
+        },
+        "staircase-steps": {
+          "name": "Escalera",
+          "description": "Bloques de color descienden por las caras como los peldaños de una escalera."
+        },
+        "wrapped2x2cube": {
+          "name": "2x2 Envuelto",
+          "description": "El cubo parece tener un cubo 2x2 más pequeño envuelto y colocado dentro."
+        },
+        "antipodal-chaos": {
+          "name": "Caos Antipodal",
+          "description": "Cada cara muestra una forma diferente, hecha con los colores de la cara opuesta."
+        },
+        "flower-field-power": {
+          "name": "Campo de Flores",
+          "description": "Un campo de pequeñas flores se extiende por todas las caras."
+        },
+        "c-spirals-3d": {
+          "name": "Espirales en C",
+          "description": "Curvas en forma de C se despliegan en espiral desde el centro de cada cara."
+        },
+        "tiny-worms-perpendicular": {
+          "name": "Gusanos",
+          "description": "Pequeños rastros de color, como gusanos, se cruzan en ángulo recto por las caras."
+        },
+        "glider-conways-life": {
+          "name": "Planeador",
+          "description": "Un grupo diagonal de cuadrados que recuerda al planeador del Juego de la Vida de Conway."
+        },
+        "elegant-cube-in-cube": {
+          "name": "Comillas",
+          "description": "Un par de bloques ordenado, como comillas, enmarca la esquina de cada cara."
+        },
+        "matching-pictures": {
+          "name": "Imágenes a Juego",
+          "description": "Un algoritmo corto que deja bloques de color espejados y a juego en las caras opuestas."
+        },
+        "loose-strap": {
+          "name": "Correa Suelta",
+          "description": "Una franja suelta de color cruza en diagonal las caras de arriba y abajo."
+        },
+        "doubler": {
+          "name": "Duplicador",
+          "description": "Un motivo parece repetirse dos veces por las caras."
+        },
+        "3t": {
+          "name": "3T",
+          "description": "Tres bloques de color en forma de T se alinean por las caras."
+        },
+        "4t-around": {
+          "name": "4 T",
+          "description": "Cuatro bloques en forma de T aparecen, uno en cada cara lateral."
+        },
+        "6ts": {
+          "name": "6 T",
+          "description": "Un bloque de color en forma de T aparece en cada una de las seis caras."
+        },
+        "zz-line": {
+          "name": "Línea ZZ",
+          "description": "Una línea de color en zigzag atraviesa las caras."
+        },
+        "henrys-zigzag-with-checkerboard": {
+          "name": "Zigzag de Damero",
+          "description": "Una franja en zigzag atraviesa un fondo de damero."
+        },
+        "exchanged-duck-feet": {
+          "name": "Patas de Pato Intercambiadas",
+          "description": "Bloques en forma de Y que recuerdan huellas palmeadas cambian de lugar entre las caras."
+        },
+        "stripe-dot-solved": {
+          "name": "Raya y Punto",
+          "description": "Un algoritmo corto que deja una raya y un punto mientras la mayor parte del cubo sigue resuelta."
+        },
+        "picnic": {
+          "name": "Picnic",
+          "description": "Un patrón cuadriculado ordenado, que recuerda a una manta de picnic, hecho en solo cinco movimientos."
+        },
+        "percent-sign": {
+          "name": "Signo de Porcentaje %",
+          "description": "Bloques diagonales se alinean en cada cara recordando un signo de porcentaje."
+        },
+        "mirror": {
+          "name": "Espejo",
+          "description": "Dos caras opuestas reflejan el patrón una de la otra, como una imagen especular."
+        },
+        "plus-minus-check": {
+          "name": "Más y Menos a Cuadros",
+          "description": "Una variante a cuadros del patrón más y menos, alternando cruces y rayas."
+        },
+        "facing-checkerboards": {
+          "name": "Damero Enfrentado",
+          "description": "Dos caras opuestas se convierten en dameros que se enfrentan entre sí."
+        },
+        "hiagain": {
+          "name": "Hola de Nuevo",
+          "description": "Una secuencia más larga que repite el motivo amistoso “Hola” en todas las caras."
+        },
+        "4-plus-2-dots": {
+          "name": "4 Más y 2 Puntos",
+          "description": "Cuatro caras muestran un motivo en forma de más, mientras las otras dos muestran puntos simples."
+        },
+        "rockets": {
+          "name": "Cohetes",
+          "description": "Bloques triangulares de color apuntan hacia afuera desde el centro, como cohetes despegando."
+        },
+        "slash": {
+          "name": "Barra",
+          "description": "Trazos diagonales de color se repiten de forma uniforme por las caras."
+        },
+        "the-pillars": {
+          "name": "Los Pilares",
+          "description": "Una secuencia mínima de cuatro movimientos que deja pilares altos de color en las caras laterales."
+        },
+        "twisted-duck-feet": {
+          "name": "Patas de Pato Torcidas",
+          "description": "Una variante torcida del motivo de patas de pato se extiende por las caras."
+        },
+        "rons-cube-in-a-cube": {
+          "name": "Cubo en el Cubo de Ron",
+          "description": "Una variante del cubo en el cubo con un esquema de colores diferente, llamada así por su creador, Ron."
+        },
+        "headlights": {
+          "name": "Faros",
+          "description": "Dos cuadrados de color vivo quedan uno al lado del otro en una cara, como los faros de un coche."
+        },
+        "crossing-snake": {
+          "name": "Serpiente Cruzada",
+          "description": "Un rastro serpenteante de color se cruza sobre sí mismo mientras serpentea por las caras."
+        },
+        "toms-stripes": {
+          "name": "Jaula",
+          "description": "Barras finas de color forman una rejilla tipo jaula sobre cada cara."
+        },
+        "4-crosses": {
+          "name": "4 Cruces (Repetido)",
+          "description": "Una secuencia repetida de seis movimientos que forma cuatro cruces por las caras."
+        },
+        "edge-hexagon-of-order-3": {
+          "name": "Pyraminx",
+          "description": "Bloques triangulares se organizan en un motivo hexagonal que recuerda al rompecabezas Pyraminx."
+        },
+        "edge-hexagon-of-order-2": {
+          "name": "Triángulo de Aristas",
+          "description": "Un motivo triangular más pequeño se forma a partir de las piezas de arista de cada cara."
+        },
+        "twisted-rings": {
+          "name": "Anillos Retorcidos",
+          "description": "Una variante repintada del cubo en el cubo en el cubo, con anillos en lugar de cuadrados."
+        },
+        "exchanged-rings": {
+          "name": "Anillos Intercambiados",
+          "description": "Bloques de color en forma de anillo cambian de lugar entre caras vecinas."
+        },
+        "twisted-chicken-feet": {
+          "name": "Patas de Gallina Torcidas",
+          "description": "Bloques en forma de Y, como huellas, aparecen torcidos por las caras."
+        },
+        "exchanged-chicken-feet": {
+          "name": "Patas de Gallina Intercambiadas",
+          "description": "El motivo de patas de gallina cambia de lugar entre las caras opuestas."
+        },
+        "twinpeaks": {
+          "name": "Picos Gemelos",
+          "description": "Dos picos triangulares de color se alzan en cada cara."
+        },
+        "four-twisted-peaks": {
+          "name": "Pirámide de Esquina",
+          "description": "Un bloque de color en forma de pirámide se forma en la esquina de cada cara."
+        },
+        "two-twisted-peaks": {
+          "name": "Picos Torcidos",
+          "description": "Un par de picos angulares se retuerce por las caras opuestas."
+        },
+        "exchanged-peaks": {
+          "name": "Picos Intercambiados",
+          "description": "Los bloques en forma de pico cambian de lugar entre las caras opuestas."
+        },
+        "megatron": {
+          "name": "Megatron",
+          "description": "Un motivo audaz y angular cubre las caras, como el blindaje de un robot."
+        },
+        "six-two-one": {
+          "name": "Seis-Dos-Uno",
+          "description": "Un patrón por etapas en el que las caras muestran seis, luego dos, luego un bloque de color."
+        },
+        "yin-yang": {
+          "name": "Yin Yang",
+          "description": "Dos mitades curvas encajadas, de colores contrastantes, forman un motivo de yin-yang."
+        },
+        "yan-ying": {
+          "name": "Yan Ying",
+          "description": "Una variante espejada del patrón Tetris, hecha con los mismos bloques encajados girados hacia el otro lado."
+        },
+        "henrys-snake": {
+          "name": "Serpiente de Henry",
+          "description": "Un rastro de color sinuoso, como una serpiente, serpentea por las caras, llamado así por su creador, Henry."
+        },
+        "snake-eyes": {
+          "name": "Ojos de Serpiente",
+          "description": "Dos pequeños puntos de color quedan lado a lado en cada cara, como un par de “ojos de serpiente” en los dados."
+        },
+        "glitch-corners": {
+          "name": "Fallo",
+          "description": "Las esquinas parecen ligeramente fuera de lugar, como si el cubo hubiera fallado a mitad del revuelto."
+        },
+        "weirdo": {
+          "name": "Rarito",
+          "description": "Una mezcla irregular y asimétrica de colores que parece deliberadamente extraña."
+        },
+        "twisted-corners": {
+          "name": "Esquinas Torcidas",
+          "description": "Las piezas de esquina parecen giradas fuera de lugar en todas las caras."
+        },
+        "plus-with-dot": {
+          "name": "Matemáticas Rápidas 1+1",
+          "description": "Un signo de más queda al lado de un único punto, un guiño divertido a la aritmética simple."
+        },
+        "scrambled2x2s": {
+          "name": "2x2 Revueltos",
+          "description": "El cubo parece cuatro cubitos 2x2, cada uno revuelto individualmente."
         }
       }
     }

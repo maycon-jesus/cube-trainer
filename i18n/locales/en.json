@@ -493,17 +493,129 @@
         "subtitle": "Pick a pattern and apply the moves from a solved cube"
       },
       "cases": {
-        "checkerboard": {
+        "the-superflip": {
+          "name": "The Superflip",
+          "description": "Every corner solved and all 12 edges flipped, the single most scrambled state a cube can be in, exactly 20 moves from solved."
+        },
+        "the-easy-checkerboard": {
           "name": "Checkerboard",
-          "description": "Every face becomes a checkerboard of two opposite colors."
+          "description": "Every face becomes a checkerboard of two opposite colors using only slice moves."
+        },
+        "speedsolving-logo": {
+          "name": "SpeedSolving Logo",
+          "description": "Recreates the header logo of the SpeedSolving.com community website."
+        },
+        "3sidessolved": {
+          "name": "3 Sides Solved",
+          "description": "Three whole faces stay solved while the rest of the cube looks scrambled."
+        },
+        "all-flags-and-crest": {
+          "name": "Flags & Crest",
+          "description": "Three bands of color with a crest in the middle, like a tricolor national flag."
         },
         "wire": {
           "name": "Wire",
-          "description": "Only four moves: the front and back faces get a dot above and below the center."
+          "description": "Thin diagonal lines of color stretch across each face like taut wires."
+        },
+        "checkerboard-in-the-cube": {
+          "name": "Checkerboard in the Cube",
+          "description": "A checkerboard motif nested inside a smaller cube on every face."
+        },
+        "perfect-scramble": {
+          "name": "Perfect Scramble",
+          "description": "Every color appears on every face with no two matching stickers touching, the most evenly mixed scramble possible."
+        },
+        "perfect-storm": {
+          "name": "Perfect Storm",
+          "description": "A dense, chaotic mix of colors on every face, discovered by Mugur."
+        },
+        "minority-cross": {
+          "name": "Minority Cross",
+          "description": "Every color appears on every face with the corners left solved and no two matching cross colors adjacent."
+        },
+        "perpendicular-lines": {
+          "name": "Perpendicular Lines",
+          "description": "Straight lines cross at right angles on each face."
+        },
+        "flipped-tips-yeah": {
+          "name": "Flipped Tips",
+          "description": "The corner pieces look twisted in place while the rest of the faces stay clean."
         },
         "plus-minus": {
           "name": "Plus Minus",
-          "description": "A plus sign on the front and back faces and horizontal stripes on the sides."
+          "description": "A plus sign on two opposite faces with horizontal stripes running around the sides."
+        },
+        "tablecloth": {
+          "name": "Tablecloth",
+          "description": "A checkered, cloth-like pattern drapes evenly over every face."
+        },
+        "deckerboard": {
+          "name": "Deckerboard",
+          "description": "A half-checkerboard variant where only part of each face alternates colors."
+        },
+        "spiral-pattern": {
+          "name": "Spiral",
+          "description": "Color trails curl outward from the center of each face like a spiral."
+        },
+        "fruit-bowl": {
+          "name": "Fruit Bowl",
+          "description": "A cheerful mix of colored blocks scattered across the faces like fruit in a bowl."
+        },
+        "flower-with-stem": {
+          "name": "Flower",
+          "description": "A flower-shaped blossom with a stem appears on each face."
+        },
+        "vertical-stripes": {
+          "name": "Vertical Stripes",
+          "description": "Vertical stripes wrap around the four side faces while the top and bottom stay solid."
+        },
+        "gift-box": {
+          "name": "Gift Box",
+          "description": "A ribbon-like cross wraps each face as if the cube were wrapped like a present."
+        },
+        "opposite-corners": {
+          "name": "Opposite Corners",
+          "description": "The corner pieces on opposite faces swap colors, framing each center in a contrasting border."
+        },
+        "cross-2": {
+          "name": "Cross",
+          "description": "A cross in a contrasting color appears on all six faces."
+        },
+        "four-crosses": {
+          "name": "4 Crosses",
+          "description": "Four of the six faces display a clean plus-shaped cross."
+        },
+        "cross": {
+          "name": "Union Jack",
+          "description": "A diagonal cross pattern reminiscent of the United Kingdom's flag on opposite faces."
+        },
+        "twisted-cube-in-the-big-cube": {
+          "name": "Cube in the Cube",
+          "description": "Every face shows a smaller cube nested in one of its corners."
+        },
+        "cube-in-a-cube-in-a-cube": {
+          "name": "Cube in a Cube in a Cube",
+          "description": "Three cubes nested one inside the other on every face."
+        },
+        "anaconda": {
+          "name": "Anaconda",
+          "description": "A thick snake-like band of color slithers across the faces."
+        },
+        "python": {
+          "name": "Python",
+          "description": "A winding, segmented trail of color slithers across the cube like a snake."
+        },
+        "black-mamba": {
+          "name": "Black Mamba",
+          "description": "A dark, narrow serpentine stripe coils across the faces."
+        },
+        "green-mamba": {
+          "name": "Green Mamba",
+          "description": "A different serpentine coil, a color variant of the mamba family of snake patterns."
+        },
+        "tangled-cube": {
+          "name": "Tangled",
+          "description": "Interlocking bands appear knotted together across the faces."
         },
         "four-spots": {
           "name": "Four Spots",
@@ -513,29 +625,313 @@
           "name": "Six Spots",
           "description": "All six faces stay solid with a swapped center, forming six dots."
         },
+        "twister": {
+          "name": "Twister",
+          "description": "Bands of color appear to twist around each face like a wrung cloth."
+        },
+        "kilt": {
+          "name": "Kilt",
+          "description": "Overlapping stripes form a tartan-like pattern reminiscent of a Scottish kilt."
+        },
         "tetris": {
           "name": "Tetris",
           "description": "Interlocking blocks of color, like falling Tetris pieces."
         },
-        "cube-in-cube": {
-          "name": "Cube in a Cube",
-          "description": "Every face shows a smaller cube nested in one of its corners."
+        "dont-cross-line": {
+          "name": "Don't Cross Line",
+          "description": "A single straight line runs around the middle layer without ever crossing itself."
         },
-        "cross": {
-          "name": "Crosses",
-          "description": "A cross in a contrasting color on all six faces."
+        "hi": {
+          "name": "Hi",
+          "description": "A short, friendly four-move sequence that leaves a simple greeting-like motif on the faces."
         },
-        "vertical-stripes": {
-          "name": "Vertical Stripes",
-          "description": "Vertical stripes wrap around the four side faces while the top and bottom stay solid."
+        "hi-all-around": {
+          "name": "Hi All Around",
+          "description": "The same friendly motif repeated so it shows up on every face."
         },
-        "cube-in-cube-in-cube": {
-          "name": "Cube in a Cube in a Cube",
-          "description": "Three cubes nested one inside the other on every face."
+        "spicy": {
+          "name": "Displaced Motif",
+          "description": "Colors shift out of place just enough to create an irregular, spicy-looking mix."
         },
-        "superflip": {
-          "name": "Superflip",
-          "description": "Every corner solved and all 12 edges flipped — the hardest state, exactly 20 moves from solved."
+        "hi-there": {
+          "name": "Are You High?",
+          "description": "A tall, symmetric motif stretches vertically across opposite faces."
+        },
+        "see-you-around": {
+          "name": "C U Around",
+          "description": "An irregular scramble-like pattern that still keeps a recognizable motif on each face."
+        },
+        "order-in-chaos": {
+          "name": "Order in Chaos",
+          "description": "A seemingly scrambled cube that still hides a recognizable repeating structure."
+        },
+        "well-spread": {
+          "name": "Evenly Distributed",
+          "description": "Every face shows all six colors with no two of the same touching, spread out as evenly as possible."
+        },
+        "the-hole": {
+          "name": "The Hole",
+          "description": "A short six-move sequence that leaves a hollow, empty-looking gap on the faces."
+        },
+        "no-entry": {
+          "name": "No Entry",
+          "description": "A bold band of color rings each face like a road sign's no-entry stripe."
+        },
+        "plus-apostr": {
+          "name": "Plus",
+          "description": "A simple plus sign appears centered on opposite faces."
+        },
+        "3c3w": {
+          "name": "3C3W",
+          "description": "Three corners and three wings of color rearrange to form a pinwheel-like motif."
+        },
+        "pong": {
+          "name": "Pong",
+          "description": "Two small squares face off across the cube like paddles in a game of Pong."
+        },
+        "spun-ts": {
+          "name": "Spun T's",
+          "description": "T-shaped blocks of color appear rotated across the faces."
+        },
+        "wifi-downstairs": {
+          "name": "Wifi Downstairs",
+          "description": "Concentric, signal-like bands radiate from the center of each face."
+        },
+        "opposite-pillars-mem": {
+          "name": "Opposite Pillars",
+          "description": "Tall pillars of color stand on opposite faces of the cube."
+        },
+        "viaduct-u": {
+          "name": "Viaduct",
+          "description": "A raised, bridge-like band of color arches across the faces."
+        },
+        "2-small-cubes-in-scrambled": {
+          "name": "Solved in Scrambled",
+          "description": "Two small cubes stay intact with unmatched borders, hiding order inside an otherwise scrambled-looking cube."
+        },
+        "hi-ohio-peace": {
+          "name": "Hi Ohio",
+          "description": "A short, symmetric motif that reads the same from either side, like the palindrome \"Ohio\"."
+        },
+        "staircase-steps": {
+          "name": "Staircase",
+          "description": "Blocks of color descend across the faces like steps of a staircase."
+        },
+        "wrapped2x2cube": {
+          "name": "Wrapped 2x2",
+          "description": "The cube looks as if a smaller 2x2 cube were wrapped up and placed inside it."
+        },
+        "antipodal-chaos": {
+          "name": "Antipodal Chaos",
+          "description": "Each face shows a different shape built from the colors of its opposite face."
+        },
+        "flower-field-power": {
+          "name": "Flower Field",
+          "description": "A field of small flower-like blossoms spreads across every face."
+        },
+        "c-spirals-3d": {
+          "name": "C Spirals",
+          "description": "C-shaped curves spiral outward from the center of each face."
+        },
+        "tiny-worms-perpendicular": {
+          "name": "Worms",
+          "description": "Small worm-like trails of color crawl across the faces at right angles to each other."
+        },
+        "glider-conways-life": {
+          "name": "Glider",
+          "description": "A diagonal cluster of squares echoing the glider from Conway's Game of Life."
+        },
+        "elegant-cube-in-cube": {
+          "name": "Quote",
+          "description": "A neat, quotation-mark-like pair of blocks frames the corner of each face."
+        },
+        "matching-pictures": {
+          "name": "Matching Pictures",
+          "description": "A short algorithm that leaves matching mirrored blocks of color on opposite faces."
+        },
+        "loose-strap": {
+          "name": "Loose Strap",
+          "description": "A loose band of color drapes diagonally across the top and bottom faces."
+        },
+        "doubler": {
+          "name": "Doubler",
+          "description": "A motif appears to repeat itself twice across the faces."
+        },
+        "3t": {
+          "name": "3T",
+          "description": "Three T-shaped blocks of color line up across the faces."
+        },
+        "4t-around": {
+          "name": "4 T",
+          "description": "Four T-shaped blocks appear, one on each side face."
+        },
+        "6ts": {
+          "name": "6 T",
+          "description": "A T-shaped block of color appears on every one of the six faces."
+        },
+        "zz-line": {
+          "name": "ZZ-Line",
+          "description": "A zigzagging line of color runs across the faces."
+        },
+        "henrys-zigzag-with-checkerboard": {
+          "name": "Checker Zigzag",
+          "description": "A zigzag stripe cuts across a checkerboard background."
+        },
+        "exchanged-duck-feet": {
+          "name": "Exchanged Duck Feet",
+          "description": "Y-shaped blocks that resemble webbed footprints swap places between faces."
+        },
+        "stripe-dot-solved": {
+          "name": "Stripe Dot Solved",
+          "description": "A short algorithm leaving a single stripe and dot while most of the cube stays solved."
+        },
+        "picnic": {
+          "name": "Picnic",
+          "description": "A tidy checkered pattern reminiscent of a picnic blanket, made in just five moves."
+        },
+        "percent-sign": {
+          "name": "Percent Sign %",
+          "description": "Diagonal blocks line up on each face to resemble a percent sign."
+        },
+        "mirror": {
+          "name": "Mirror",
+          "description": "Two opposite faces reflect each other's pattern like a mirror image."
+        },
+        "plus-minus-check": {
+          "name": "Plus Minus Check",
+          "description": "A checkered variant of the plus-minus pattern, alternating crosses and stripes."
+        },
+        "facing-checkerboards": {
+          "name": "Facing Checkerboards",
+          "description": "Two opposite faces both turn into checkerboards that face each other."
+        },
+        "hiagain": {
+          "name": "Hi Again",
+          "description": "A longer sequence that repeats the friendly \"Hi\" motif across every face."
+        },
+        "4-plus-2-dots": {
+          "name": "4 Plus 2 Dots",
+          "description": "Four faces show a plus-shaped motif while the remaining two show simple dots."
+        },
+        "rockets": {
+          "name": "Rockets",
+          "description": "Triangular blocks of color point outward from the center like rockets taking off."
+        },
+        "slash": {
+          "name": "Slash",
+          "description": "Diagonal slashes of color repeat evenly across the faces."
+        },
+        "the-pillars": {
+          "name": "The Pillars",
+          "description": "A minimal four-move sequence that leaves tall pillars of color on the side faces."
+        },
+        "twisted-duck-feet": {
+          "name": "Twisted Duck Feet",
+          "description": "A twisted variant of the duck-feet motif spreads across the faces."
+        },
+        "rons-cube-in-a-cube": {
+          "name": "Ron's Cube in a Cube",
+          "description": "A cube-in-a-cube variant with a different color scheme, named after its creator Ron."
+        },
+        "headlights": {
+          "name": "Headlights",
+          "description": "Two bright squares of color sit side by side on a face like a car's headlights."
+        },
+        "crossing-snake": {
+          "name": "Crossing Snake",
+          "description": "A serpentine trail of color crosses over itself as it winds across the faces."
+        },
+        "toms-stripes": {
+          "name": "Cage",
+          "description": "Thin bars of color form a cage-like grid over each face."
+        },
+        "4-crosses": {
+          "name": "4 Crosses (Repeating)",
+          "description": "A repeating six-move sequence that builds four crosses across the faces."
+        },
+        "edge-hexagon-of-order-3": {
+          "name": "Pyraminx",
+          "description": "Triangular blocks arrange into a hexagonal motif reminiscent of the Pyraminx puzzle."
+        },
+        "edge-hexagon-of-order-2": {
+          "name": "Edge Triangle",
+          "description": "A smaller triangular motif forms from the edge pieces of each face."
+        },
+        "twisted-rings": {
+          "name": "Twisted Rings",
+          "description": "A repainted variant of the cube-in-a-cube-in-a-cube, with rings instead of squares."
+        },
+        "exchanged-rings": {
+          "name": "Exchanged Rings",
+          "description": "Ring-shaped blocks of color swap places between neighboring faces."
+        },
+        "twisted-chicken-feet": {
+          "name": "Twisted Chicken Feet",
+          "description": "Y-shaped footprint blocks appear twisted across the faces."
+        },
+        "exchanged-chicken-feet": {
+          "name": "Exchanged Chicken Feet",
+          "description": "The chicken-feet motif swaps between opposite faces."
+        },
+        "twinpeaks": {
+          "name": "Twin Peaks",
+          "description": "Two triangular peaks of color rise from each face."
+        },
+        "four-twisted-peaks": {
+          "name": "Corner Pyramid",
+          "description": "A pyramid-shaped block of color forms in the corner of each face."
+        },
+        "two-twisted-peaks": {
+          "name": "Twisted Peaks",
+          "description": "A pair of angular peaks twist across opposite faces."
+        },
+        "exchanged-peaks": {
+          "name": "Exchanged Peaks",
+          "description": "The peak-shaped blocks trade places between opposite faces."
+        },
+        "megatron": {
+          "name": "Megatron",
+          "description": "A bold, angular motif spans the faces like a robot's armor plating."
+        },
+        "six-two-one": {
+          "name": "Six-Two-One",
+          "description": "A staged pattern where the faces show six, then two, then one block of color."
+        },
+        "yin-yang": {
+          "name": "Yin Yang",
+          "description": "Two interlocking curved halves of contrasting color form a yin-yang motif."
+        },
+        "yan-ying": {
+          "name": "Yan Ying",
+          "description": "A mirrored variant of the Tetris pattern, built from the same interlocking blocks turned the other way."
+        },
+        "henrys-snake": {
+          "name": "Henry's Snake",
+          "description": "A snake-like trail of color winds across the faces, named after its creator Henry."
+        },
+        "snake-eyes": {
+          "name": "Snake Eyes",
+          "description": "Two small dots of color sit side by side on each face like a pair of snake eyes on dice."
+        },
+        "glitch-corners": {
+          "name": "Glitch",
+          "description": "The corners look slightly out of place, as if the cube glitched mid-scramble."
+        },
+        "weirdo": {
+          "name": "Weirdo",
+          "description": "An irregular, asymmetric mix of colors that looks deliberately odd."
+        },
+        "twisted-corners": {
+          "name": "Twisted Corners",
+          "description": "The corner pieces look rotated out of place across every face."
+        },
+        "plus-with-dot": {
+          "name": "Quick Maths 1+1",
+          "description": "A plus sign sits next to a single dot, a playful nod to simple arithmetic."
+        },
+        "scrambled2x2s": {
+          "name": "Scrambled 2x2s",
+          "description": "The cube looks like four small 2x2 cubes, each individually scrambled."
         }
       }
     }

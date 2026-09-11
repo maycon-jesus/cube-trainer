@@ -493,17 +493,129 @@
         "subtitle": "选择一个图案，从复原状态开始依次执行公式"
       },
       "cases": {
-        "checkerboard": {
+        "the-superflip": {
+          "name": "超级翻转",
+          "description": "所有角块归位、12 个棱块全部翻转——最混乱的状态，距离还原恰好 20 步。"
+        },
+        "the-easy-checkerboard": {
           "name": "棋盘",
-          "description": "每个面都变成两种对色交错的棋盘图案。"
+          "description": "只用中层转动，每个面都变成两种对色交错的棋盘图案。"
+        },
+        "speedsolving-logo": {
+          "name": "SpeedSolving 标志",
+          "description": "还原出 SpeedSolving.com 社区网站页头的标志图案。"
+        },
+        "3sidessolved": {
+          "name": "三面已还原",
+          "description": "三个完整的面保持还原状态，其余部分看起来像被打乱了。"
+        },
+        "all-flags-and-crest": {
+          "name": "旗帜与徽章",
+          "description": "三色条纹中间带一个徽章图案，像一面三色国旗。"
         },
         "wire": {
           "name": "电线",
-          "description": "只需四步：前后两面的中心上下各出现一个色点。"
+          "description": "细细的对角色线贯穿每个面，像绷紧的电线。"
+        },
+        "checkerboard-in-the-cube": {
+          "name": "方中棋盘",
+          "description": "每个面上，一个小方块里嵌着棋盘图案。"
+        },
+        "perfect-scramble": {
+          "name": "完美打乱",
+          "description": "每个面都出现所有颜色，且没有两个相同颜色的贴纸相邻，是最均匀的打乱方式。"
+        },
+        "perfect-storm": {
+          "name": "完美风暴",
+          "description": "由 Mugur 发现，每个面上都是密集而混乱的色彩组合。"
+        },
+        "minority-cross": {
+          "name": "少数十字",
+          "description": "每个面都出现所有颜色，角块保持还原，且十字上没有相邻的相同颜色。"
+        },
+        "perpendicular-lines": {
+          "name": "垂直线",
+          "description": "每个面上都有互相垂直交叉的直线。"
+        },
+        "flipped-tips-yeah": {
+          "name": "翻转的角尖",
+          "description": "角块看起来原地扭转了，其余部分仍保持干净。"
         },
         "plus-minus": {
           "name": "加减号",
-          "description": "前后两面呈加号，左右两面呈横条纹。"
+          "description": "两个对面呈加号，四周侧面是水平条纹。"
+        },
+        "tablecloth": {
+          "name": "桌布",
+          "description": "格子状的布纹图案均匀覆盖在每个面上。"
+        },
+        "deckerboard": {
+          "name": "半棋盘",
+          "description": "棋盘图案的变体，只有每个面的一部分交替换色。"
+        },
+        "spiral-pattern": {
+          "name": "螺旋",
+          "description": "色彩轨迹从每个面的中心向外卷曲，形成螺旋状。"
+        },
+        "fruit-bowl": {
+          "name": "水果碗",
+          "description": "彩色方块散落在各个面上，像碗里的水果一样缤纷。"
+        },
+        "flower-with-stem": {
+          "name": "花朵",
+          "description": "每个面上都绽放出一朵带茎的花。"
+        },
+        "vertical-stripes": {
+          "name": "竖条纹",
+          "description": "竖条纹环绕四个侧面，顶面和底面保持纯色。"
+        },
+        "gift-box": {
+          "name": "礼物盒",
+          "description": "丝带状的十字缠绕每个面，仿佛魔方被包装成了礼物。"
+        },
+        "opposite-corners": {
+          "name": "对角互换",
+          "description": "对面的角块互换颜色，为每个中心块镶上对比色边框。"
+        },
+        "cross-2": {
+          "name": "十字",
+          "description": "六个面上都出现一个对比色的十字。"
+        },
+        "four-crosses": {
+          "name": "四十字",
+          "description": "六个面中有四个呈现出清晰的加号十字。"
+        },
+        "cross": {
+          "name": "米字旗",
+          "description": "对面呈现出类似英国国旗的对角十字图案。"
+        },
+        "twisted-cube-in-the-big-cube": {
+          "name": "方中方",
+          "description": "每个面上都有一个嵌在角落里的小方块。"
+        },
+        "cube-in-a-cube-in-a-cube": {
+          "name": "方中方中方",
+          "description": "每个面上有三层层层嵌套的方块。"
+        },
+        "anaconda": {
+          "name": "森蚺",
+          "description": "一条粗粗的蛇形色带蜿蜒穿过各个面。"
+        },
+        "python": {
+          "name": "蟒蛇",
+          "description": "一条曲折分段的色带像蛇一样滑过魔方。"
+        },
+        "black-mamba": {
+          "name": "黑曼巴",
+          "description": "一条细窄的深色蛇形条纹在各面上盘绕。"
+        },
+        "green-mamba": {
+          "name": "绿曼巴",
+          "description": "曼巴系列蛇形花样的另一种配色变体。"
+        },
+        "tangled-cube": {
+          "name": "缠结",
+          "description": "交错的色带看起来像是打了结一样纠缠在一起。"
         },
         "four-spots": {
           "name": "四点",
@@ -513,29 +625,313 @@
           "name": "六点",
           "description": "六个面都保持纯色，只有中心块换了颜色，形成六个点。"
         },
+        "twister": {
+          "name": "扭转",
+          "description": "色带在每个面上像拧过的布一样扭转缠绕。"
+        },
+        "kilt": {
+          "name": "苏格兰裙",
+          "description": "重叠的条纹组成格子呢图案，让人联想到苏格兰短裙。"
+        },
         "tetris": {
           "name": "俄罗斯方块",
           "description": "色块相互交错，就像下落的俄罗斯方块。"
         },
-        "cube-in-cube": {
-          "name": "方中方",
-          "description": "每个面上都有一个嵌在角落里的小方块。"
+        "dont-cross-line": {
+          "name": "不交叉线",
+          "description": "一条笔直的线环绕中层，始终不与自身交叉。"
         },
-        "cross": {
-          "name": "十字",
-          "description": "六个面上都出现一个对比色的十字。"
+        "hi": {
+          "name": "Hi",
+          "description": "只需四步的简单公式，在各面上留下像打招呼一样的简单图案。"
         },
-        "vertical-stripes": {
-          "name": "竖条纹",
-          "description": "竖条纹环绕四个侧面，顶面和底面保持纯色。"
+        "hi-all-around": {
+          "name": "处处 Hi",
+          "description": "同样的图案重复出现，使其显现在每一个面上。"
         },
-        "cube-in-cube-in-cube": {
-          "name": "方中方中方",
-          "description": "每个面上有三层层层嵌套的方块。"
+        "spicy": {
+          "name": "错位图案",
+          "description": "颜色轻微错位，形成不规则又带点辛辣感的混色效果。"
         },
-        "superflip": {
-          "name": "超级翻转",
-          "description": "所有角块归位、12 个棱块全部翻转 —— 距离还原恰好 20 步，是最难的状态。"
+        "hi-there": {
+          "name": "你嗨吗？",
+          "description": "一个高高的对称图案在对面之间纵向延伸。"
+        },
+        "see-you-around": {
+          "name": "回头见",
+          "description": "看似不规则的打乱图案，但每个面上仍保留可辨认的花样。"
+        },
+        "order-in-chaos": {
+          "name": "混乱中的秩序",
+          "description": "看似打乱的魔方，其实暗藏着可辨认的重复结构。"
+        },
+        "well-spread": {
+          "name": "均匀分布",
+          "description": "每个面都显示全部六种颜色，且没有相同颜色相邻，分布尽可能均匀。"
+        },
+        "the-hole": {
+          "name": "空洞",
+          "description": "只需六步，就能在各面上留下一个空洞般的缺口。"
+        },
+        "no-entry": {
+          "name": "禁止通行",
+          "description": "一条醒目的色带环绕每个面，像禁止通行标志上的条纹。"
+        },
+        "plus-apostr": {
+          "name": "加号",
+          "description": "对面正中央出现一个简单的加号。"
+        },
+        "3c3w": {
+          "name": "3C3W",
+          "description": "三个角块和三组翼状色块重新排列，形成风车般的图案。"
+        },
+        "pong": {
+          "name": "Pong 游戏",
+          "description": "两个小方块在魔方两侧相对，像 Pong 游戏里的球拍。"
+        },
+        "spun-ts": {
+          "name": "旋转 T 形",
+          "description": "T 形色块在各个面上呈旋转排列。"
+        },
+        "wifi-downstairs": {
+          "name": "楼下 Wifi",
+          "description": "同心的信号状条纹从每个面的中心向外扩散，像 Wifi 信号图标。"
+        },
+        "opposite-pillars-mem": {
+          "name": "对面立柱",
+          "description": "对面两侧各竖立着高高的色柱。"
+        },
+        "viaduct-u": {
+          "name": "高架桥",
+          "description": "一条高架桥般的色带弧形跨越各个面。"
+        },
+        "2-small-cubes-in-scrambled": {
+          "name": "乱中有序",
+          "description": "两个小方块完好无损、边框不成对，在看似打乱的魔方中暗藏秩序。"
+        },
+        "hi-ohio-peace": {
+          "name": "Hi Ohio",
+          "description": "简短对称的图案，从哪边看都一样，就像回文词 “Ohio”。"
+        },
+        "staircase-steps": {
+          "name": "楼梯",
+          "description": "色块沿着各面依次下降，像楼梯的台阶。"
+        },
+        "wrapped2x2cube": {
+          "name": "包裹的 2x2",
+          "description": "魔方看起来像是里面包裹着一个更小的 2x2 魔方。"
+        },
+        "antipodal-chaos": {
+          "name": "对跖混乱",
+          "description": "每个面都用对面的颜色拼出一个不同的图形。"
+        },
+        "flower-field-power": {
+          "name": "花田",
+          "description": "一片小花朵般的图案铺满每一个面。"
+        },
+        "c-spirals-3d": {
+          "name": "C 形螺旋",
+          "description": "C 形曲线从每个面的中心向外螺旋展开。"
+        },
+        "tiny-worms-perpendicular": {
+          "name": "小虫",
+          "description": "细小的虫形色迹在各面上以直角相交爬行。"
+        },
+        "glider-conways-life": {
+          "name": "滑翔机",
+          "description": "对角排列的方块群，呼应康威生命游戏中的滑翔机图案。"
+        },
+        "elegant-cube-in-cube": {
+          "name": "引号",
+          "description": "一对整齐的方块像引号一样框住每个面的角落。"
+        },
+        "matching-pictures": {
+          "name": "对称图案",
+          "description": "一个简短的公式，让对面出现镜像对称的色块。"
+        },
+        "loose-strap": {
+          "name": "松散带子",
+          "description": "一条松垮的色带斜挂在顶面和底面上。"
+        },
+        "doubler": {
+          "name": "加倍",
+          "description": "同一个图案在各面上仿佛重复出现了两次。"
+        },
+        "3t": {
+          "name": "3T",
+          "description": "三个 T 形色块沿各面排成一列。"
+        },
+        "4t-around": {
+          "name": "4T",
+          "description": "四个 T 形色块出现，每个侧面一个。"
+        },
+        "6ts": {
+          "name": "6T",
+          "description": "六个面上各自都出现一个 T 形色块。"
+        },
+        "zz-line": {
+          "name": "之字线",
+          "description": "一条锯齿状的色线贯穿各个面。"
+        },
+        "henrys-zigzag-with-checkerboard": {
+          "name": "棋盘之字纹",
+          "description": "一条锯齿状条纹穿过棋盘状的背景。"
+        },
+        "exchanged-duck-feet": {
+          "name": "交换鸭掌",
+          "description": "Y 形色块像蹼状脚印一样，在各面之间互换位置。"
+        },
+        "stripe-dot-solved": {
+          "name": "条纹圆点",
+          "description": "一个简短的公式，留下一条条纹和一个圆点，其余部分仍保持还原。"
+        },
+        "picnic": {
+          "name": "野餐",
+          "description": "只需五步，就能拼出让人联想到野餐布的整齐格纹。"
+        },
+        "percent-sign": {
+          "name": "百分号 %",
+          "description": "对角排列的色块在每个面上组成类似百分号的图案。"
+        },
+        "mirror": {
+          "name": "镜像",
+          "description": "两个对面互相映照出对方的图案，如同镜像。"
+        },
+        "plus-minus-check": {
+          "name": "加减号棋盘",
+          "description": "加减号图案的棋盘变体，十字与条纹交替出现。"
+        },
+        "facing-checkerboards": {
+          "name": "对望棋盘",
+          "description": "两个相对的面都变成棋盘图案，彼此相望。"
+        },
+        "hiagain": {
+          "name": "再次 Hi",
+          "description": "更长的公式，让友好的 “Hi” 图案在每个面上重复出现。"
+        },
+        "4-plus-2-dots": {
+          "name": "四加二点",
+          "description": "四个面呈加号图案，另外两个面呈简单的圆点。"
+        },
+        "rockets": {
+          "name": "火箭",
+          "description": "三角形色块从中心向外指出，像火箭升空一样。"
+        },
+        "slash": {
+          "name": "斜杠",
+          "description": "对角斜纹在各面上均匀重复排列。"
+        },
+        "the-pillars": {
+          "name": "立柱",
+          "description": "只需四步的极简公式，就能在侧面留下高高的色柱。"
+        },
+        "twisted-duck-feet": {
+          "name": "扭转鸭掌",
+          "description": "鸭掌图案的扭转版本铺展在各个面上。"
+        },
+        "rons-cube-in-a-cube": {
+          "name": "Ron 的方中方",
+          "description": "方中方图案的配色变体，以其创作者 Ron 命名。"
+        },
+        "headlights": {
+          "name": "车灯",
+          "description": "两个明亮的色块并排出现在一个面上，像汽车的大灯。"
+        },
+        "crossing-snake": {
+          "name": "交叉蛇纹",
+          "description": "蛇形色带在蜿蜒穿过各面时与自身交叉。"
+        },
+        "toms-stripes": {
+          "name": "笼子",
+          "description": "细细的色条在每个面上组成笼子般的网格。"
+        },
+        "4-crosses": {
+          "name": "四十字（重复）",
+          "description": "重复六步的公式，在各面上形成四个十字。"
+        },
+        "edge-hexagon-of-order-3": {
+          "name": "金字塔",
+          "description": "三角形色块排列成六边形图案，让人联想到金字塔魔方。"
+        },
+        "edge-hexagon-of-order-2": {
+          "name": "棱块三角",
+          "description": "由每个面的棱块组成一个较小的三角形图案。"
+        },
+        "twisted-rings": {
+          "name": "扭转圆环",
+          "description": "方中方中方的重新配色版本，用圆环取代了方块。"
+        },
+        "exchanged-rings": {
+          "name": "交换圆环",
+          "description": "环形色块在相邻的面之间互换位置。"
+        },
+        "twisted-chicken-feet": {
+          "name": "扭转鸡爪",
+          "description": "Y 形的脚印状色块在各面上呈扭转排列。"
+        },
+        "exchanged-chicken-feet": {
+          "name": "交换鸡爪",
+          "description": "鸡爪图案在对面之间互换位置。"
+        },
+        "twinpeaks": {
+          "name": "双峰",
+          "description": "每个面上都耸立着两座三角形的色峰。"
+        },
+        "four-twisted-peaks": {
+          "name": "角锥",
+          "description": "每个面的角落都形成一个金字塔形的色块。"
+        },
+        "two-twisted-peaks": {
+          "name": "扭转尖峰",
+          "description": "一对棱角分明的尖峰在对面上扭转呈现。"
+        },
+        "exchanged-peaks": {
+          "name": "交换尖峰",
+          "description": "尖峰状的色块在对面之间互换位置。"
+        },
+        "megatron": {
+          "name": "威震天",
+          "description": "棱角分明的大胆图案覆盖各面，像机器人的装甲板。"
+        },
+        "six-two-one": {
+          "name": "六二一",
+          "description": "分阶段呈现的图案：各面依次显示六块、两块、一块颜色。"
+        },
+        "yin-yang": {
+          "name": "阴阳",
+          "description": "两个对比色的弧形部分相互嵌合，构成阴阳图案。"
+        },
+        "yan-ying": {
+          "name": "Yan Ying",
+          "description": "俄罗斯方块图案的镜像版本，用相同的交错色块朝反方向排列而成。"
+        },
+        "henrys-snake": {
+          "name": "Henry 的蛇",
+          "description": "蛇形色带蜿蜒穿过各面，以其创作者 Henry 命名。"
+        },
+        "snake-eyes": {
+          "name": "蛇眼",
+          "description": "每个面上并排出现两个小色点，像骰子上的蛇眼点数。"
+        },
+        "glitch-corners": {
+          "name": "故障",
+          "description": "角块看起来略微错位，仿佛魔方在打乱过程中发生了故障。"
+        },
+        "weirdo": {
+          "name": "怪咖",
+          "description": "不规则、不对称的色彩组合，看起来故意显得古怪。"
+        },
+        "twisted-corners": {
+          "name": "扭转角块",
+          "description": "每个面上的角块看起来都旋转错位了。"
+        },
+        "plus-with-dot": {
+          "name": "快算 1+1",
+          "description": "加号旁边跟着一个圆点，俏皮地致敬简单算术。"
+        },
+        "scrambled2x2s": {
+          "name": "打乱的 2x2",
+          "description": "魔方看起来像四个各自独立打乱的小 2x2 魔方。"
         }
       }
     }
