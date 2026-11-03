@@ -101,6 +101,78 @@ const f2lAlgorithms: TrainingAlgorithm[] = [
             "U' R U R' U F' U' F"
         ]
     },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-12',
+        id: 'f2l-case-12',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-12.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("R U R' U' R U R' U' R U R'"),
+        solves: [
+            "R U R' U' R U R' U' R U R'"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-13',
+        id: 'f2l-case-13',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-13.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("U' R' F R F' R U' R'"),
+        solves: [
+            "U' R' F R F' R U' R'"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-14',
+        id: 'f2l-case-14',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-14.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("R U' R' U R U' R' U2 R U' R'"),
+        solves: [
+            "R U' R' U R U' R' U2 R U' R'"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-15',
+        id: 'f2l-case-15',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-15.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("U' R U2 R' U F' U' F"),
+        solves: [
+            "U' R U2 R' U F' U' F"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-16',
+        id: 'f2l-case-16',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-16.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("U' R U' R' U R U R'"),
+        solves: [
+            "U' R U' R' U R U R'"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-17',
+        id: 'f2l-case-17',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-17.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("y' U R' U R U' R' U' R"),
+        solves: [
+            "y' U R' U R U' R' U' R"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-18',
+        id: 'f2l-case-18',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-18.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("R U' R' U2 F' U' F"),
+        solves: [
+            "R U' R' U2 F' U' F"
+        ]
+    },
+    {
+        nameKey: 'training.3x3x3.f2l.cases.case-19',
+        id: 'f2l-case-19',
+        imageUrl: '/img/training/3x3x3/f2l/f2l-case-19.svg',
+        generateSetupScramble: ()=> newAlgorithmSetup("R U R' U2 R U' R' U R U' R'"),
+        solves: [
+            "R U R' U2 R U' R' U R U' R'"
+        ]
+    },
 ]
 
 export default f2lAlgorithms
