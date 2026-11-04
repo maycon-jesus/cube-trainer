@@ -35,17 +35,12 @@ below come from there.
    (subjects + bodies; `--no-merges` drops PR merge commits). Include bodies so you
    catch `BREAKING CHANGE:` footers.
 
-4. **Map commits onto the template sections** using Conventional Commit type/scope:
-
-   | Commit                          | Template section        |
-   | ------------------------------- | ----------------------- |
-   | `feat(cube):` / `fix(cube):`    | 🧩 Puzzles & algorithms |
-   | other `feat:`                   | ✨ Features             |
-   | other `fix:`                    | 🐛 Fixes                |
-   | theme / UI / layout changes     | 🎨 Appearance           |
-   | `feat(i18n):` / locale changes  | 🌐 Translations         |
-   | `chore:` / `refactor:` / `build:` / `ci:` / `docs:` / `perf:` | 🧰 Internal |
-   | `!` in type or `BREAKING CHANGE:` footer | ⚠️ Breaking changes |
+4. **Map commits onto the template sections** with the table in
+   [RELEASING.md](../../../.github/RELEASING.md) ("Cutting a release", step 4). It is the
+   single source of truth, so don't copy it here. Apply its rules in order, first match wins.
+   Also treat `feat:`/`fix:` commits that touch training cases, puzzles or patterns as
+   Puzzles, algorithms & patterns, even without a `cube` scope. Commits that match no row
+   go to Internal, and flag them to the user.
 
 5. **Write the notes** (this is the important part — not a mechanical dump):
    - One bullet **per user-visible change**, written for a user of the app, not a
@@ -61,6 +56,8 @@ below come from there.
 
 6. **Emit only the sections that have content.** Delete empty sections and all the
    HTML `<!-- comment -->` guidance from the template — empty sections must not ship.
+   Also keep the template's section names as they are, even if the table in RELEASING.md
+   and the template disagree: report the mismatch to the user instead of picking one.
    Keep the `---` rules and the final **Full changelog** line, filling the compare
    link with `<previous-tag>...<target-tag>` (use the real prev tag; if none, link
    the repo's commits page or note it's the first release).
