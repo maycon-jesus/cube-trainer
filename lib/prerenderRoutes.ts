@@ -1,4 +1,5 @@
 import trainingSets333 from "./cube/3x3x3/training"
+import {trainingSets as trainingSets222} from "./cube/2x2x2/training"
 import patterns333 from "./cube/3x3x3/patterns"
 import type { TrainingSet } from "./cube/training/types"
 import type { CubePattern } from "./cube/patterns/types"
@@ -7,6 +8,7 @@ const PREFIXED_LOCALES = ['pt', 'es', 'zh'] as const
 
 const trainingPuzzles: Record<string, TrainingSet[]> = {
   '3x3x3': trainingSets333,
+  '2x2x2': trainingSets222,
 }
 
 const patternPuzzles: Record<string, CubePattern[]> = {
