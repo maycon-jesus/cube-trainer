@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cubesDefinition, type CubePattern } from '~~/lib/cube/cubesDefinition'
+import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
 import { cubeIcons } from '~/components/icon'
 
 const { t } = useI18n()
@@ -12,6 +12,7 @@ const PREVIEW_COUNT = 4
 const patternPuzzles = Object.values(cubesDefinition).filter((puzzle) => puzzle.patterns?.length)
 
 const selectedPattern = ref<CubePattern | null>(null)
+const selectedPuzzle = ref<CubeData | null>(null)
 const detailsOpen = ref(false)
 
 const sections = patternPuzzles.map((puzzle) => ({
@@ -20,8 +21,9 @@ const sections = patternPuzzles.map((puzzle) => ({
   patterns: puzzle.patterns!.slice(0, PREVIEW_COUNT),
 }))
 
-function openDetails(pattern: CubePattern) {
+function openDetails(pattern: CubePattern, puzzle: CubeData) {
   selectedPattern.value = pattern
+  selectedPuzzle.value = puzzle
   detailsOpen.value = true
 }
 </script>
@@ -72,7 +74,7 @@ function openDetails(pattern: CubePattern) {
           lg="4"
           xl="3"
         >
-          <PatternCard :pattern="pattern" @details="openDetails" />
+          <PatternCard :pattern="pattern" @details="openDetails($event, section.puzzle)" />
         </v-col>
       </v-row>
     </section>
@@ -87,7 +89,7 @@ function openDetails(pattern: CubePattern) {
       {{ t('patterns.empty') }}
     </v-card>
 
-    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" />
+    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" :cube-definition="selectedPuzzle" />
   </v-container>
 </template>
 

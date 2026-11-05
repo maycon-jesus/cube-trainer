@@ -47,13 +47,14 @@
 </template>
 
 <script setup lang="ts">
-import type { CubePattern } from '~~/lib/cube/cubesDefinition'
-import { invertScramble } from '~~/lib/cube/3x3x3'
+import type { CubeData, CubePattern } from '~~/lib/cube/cubesDefinition'
 
 const { t } = useI18n()
 
 const props = defineProps<{
   pattern: CubePattern | null
+  /** Puzzle ao qual o padrão pertence; fornece `invertScramble` para o algoritmo reverso. */
+  cubeDefinition: CubeData | null
 }>()
 const model = defineModel<boolean>()
 
@@ -61,7 +62,7 @@ const labels = usePatternLabels()
 
 const name = computed(() => props.pattern ? labels.name(props.pattern) : '')
 const description = computed(() => props.pattern ? labels.description(props.pattern) : '')
-const reverseAlgorithm = computed(() => props.pattern ? invertScramble(props.pattern.algorithm) : '')
+const reverseAlgorithm = computed(() => props.pattern ? props.cubeDefinition?.invertScramble?.(props.pattern.algorithm) ?? '' : '')
 
 const difficultyColors: Record<CubePattern['difficulty'], string> = {
   easy: 'success',

@@ -16,7 +16,9 @@
 // permutations are derived at init time from the project's own `Cube333`
 // engine, so the solver always agrees with the engine's move semantics.
 
-import { Cube333, FaceIndex } from './index'
+import { Engine } from "./engine"
+import { FaceIndex } from "./faces"
+
 
 // ---------------------------------------------------------------------------
 // Cubie model
@@ -335,7 +337,7 @@ const moveFace = (m: number): number => (m / 3) | 0
 // to all 18 by composition.
 function buildMoveCubes(): CubieCube[] {
   const basic: CubieCube[] = FACE_LETTERS.map((letter) => {
-    const cube = new Cube333()
+    const cube = new Engine()
     cube.applyMove(letter)
     const faces = cube.faces.map((f) => Array.from(f.pieces) as number[])
     return readFromFaces(faces)
@@ -635,7 +637,7 @@ export function solveCube(faces: number[][], _options?: SolveOptions): string {
 }
 
 /** Convenience overload for the project's own engine. */
-export function solveCube333(cube: Cube333): string {
+export function solveCube333(cube: Engine): string {
   const faces = cube.faces.map((f) => Array.from(f.pieces) as number[])
   return solveCube(faces)
 }

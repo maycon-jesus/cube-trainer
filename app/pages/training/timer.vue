@@ -40,7 +40,7 @@
                 <CustomCard v-if="puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
                   <div class="d-flex justify-center py-2">
                     <ClientOnly>
-                      <ScrambleCube :scramble="scramble" class="scramble-preview" />
+                      <ScrambleCube :scramble="scramble" :cube-definition="cubeDefinition" class="scramble-preview" />
                     </ClientOnly>
                   </div>
                 </CustomCard>
@@ -67,7 +67,7 @@
 import { useConfigStore } from '~/stores/db/config'
 import { useCustomTimerStore } from '~/stores/customTimer'
 import { useSolvesStore, type Solve } from '~/stores/db/solves'
-import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition'
+import { cubesDefinition, type TrainingAlgorithm } from '~~/lib/cube/cubesDefinition'
 
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
@@ -85,6 +85,7 @@ const started = ref(false)
 // --- Training set (predefined scrambles) ----------------------------------
 const trainingSet = computed(() => customTimerStore.trainingSet)
 const puzzle = computed(() => customTimerStore.puzzle ?? '')
+const cubeDefinition = computed(() => cubesDefinition[puzzle.value])
 
 const currentAlgorithm = ref<TrainingAlgorithm | null>(null)
 const scramble = ref('')

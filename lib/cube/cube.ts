@@ -28,7 +28,8 @@ export abstract class CubeEngine {
   abstract generateScramble(movesCount: number): string
   abstract applyMove(move: string): void
   abstract applyMoves(moves: string[]): void
-  abstract render(): Record<number, CubeColor[][]>
+  abstract renderSvg?(): string
+  abstract renderSvgDataUri?(): string
 }
 
 export type CubeFaceFiller<Piece> = Piece | Piece[]

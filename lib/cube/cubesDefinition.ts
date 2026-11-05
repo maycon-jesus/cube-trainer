@@ -1,4 +1,3 @@
-import { generateScramble as generateScramble3x3x3 } from "./3x3x3"
 import { generateScramble as generateScrambleMegaminx } from "./megaminx"
 import { generateScramble as generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
@@ -6,7 +5,9 @@ import type { TrainingSet } from "./training/types"
 import type { CubePattern } from "./patterns/types"
 import trainingSets333 from "./3x3x3/training"
 import patterns333 from "./3x3x3/patterns"
-import {trainingSets as trainingSets222} from "./2x2x2/training"
+import { trainingSets as trainingSets222 } from "./2x2x2/training"
+import { Engine as Engine333 } from "./3x3x3/engine"
+import { generateScramble as generateScramble333, invertScramble as invertScramble333 } from "./3x3x3/scramble"
 
 export type { TrainingAlgorithm, TrainingSet } from "./training/types"
 export type { CubePattern, PatternDifficulty } from "./patterns/types"
@@ -14,9 +15,10 @@ export type { CubePattern, PatternDifficulty } from "./patterns/types"
 export type CubeData = {
     id: string,
     name: string,
-    cubeEngine?: CubeEngine,
+    createEngine?: () => CubeEngine
     imageUrl?: string,
     generateScramble?: (movesCount?: number) => string,
+    invertScramble?: (scramble: string) => string,
     icon: string,
     trainingSets?: TrainingSet[],
     patterns?: CubePattern[]
@@ -26,7 +28,7 @@ export const cubesDefinition: Record<string, CubeData> = {
     "2x2x2": {
         id: "2x2x2",
         name: "2x2x2",
-        generateScramble: generateScramble3x3x3,
+        generateScramble: generateScramble333,
         icon: "Cube2x2x2",
         imageUrl: '/img/puzzle/2x2x2.png',
         trainingSets: trainingSets222
@@ -34,11 +36,13 @@ export const cubesDefinition: Record<string, CubeData> = {
     "3x3x3": {
         id: "3x3x3",
         name: "3x3x3",
-        generateScramble: generateScramble3x3x3,
+        generateScramble: generateScramble333,
+        invertScramble: invertScramble333,
         icon: "Cube3x3x3",
         imageUrl: '/img/puzzle/3x3x3.png',
         trainingSets: trainingSets333,
-        patterns: patterns333
+        patterns: patterns333,
+        createEngine: () => new Engine333()
     },
     "4x4x4": {
         id: "4x4x4",

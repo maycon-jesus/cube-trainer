@@ -5,7 +5,7 @@
 // pesado ao worker, devolvendo a solução como `Promise<string>`. Um único worker
 // é criado sob demanda e reutilizado entre chamadas.
 
-import type { Cube333 } from './index'
+import type { Engine } from './engine'
 import type { SolveOptions } from './kociemba'
 import type { SolverWorkerRequest, SolverWorkerResponse } from './solver.worker'
 
@@ -51,7 +51,7 @@ function getWorker(): Worker {
  * @param options  limites opcionais (`maxDepth`, `timeoutMs`).
  * @returns a solução como string de moves separados por espaço (ex.: `"R U R' U'"`).
  */
-export function solveCube333InWorker(cube: Cube333, options?: SolveOptions): Promise<string> {
+export function solveCube333InWorker(cube: Engine, options?: SolveOptions): Promise<string> {
   const faces = cube.faces.map((face) => Array.from(face.pieces) as number[])
   const id = nextId++
   const request: SolverWorkerRequest = { id, faces, options }

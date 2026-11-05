@@ -37,7 +37,7 @@
                 <CustomCard v-if="configStore.puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
                   <div class="d-flex justify-center py-2">
                     <ClientOnly>
-                      <ScrambleCube :scramble="scramble" class="scramble-preview" />
+                      <ScrambleCube :scramble="scramble" :cube-definition="cubeDefinition" class="scramble-preview" />
                     </ClientOnly>
                   </div>
                 </CustomCard>

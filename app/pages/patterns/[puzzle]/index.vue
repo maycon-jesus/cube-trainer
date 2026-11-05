@@ -108,7 +108,7 @@ function openDetails(pattern: CubePattern) {
       {{ t('patterns.empty') }}
     </v-card>
 
-    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" />
+    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" :cube-definition="puzzle" />
   </v-container>
 </template>
 
