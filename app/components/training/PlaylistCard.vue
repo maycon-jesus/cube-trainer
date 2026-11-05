@@ -3,7 +3,7 @@
     <div class="pa-4 d-flex flex-column flex-fill">
       <div class="d-flex align-center ga-3 mb-3">
         <span class="playlist-card__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="puzzle?.icon" v-if="puzzle?.icon" class="playlist-card__icon" />
+          <component :is="cubeIcons[puzzle?.icon ?? '']" v-if="puzzle?.icon" class="playlist-card__icon" />
         </span>
         <div class="flex-fill" style="min-width: 0;">
           <h3 class="text-title-medium font-weight-bold mb-0 text-truncate">{{ playlist.name }}</h3>
@@ -47,6 +47,7 @@
 
 <script setup lang="ts">
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
+import { cubeIcons } from '~/components/icon';
 import type { TrainingPlaylist } from '~/stores/db/trainingPlaylists';
 
 const { t } = useI18n()

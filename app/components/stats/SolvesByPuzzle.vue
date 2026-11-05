@@ -32,7 +32,7 @@ import type { Component } from 'vue'
 import type { Solve } from '~/stores/db/solves'
 import { solvesByPuzzle } from '~/utils/statsDashboard'
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
-import { OtherIcon } from '@icon'
+import { cubeIcons } from '~/components/icon'
 
 const props = defineProps<{
   solves: Solve[]
@@ -54,7 +54,7 @@ const rows = computed<Row[]>(() =>
     return {
       ...entry,
       name: cube ? t(`cube.${cube.id}`) : entry.puzzle,
-      icon: cube?.icon ?? OtherIcon,
+      icon: cubeIcons[cube?.icon ?? 'Puzzle'],
     }
   }),
 )

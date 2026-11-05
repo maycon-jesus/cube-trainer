@@ -23,7 +23,7 @@
                             <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
                         </v-avatar>
                         <v-icon v-else-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1" size="32">
-                            <component :is="cubesDefinition[solve.puzzle]!.icon" />
+                            <component :is="cubeIcons[cubesDefinition[solve.puzzle]!.icon]" />
                         </v-icon>
                     </template>
                     <v-list-item-title
@@ -88,6 +88,7 @@
 import { useSolvesStore, type Penalty, type Solve, type SolvesFilter, type Type } from '~/stores/db/solves'
 import { useSessionsStore } from '~/stores/db/sessions'
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
+import { cubeIcons } from '~/components/icon'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
 import SolveTypeSelector from '~/components/solve/TypeSelector.vue'

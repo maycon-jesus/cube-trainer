@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cubesDefinition, type CubePattern } from '~~/lib/cube/cubesDefinition'
+import { cubeIcons } from '~/components/icon'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -47,7 +48,7 @@ function openDetails(pattern: CubePattern) {
     >
       <div class="d-flex align-center ga-3 mb-4">
         <span class="patterns-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="section.puzzle.icon" class="patterns-heading__icon" />
+          <component :is="cubeIcons[section.puzzle.icon]" class="patterns-heading__icon" />
         </span>
         <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t(`cube.${section.puzzle.id}`) }}</h2>
         <span class="text-body-medium text-medium-emphasis">

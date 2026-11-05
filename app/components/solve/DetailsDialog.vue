@@ -32,7 +32,7 @@
                             <v-card-title class="text-body-small">{{ t('solve.details.puzzle') }}</v-card-title>
                             <v-card-text class="d-flex align-center">
                                 <v-icon v-if="cube?.icon">
-                                    <component :is="cube.icon" />
+                                    <component :is="cubeIcons[cube.icon]" />
                                 </v-icon>
                                 <span class="text-body-large ml-1">
                                     {{ t(`cube.${props.solve.puzzle}`) }}
@@ -75,6 +75,7 @@
 <script setup lang="ts">
 import type { Penalty, Solve } from '~/stores/db/solves';
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
+import { cubeIcons } from '~/components/icon';
 const {locale, t} = useI18n()
 
 const props = defineProps<{

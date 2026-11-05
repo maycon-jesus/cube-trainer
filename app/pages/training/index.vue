@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cubesDefinition, type TrainingSet } from '~~/lib/cube/cubesDefinition';
+import { cubeIcons } from '~/components/icon';
 import { useTrainingPlaylistsStore, type TrainingPlaylist } from '~/stores/db/trainingPlaylists';
 import { useCustomTimerStore } from '~/stores/customTimer';
 
@@ -134,7 +135,7 @@ function setItems(puzzleId: string) {
     >
       <div class="d-flex align-center ga-3 mb-4">
         <span class="training-puzzle-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="puzzle.icon" class="training-puzzle-heading__icon" />
+          <component :is="cubeIcons[puzzle.icon]" class="training-puzzle-heading__icon" />
         </span>
         <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t(`cube.${puzzle.id}`) }}</h2>
         <NuxtLink

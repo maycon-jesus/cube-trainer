@@ -1,0 +1,21 @@
+{
+  // Config própria de `lib/` para o editor (autocomplete/tipos).
+  // Não é referenciada pelo tsconfig.json da raiz, então não entra no
+  // problema de `composite` dos projetos gerados pelo Nuxt.
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "~~/*": ["../*"]
+    }
+  },
+  "include": ["./**/*.ts", "../types/**/*.d.ts"]
+}

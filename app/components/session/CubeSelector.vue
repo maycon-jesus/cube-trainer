@@ -24,6 +24,7 @@ v-model="model" :label="t('puzzle.label')" :items="items" hide-details item-titl
 <script setup lang="ts">
 import type { Component } from 'vue';
 import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
+import { cubeIcons } from '~/components/icon';
 
 const props = defineProps<{
     showAllOption?: boolean
@@ -44,7 +45,7 @@ const items = computed<Item[]>(() => {
         return {
             value: cube.id,
             title: t(`cube.${cube.id}`),
-            icon: cube.icon
+            icon: cubeIcons[cube.icon]
         }
     })
     if (props.showAllOption) {
