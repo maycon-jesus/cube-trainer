@@ -129,7 +129,7 @@ const emit = defineEmits<{ (e: 'saved'): void }>()
 const { t } = useI18n()
 const playlistsStore = useTrainingPlaylistsStore()
 
-const trainablePuzzles = Object.values(cubesDefinition).filter((p) => !!p.trainingSets?.length)
+const trainablePuzzles = Object.values(cubesDefinition).filter((p) => !!p.loadTrainingSets)
 const puzzleItems = trainablePuzzles.map((p) => ({ title: t(`cube.${p.id}`), value: p.id }))
 
 const isEdit = computed(() => !!props.playlist)
@@ -140,7 +140,12 @@ const selectedKeys = ref<Set<string>>(new Set())
 const saving = ref(false)
 const hydrating = ref(false)
 
-const sets = computed<TrainingSet[]>(() => cubesDefinition[puzzleId.value]?.trainingSets ?? [])
+const sets = ref<TrainingSet[]>([])
+watch(puzzleId, async (id) => {
+  const loader = cubesDefinition[id]!.loadTrainingSets
+  const loaded = loader ? await loader() : []
+  if (puzzleId.value === id) sets.value = loaded
+}, { immediate: true })
 const selectedCount = computed(() => selectedKeys.value.size)
 const canSave = computed(() => !!name.value.trim() && selectedCount.value > 0)
 

@@ -9,17 +9,17 @@ usePageSeo('patterns')
 
 const PREVIEW_COUNT = 4
 
-const patternPuzzles = Object.values(cubesDefinition).filter((puzzle) => puzzle.patterns?.length)
+const patternPuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadPatterns)
 
 const selectedPattern = ref<CubePattern | null>(null)
 const selectedPuzzle = ref<CubeData | null>(null)
 const detailsOpen = ref(false)
 
-const sections = patternPuzzles.map((puzzle) => ({
-  puzzle,
-  total: puzzle.patterns!.length,
-  patterns: puzzle.patterns!.slice(0, PREVIEW_COUNT),
-}))
+async function loadAllPatterns (puzzle:CubeData) {
+  const patterns = await puzzle.loadPatterns!()
+  return { puzzle, total: patterns.length, patterns: patterns.slice(0, PREVIEW_COUNT) }
+}
+const sections = (await Promise.all(patternPuzzles.map(loadAllPatterns))).filter((section) => section.total > 0)
 
 function openDetails(pattern: CubePattern, puzzle: CubeData) {
   selectedPattern.value = pattern

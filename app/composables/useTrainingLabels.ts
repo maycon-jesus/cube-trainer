@@ -8,6 +8,21 @@ export type SolveTraining = {
     algorithmName: string
 }
 
+// Cache module-level dos sets já carregados por puzzle. Reativo para que os labels
+// que dependem dele sejam re-renderizados quando o chunk de treino chegar.
+const loadedSets = reactive<Record<string, TrainingSet[]>>({})
+const requestedSets = new Set<string>()
+
+function ensureTrainingSetsLoaded(puzzle: string) {
+    if (loadedSets[puzzle] || requestedSets.has(puzzle)) return
+    const loader = cubesDefinition[puzzle]?.loadTrainingSets
+    if (!loader) return
+    requestedSets.add(puzzle)
+    loader().then((sets) => {
+        loadedSets[puzzle] = sets
+    })
+}
+
 export function useTrainingLabels() {
     const { t } = useI18n()
 
@@ -16,7 +31,8 @@ export function useTrainingLabels() {
     // need to store the set separately.
     function findAlgorithm(puzzle: string, algorithmId: string): { set: TrainingSet, algorithm: TrainingAlgorithm } | undefined {
         if (!algorithmId) return undefined
-        for (const set of cubesDefinition[puzzle]?.trainingSets ?? []) {
+        ensureTrainingSetsLoaded(puzzle)
+        for (const set of loadedSets[puzzle] ?? []) {
             const algorithm = set.algorithms.find(it => it.id === algorithmId)
             if (algorithm) return { set, algorithm }
         }

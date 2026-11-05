@@ -3,9 +3,6 @@ import { generateScramble as generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
 import type { TrainingSet } from "./training/types"
 import type { CubePattern } from "./patterns/types"
-import trainingSets333 from "./3x3x3/training"
-import patterns333 from "./3x3x3/patterns"
-import { trainingSets as trainingSets222 } from "./2x2x2/training"
 import { Engine as Engine333 } from "./3x3x3/engine"
 import { generateScramble as generateScramble333, invertScramble as invertScramble333 } from "./3x3x3/scramble"
 
@@ -20,8 +17,8 @@ export type CubeData = {
     generateScramble?: (movesCount?: number) => string,
     invertScramble?: (scramble: string) => string,
     icon: string,
-    trainingSets?: TrainingSet[],
-    patterns?: CubePattern[]
+    loadTrainingSets?: () => Promise<TrainingSet[]>,
+    loadPatterns?: () => Promise<CubePattern[]>
 }
 
 export const cubesDefinition: Record<string, CubeData> = {
@@ -31,7 +28,7 @@ export const cubesDefinition: Record<string, CubeData> = {
         generateScramble: generateScramble333,
         icon: "Cube2x2x2",
         imageUrl: '/img/puzzle/2x2x2.png',
-        trainingSets: trainingSets222
+        loadTrainingSets: () => import("./2x2x2/training").then((m) => m.trainingSets)
     },
     "3x3x3": {
         id: "3x3x3",
@@ -40,8 +37,8 @@ export const cubesDefinition: Record<string, CubeData> = {
         invertScramble: invertScramble333,
         icon: "Cube3x3x3",
         imageUrl: '/img/puzzle/3x3x3.png',
-        trainingSets: trainingSets333,
-        patterns: patterns333,
+        loadTrainingSets: () => import("./3x3x3/training").then((m) => m.default),
+        loadPatterns: () => import("./3x3x3/patterns").then((m) => m.default),
         createEngine: () => new Engine333()
     },
     "4x4x4": {

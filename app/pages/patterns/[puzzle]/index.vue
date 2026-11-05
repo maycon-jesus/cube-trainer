@@ -9,7 +9,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.patterns?.length) {
+if (!puzzle.loadPatterns) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have patterns'
@@ -21,7 +21,13 @@ const { t } = useI18n()
 
 usePageSeo(`patterns.puzzles.${puzzleId}`)
 
-const patterns = puzzle.patterns
+const patterns = await puzzle.loadPatterns()
+if (!patterns.length) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Puzzle does not have patterns'
+  })
+}
 const difficulties: PatternDifficulty[] = ['easy', 'medium', 'hard']
 
 const difficulty = ref<PatternDifficulty>()

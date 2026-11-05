@@ -9,7 +9,7 @@ const localePath = useLocalePath()
 
 usePageSeo('training')
 
-const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.trainingSets)
+const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadTrainingSets)
 
 const playlistsStore = useTrainingPlaylistsStore()
 const customTimerStore = useCustomTimerStore()
@@ -36,8 +36,8 @@ function openEdit(playlist: TrainingPlaylist) {
   dialogOpen.value = true
 }
 
-function trainPlaylist(playlist: TrainingPlaylist) {
-  const sets = cubesDefinition[playlist.puzzleId]?.trainingSets ?? []
+async function trainPlaylist(playlist: TrainingPlaylist) {
+  const sets = await cubesDefinition[playlist.puzzleId]?.loadTrainingSets?.() ?? []
   customTimerStore.useTrainingSetDefault(playlist.puzzleId)
   for (const trainingCase of playlist.trainingCases) {
     const set = sets.find((s) => s.id === trainingCase.setId)
@@ -59,8 +59,12 @@ async function confirmDelete() {
 const setsByPuzzle: Record<string, TrainingSet[]> = {}
 const caseCounts: Record<string, number> = {}
 
-for (const puzzle of trainablePuzzles) {
-  const sets = puzzle.trainingSets!
+const loadedPuzzles = await Promise.all(trainablePuzzles.map(async (puzzle) => ({
+  puzzle,
+  sets: await puzzle.loadTrainingSets!(),
+})))
+
+for (const { puzzle, sets } of loadedPuzzles) {
   setsByPuzzle[puzzle.id] = sets
   // Surface each set's case count on the card.
   for (const set of sets) {

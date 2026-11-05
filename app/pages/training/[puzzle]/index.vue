@@ -39,7 +39,7 @@ if (!puzzle) {
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.trainingSets) {
+if (!puzzle.loadTrainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -51,7 +51,7 @@ const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
-const trainingSets = puzzle.trainingSets
+const trainingSets = await puzzle.loadTrainingSets()
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 const setItems = computed(() =>
