@@ -947,7 +947,7 @@
   "seo": {
     "index": {
       "title": "Cube Trainer — Temporizador y Estadísticas de Speedcubing Gratis",
-      "description": "Temporizador gratuito para el cubo de Rubik. Obtén mezclas para 2x2, 3x3 y Megaminx, registra tus tiempos y promedios, y sigue tu progreso con gráficos. Funciona sin conexión."
+      "description": "Temporizador gratuito para el cubo de Rubik con mezclas estilo WCA para 2x2, 3x3, Pyraminx y Megaminx, estadísticas de tiempos, entrenamiento de algoritmos y patrones de cubo."
     },
     "stats": {
       "title": "Tus Estadísticas",
@@ -1008,6 +1008,20 @@
     "settings": {
       "title": "Ajustes",
       "description": "Personaliza Cube Trainer: cambia entre tema claro y oscuro, cambia el idioma y gestiona tus datos."
+    }
+  },
+  "jsonld": {
+    "index": {
+      "featureList": [
+        "Generador de mezclas estilo WCA para 2x2, 3x3, Pyraminx y Megaminx",
+        "Temporizador de speedcubing: mantén pulsada la barra espaciadora para prepararte, con penalizaciones +2 y DNF",
+        "Historial de solves organizado por sesión de práctica y puzzle",
+        "Estadísticas: mejor solve, mo3, ao5, ao12 y ao100, con gráficos, rachas y calendario de práctica",
+        "Entrenamiento de algoritmos para 3x3x3 (PLL, OLL, F2L) y 2x2x2 (OLL), con mezclas de preparación generadas",
+        "Patrones del cubo 3x3x3 explicados paso a paso",
+        "Copia de seguridad y restauración de tus datos en un archivo",
+        "Sin cuenta: funciona en el navegador y guarda tus datos en tu dispositivo"
+      ]
     }
   }
 }

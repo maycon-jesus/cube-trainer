@@ -17,7 +17,6 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 - 📜 **Histórico** de resoluções
 - 💾 **Armazenamento local** via IndexedDB (seus dados nunca saem do seu dispositivo)
 - 📤 **Backup** — exporte e importe todos os seus dados em um arquivo JSON
-- 📱 **PWA** — instalável e funciona offline
 - 🌐 **i18n** — Português, Inglês, Espanhol e Chinês simplificado
 - 🎨 **Temas** — mais de 25 temas claros e escuros, incluindo paletas inspiradas em editores (Dracula, Nord, Catppuccin…)
 
@@ -27,7 +26,7 @@ Um timer de speedcubing para cubo mágico, feito para rodar 100% no navegador. C
 - [Vuetify 4](https://vuetifyjs.com/) (blueprint `md3`)
 - [Pinia](https://pinia.vuejs.org/) para estado
 - [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API) para persistência
-- PWA via [`@vite-pwa/nuxt`](https://vite-pwa-org.netlify.app/) e i18n via [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/)
+- i18n via [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/)
 
 ## Começando
 
