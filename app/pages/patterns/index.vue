@@ -2,7 +2,7 @@
 import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
 import { cubeIcons } from '~/components/icon'
 
-const { t } = useI18n()
+const { t, te, locale, locales } = useI18n()
 const localePath = useLocalePath()
 
 usePageSeo('patterns')
@@ -26,6 +26,44 @@ function openDetails(pattern: CubePattern, puzzle: CubeData) {
   selectedPuzzle.value = puzzle
   detailsOpen.value = true
 }
+
+// JSON-LD (schema.org CollectionPage + ItemList of the puzzle pattern pages).
+// Names reuse `seo.patterns.puzzles.<id>.title` and fall back to the puzzle name.
+useHead(() => {
+  const path = localePath('/patterns')
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `https://cubetrainer.net${path}#collection`,
+    url: `https://cubetrainer.net${path}`,
+    name: t('seo.patterns.title'),
+    description: t('seo.patterns.description'),
+    inLanguage: locales.value.find(l => l.code === locale.value)?.language ?? locale.value,
+    isPartOf: { '@id': 'https://cubetrainer.net/#webapp' },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: sections.length,
+      itemListElement: sections.map((section, index) => {
+        const key = `seo.patterns.puzzles.${section.puzzle.id}.title`
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: te(key) ? t(key) : t(`cube.${section.puzzle.id}`),
+          url: `https://cubetrainer.net${localePath(`/patterns/${section.puzzle.id}`)}`,
+        }
+      }),
+    },
+  }
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        key: 'jsonld-patterns',
+        innerHTML: JSON.stringify(jsonLd),
+      },
+    ],
+  }
+})
 </script>
 
 <template>
