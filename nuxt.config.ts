@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       version: pkg.version,
+      appUrl: process.env.APP_URL || 'https://cubetrainer.net',
       githubUrl: 'https://github.com/maycon-jesus/cube-trainer',
       licenseUrl: 'https://github.com/maycon-jesus/cube-trainer/blob/main/LICENSE',
       buyMeCoffeeUrl: 'https://buymeacoffee.com/mayconjesus',
@@ -30,13 +31,13 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
+        { name: 'description', content: 'Free Rubik\'s Cube timer with WCA-style scrambles for 2x2, 3x3, Pyraminx and Megaminx, solve statistics, algorithm training and cube patterns.' },
         { name: 'theme-color', content: '#F56217' },
         // Open Graph
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Cube Trainer' },
         { property: 'og:title', content: 'Cube Trainer — Free Speedcubing Timer & Statistics' },
-        { property: 'og:description', content: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.' },
+        { property: 'og:description', content: 'Free Rubik\'s Cube timer with WCA-style scrambles for 2x2, 3x3, Pyraminx and Megaminx, solve statistics, algorithm training and cube patterns.' },
         { property: 'og:image', content: 'https://cubetrainer.net/og.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
@@ -57,43 +58,6 @@ export default defineNuxtConfig({
         // PWA
         // { rel: 'manifest', href: '/manifest.webmanifest' },
       ],
-      script: [
-        // JSON-LD structured data
-        {
-          type: 'application/ld+json',
-          innerHTML: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            '@id': 'https://cubetrainer.net/#webapp',
-            name: 'Cube Trainer',
-            url: 'https://cubetrainer.net/',
-            description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
-            applicationCategory: 'UtilitiesApplication',
-            operatingSystem: 'Any',
-            browserRequirements: 'Requires JavaScript',
-            softwareVersion: pkg.version,
-            image: 'https://cubetrainer.net/og.png',
-            inLanguage: ['en', 'pt-BR', 'es', 'zh-CN'],
-            isAccessibleForFree: true,
-            featureList: [
-              'WCA-style scramble generator (2x2, 3x3, Megaminx, Pyraminx)',
-              'Speedcubing timer with inspection and penalties',
-              'Solve statistics, averages and progress charts',
-              'Works offline (PWA)',
-            ],
-            creator: {
-              '@type': 'Person',
-              name: 'Maycon Jesus',
-              url: 'https://github.com/maycon-jesus',
-            },
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-          }),
-        },
-      ]
     },
   },
   modules: [
@@ -167,7 +131,7 @@ export default defineNuxtConfig({
   //   manifest: {
   //     name: 'Cube Trainer',
   //     short_name: 'Cube Trainer',
-  //     description: 'Free Rubik\'s Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline.',
+  //     description: 'Free Rubik\'s Cube timer with WCA-style scrambles for 2x2, 3x3, Pyraminx and Megaminx, solve statistics, algorithm training and cube patterns.',
   //     lang: 'en',
   //     dir: 'ltr',
   //     start_url: '/',

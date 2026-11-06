@@ -947,7 +947,7 @@
   "seo": {
     "index": {
       "title": "Cube Trainer — Timer de Speedcubing Grátis e Estatísticas",
-      "description": "Timer de cubo mágico grátis. Gere embaralhamentos para 2x2, 3x3 e Megaminx, registre seus tempos e médias e acompanhe seu progresso com gráficos. Funciona offline."
+      "description": "Timer de cubo mágico grátis com embaralhamentos no padrão WCA para 2x2, 3x3, Pyraminx e Megaminx, estatísticas de tempos, treino de algoritmos e padrões de cubo."
     },
     "stats": {
       "title": "Suas Estatísticas",
@@ -1008,6 +1008,20 @@
     "settings": {
       "title": "Configurações",
       "description": "Personalize o Cube Trainer: alterne entre tema claro e escuro, mude o idioma e gerencie seus dados."
+    }
+  },
+  "jsonld": {
+    "index": {
+      "featureList": [
+        "Gerador de embaralhamentos no padrão WCA para 2x2, 3x3, Pyraminx e Megaminx",
+        "Timer de speedcubing: segure a barra de espaço para se preparar, com penalidades +2 e DNF",
+        "Histórico de solves organizado por sessão de prática e puzzle",
+        "Estatísticas: melhor solve, mo3, ao5, ao12 e ao100, com gráficos, sequências e calendário de treino",
+        "Treino de algoritmos para 3x3x3 (PLL, OLL, F2L) e 2x2x2 (OLL), com embaralhamentos de preparação gerados",
+        "Padrões do cubo 3x3x3 ensinados passo a passo",
+        "Backup e restauração dos seus dados em arquivo",
+        "Sem conta: funciona no navegador e mantém seus dados no seu dispositivo"
+      ]
     }
   }
 }

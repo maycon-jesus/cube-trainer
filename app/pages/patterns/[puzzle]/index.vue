@@ -17,7 +17,9 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { t } = useI18n()
+const { t, locale, locales } = useI18n()
+const getDomain = useGetDomain()
+const { name: patternName, description: patternDescription } = usePatternLabels()
 
 usePageSeo(`patterns.puzzles.${puzzleId}`)
 
@@ -43,6 +45,42 @@ function openDetails(pattern: CubePattern) {
   selectedPattern.value = pattern
   detailsOpen.value = true
 }
+
+// JSON-LD (schema.org CollectionPage + ItemList of this puzzle's patterns).
+// Names/descriptions come from the pattern labels; the collection links back to the patterns index.
+useHead(() => {
+  const path = localePath(`/patterns/${puzzleId}`)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': getDomain(path, '#collection'),
+    url: getDomain(path),
+    name: t(`seo.patterns.puzzles.${puzzleId}.title`),
+    description: t(`seo.patterns.puzzles.${puzzleId}.description`),
+    inLanguage: locales.value.find(l => l.code === locale.value)?.language ?? locale.value,
+    isPartOf: { '@id': getDomain(localePath('/patterns'), '#collection') },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: patterns.length,
+      itemListElement: patterns.map((pattern, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: patternName(pattern),
+        description: patternDescription(pattern),
+        image: getDomain(pattern.imageUrl),
+      })),
+    },
+  }
+  return {
+    script: [
+      {
+        type: 'application/ld+json',
+        key: 'jsonld-patterns-puzzle',
+        innerHTML: JSON.stringify(jsonLd),
+      },
+    ],
+  }
+})
 </script>
 
 <template>

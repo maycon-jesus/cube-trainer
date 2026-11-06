@@ -947,7 +947,7 @@
   "seo": {
     "index": {
       "title": "Cube Trainer — Free Speedcubing Timer & Statistics",
-      "description": "Free Rubik's Cube timer. Get scrambles for 2x2, 3x3 and Megaminx, track your solve times and averages, and follow your progress with charts. Works offline."
+      "description": "Free Rubik's Cube timer with WCA-style scrambles for 2x2, 3x3, Pyraminx and Megaminx, solve statistics, algorithm training and cube patterns."
     },
     "stats": {
       "title": "Your Statistics",
@@ -1008,6 +1008,20 @@
     "settings": {
       "title": "Settings",
       "description": "Customize Cube Trainer: switch between light and dark theme, change the language and manage your data."
+    }
+  },
+  "jsonld": {
+    "index": {
+      "featureList": [
+        "WCA-style scramble generator for 2x2, 3x3, Pyraminx and Megaminx",
+        "Speedcubing timer: hold the spacebar to get ready, with +2 and DNF penalties",
+        "Solve history organized by practice session and puzzle",
+        "Statistics: best single, mo3, ao5, ao12 and ao100, with charts, streaks and a practice calendar",
+        "Algorithm training for 3x3x3 (PLL, OLL, F2L) and 2x2x2 (OLL), with generated setup scrambles",
+        "3x3x3 cube patterns taught step by step",
+        "Backup and restore of your data to a file",
+        "No account needed: runs in your browser and keeps your data on your device"
+      ]
     }
   }
 }
