@@ -168,6 +168,7 @@ export default defineNuxtConfig({
     }
   },
   sitemap: {
-    zeroRuntime: true
+    zeroRuntime: true,
+    xsl: false,
   }
 })
