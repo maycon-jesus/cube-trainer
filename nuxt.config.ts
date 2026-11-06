@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       version: pkg.version,
+      appUrl: process.env.APP_URL || 'https://cubetrainer.net',
       githubUrl: 'https://github.com/maycon-jesus/cube-trainer',
       licenseUrl: 'https://github.com/maycon-jesus/cube-trainer/blob/main/LICENSE',
       buyMeCoffeeUrl: 'https://buymeacoffee.com/mayconjesus',

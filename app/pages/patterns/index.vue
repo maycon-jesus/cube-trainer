@@ -4,6 +4,7 @@ import { cubeIcons } from '~/components/icon'
 
 const { t, te, locale, locales } = useI18n()
 const localePath = useLocalePath()
+const getDomain = useGetDomain()
 
 usePageSeo('patterns')
 
@@ -34,12 +35,12 @@ useHead(() => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': `https://cubetrainer.net${path}#collection`,
-    url: `https://cubetrainer.net${path}`,
+    '@id': getDomain(path, '#collection'),
+    url: getDomain(path),
     name: t('seo.patterns.title'),
     description: t('seo.patterns.description'),
     inLanguage: locales.value.find(l => l.code === locale.value)?.language ?? locale.value,
-    isPartOf: { '@id': 'https://cubetrainer.net/#webapp' },
+    isPartOf: { '@id': getDomain('/#webapp') },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: sections.length,
@@ -49,7 +50,7 @@ useHead(() => {
           '@type': 'ListItem',
           position: index + 1,
           name: te(key) ? t(key) : t(`cube.${section.puzzle.id}`),
-          url: `https://cubetrainer.net${localePath(`/patterns/${section.puzzle.id}`)}`,
+          url: getDomain(localePath(`/patterns/${section.puzzle.id}`)),
         }
       }),
     },
