@@ -15,18 +15,18 @@ const props = defineProps<{
 }>()
 
 const getDomain = useGetDomain()
-const localePath = useLocalePath()
+const getAbsoluteUrl = useGetAbsoluteUrl()
 const { t } = useI18n()
 
 const data = computed(() => {
-    const path = localePath("/patterns")
+    const path = "/patterns"
     const page = new CollectionPage()
-        .id(getDomain(path, '/#collection'))
+        .id(getDomain(path, '#collection'))
         .url(getDomain(path))
         .name(t('seo.patterns.title'))
         .description(t('seo.patterns.description'))
         .inLanguage(useGetCurrentLocale())
-        .isPartOf(new IdReference(getDomain('/#website')))
+        .isPartOf(new IdReference(getDomain('/', '#website')))
 
     const itemList = new ItemList()
         .numberOfItems(props.items.length)
@@ -34,8 +34,8 @@ const data = computed(() => {
             return new ListItem()
                 .name(item.name)
                 .name(item.description)
-                .url(getDomain(localePath(item.url)))
-                .image(getDomain(item.imageUrl))
+                .url(getDomain(item.url))
+                .image(getAbsoluteUrl(item.imageUrl))
                 .position(index + 1)
         }))
 

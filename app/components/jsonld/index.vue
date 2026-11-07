@@ -8,16 +8,17 @@ import { toUseHeadGraph } from "~~/lib/jsonld/graph"
 
 const { t, tm, rt } = useI18n()
 const getDomain = useGetDomain()
+const getAbsoluteUrl = useGetAbsoluteUrl()
 const runtimeConfig = useRuntimeConfig()
 
 const data = computed(() => {
     const owner = new Person()
-        .id(getDomain("/#owner"))
+        .id(getDomain("/", "#owner"))
         .name("Maycon Jesus")
         .url("https://github.com/maycon-jesus")
 
     const webApp = new WebApplication()
-        .id(getDomain("/#webapp"))
+        .id(getDomain("/", "#webapp"))
         .url(getDomain("/"))
         .name("Cube Trainer")
         .description(t('seo.index.description'))
@@ -25,21 +26,21 @@ const data = computed(() => {
         .operatingSystem("Any")
         .browserRequirements("Requires JavaScript")
         .softwareVersion(runtimeConfig.public.version)
-        .image(getDomain('/og.png'))
+        .image(getAbsoluteUrl('/og.png'))
         .inLanguage(useGetCurrentLocale())
         .isAccessibleForFree(false)
         .featureList((tm('jsonld.index.featureList') as unknown[]).map(item => rt(item as string)))
-        .creator(new IdReference(getDomain("/#owner")))
+        .creator(new IdReference(getDomain("/", "#owner")))
         .offers(new Offer().price("0").priceCurrency("USD"))
 
     const website = new WebSite()
         .url(getDomain("/"))
-        .id(getDomain("/#website"))
+        .id(getDomain("/", "#website"))
         .name("Cube Trainer")
         .description(t('seo.index.description'))
-        .owner(new IdReference(getDomain("/#owner")))
+        .owner(new IdReference(getDomain("/", "#owner")))
         .inLanguage(useGetCurrentLocale())
-        .mainEntity(new IdReference(getDomain("/#webapp")))
+        .mainEntity(new IdReference(getDomain("/", "#webapp")))
     return [website, webApp, owner]
 })
 
