@@ -60,6 +60,12 @@ export default defineNuxtConfig({
       ],
     },
   },
+  typescript: {
+    // Inclui lib/ no projeto do editor para o TS sugerir imports de lib/ (sem auto-import global).
+    tsConfig: {
+      include: ['../lib/**/*.ts'],
+    },
+  },
   modules: [
     '@nuxtjs/sitemap',
     '@nuxt/eslint',

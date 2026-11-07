@@ -2,9 +2,8 @@
 import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
 import { cubeIcons } from '~/components/icon'
 
-const { t, te, locale, locales } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
-const getDomain = useGetDomain()
 
 usePageSeo('patterns')
 
@@ -16,77 +15,37 @@ const selectedPattern = ref<CubePattern | null>(null)
 const selectedPuzzle = ref<CubeData | null>(null)
 const detailsOpen = ref(false)
 
-async function loadAllPatterns (puzzle:CubeData) {
+async function loadAllPatterns(puzzle: CubeData) {
   const patterns = await puzzle.loadPatterns!()
   return { puzzle, total: patterns.length, patterns: patterns.slice(0, PREVIEW_COUNT) }
 }
 const sections = (await Promise.all(patternPuzzles.map(loadAllPatterns))).filter((section) => section.total > 0)
-
+const sectionsJsonld = sections.map(s => {
+  return {
+    name: t(`seo.patterns.puzzles.${s.puzzle.id}.title`),
+    description: t(`seo.patterns.puzzles.${s.puzzle.id}.description`),
+    url: `/patterns/${s.puzzle.id}`,
+    imageUrl: s.puzzle.imageUrl
+  }
+})
 function openDetails(pattern: CubePattern, puzzle: CubeData) {
   selectedPattern.value = pattern
   selectedPuzzle.value = puzzle
   detailsOpen.value = true
 }
-
-// JSON-LD (schema.org CollectionPage + ItemList of the puzzle pattern pages).
-// Names reuse `seo.patterns.puzzles.<id>.title` and fall back to the puzzle name.
-useHead(() => {
-  const path = localePath('/patterns')
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    '@id': getDomain(path, '#collection'),
-    url: getDomain(path),
-    name: t('seo.patterns.title'),
-    description: t('seo.patterns.description'),
-    inLanguage: locales.value.find(l => l.code === locale.value)?.language ?? locale.value,
-    isPartOf: { '@id': getDomain('/#webapp') },
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: sections.length,
-      itemListElement: sections.map((section, index) => {
-        const key = `seo.patterns.puzzles.${section.puzzle.id}.title`
-        return {
-          '@type': 'ListItem',
-          position: index + 1,
-          name: te(key) ? t(key) : t(`cube.${section.puzzle.id}`),
-          url: getDomain(localePath(`/patterns/${section.puzzle.id}`)),
-        }
-      }),
-    },
-  }
-  return {
-    script: [
-      {
-        type: 'application/ld+json',
-        key: 'jsonld-patterns',
-        innerHTML: JSON.stringify(jsonLd),
-      },
-    ],
-  }
-})
 </script>
 
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
+    <JsonldPatterns :items="sectionsJsonld" />
     <LayoutsPageHeader :title="t('patterns.title')" :subtitle="t('patterns.subtitle')" />
 
-    <v-alert
-      type="info"
-      variant="tonal"
-      rounded="lg"
-      density="comfortable"
-      class="mb-6 text-body-medium"
-      icon="mdi-lightbulb-on-outline"
-    >
+    <v-alert type="info" variant="tonal" rounded="lg" density="comfortable" class="mb-6 text-body-medium"
+      icon="mdi-lightbulb-on-outline">
       {{ t('patterns.tip') }}
     </v-alert>
 
-    <section
-      v-for="section in sections"
-      :key="section.puzzle.id"
-      class="mb-10"
-    >
+    <section v-for="section in sections" :key="section.puzzle.id" class="mb-10">
       <div class="d-flex align-center ga-3 mb-4">
         <span class="patterns-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
           <component :is="cubeIcons[section.puzzle.icon]" class="patterns-heading__icon" />
@@ -95,35 +54,21 @@ useHead(() => {
         <span class="text-body-medium text-medium-emphasis">
           {{ t('patterns.patternCount', section.total) }}
         </span>
-        <NuxtLink
-          :to="localePath(`/patterns/${section.puzzle.id}`)"
-          class="patterns-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none"
-        >
+        <NuxtLink :to="localePath(`/patterns/${section.puzzle.id}`)"
+          class="patterns-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none">
           {{ t('patterns.viewAll') }}
           <v-icon icon="mdi-arrow-right" size="16" class="patterns-heading__arrow" />
         </NuxtLink>
       </div>
 
       <v-row>
-        <v-col
-          v-for="pattern in section.patterns"
-          :key="pattern.id"
-          cols="12"
-          sm="6"
-          lg="4"
-          xl="3"
-        >
+        <v-col v-for="pattern in section.patterns" :key="pattern.id" cols="12" sm="6" lg="4" xl="3">
           <PatternCard :pattern="pattern" @details="openDetails($event, section.puzzle)" />
         </v-col>
       </v-row>
     </section>
 
-    <v-card
-      v-if="!sections.length"
-      variant="tonal"
-      rounded="lg"
-      class="pa-6 text-center text-medium-emphasis"
-    >
+    <v-card v-if="!sections.length" variant="tonal" rounded="lg" class="pa-6 text-center text-medium-emphasis">
       <v-icon icon="mdi-cube-outline" size="40" class="mb-2 d-block mx-auto" />
       {{ t('patterns.empty') }}
     </v-card>
