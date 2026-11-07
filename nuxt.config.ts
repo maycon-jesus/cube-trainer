@@ -7,9 +7,6 @@ import { getPrerenderRoutes } from "./lib/prerenderRoutes";
 export default defineNuxtConfig({
   compatibilityDate: '2026-07-07',
   devtools: { enabled: true },
-  features: {
-    inlineStyles: false,
-  },
   site: {
     url: 'https://cubetrainer.net',
     name: 'Cube Trainer',
@@ -58,6 +55,12 @@ export default defineNuxtConfig({
         // PWA
         // { rel: 'manifest', href: '/manifest.webmanifest' },
       ],
+    },
+  },
+  typescript: {
+    // Inclui lib/ no projeto do editor para o TS sugerir imports de lib/ (sem auto-import global).
+    tsConfig: {
+      include: ['../lib/**/*.ts'],
     },
   },
   modules: [
