@@ -1,25 +1,26 @@
 {
   "routes": [
     {
+      "src": "/(.*)",
+      "headers": { "Vary": "Accept" },
+      "continue": true
+    },
+    {
       "src": "^/$",
       "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
       "dest": "/index.md",
-      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept" }
+      "headers": { "Content-Type": "text/markdown; charset=utf-8" }
     },
     {
       "src": "^/(.+?)/?$",
       "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
       "dest": "/$1.md",
-      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept" }
+      "headers": { "Content-Type": "text/markdown; charset=utf-8" }
     },
     {
       "src": "^/(.*)\\.md$",
+      "dest": "/404.html",
       "status": 404
-    },
-    {
-      "src": "/(.*)",
-      "headers": { "Vary": "Accept" },
-      "continue": true
     },
     { "handle": "filesystem" }
   ]
