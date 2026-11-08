@@ -1,0 +1,46 @@
+{
+    "en": {
+        "nav": {
+            "play": "Timer",
+            "patterns": "Patterns",
+            "training-algorithms": "Train Algorithms",
+            "sessions": "Sessions",
+            "history": "History",
+            "stats": "Statistics",
+            "settings": "Settings"
+        }
+    },
+    "pt": {
+        "nav": {
+            "play": "Timer",
+            "patterns": "Padrões",
+            "training-algorithms": "Treinar Algoritmos",
+            "sessions": "Sessões",
+            "history": "Histórico",
+            "stats": "Estatísticas",
+            "settings": "Configurações"
+        }
+    },
+    "es": {
+        "nav": {
+            "play": "Temporizador",
+            "patterns": "Patrones",
+            "training-algorithms": "Entrenar Algoritmos",
+            "sessions": "Sesiones",
+            "history": "Historial",
+            "stats": "Estadísticas",
+            "settings": "Ajustes"
+        }
+    },
+    "zh": {
+        "nav": {
+            "play": "计时器",
+            "patterns": "花样",
+            "training-algorithms": "算法训练",
+            "sessions": "分组",
+            "history": "历史记录",
+            "stats": "统计",
+            "settings": "设置"
+        }
+    }
+}

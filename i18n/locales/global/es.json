@@ -1,0 +1,22 @@
+{
+    "app": {
+        "title": "Cube Trainer",
+        "description": "Temporizador gratuito para el cubo de Rubik con mezclas estilo WCA para 2x2, 3x3, Pyraminx y Megaminx, estadísticas de tiempos, entrenamiento de algoritmos y patrones de cubo."
+    },
+    "cube": {
+        "other": "Otro",
+        "2x2x2": "2x2x2",
+        "3x3x3": "3x3x3",
+        "4x4x4": "4x4x4",
+        "5x5x5": "5x5x5",
+        "6x6x6": "6x6x6",
+        "7x7x7": "7x7x7",
+        "pyraminx": "Pyraminx",
+        "megaminx": "Megaminx",
+        "mirror-3x3x3": "Mirror 3x3x3",
+        "mirror-2x2x2": "Mirror 2x2x2",
+        "gear-2x2x2": "Gear Cube 2x2x2",
+        "gear-3x3x3": "Gear Cube 3x3x3",
+        "fto": "FTO"
+    }
+}

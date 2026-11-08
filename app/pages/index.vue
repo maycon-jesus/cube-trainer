@@ -146,3 +146,5 @@ watch([() => configStore.puzzle, () => configStore.sessionId], async () => {
   height: auto;
 }
 </style>
+
+<i18n src="./index.i18n.json"></i18n>

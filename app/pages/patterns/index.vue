@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
 import { cubeIcons } from '~/components/icon'
+import { i18nLoaders } from './[puzzle]/index.i18n'
 
-const { t } = useI18n()
+const { locale, mergeLocaleMessage, t } = useI18n()
 const localePath = useLocalePath()
 
+mergeLocaleMessage(locale.value, (await i18nLoaders[locale.value]()).default)
 usePageSeo('patterns')
 
 const PREVIEW_COUNT = 4
@@ -16,7 +18,16 @@ const selectedPuzzle = ref<CubeData | null>(null)
 const detailsOpen = ref(false)
 
 async function loadAllPatterns(puzzle: CubeData) {
-  const patterns = await puzzle.loadPatterns!()
+  let patterns = await puzzle.loadPatterns!()
+  patterns = patterns.map(p => {
+    if (p.nameKey) {
+      p.name = t(p.nameKey)
+    }
+    if (p.descriptionKey) {
+      p.description = t(p.descriptionKey)
+    }
+    return p
+  })
   return { puzzle, total: patterns.length, patterns: patterns.slice(0, PREVIEW_COUNT) }
 }
 const sections = (await Promise.all(patternPuzzles.map(loadAllPatterns))).filter((section) => section.total > 0)
