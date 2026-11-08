@@ -184,7 +184,6 @@ export default defineNuxtConfig({
       aiTrain: true,
       contentUsage: true,
       search: true
-    },
-    contentNegotiation: true
+    }
   },
 })
