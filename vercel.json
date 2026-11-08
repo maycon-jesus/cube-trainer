@@ -34,22 +34,6 @@
             "headers": {
                 "Content-Type": "text/markdown; charset=utf-8"
             }
-        },
-        {
-            "src": "^/(?:[^/]*/)*[^/.]*/?$",
-            "missing": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": ".*text/html.*"
-                },
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": ".*text/markdown.*"
-                }
-            ],
-            "status": 406
         }
     ]
 }
