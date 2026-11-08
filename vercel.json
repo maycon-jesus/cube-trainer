@@ -42,6 +42,11 @@
                     "type": "header",
                     "key": "accept",
                     "value": ".*text/html.*"
+                },
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": ".*text/markdown.*"
                 }
             ],
             "status": 406
