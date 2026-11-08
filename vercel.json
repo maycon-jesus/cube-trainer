@@ -2,20 +2,38 @@
   "routes": [
     {
       "src": "/(.*)",
-      "headers": { "Vary": "Accept" },
+      "headers": {
+        "Vary": "Accept"
+      },
       "continue": true
     },
     {
       "src": "^/$",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
       "dest": "/index.md",
-      "headers": { "Content-Type": "text/markdown; charset=utf-8" }
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
     },
     {
       "src": "^/(.+?)/?$",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
       "dest": "/$1.md",
-      "headers": { "Content-Type": "text/markdown; charset=utf-8" }
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8"
+      }
     },
     {
       "src": "^/(.*)\\.md$",
@@ -24,9 +42,14 @@
     },
     {
       "src": "^/(?:[^/]*/)*[^/.]*/?$",
-      "missing": [{ "type": "header", "key": "accept", "value": ".*text/html.*" }],
+      "missing": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/html.*"
+        }
+      ],
       "status": 406
-    },
-    { "handle": "filesystem" }
+    }
   ]
 }
