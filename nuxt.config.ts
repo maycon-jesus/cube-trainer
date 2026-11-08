@@ -178,4 +178,12 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     xsl: false,
   },
+  aiReady: {
+    contentSignal: {
+      aiInput: true,
+      aiTrain: true,
+      contentUsage: true,
+      search: true
+    }
+  },
 })
