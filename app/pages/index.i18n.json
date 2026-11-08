@@ -1,0 +1,22 @@
+{
+    "en": {
+        "site": "site",
+        "source": "source",
+        "license": "license"
+    },
+    "pt": {
+        "site": "site",
+        "source": "código",
+        "license": "licença"
+    },
+    "es": {
+        "site": "sitio",
+        "source": "código",
+        "license": "licencia"
+    },
+    "zh": {
+        "site": "网站",
+        "source": "源代码",
+        "license": "许可证"
+    }
+}

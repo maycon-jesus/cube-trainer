@@ -13,7 +13,7 @@ onMounted(() => {
   useLoader().start()
   useMigrationStore().load()
     .then(() => {
-      if(configStore.theme){
+      if (configStore.theme) {
         theme.change(configStore.theme, true)
       }
       useLoader().end()
@@ -23,7 +23,7 @@ onMounted(() => {
     })
 })
 
-const wakeLock = ref<WakeLockSentinel|null>(null);
+const wakeLock = ref<WakeLockSentinel | null>(null);
 const wakeLockSupported = ref(false);
 const wakeLockActive = computed(() => wakeLock.value !== null)
 
@@ -58,12 +58,12 @@ function onVisibilityChange() {
   if (document.visibilityState === 'visible') requestWakeLock()
 }
 
-onBeforeMount(()=>{
+onBeforeMount(() => {
   wakeLockSupported.value = import.meta.client && 'wakeLock' in navigator
   requestWakeLock()
   if (import.meta.client) document.addEventListener('visibilitychange', onVisibilityChange)
 })
-onBeforeUnmount(()=>{
+onBeforeUnmount(() => {
   if (import.meta.client) document.removeEventListener('visibilitychange', onVisibilityChange)
   releaseWakeLock()
 })
@@ -78,19 +78,17 @@ onBeforeUnmount(()=>{
       </template>
       <v-app-bar-title>
         <div>
-        <NuxtLink :to="localePath('/')" class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row no-decoration">
-          <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title')
+          <NuxtLink :to="localePath('/')"
+            class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row no-decoration">
+            <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title')
             }}</span>
-        </NuxtLink>
-      </div>
+          </NuxtLink>
+        </div>
       </v-app-bar-title>
       <template #append>
         <span class="d-inline-flex align-center mr-2">
-          <v-icon
-            :icon="wakeLockActive ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off-outline'"
-            :color="wakeLockActive ? 'primary' : undefined"
-            :class="{ 'text-medium-emphasis': !wakeLockActive }"
-          />
+          <v-icon :icon="wakeLockActive ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off-outline'"
+            :color="wakeLockActive ? 'primary' : undefined" :class="{ 'text-medium-emphasis': !wakeLockActive }" />
           <v-tooltip activator="parent" location="bottom">{{ wakeLockTooltip }}</v-tooltip>
         </span>
       </template>
@@ -98,7 +96,7 @@ onBeforeUnmount(()=>{
 
     <LayoutsNavDrawer />
 
-    <v-main :style="{minHeight: '100vh'}">
+    <v-main :style="{ minHeight: '100vh' }">
       <slot />
     </v-main>
 

@@ -74,6 +74,7 @@ export default defineNuxtConfig({
     // '@vite-pwa/nuxt',
     '@vercel/analytics',
     '@vercel/speed-insights',
+    'nuxt-ai-ready',
   ],
   fonts: {
     families: [
@@ -100,8 +101,11 @@ export default defineNuxtConfig({
     // Absolute base URL — required so i18n can emit correct hreflang / canonical
     // links and og:url for the SEO head (useLocaleHead in app.vue).
     baseUrl: 'https://cubetrainer.net',
+    experimental: {
+      compactRoutes: true
+    },
     locales: [
-      { code: 'pt', name: 'Português', language: 'pt-BR', file: 'pt.json' },
+      { code: 'pt', name: 'Português', language: 'pt-BR', files: ['global/pt.json', 'pt.json'] },
       { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
       { code: 'es', name: 'Español', language: 'es-ES', file: 'es.json' },
       { code: 'zh', name: '简体中文', language: 'zh-CN', file: 'zh.json' },
@@ -173,5 +177,13 @@ export default defineNuxtConfig({
   sitemap: {
     zeroRuntime: true,
     xsl: false,
-  }
+  },
+  aiReady: {
+    contentSignal: {
+      aiInput: true,
+      aiTrain: true,
+      contentUsage: true,
+      search: true
+    }
+  },
 })

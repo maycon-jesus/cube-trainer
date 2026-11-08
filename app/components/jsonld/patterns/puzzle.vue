@@ -14,7 +14,6 @@ const props = defineProps<{
 const getDomain = useGetDomain()
 const getAbsoluteUrl = useGetAbsoluteUrl()
 const { t } = useI18n()
-const labels = usePatternLabels()
 
 const data = computed(() => {
     const path = `/patterns/${props.puzzleId}`
@@ -30,8 +29,8 @@ const data = computed(() => {
         .numberOfItems(props.patterns.length)
         .itemListElement(props.patterns.map((pattern, index) => {
             return new ListItem()
-                .name(labels.name(pattern))
-                .description(labels.description(pattern))
+                .name(pattern.name)
+                .description(pattern.description)
                 .image(getAbsoluteUrl(pattern.imageUrl))
                 .position(index + 1)
         }))

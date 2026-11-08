@@ -8,5 +8,7 @@ export interface JsonLdData {
     [key: string]: Thing | Primitives | undefined | Thing[] | Primitives[]
 }
 export interface JsonLdTree<T = Primitives> {
-    [key: string]: JsonLdTree<T> | T
+    [key: string]: JsonLdTree<T> | T | JsonLdTreeArr<T>
 }
+
+export type JsonLdTreeArr<T = Primitives> = (JsonLdTree<T> | Primitives)[]

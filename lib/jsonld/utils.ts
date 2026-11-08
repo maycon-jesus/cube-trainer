@@ -1,5 +1,5 @@
 import { Thing } from "./thing";
-import type { JsonLdData, JsonLdTree } from "./types";
+import type { JsonLdData, JsonLdTree, JsonLdTreeArr } from "./types";
 
 export function dataToJson(data: JsonLdData): JsonLdTree {
     const nObj: JsonLdTree = {}
@@ -8,13 +8,15 @@ export function dataToJson(data: JsonLdData): JsonLdTree {
             continue
         }
         if (Array.isArray(data[key])) {
+            const els: JsonLdTreeArr = []
             for (const el of data[key]) {
                 if (el instanceof Thing) {
-                    nObj[key] = el.toJson()
+                    els.push(el.toJson())
                     continue
                 }
-                nObj[key] = el
+                els.push(el)
             }
+            nObj[key] = els
             continue
         }
         if (data[key] instanceof Thing) {

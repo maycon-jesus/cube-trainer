@@ -8,14 +8,27 @@
     "skipLibCheck": true,
     "target": "ESNext",
     "module": "ESNext",
+    "types": [
+      "node"
+    ],
     "moduleResolution": "Bundler",
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker"
+    ],
     "allowJs": false,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "~~/*": ["../*"]
+      "~~/*": [
+        "../*"
+      ]
     }
   },
-  "include": ["./**/*.ts", "../types/**/*.d.ts"]
+  "include": [
+    "./**/*.ts",
+    "../types/**/*.d.ts"
+  ]
 }

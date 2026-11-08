@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cubesDefinition, type CubePattern, type PatternDifficulty } from '~~/lib/cube/cubesDefinition'
+import { i18nLoaders } from './index.i18n'
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -17,17 +18,30 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { t } = useI18n()
+const { locale, mergeLocaleMessage, t } = useI18n()
+
+mergeLocaleMessage(locale.value, (await i18nLoaders[locale.value]()).default)
 
 usePageSeo(`patterns.puzzles.${puzzleId}`)
 
-const patterns = await puzzle.loadPatterns()
+let patterns = await puzzle.loadPatterns()
 if (!patterns.length) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have patterns'
   })
 }
+
+patterns = patterns.map(p => {
+  if (p.nameKey) {
+    p.name = t(p.nameKey)
+  }
+  if (p.descriptionKey) {
+    p.description = t(p.descriptionKey)
+  }
+  return p
+})
+
 const difficulties: PatternDifficulty[] = ['easy', 'medium', 'hard']
 
 const difficulty = ref<PatternDifficulty>()
@@ -49,19 +63,12 @@ function openDetails(pattern: CubePattern) {
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
     <JsonldPatternsPuzzle :puzzle-id="puzzleId" :patterns="patterns" />
-    <v-btn
-      variant="text"
-      class="mb-2 px-2 text-none"
-      prepend-icon="mdi-arrow-left"
-      :to="localePath('/patterns')"
-    >
+    <v-btn variant="text" class="mb-2 px-2 text-none" prepend-icon="mdi-arrow-left" :to="localePath('/patterns')">
       {{ t('patterns.title') }}
     </v-btn>
 
-    <LayoutsPageHeader
-      :title="t(`patterns.${puzzleId}.header.title`)"
-      :subtitle="t(`patterns.${puzzleId}.header.subtitle`)"
-    >
+    <LayoutsPageHeader :title="t(`patterns.${puzzleId}.header.title`)"
+      :subtitle="t(`patterns.${puzzleId}.header.subtitle`)">
       <template #append>
         <span class="patterns-count d-inline-flex align-center ga-2 text-body-medium font-weight-medium">
           <v-icon icon="mdi-view-grid-outline" size="18" />
@@ -70,48 +77,24 @@ function openDetails(pattern: CubePattern) {
       </template>
     </LayoutsPageHeader>
 
-    <v-alert
-      type="info"
-      variant="tonal"
-      rounded="lg"
-      density="comfortable"
-      class="mb-6 text-body-medium"
-      icon="mdi-lightbulb-on-outline"
-    >
+    <v-alert type="info" variant="tonal" rounded="lg" density="comfortable" class="mb-6 text-body-medium"
+      icon="mdi-lightbulb-on-outline">
       {{ t('patterns.tip') }}
     </v-alert>
 
     <v-chip-group v-model="difficulty" class="mb-4" selected-class="text-primary">
-      <v-chip
-        v-for="value in difficulties"
-        :key="value"
-        :value="value"
-        variant="outlined"
-        filter
-      >
+      <v-chip v-for="value in difficulties" :key="value" :value="value" variant="outlined" filter>
         {{ t(`patterns.difficulty.${value}`) }}
       </v-chip>
     </v-chip-group>
 
     <v-row>
-      <v-col
-        v-for="pattern in filteredPatterns"
-        :key="pattern.id"
-        cols="12"
-        sm="6"
-        lg="4"
-        xl="3"
-      >
+      <v-col v-for="pattern in filteredPatterns" :key="pattern.id" cols="12" sm="6" lg="4" xl="3">
         <PatternCard :pattern="pattern" @details="openDetails" />
       </v-col>
     </v-row>
 
-    <v-card
-      v-if="!filteredPatterns.length"
-      variant="tonal"
-      rounded="lg"
-      class="pa-6 text-center text-medium-emphasis"
-    >
+    <v-card v-if="!filteredPatterns.length" variant="tonal" rounded="lg" class="pa-6 text-center text-medium-emphasis">
       <v-icon icon="mdi-cube-outline" size="40" class="mb-2 d-block mx-auto" />
       {{ t('patterns.empty') }}
     </v-card>

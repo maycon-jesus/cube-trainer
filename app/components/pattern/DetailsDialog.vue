@@ -12,31 +12,19 @@
 
       <template #text>
         <div class="pattern-details__preview d-flex align-center justify-center rounded-lg pa-4 mb-4">
-          <nuxt-img
-            :src="pattern.imageUrl"
-            :alt="name"
-            width="320"
-            height="320"
-            class="pattern-details__net rounded-lg"
-          />
+          <nuxt-img :src="pattern.imageUrl" :alt="name" width="320" height="320"
+            class="pattern-details__net rounded-lg" />
         </div>
 
         <p v-if="description" class="text-body-medium text-medium-emphasis mb-4">
           {{ description }}
         </p>
 
-        <PatternMoveList
-          :title="t('patterns.algorithm')"
-          :subtitle="t('patterns.fromSolved')"
-          :moves="pattern.algorithm"
-        />
+        <PatternMoveList :title="t('patterns.algorithm')" :subtitle="t('patterns.fromSolved')"
+          :moves="pattern.algorithm" />
 
-        <PatternMoveList
-          class="mt-3"
-          :title="t('patterns.reverse')"
-          :subtitle="t('patterns.backToSolved')"
-          :moves="reverseAlgorithm"
-        />
+        <PatternMoveList class="mt-3" :title="t('patterns.reverse')" :subtitle="t('patterns.backToSolved')"
+          :moves="reverseAlgorithm" />
       </template>
 
       <template #actions>
@@ -58,10 +46,8 @@ const props = defineProps<{
 }>()
 const model = defineModel<boolean>()
 
-const labels = usePatternLabels()
-
-const name = computed(() => props.pattern ? labels.name(props.pattern) : '')
-const description = computed(() => props.pattern ? labels.description(props.pattern) : '')
+const name = computed(() => props.pattern ? props.pattern.name : '')
+const description = computed(() => props.pattern ? props.pattern.description : '')
 const reverseAlgorithm = computed(() => props.pattern ? props.cubeDefinition?.invertScramble?.(props.pattern.algorithm) ?? '' : '')
 
 const difficultyColors: Record<CubePattern['difficulty'], string> = {
