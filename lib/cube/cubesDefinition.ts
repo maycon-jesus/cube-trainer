@@ -18,7 +18,8 @@ export type CubeData = {
     invertScramble?: (scramble: string) => string,
     icon: string,
     loadTrainingSets?: () => Promise<TrainingSet[]>,
-    loadPatterns?: () => Promise<CubePattern[]>
+    loadPatterns?: () => Promise<CubePattern[]>,
+    loadPatternMessages?: (locale: string) => Promise<Record<string, unknown> | undefined>
 }
 
 export const cubesDefinition: Record<string, CubeData> = {
@@ -39,6 +40,7 @@ export const cubesDefinition: Record<string, CubeData> = {
         imageUrl: '/img/puzzle/3x3x3.png',
         loadTrainingSets: () => import("./3x3x3/training").then((m) => m.default),
         loadPatterns: () => import("./3x3x3/patterns").then((m) => m.default),
+        loadPatternMessages: (locale) => import("./3x3x3/patterns.i18n").then((m) => m.loadPatternMessages(locale)),
         createEngine: () => new Engine333()
     },
     "4x4x4": {

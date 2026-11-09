@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { cubesDefinition, type CubePattern, type PatternDifficulty } from '~~/lib/cube/cubesDefinition'
-import { i18nLoaders } from './index.i18n'
 
 const puzzleId = useRoute().params.puzzle as string
 const puzzle = cubesDefinition[puzzleId]
@@ -18,9 +17,10 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { locale, mergeLocaleMessage, t } = useI18n()
+const { locale, mergeLocaleMessage, t } = useI18n({ useScope: 'local' })
 
-mergeLocaleMessage(locale.value, (await i18nLoaders[locale.value]()).default)
+const messages = await puzzle.loadPatternMessages?.(locale.value)
+if (messages) mergeLocaleMessage(locale.value, messages)
 
 usePageSeo(`patterns.puzzles.${puzzleId}`)
 
