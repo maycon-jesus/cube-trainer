@@ -51,7 +51,8 @@ const { t } = useI18n()
 
 usePageSeo(`puzzle.${puzzleId}`)
 
-const trainingSets = await puzzle.loadTrainingSets()
+const loadTrainingSets = useTrainingSetLoader()
+const trainingSets = await loadTrainingSets(puzzle)
 
 // Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
 const setItems = computed(() =>

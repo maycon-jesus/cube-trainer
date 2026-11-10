@@ -1,0 +1,33 @@
+{
+  "training": {
+    "3x3x3": {
+      "pll": {
+        "name": "PLL",
+        "description": "Permutation of the Last Layer: permute the last-layer pieces to finish the solve once the top face is oriented.",
+        "cases": {
+          "u-clockwise": "U case (clockwise)",
+          "u-anticlockwise": "U case (counter-clockwise)",
+          "a-clockwise": "A case (clockwise)",
+          "a-anticlockwise": "A case (counter-clockwise)",
+          "h": "H case",
+          "z": "Z case",
+          "t": "T case",
+          "f": "F case",
+          "y": "Y case",
+          "e": "E case",
+          "v": "V case",
+          "ra": "Ra case",
+          "rb": "Rb case",
+          "ja": "Ja case",
+          "jb": "Jb case",
+          "na": "Na case",
+          "nb": "Nb case",
+          "ga": "Ga case",
+          "gb": "Gb case",
+          "gc": "Gc case",
+          "gd": "Gd case"
+        }
+      }
+    }
+  }
+}

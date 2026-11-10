@@ -77,7 +77,8 @@ onMounted(() => {
   customTimerStore.useTrainingSetDefault(puzzleId)
 })
 
-const found = (await puzzle.loadTrainingSets()).find((set) => set.id === setId)
+const loadTrainingSets = useTrainingSetLoader()
+const found = (await loadTrainingSets(puzzle)).find((set) => set.id === setId)
 if (!found) {
   throw createError({
     statusCode: 404,
