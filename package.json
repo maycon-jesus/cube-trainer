@@ -23,11 +23,11 @@
   "dependencies": {
     "@nuxt/image": "^2.2.1",
     "@pinia/nuxt": "1.0.1",
-    "nuxt": "^4.6.2",
+    "nuxt": "^4.6.3",
     "nuxt-ai-ready": "3.5.1",
     "pinia": "^4.1.0",
     "vue": "^3.5.44",
-    "vue-i18n": "^11.4.10",
+    "vue-i18n": "^11.4.17",
     "vue-router": "^5.4.0",
     "vuetify": "^4.3.1",
     "vuetify-nuxt-module": "1.0.0-rc.1"
