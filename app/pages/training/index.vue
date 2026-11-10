@@ -6,6 +6,7 @@ import { useCustomTimerStore } from '~/stores/customTimer';
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const loadTrainingSets = useTrainingSetLoader()
 
 usePageSeo('training')
 
@@ -37,7 +38,8 @@ function openEdit(playlist: TrainingPlaylist) {
 }
 
 async function trainPlaylist(playlist: TrainingPlaylist) {
-  const sets = await cubesDefinition[playlist.puzzleId]?.loadTrainingSets?.() ?? []
+  const playlistPuzzle = cubesDefinition[playlist.puzzleId]
+  const sets = playlistPuzzle ? await loadTrainingSets(playlistPuzzle) : []
   customTimerStore.useTrainingSetDefault(playlist.puzzleId)
   for (const trainingCase of playlist.trainingCases) {
     const set = sets.find((s) => s.id === trainingCase.setId)
@@ -61,7 +63,7 @@ const caseCounts: Record<string, number> = {}
 
 const loadedPuzzles = await Promise.all(trainablePuzzles.map(async (puzzle) => ({
   puzzle,
-  sets: await puzzle.loadTrainingSets!(),
+  sets: await loadTrainingSets(puzzle),
 })))
 
 for (const { puzzle, sets } of loadedPuzzles) {

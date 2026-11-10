@@ -141,9 +141,10 @@ const saving = ref(false)
 const hydrating = ref(false)
 
 const sets = ref<TrainingSet[]>([])
+const loadTrainingSets = useTrainingSetLoader()
 watch(puzzleId, async (id) => {
-  const loader = cubesDefinition[id]!.loadTrainingSets
-  const loaded = loader ? await loader() : []
+  const puzzle = cubesDefinition[id]
+  const loaded = puzzle ? await loadTrainingSets(puzzle) : []
   if (puzzleId.value === id) sets.value = loaded
 }, { immediate: true })
 const selectedCount = computed(() => selectedKeys.value.size)

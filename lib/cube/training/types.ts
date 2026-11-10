@@ -14,5 +14,8 @@ export type TrainingSet = {
     descriptionKey?: string,
     description?: string,
     imageUrl: string,
-    algorithms: TrainingAlgorithm[]
+    algorithms: TrainingAlgorithm[],
+    // Locale messages for this set's nameKey/descriptionKey and its algorithm nameKeys.
+    // Must be merged into vue-i18n before the set is rendered.
+    loadMessages?: (locale: string) => Promise<Record<string, unknown> | undefined>
 }

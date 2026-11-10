@@ -1,0 +1,19 @@
+{
+  "training": {
+    "2x2x2": {
+      "oll": {
+        "name": "OLL",
+        "description": "Orientação da Última Camada: oriente todos os cantos da última camada para deixar o topo com uma única cor.",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "Caso U",
+          "oll-4": "Caso T",
+          "oll-5": "Caso H",
+          "oll-6": "Caso Pi",
+          "oll-7": "Caso L"
+        }
+      }
+    }
+  }
+}

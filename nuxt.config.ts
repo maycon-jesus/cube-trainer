@@ -72,8 +72,6 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     // '@vite-pwa/nuxt',
-    '@vercel/analytics',
-    '@vercel/speed-insights',
     'nuxt-ai-ready',
   ],
   fonts: {

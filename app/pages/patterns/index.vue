@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
 import { cubeIcons } from '~/components/icon'
-import { i18nLoaders } from './[puzzle]/index.i18n'
 
-const { locale, mergeLocaleMessage, t } = useI18n()
+const { locale, mergeLocaleMessage, t } = useI18n({ useScope: 'local' })
 const localePath = useLocalePath()
 
-mergeLocaleMessage(locale.value, (await i18nLoaders[locale.value]()).default)
 usePageSeo('patterns')
 
 const PREVIEW_COUNT = 4
 
 const patternPuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadPatterns)
+
+for (const puzzle of patternPuzzles) {
+  const messages = await puzzle.loadPatternMessages?.(locale.value)
+  if (messages) mergeLocaleMessage(locale.value, messages)
+}
 
 const selectedPattern = ref<CubePattern | null>(null)
 const selectedPuzzle = ref<CubeData | null>(null)

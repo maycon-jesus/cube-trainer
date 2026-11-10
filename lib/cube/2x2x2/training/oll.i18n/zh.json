@@ -1,0 +1,19 @@
+{
+  "training": {
+    "2x2x2": {
+      "oll": {
+        "name": "OLL",
+        "description": "顶层定向：调整顶层所有角块的朝向，使顶面变成单一颜色。",
+        "cases": {
+          "oll-1": "Sune",
+          "oll-2": "Anti-Sune",
+          "oll-3": "U 情况",
+          "oll-4": "T 情况",
+          "oll-5": "H 情况",
+          "oll-6": "Pi 情况",
+          "oll-7": "L 情况"
+        }
+      }
+    }
+  }
+}
