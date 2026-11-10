@@ -1,0 +1,33 @@
+{
+  "training": {
+    "3x3x3": {
+      "pll": {
+        "name": "PLL",
+        "description": "顶层排列：在顶面已定向后，调整顶层各块的位置，完成最后一步还原。",
+        "cases": {
+          "u-clockwise": "U 情况（顺时针）",
+          "u-anticlockwise": "U 情况（逆时针）",
+          "a-clockwise": "A 情况（顺时针）",
+          "a-anticlockwise": "A 情况（逆时针）",
+          "h": "H 情况",
+          "z": "Z 情况",
+          "t": "T 情况",
+          "f": "F 情况",
+          "y": "Y 情况",
+          "e": "E 情况",
+          "v": "V 情况",
+          "ra": "Ra 情况",
+          "rb": "Rb 情况",
+          "ja": "Ja 情况",
+          "jb": "Jb 情况",
+          "na": "Na 情况",
+          "nb": "Nb 情况",
+          "ga": "Ga 情况",
+          "gb": "Gb 情况",
+          "gc": "Gc 情况",
+          "gd": "Gd 情况"
+        }
+      }
+    }
+  }
+}

@@ -62,6 +62,10 @@ export default defineNuxtConfig({
     tsConfig: {
       include: ['../lib/**/*.ts'],
     },
+    // O projeto de server/ (Nitro) também precisa enxergar lib/, senão o autocomplete não sugere nada de lib/ nele.
+    serverTsConfig: {
+      include: ['../lib/**/*.ts'],
+    },
   },
   modules: [
     '@nuxtjs/sitemap',
