@@ -5,6 +5,9 @@ import { Translator } from "~~/lib/translator/translator"
 
 const CACHE_CONTROL = "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
 
+const translator = new Translator()
+translator.registerLanguages(loaders)
+
 function getPayload(bodyJson: any) {
     const body = JSON.stringify(bodyJson)
     const etag = `"${createHash("sha256").update(body).digest("hex").slice(0, 32)}"`
@@ -14,6 +17,7 @@ function getPayload(bodyJson: any) {
 export default defineEventHandler(async (event) => {
     const lang = detectLanguage(event)
     const puzzle = getRouterParam(event, "puzzle")
+    const t = translator.t(lang)
 
     // hasOwn evita que chaves herdadas do prototype (ex.: "constructor") passem.
     if (!puzzle || !Object.hasOwn(cubesDefinition, puzzle)) {
@@ -24,12 +28,11 @@ export default defineEventHandler(async (event) => {
     }
 
     const patterns = cubesDefinition[puzzle]!.patterns!
-    const t = new Translator()
-    t.registerLanguages(loaders)
+
 
     for (const pattern of patterns) {
-        if (pattern.nameKey) pattern.name = t.t(lang, pattern.nameKey)
-        if (pattern.descriptionKey) pattern.description = t.t(lang, pattern.descriptionKey)
+        if (pattern.nameKey) pattern.name = t(pattern.nameKey)
+        if (pattern.descriptionKey) pattern.description = t(pattern.descriptionKey)
     }
 
     const { body, etag } = getPayload(patterns)

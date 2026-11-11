@@ -15,19 +15,21 @@ export class Translator {
         this.langs = langs
     }
 
-    t(language: string, key: string): string {
-        const keySplitted = key.split(".")
-        let currentLeaf: LanguageMessages | string = this.langs[language]
-        if (!currentLeaf) return key
+    t(language: string): (key: string) => string {
+        return (key: string) => {
+            let currentLeaf: LanguageMessages | string = this.langs[language]
+            if (!currentLeaf) return key
+            const keySplitted = key.split(".")
 
-        for (const k of keySplitted) {
-            if (typeof currentLeaf == "string") {
-                return key
+            for (const k of keySplitted) {
+                if (typeof currentLeaf == "string") {
+                    return key
+                }
+                currentLeaf = currentLeaf[k]
             }
-            currentLeaf = currentLeaf[k]
-        }
 
-        if (typeof currentLeaf == "string") return currentLeaf
-        return key
+            if (typeof currentLeaf == "string") return currentLeaf
+            return key
+        }
     }
 }
