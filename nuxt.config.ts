@@ -190,5 +190,5 @@ export default defineNuxtConfig({
     cloudflare: {
       baseURL: 'https://cubetrainer.net'
     }
-  }.
+  }
 })
