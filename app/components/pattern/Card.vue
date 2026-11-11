@@ -2,7 +2,7 @@
   <v-card class="pattern-card d-flex flex-column h-100" rounded="lg" border flat @click="$emit('details', pattern)">
     <div class="pattern-card__preview pa-4 d-flex align-center justify-center">
       <nuxt-img :src="pattern.imageUrl" :alt="pattern.name" width="220" height="220"
-        class="pattern-card__net rounded-lg" />
+        class="pattern-card__net rounded-lg" loading="lazy" />
 
       <span class="pattern-card__badge d-inline-flex align-center ga-1 text-body-small font-weight-medium">
         <v-icon size="13" icon="mdi-rotate-3d-variant" />
