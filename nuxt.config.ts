@@ -82,7 +82,6 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
     // '@vite-pwa/nuxt',
-    'nuxt-ai-ready',
   ],
   fonts: {
     families: [
@@ -172,14 +171,6 @@ export default defineNuxtConfig({
   sitemap: {
     zeroRuntime: true,
     xsl: false,
-  },
-  aiReady: {
-    contentSignal: {
-      aiInput: true,
-      aiTrain: true,
-      contentUsage: true,
-      search: true
-    }
   },
   routeRules: {
     '/': {
