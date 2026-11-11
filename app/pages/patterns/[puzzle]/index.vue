@@ -17,7 +17,7 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { t, locale } = useI18n({ useScope: 'local' })
+const { t, locale } = useI18n()
 
 const { data, error } = await useFetch<CubePattern[]>(`/api/${locale.value}/puzzle/${puzzleId}/patterns`)
 if (error.value) {

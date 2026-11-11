@@ -1,50 +1,46 @@
 <script setup lang="ts">
-import { cubesDefinition, type CubeData, type CubePattern } from '~~/lib/cube/cubesDefinition'
-import { cubeIcons } from '~/components/icon'
+import { cubesDefinition, type CubePattern } from '~~/lib/cube/cubesDefinition'
 
-const { locale, mergeLocaleMessage, t } = useI18n({ useScope: 'local' })
-const localePath = useLocalePath()
+type PuzzleSummary = {
+  id: string,
+  name: string,
+  imageUrl: string,
+  hasPatterns: boolean
+}
+
+const { locale, t } = useI18n()
 
 usePageSeo('patterns')
 
-const PREVIEW_COUNT = 4
-
-const patternPuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadPatterns)
-
-for (const puzzle of patternPuzzles) {
-  const messages = await puzzle.loadPatternMessages?.(locale.value)
-  if (messages) mergeLocaleMessage(locale.value, messages)
+const { data: puzzles, error } = await useFetch<PuzzleSummary[]>(() => `/api/${locale.value}/puzzle/list`)
+if (error.value) {
+  throw createError({
+    statusCode: error.value.statusCode ?? 500,
+    statusMessage: error.value.message
+  })
 }
+
+const sections = computed(() => (puzzles.value ?? []).filter(p => p.hasPatterns))
 
 const selectedPattern = ref<CubePattern | null>(null)
-const selectedPuzzle = ref<CubeData | null>(null)
+const selectedPuzzleId = ref<string | null>(null)
 const detailsOpen = ref(false)
 
-async function loadAllPatterns(puzzle: CubeData) {
-  let patterns = await puzzle.loadPatterns!()
-  patterns = patterns.map(p => {
-    if (p.nameKey) {
-      p.name = t(p.nameKey)
-    }
-    if (p.descriptionKey) {
-      p.description = t(p.descriptionKey)
-    }
-    return p
-  })
-  return { puzzle, total: patterns.length, patterns: patterns.slice(0, PREVIEW_COUNT) }
-}
-const sections = (await Promise.all(patternPuzzles.map(loadAllPatterns))).filter((section) => section.total > 0)
-const sectionsJsonld = sections.map(s => {
+// Inversão de scramble é só de UI/cliente; a API não a expõe.
+const selectedCubeDefinition = computed(() => selectedPuzzleId.value ? cubesDefinition[selectedPuzzleId.value] ?? null : null)
+
+const sectionsJsonld = computed(() => sections.value.map(puzzle => {
   return {
-    name: t(`seo.patterns.puzzles.${s.puzzle.id}.title`),
-    description: t(`seo.patterns.puzzles.${s.puzzle.id}.description`),
-    url: `/patterns/${s.puzzle.id}`,
-    imageUrl: s.puzzle.imageUrl
+    name: t(`seo.patterns.puzzles.${puzzle.id}.title`),
+    description: t(`seo.patterns.puzzles.${puzzle.id}.description`),
+    url: `/patterns/${puzzle.id}`,
+    imageUrl: puzzle.imageUrl
   }
-})
-function openDetails(pattern: CubePattern, puzzle: CubeData) {
+}))
+
+function openDetails(pattern: CubePattern, puzzleId: string) {
   selectedPattern.value = pattern
-  selectedPuzzle.value = puzzle
+  selectedPuzzleId.value = puzzleId
   detailsOpen.value = true
 }
 </script>
@@ -59,66 +55,13 @@ function openDetails(pattern: CubePattern, puzzle: CubeData) {
       {{ t('patterns.tip') }}
     </v-alert>
 
-    <section v-for="section in sections" :key="section.puzzle.id" class="mb-10">
-      <div class="d-flex align-center ga-3 mb-4">
-        <span class="patterns-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="cubeIcons[section.puzzle.icon]" class="patterns-heading__icon" />
-        </span>
-        <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t(`cube.${section.puzzle.id}`) }}</h2>
-        <span class="text-body-medium text-medium-emphasis">
-          {{ t('patterns.patternCount', section.total) }}
-        </span>
-        <NuxtLink :to="localePath(`/patterns/${section.puzzle.id}`)"
-          class="patterns-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none">
-          {{ t('patterns.viewAll') }}
-          <v-icon icon="mdi-arrow-right" size="16" class="patterns-heading__arrow" />
-        </NuxtLink>
-      </div>
-
-      <v-row>
-        <v-col v-for="pattern in section.patterns" :key="pattern.id" cols="12" sm="6" lg="4" xl="3">
-          <PatternCard :pattern="pattern" @details="openDetails($event, section.puzzle)" />
-        </v-col>
-      </v-row>
-    </section>
+    <PatternSection v-for="puzzle in sections" :key="puzzle.id" :puzzle="puzzle" @details="openDetails" />
 
     <v-card v-if="!sections.length" variant="tonal" rounded="lg" class="pa-6 text-center text-medium-emphasis">
       <v-icon icon="mdi-cube-outline" size="40" class="mb-2 d-block mx-auto" />
       {{ t('patterns.empty') }}
     </v-card>
 
-    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" :cube-definition="selectedPuzzle" />
+    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" :cube-definition="selectedCubeDefinition" />
   </v-container>
 </template>
-
-<style scoped lang="scss">
-.patterns-heading__icon-box {
-  width: 40px;
-  height: 40px;
-  background: rgba(var(--v-theme-primary), 0.12);
-  border: 1px solid rgba(var(--v-theme-primary), 0.18);
-}
-
-.patterns-heading__icon {
-  width: 24px;
-  height: 24px;
-  color: rgb(var(--v-theme-primary));
-}
-
-.patterns-heading__link {
-  color: rgba(var(--v-theme-on-surface), 0.7);
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: rgb(var(--v-theme-primary));
-
-    .patterns-heading__arrow {
-      transform: translateX(3px);
-    }
-  }
-}
-
-.patterns-heading__arrow {
-  transition: transform 0.2s ease;
-}
-</style>
