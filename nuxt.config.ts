@@ -182,7 +182,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: getPrerenderRoutes()
+      routes: getPrerenderRoutes(),
+      autoSubfolderIndex: false
     }
   },
 })
