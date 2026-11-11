@@ -1,24 +1,18 @@
 import { createHash } from "node:crypto"
+import { loaders } from "~~/lib/cubev2/3x3x3/patterns.i18n"
 import { cubesDefinition } from "~~/lib/cubev2/cubesDefinition"
-
-// Os padrões são dados estáticos embutidos no bundle: o corpo e o ETag são
-// calculados uma única vez por puzzle e reaproveitados nas próximas requisições.
-const cache = new Map<string, { body: string, etag: string }>()
+import { Translator } from "~~/lib/translator/translator"
 
 const CACHE_CONTROL = "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
 
-function getPayload(puzzle: string) {
-    let entry = cache.get(puzzle)
-    if (!entry) {
-        const body = JSON.stringify(cubesDefinition[puzzle]!.patterns)
-        const etag = `"${createHash("sha256").update(body).digest("hex").slice(0, 32)}"`
-        entry = { body, etag }
-        cache.set(puzzle, entry)
-    }
-    return entry
+function getPayload(bodyJson: any) {
+    const body = JSON.stringify(bodyJson)
+    const etag = `"${createHash("sha256").update(body).digest("hex").slice(0, 32)}"`
+    return { body, etag }
 }
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
+    const lang = detectLanguage(event)
     const puzzle = getRouterParam(event, "puzzle")
 
     // hasOwn evita que chaves herdadas do prototype (ex.: "constructor") passem.
@@ -29,7 +23,16 @@ export default defineEventHandler((event) => {
         })
     }
 
-    const { body, etag } = getPayload(puzzle)
+    const patterns = cubesDefinition[puzzle]!.patterns!
+    const t = new Translator()
+    t.registerLanguages(loaders)
+
+    for (const pattern of patterns) {
+        if (pattern.nameKey) pattern.name = t.t(lang, pattern.nameKey)
+        if (pattern.descriptionKey) pattern.description = t.t(lang, pattern.descriptionKey)
+    }
+
+    const { body, etag } = getPayload(patterns)
 
     setResponseHeader(event, "Cache-Control", CACHE_CONTROL)
     setResponseHeader(event, "ETag", etag)

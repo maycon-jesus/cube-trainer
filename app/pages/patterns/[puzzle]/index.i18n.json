@@ -1,0 +1,42 @@
+{
+    "en": {
+        "patterns": {
+            "3x3x3": {
+                "header": {
+                    "title": "3x3x3 patterns",
+                    "subtitle": "Pick a pattern and apply the moves from a solved cube"
+                }
+            }
+        }
+    },
+    "es": {
+        "patterns": {
+            "3x3x3": {
+                "header": {
+                    "title": "Patrones del 3x3x3",
+                    "subtitle": "Elige un patrón y aplica los movimientos desde el cubo resuelto"
+                }
+            }
+        }
+    },
+    "pt": {
+        "patterns": {
+            "3x3x3": {
+                "header": {
+                    "title": "Padrões do 3x3x3",
+                    "subtitle": "Escolha um padrão e aplique os movimentos a partir do cubo resolvido"
+                }
+            }
+        }
+    },
+    "zh": {
+        "patterns": {
+            "3x3x3": {
+                "header": {
+                    "title": "3x3x3 图案",
+                    "subtitle": "选择一个图案，从复原状态开始依次执行公式"
+                }
+            }
+        }
+    }
+}

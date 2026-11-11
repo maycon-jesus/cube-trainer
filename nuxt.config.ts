@@ -1,12 +1,17 @@
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
 import { themes, defaultThemeName } from "./config/themes";
-import { getPrerenderRoutes } from "./lib/prerenderRoutes";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2026-07-07',
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
+  },
   site: {
     url: 'https://cubetrainer.net',
     name: 'Cube Trainer',
@@ -83,19 +88,6 @@ export default defineNuxtConfig({
       { name: 'Inter', provider: 'google' },
       { name: 'JetBrains Mono', provider: 'google' },
     ],
-  },
-  routeRules: {
-    '/': {
-      prerender: true
-    },
-    '/**': {
-      prerender: true,
-    }
-  },
-  nitro: {
-    prerender: {
-      routes: getPrerenderRoutes()
-    }
   },
   i18n: {
     defaultLocale: 'en',

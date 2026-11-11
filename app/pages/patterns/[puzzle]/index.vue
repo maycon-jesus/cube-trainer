@@ -17,30 +17,24 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { locale, mergeLocaleMessage, t } = useI18n({ useScope: 'local' })
+const { t, locale } = useI18n({ useScope: 'local' })
 
-const messages = await puzzle.loadPatternMessages?.(locale.value)
-if (messages) mergeLocaleMessage(locale.value, messages)
-
-usePageSeo(`patterns.puzzles.${puzzleId}`)
-
-let patterns = await puzzle.loadPatterns()
-if (!patterns.length) {
+const { data, error } = await useFetch<CubePattern[]>(`/api/${locale.value}/puzzle/${puzzleId}/patterns`)
+if (error.value) {
   throw createError({
-    statusCode: 404,
-    statusMessage: 'Puzzle does not have patterns'
+    status: error.value.status,
+    statusText: error.value.message
   })
 }
+if (!data.value) {
+  throw createError({
+    status: 404,
+    statusText: 'Not found data'
+  })
+}
+const patterns = data.value
 
-patterns = patterns.map(p => {
-  if (p.nameKey) {
-    p.name = t(p.nameKey)
-  }
-  if (p.descriptionKey) {
-    p.description = t(p.descriptionKey)
-  }
-  return p
-})
+usePageSeo(`patterns.puzzles.${puzzleId}`)
 
 const difficulties: PatternDifficulty[] = ['easy', 'medium', 'hard']
 
@@ -50,7 +44,7 @@ const selectedPattern = ref<CubePattern | null>(null)
 const detailsOpen = ref(false)
 
 const filteredPatterns = computed(() =>
-  patterns.filter((pattern) => !difficulty.value || pattern.difficulty === difficulty.value),
+  patterns.filter((pattern: any) => !difficulty.value || pattern.difficulty === difficulty.value),
 )
 
 function openDetails(pattern: CubePattern) {
@@ -112,3 +106,5 @@ function openDetails(pattern: CubePattern) {
   border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
 }
 </style>
+
+<i18n src="./index.i18n.json"></i18n>

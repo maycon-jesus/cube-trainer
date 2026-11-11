@@ -1,10 +1,6 @@
 {
     "patterns": {
         "3x3x3": {
-            "header": {
-                "title": "Patrones del 3x3x3",
-                "subtitle": "Elige un patrón y aplica los movimientos desde el cubo resuelto"
-            },
             "cases": {
                 "the-superflip": {
                     "name": "Superflip",
