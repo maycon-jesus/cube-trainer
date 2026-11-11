@@ -186,4 +186,9 @@ export default defineNuxtConfig({
       autoSubfolderIndex: false
     }
   },
+  image: {
+    cloudflare: {
+      baseURL: 'https://cubetrainer.net'
+    }
+  }.
 })
