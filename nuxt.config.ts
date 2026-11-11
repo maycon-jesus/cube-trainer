@@ -1,6 +1,7 @@
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
 import { themes, defaultThemeName } from "./config/themes";
+import { getPrerenderRoutes } from "./lib/prerenderRoutes"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -178,6 +179,19 @@ export default defineNuxtConfig({
       aiTrain: true,
       contentUsage: true,
       search: true
+    }
+  },
+  routeRules: {
+    '/': {
+      prerender: true
+    },
+    '/**': {
+      prerender: true,
+    }
+  },
+  nitro: {
+    prerender: {
+      routes: getPrerenderRoutes()
     }
   },
 })
