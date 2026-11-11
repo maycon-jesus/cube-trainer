@@ -187,6 +187,7 @@ export default defineNuxtConfig({
     }
   },
   image: {
+    provider: 'cloudflare',
     cloudflare: {
       baseURL: 'https://cubetrainer.net'
     }
