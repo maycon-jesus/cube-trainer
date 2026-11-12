@@ -1,7 +1,8 @@
-import { cubesDefinition } from "~~/lib/cubev2/cubesDefinition"
-import cubesTranslations from "~~/lib/cubev2/i18n"
+import { cubesDefinition } from "~~/server/lib/cube/cubesDefinition"
+import cubesTranslations from "~~/server/lib/cube/i18n"
 import { Translator } from "~~/lib/translator/translator"
-import { responseWithCache } from "~~/server/utils/responseWithCache"
+import { detectLanguage } from "~~/server/lib/utils/detectLanguage"
+import { responseWithCache } from "~~/server/lib/utils/responseWithCache"
 
 
 const translator = new Translator()
