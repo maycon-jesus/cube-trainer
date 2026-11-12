@@ -1,4 +1,4 @@
-import { randomFromArr } from "../../utils/array"
+import { randomFromArr } from "~~/lib/utils/array"
 
 export function generateScramble(movesCount: number = 20): string {
   const moves: string[] = []
@@ -40,7 +40,7 @@ export function generateScramble(movesCount: number = 20): string {
 }
 
 export function randomAUFScramble(scramble: string): string {
-  const AUFs: (string|null)[] = ["U", "U'", "U2", null]
+  const AUFs: (string | null)[] = ["U", "U'", "U2", null]
   const [auf, _] = randomFromArr(AUFs)
   return auf ? auf + ' ' + scramble : scramble
 }

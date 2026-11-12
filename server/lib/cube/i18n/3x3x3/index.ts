@@ -1,4 +1,4 @@
-import { mergeLanguages } from "../../../translator/helpers";
+import { mergeLanguages } from "~~/lib/translator/helpers";
 import patterns from "./patterns";
 import trainingSets from "./trainingSets";
 

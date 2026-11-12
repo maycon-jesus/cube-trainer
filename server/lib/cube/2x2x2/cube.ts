@@ -1,3 +1,4 @@
+import { randomFromArr } from '~~/lib/utils/array'
 import {
   CubeColor,
   CubeFace,
@@ -5,7 +6,6 @@ import {
   type MovesCollection,
 } from '../cube'
 
-import {randomFromArr} from "../../utils/array"
 
 export enum FaceIndex {
   L = 0,
@@ -146,7 +146,7 @@ export function invertScramble(scramble: string): string {
 }
 
 export function randomAUFScramble(scramble: string): string {
-  const AUFs: (string|null)[] = ["U", "U'", "U2", null]
+  const AUFs: (string | null)[] = ["U", "U'", "U2", null]
   const [auf, _] = randomFromArr(AUFs)
   return auf ? auf + ' ' + scramble : scramble
 }

@@ -10,13 +10,11 @@ const localePath = useLocalePath()
 const layoutState = useLayoutStateStore()
 
 onMounted(() => {
-  useLoader().start()
   useMigrationStore().load()
     .then(() => {
       if (configStore.theme) {
         theme.change(configStore.theme, true)
       }
-      useLoader().end()
     })
     .catch(err => {
       console.error(err)
@@ -81,7 +79,7 @@ onBeforeUnmount(() => {
           <NuxtLink :to="localePath('/')"
             class="font-weight-bold d-flex align-center flex-nowrap text-no-wrap flex-row no-decoration">
             <v-img :src="logo" alt="logo" width="28" height="28" class="mr-2 flex-grow-0" /><span>{{ t('app.title')
-            }}</span>
+              }}</span>
           </NuxtLink>
         </div>
       </v-app-bar-title>

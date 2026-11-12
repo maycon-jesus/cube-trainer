@@ -1,4 +1,4 @@
-import { mergeLanguages } from "../../translator/helpers";
+import { mergeLanguages } from "~~/lib/translator/helpers"
 import cube222 from "./2x2x2"
 import cube333 from "./3x3x3"
 
