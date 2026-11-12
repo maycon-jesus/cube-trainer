@@ -7,6 +7,12 @@ export interface LanguageMessages {
 export class Translator {
     langs: Languages = {}
 
+    constructor(langs?: Languages) {
+        if (langs) {
+            this.langs = langs
+        }
+    }
+
     registerLanguage(lang: string, messages: LanguageMessages) {
         this.langs[lang] = messages
     }

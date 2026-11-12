@@ -12,7 +12,7 @@ const { locale, t } = useI18n()
 
 usePageSeo('patterns')
 
-const { data: puzzles, error } = await useFetch<PuzzleSummary[]>(() => `/api/${locale.value}/puzzle/list`)
+const { data: puzzles, error } = await useFetch<PuzzleSummary[]>(() => `/api/${locale.value}/puzzles`)
 if (error.value) {
   throw createError({
     statusCode: error.value.statusCode ?? 500,

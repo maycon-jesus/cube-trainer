@@ -1,7 +1,7 @@
-import type { TrainingAlgorithm } from "../../training/types";
+import type { TrainingAlgorithm } from "../../types/training";
 import { newAlgorithmSetup } from "./setup";
 
-function newOllSetup(id:string, solve: string){
+function newOllSetup(id: string, solve: string) {
     return newAlgorithmSetup("oll", id, solve)
 }
 

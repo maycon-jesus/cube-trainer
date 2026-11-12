@@ -1,12 +1,14 @@
 import { cubesDefinition } from "~~/lib/cubev2/cubesDefinition"
 import { cubesDefinitionI18n } from "~~/lib/cubev2/cubesDefinition.i18n"
 import { Translator } from "~~/lib/translator/translator"
+import { responseWithCache } from "~~/server/utils/responseWithCache"
 
 type ResponseType = {
     id: string,
     name: string,
     imageUrl: string,
     hasPatterns: boolean
+    hasTrainingSets: boolean
 }
 
 const translator = new Translator()
@@ -22,7 +24,8 @@ export default defineEventHandler((event) => {
                 id,
                 name: cube.name,
                 imageUrl: cube.imageUrl,
-                hasPatterns: !!cube.patterns && cube.patterns.length > 0
+                hasPatterns: !!cube.patterns && cube.patterns.length > 0,
+                hasTrainingSets: !!cube.trainingSets && cube.trainingSets.length > 0
             }
         })
         .map(r => {
@@ -30,5 +33,5 @@ export default defineEventHandler((event) => {
             return r
         })
 
-    return resp
+    return responseWithCache(event, resp)
 })

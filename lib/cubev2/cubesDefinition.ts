@@ -1,21 +1,17 @@
-import patterns333 from "./3x3x3/patterns"
-import type { CubePattern } from "./patterns/types"
+import { LanguageMessages, Languages, Translator } from "../translator/translator"
+import type { CubePattern } from "./types/pattern"
 
-export type { TrainingAlgorithm, TrainingSet } from "./training/types"
-export type { CubePattern, PatternDifficulty } from "./patterns/types"
+import cube333 from "./3x3x3/definition"
+import { TrainingSet } from "./types/training"
 
-export type CubeData = {
+export type CubeDefinition = {
     id: string,
     name: string,
     imageUrl: string
     patterns: CubePattern[],
+    trainingSets: TrainingSet[],
 }
 
-export const cubesDefinition: Record<string, CubeData> = {
-    "3x3x3": {
-        id: "3x3x3",
-        name: "name.3x3x3",
-        imageUrl: '/img/puzzle/3x3x3.png',
-        patterns: patterns333,
-    },
+export const cubesDefinition: Record<string, CubeDefinition> = {
+    "3x3x3": cube333,
 }
