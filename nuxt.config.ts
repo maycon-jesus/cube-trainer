@@ -185,4 +185,10 @@ export default defineNuxtConfig({
       routes: getPrerenderRoutes(),
     }
   },
+  image: {
+    provider: 'cloudflare',
+    cloudflare: {
+      baseURL: 'https://cubetrainer.net'
+    }
+  }
 })
