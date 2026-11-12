@@ -183,13 +183,6 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: getPrerenderRoutes(),
-      autoSubfolderIndex: false
     }
   },
-  image: {
-    provider: 'cloudflare',
-    cloudflare: {
-      baseURL: 'https://cubetrainer.net'
-    }
-  }
 })
