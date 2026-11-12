@@ -5,7 +5,7 @@ import { getPrerenderRoutes } from "./lib/prerenderRoutes"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2026-07-07',
+  compatibilityDate: '2026-11-12',
   devtools: {
     enabled: true,
 
@@ -191,5 +191,5 @@ export default defineNuxtConfig({
     cloudflare: {
       baseURL: 'https://cubetrainer.net'
     }
-  }
+  },
 })
