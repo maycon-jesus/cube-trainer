@@ -28,6 +28,7 @@ export class Translator {
             const keySplitted = key.split(".")
 
             for (const k of keySplitted) {
+                if (!currentLeaf) return key
                 if (typeof currentLeaf == "string") {
                     return key
                 }

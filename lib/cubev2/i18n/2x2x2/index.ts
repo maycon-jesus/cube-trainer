@@ -1,3 +1,3 @@
-import trainingSets from "../3x3x3/trainingSets";
+import trainingSets from "./trainingSets";
 
 export default trainingSets
