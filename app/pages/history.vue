@@ -1,6 +1,6 @@
 <template>
     <v-container class="py-6">
-        <LayoutsPageHeader :title="t('nav.history')" :subtitle="t('history.subtitle')">
+        <LayoutsPageHeader :title="t('page.title')" :subtitle="t('page.subtitle')">
             <template #append>
                 <div class="filters d-flex flex-wrap ga-3">
                     <SolveTypeSelector v-model="type" show-all-option />
@@ -10,24 +10,23 @@
             </template>
         </LayoutsPageHeader>
 
-        <CustomCard :title="t('history.solves')" :subtitle="t('history.count', { count: total }, total)">
+        <CustomCard :title="t('page.solves')" :subtitle="t('page.count', { count: total }, total)">
             <template #title-append>
-                <v-btn
-                    icon="mdi-plus" size="small" variant="text" color="primary"
-                    :title="t('timer.solves.add.action')" @click="openAddModal = true" />
+                <v-btn icon="mdi-plus" size="small" variant="text" color="primary" :title="t('timer.solves.add.action')"
+                    @click="openAddModal = true" />
             </template>
             <v-list v-if="rows.length" density="compact" bg-color="transparent">
-                <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2" @click="openSolveDetails(solve)">
+                <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2"
+                    @click="openSolveDetails(solve)">
                     <template #prepend>
-                        <v-avatar v-if="training?.algorithm?.imageUrl" rounded="lg" size="32" class="mr-2">
-                            <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
+                        <v-avatar v-if="training?.imageUrl" rounded="lg" size="32" class="mr-2">
+                            <nuxt-img :src="training.imageUrl" :alt="training.name" width="32" height="32" />
                         </v-avatar>
-                        <v-icon v-else-if="cubesDefinition[solve.puzzle]?.icon" class="mr-1" size="32">
-                            <component :is="cubeIcons[cubesDefinition[solve.puzzle]!.icon]" />
+                        <v-icon v-else class="mr-1" size="32">
+                            <IconPuzzle :puzzle-id="solve.puzzle" />
                         </v-icon>
                     </template>
-                    <v-list-item-title
-                        class="font-weight-medium"
+                    <v-list-item-title class="font-weight-medium"
                         :class="{ 'text-decoration-line-through text-medium-emphasis': solve.penalty === 'dnf' }">
                         {{ formatSolve(solve) }}
                     </v-list-item-title>
@@ -35,18 +34,14 @@
                         <span>{{ t(`cube.${solve.puzzle}`) }}</span>
                         <span>·</span>
                         <span>{{ sessionName(solve.sessionId) }}</span>
-                        <v-chip
-                            v-if="training"
-                            size="x-small"
-                            color="primary"
-                            variant="tonal"
-                            label
+                        <v-chip v-if="training" size="x-small" color="primary" variant="tonal" label
                             prepend-icon="mdi-school-outline">
-                            {{ [training.setName, training.algorithmName].filter(Boolean).join(' · ') }}
+                            {{ [training.set.name, training.name].filter(Boolean).join(' · ') }}
                         </v-chip>
                     </v-list-item-subtitle>
                     <template #append>
-                        <div class="d-flex flex-column text-end text-caption text-medium-emphasis" style="line-height: 1.2">
+                        <div class="d-flex flex-column text-end text-caption text-medium-emphasis"
+                            style="line-height: 1.2">
                             <span>{{ timestamp.date }}</span>
                             <span>{{ timestamp.time }}</span>
                         </div>
@@ -54,32 +49,17 @@
                 </v-list-item>
             </v-list>
             <div v-else class="text-medium-emphasis text-center py-6">
-                {{ t('history.empty') }}
+                {{ t('page.empty') }}
             </div>
 
-            <v-pagination
-                v-if="pageCount > 1"
-                v-model="page"
-                :length="pageCount"
-                :total-visible="7"
-                :disabled="loading"
-                density="comfortable"
-                class="mt-4" />
+            <v-pagination v-if="pageCount > 1" v-model="page" :length="pageCount" :total-visible="7" :disabled="loading"
+                density="comfortable" class="mt-4" />
         </CustomCard>
 
-        <LazySolveAddDialog
-            v-model="openAddModal"
-            editable
-            :session-id="initialSessionId"
-            :puzzle="initialPuzzle"
-            type="normal"
-            @added="onSolveAdded" />
+        <LazySolveAddDialog v-model="openAddModal" editable :session-id="initialSessionId" :puzzle="initialPuzzle"
+            type="normal" @added="onSolveAdded" />
 
-        <LazySolveDetailsDialog
-            v-if="modalSolve"
-            v-model="openModalSolve"
-            :solve="modalSolve"
-            @set-penalty="setPenalty"
+        <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty"
             @delete-solve="removeSolve" />
     </v-container>
 </template>
@@ -87,23 +67,22 @@
 <script setup lang="ts">
 import { useSolvesStore, type Penalty, type Solve, type SolvesFilter, type Type } from '~/stores/db/solves'
 import { useSessionsStore } from '~/stores/db/sessions'
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
-import { cubeIcons } from '~/components/icon'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
 import SolveTypeSelector from '~/components/solve/TypeSelector.vue'
 import { useConfigStore } from '~/stores/db/config'
+import type { AlgorithmResponse } from '~/composables/api/useApiGetAlgorithm'
 
 const { locale, t } = useI18n()
 const solvesStore = useSolvesStore()
 const sessionsStore = useSessionsStore()
 const configStore = useConfigStore()
-const trainingLabels = useTrainingLabels()
+const getAlgorithm = useApiGetAlgorithm()
 
 const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
 
 function sessionName(id: number) {
-    return sessionNames.value.get(id) ?? t('history.unknownSession')
+    return sessionNames.value.get(id) ?? t('page.unknownSession')
 }
 
 usePageSeo('history')
@@ -127,9 +106,42 @@ const filter = computed<SolvesFilter>(() => ({
     puzzle: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
 }))
 
+const trainingRequests = computed(() => {
+    const requests = new Map<string, { puzzle: string, algorithmId: string }>()
+    for (const { puzzle, type, trainingAlgorithmId, id } of solves.value) {
+        if (type !== 'training' || !trainingAlgorithmId) continue
+        requests.set(id?.toString() ?? '', { puzzle, algorithmId: trainingAlgorithmId })
+    }
+    return requests
+})
+
+const trainingKey = computed(() =>
+    `history-algorithms-${locale.value}-${[...trainingRequests.value.keys()].sort().join(',')}`)
+
+const { data: trainingByRequest } = useAsyncData(trainingKey, async () => {
+    const allReqs = trainingRequests.value.entries()
+        .map(async ([reqId, { puzzle, algorithmId }]) => {
+            try {
+                return [reqId, await getAlgorithm.$fetch(puzzle, algorithmId)]
+            }
+            catch {
+                return [reqId, null]
+            }
+        })
+    const entries = await Promise.all(allReqs)
+    return Object.fromEntries(entries) as Record<string, AlgorithmResponse | null>
+})
+
+function trainingOf(solve: Solve): AlgorithmResponse | null {
+    if (!trainingByRequest.value) return null
+    const id = solve.id ?? ''
+    if (!trainingByRequest.value[id]) return null
+    return trainingByRequest.value[id]
+}
+
 const rows = computed(() => solves.value.map(solve => ({
     solve,
-    training: trainingLabels.ofSolve(solve),
+    training: trainingOf(solve),
     timestamp: formatTimestampParts(locale.value, solve.createdAt),
 })))
 
@@ -149,7 +161,7 @@ async function loadPage() {
     }
 }
 
-async function loadPagination(){
+async function loadPagination() {
     total.value = 0
     total.value = await solvesStore.countWithFilter(filter.value)
 }
@@ -162,7 +174,7 @@ watch(filter, async () => {
     else page.value = 1
 })
 watch(page, loadPage)
-onMounted(async()=>{
+onMounted(async () => {
     await loadPage()
     await loadPagination()
 })
@@ -209,3 +221,5 @@ async function removeSolve(solve: Solve) {
     min-width: 180px;
 }
 </style>
+
+<i18n src="./history.i18n.json"></i18n>

@@ -56,13 +56,6 @@
     "buyMeCoffee": "Buy me a coffee",
     "license": "MIT License"
   },
-  "history": {
-    "subtitle": "Browse all your recorded solves",
-    "solves": "Solves",
-    "count": "No solves | {count} solve | {count} solves",
-    "empty": "No solves found for these filters.",
-    "unknownSession": "Unknown session"
-  },
   "stats": {
     "subtitle": "Analyze your solves and track your progress over time",
     "common": {

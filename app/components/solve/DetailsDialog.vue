@@ -37,8 +37,8 @@
                         <v-card variant="tonal">
                             <v-card-title class="text-body-small">{{ t('solve.details.puzzle') }}</v-card-title>
                             <v-card-text class="d-flex align-center">
-                                <v-icon v-if="cube?.icon">
-                                    <component :is="cubeIcons[cube.icon]" />
+                                <v-icon>
+                                    <IconPuzzle :puzzle-id="props.solve.puzzle" />
                                 </v-icon>
                                 <span class="text-body-large ml-1">
                                     {{ t(`cube.${props.solve.puzzle}`) }}
@@ -46,16 +46,16 @@
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col v-if="training" cols="12">
+                    <v-col v-if="training && !trainingPending" cols="12">
                         <v-card variant="tonal">
                             <v-card-title class="text-body-small">{{ t('solve.details.training') }}</v-card-title>
                             <v-card-text class="d-flex align-center ga-3">
-                                <v-avatar v-if="training.algorithm?.imageUrl" rounded="lg" size="48">
-                                    <v-img :src="training.algorithm.imageUrl" :alt="training.algorithmName" />
+                                <v-avatar v-if="training.imageUrl" rounded="lg" size="48">
+                                    <nuxt-img :src="training.imageUrl" :alt="training.name" width="48" height="48" />
                                 </v-avatar>
                                 <div>
-                                    <p class="text-body-large">{{ training.algorithmName }}</p>
-                                    <p class="text-medium-emphasis">{{ training.setName }}</p>
+                                    <p class="text-body-large mb-0">{{ training.name }}</p>
+                                    <p class="text-medium-emphasis mt-0">{{ training.set.name }}</p>
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -80,8 +80,6 @@
 
 <script setup lang="ts">
 import type { Penalty, Solve } from '~/stores/db/solves';
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
-import { cubeIcons } from '~/components/icon';
 const { locale, t } = useI18n()
 
 const props = defineProps<{
@@ -93,11 +91,9 @@ const emits = defineEmits<{
 }>()
 const model = defineModel<boolean>()
 
-const cube = computed(() => cubesDefinition[props.solve.puzzle])
-
-const trainingLabels = useTrainingLabels()
-const training = computed(() => trainingLabels.ofSolve(props.solve))
-
+const getAlgorithm = useApiGetAlgorithm()
+const reqId = computed(() => getAlgorithm.getId(props.solve.puzzle, props.solve.trainingAlgorithmId).value)
+const { data: training, pending: trainingPending } = useAsyncData(reqId, () => getAlgorithm.$fetch(props.solve.puzzle, props.solve.trainingAlgorithmId))
 </script>
 
 <style scoped>

@@ -1,0 +1,3 @@
+<template>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.32 L21.13 9.95 L17.64 20.68 L6.36 20.68 L2.87 9.95 Z"/><path d="M12 8.82 L15.9 11.65 L14.41 16.23 L9.59 16.23 L8.1 11.65 Z"/><path d="M12 8.82 L14.74 5.31 M12 8.82 L9.26 5.31 M15.9 11.65 L20.08 13.17 M15.9 11.65 L18.39 7.96 M14.41 16.23 L14.26 20.68 M14.41 16.23 L18.69 17.46 M9.59 16.23 L5.31 17.46 M9.59 16.23 L9.74 20.68 M8.1 11.65 L5.61 7.96 M8.1 11.65 L3.92 13.17"/></svg>
+</template>

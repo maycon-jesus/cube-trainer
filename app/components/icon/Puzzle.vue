@@ -1,6 +1,33 @@
 <template>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <path d="M0 0h24v24H0z" fill="none" />
-  <path fill="currentColor" d="M22 13.5c0 1.76-1.3 3.22-3 3.46V20a2 2 0 0 1-2 2h-3.8v-.3a2.7 2.7 0 0 0-2.7-2.7c-1.5 0-2.7 1.21-2.7 2.7v.3H4a2 2 0 0 1-2-2v-3.8h.3C3.79 16.2 5 15 5 13.5s-1.21-2.7-2.7-2.7H2V7a2 2 0 0 1 2-2h3.04c.24-1.7 1.7-3 3.46-3s3.22 1.3 3.46 3H17a2 2 0 0 1 2 2v3.04c1.7.24 3 1.7 3 3.46M17 15h1.5a1.5 1.5 0 0 0 1.5-1.5a1.5 1.5 0 0 0-1.5-1.5H17V7h-5V5.5A1.5 1.5 0 0 0 10.5 4A1.5 1.5 0 0 0 9 5.5V7H4v2.12c1.76.68 3 2.38 3 4.38s-1.25 3.7-3 4.38V20h2.12a4.7 4.7 0 0 1 4.38-3c2 0 3.7 1.25 4.38 3H17z" />
-</svg>
+  <component :is="puzzleIdComputed"></component>
 </template>
+
+<script lang="ts" setup>
+const icons = {
+  "2x2x2": defineAsyncComponent(() => import('./puzzle/Cube2x2x2.vue')),
+  "3x3x3": defineAsyncComponent(() => import('./puzzle/Cube3x3x3.vue')),
+  "4x4x4": defineAsyncComponent(() => import('./puzzle/Cube4x4x4.vue')),
+  "5x5x5": defineAsyncComponent(() => import('./puzzle/Cube5x5x5.vue')),
+  "6x6x6": defineAsyncComponent(() => import('./puzzle/Cube6x6x6.vue')),
+  "7x7x7": defineAsyncComponent(() => import('./puzzle/Cube7x7x7.vue')),
+  Megaminx: defineAsyncComponent(() => import('./puzzle/Megaminx.vue')),
+  Mirror2x2: defineAsyncComponent(() => import('./puzzle/Mirror2x2.vue')),
+  Mirror3x3: defineAsyncComponent(() => import('./puzzle/Mirror3x3.vue')),
+  Pyraminx: defineAsyncComponent(() => import('./puzzle/Pyraminx.vue')),
+  GearCube2x2x2: defineAsyncComponent(() => import('./puzzle/GearCube2x2x2.vue')),
+  GearCube3x3x3: defineAsyncComponent(() => import('./puzzle/GearCube3x3x3.vue')),
+  FTO: defineAsyncComponent(() => import('./puzzle/FTO.vue')),
+  Puzzle: defineAsyncComponent(() => import('./puzzle/Puzzle.vue')),
+} as Record<string, Component>
+
+const props = defineProps<{
+  puzzleId: string
+}>()
+
+const puzzleIdComputed = computed(() => {
+  if (icons[props.puzzleId]) {
+    return icons[props.puzzleId]
+  }
+  return icons.Puzzle
+})
+</script>

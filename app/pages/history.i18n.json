@@ -1,0 +1,42 @@
+{
+    "en": {
+        "page": {
+            "title": "History",
+            "subtitle": "Browse all your recorded solves",
+            "solves": "Solves",
+            "count": "No solves | {count} solve | {count} solves",
+            "empty": "No solves found for these filters.",
+            "unknownSession": "Unknown session"
+        }
+    },
+    "pt": {
+        "page": {
+            "title": "Histórico",
+            "subtitle": "Veja todos os seus tempos registrados",
+            "solves": "Tempos",
+            "count": "Nenhum tempo | {count} tempo | {count} tempos",
+            "empty": "Nenhum tempo encontrado para esses filtros.",
+            "unknownSession": "Sessão desconhecida"
+        }
+    },
+    "es": {
+        "page": {
+            "title": "Historial",
+            "subtitle": "Explora todos tus tiempos registrados",
+            "solves": "Tiempos",
+            "count": "Sin tiempos | {count} tiempo | {count} tiempos",
+            "empty": "No se encontraron tiempos para estos filtros.",
+            "unknownSession": "Sesión desconocida"
+        }
+    },
+    "zh": {
+        "page": {
+            "title": "历史记录",
+            "subtitle": "浏览你记录的所有复原成绩",
+            "solves": "成绩",
+            "count": "{count} 次复原",
+            "empty": "没有符合筛选条件的成绩。",
+            "unknownSession": "未知分组"
+        }
+    }
+}

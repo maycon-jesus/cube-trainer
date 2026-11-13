@@ -192,4 +192,9 @@ export default defineNuxtConfig({
       baseURL: 'https://cubetrainer.net'
     }
   },
+  imports: {
+    dirs: [
+      '~/composables/**'
+    ]
+  }
 })

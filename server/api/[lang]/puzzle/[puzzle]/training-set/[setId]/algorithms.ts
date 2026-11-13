@@ -38,7 +38,7 @@ export default defineEventHandler((event) => {
 
     const resp = trainingSet.algorithms.map<ResponseType>((algorithm) => ({
         id: algorithm.id,
-        name: t(t.name),
+        name: t(algorithm.name),
         imageUrl: algorithm.imageUrl,
         solves: algorithm.solves,
     }))
