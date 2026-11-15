@@ -13,6 +13,9 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  devServer: {
+    host: 'localhost',
+  },
   site: {
     url: 'https://cubetrainer.net',
     name: 'Cube Trainer',
