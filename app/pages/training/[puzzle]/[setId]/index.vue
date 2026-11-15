@@ -1,54 +1,35 @@
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
-    <v-btn
-      variant="text"
-      class="mb-2 px-2 text-none"
-      prepend-icon="mdi-arrow-left"
-      :to="localePath(`/training/${puzzleId}`)"
-    >
+    <v-btn variant="text" class="mb-2 px-2 text-none" prepend-icon="mdi-arrow-left"
+      :to="localePath(`/training/${puzzleId}`)">
       {{ t(`training.${puzzleId}.header.title`) }}
     </v-btn>
+    <TrainingSection v-if="trainingSet" :set="trainingSet" :algorithms="algorithms" :selected-ids="selectedIds"
+      @add-to-list="toggleSelection" @train="trainSingle" @train-set="trainSet" />
 
-    <TrainingSection
-      v-if="trainingSet"
-      :set="trainingSet"
-      :selected-ids="selectedIds"
-      @add-to-list="toggleSelection"
-      @train="trainSingle"
-      @train-set="trainSet"
-    />
+    <TrainingSelectionToolbar :count="selectedAlgorithms.length" @train="trainSelected" @clear="clearSelection"
+      @create-playlist="playlistDialogOpen = true" />
 
-    <TrainingSelectionToolbar
-      :count="selectedAlgorithms.length"
-      @train="trainSelected"
-      @clear="clearSelection"
-      @create-playlist="playlistDialogOpen = true"
-    />
-
-    <TrainingPlaylistDialog
-      v-model="playlistDialogOpen"
-      :preset="playlistPreset"
-      @saved="onPlaylistSaved"
-    />
+    <TrainingPlaylistDialog v-model="playlistDialogOpen" :preset="playlistPreset" @saved="onPlaylistSaved" />
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useCustomTimerStore } from '~/stores/customTimer';
-import { cubesDefinition, type TrainingAlgorithm, type TrainingSet } from '~~/lib/cube/cubesDefinition';
 import type { TrainingCase } from '~/stores/db/trainingPlaylists';
 
 const route = useRoute()
 const puzzleId = route.params.puzzle as string
 const setId = route.params.setId as string
-const puzzle = cubesDefinition[puzzleId]
-if (!puzzle) {
+
+const { data: puzzle } = await useApiGetPuzzle().useAsyncData(puzzleId)
+if (!puzzle.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.loadTrainingSets) {
+if (!puzzle.value.hasTrainingSets) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have training sets'
@@ -61,10 +42,9 @@ const { t } = useI18n()
 usePageSeo(`puzzle.${puzzleId}.sets.${setId}`)
 
 const customTimerStore = useCustomTimerStore()
-const trainingSet = ref<TrainingSet | null>(null)
 
 // Algorithms picked via "add to list" build a selection surfaced in the toolbar.
-const selectedAlgorithms = ref<TrainingAlgorithm[]>([])
+const selectedAlgorithms = ref<TrainingSetAlgorithm[]>([])
 const selectedIds = computed(() => new Set(selectedAlgorithms.value.map((a) => a.id)))
 
 const playlistDialogOpen = ref(false)
@@ -77,17 +57,23 @@ onMounted(() => {
   customTimerStore.useTrainingSetDefault(puzzleId)
 })
 
-const loadTrainingSets = useTrainingSetLoader()
-const found = (await loadTrainingSets(puzzle)).find((set) => set.id === setId)
-if (!found) {
+const { data: trainingSet } = await useApiGetPuzzleTrainingSet().useAsyncData(puzzle.value.id, setId)
+if (!trainingSet.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Training set not found'
   })
 }
-trainingSet.value = found
 
-function toggleSelection(algorithm: TrainingAlgorithm) {
+const { data: algorithms } = await useApiGetPuzzleTrainingSetAlgorithms().useAsyncData(puzzle.value.id, setId)
+if (!algorithms.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Training set has not algorithms'
+  })
+}
+
+function toggleSelection(algorithm: TrainingSetAlgorithm) {
   const index = selectedAlgorithms.value.findIndex((a) => a.id === algorithm.id)
   if (index >= 0) {
     selectedAlgorithms.value.splice(index, 1)
@@ -105,7 +91,7 @@ function onPlaylistSaved() {
   clearSelection()
 }
 
-function trainSingle(algorithm: TrainingAlgorithm) {
+function trainSingle(algorithm: TrainingSetAlgorithm) {
   customTimerStore.useTrainingSetDefault(puzzleId)
   customTimerStore.addAlgorithmToTrainingSet(algorithm)
   navigateTo(localePath({ name: 'training-timer' }))
@@ -121,7 +107,7 @@ function trainSelected() {
 }
 
 function trainSet(set: TrainingSet) {
-  customTimerStore.useTrainingSet(set)
+  customTimerStore.useTrainingSet(set, algorithms.value ?? [])
   navigateTo(localePath({ name: 'training-timer' }))
 }
 </script>

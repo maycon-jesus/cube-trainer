@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import { useConfigStore } from '~/stores/db/config'
 import { useSolvesStore, type Solve } from '~/stores/db/solves'
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition'
+import { puzzlesDefinition } from '~~/lib/puzzle/puzzlesDefinition'
 
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
@@ -82,7 +82,7 @@ const started = ref(false)
 
 // --- Scramble -------------------------------------------------------------
 const scramble = ref('')
-const cubeDefinition = computed(() => cubesDefinition[configStore.puzzle])
+const cubeDefinition = computed(() => puzzlesDefinition[configStore.puzzle])
 
 function newScramble() {
   scramble.value = cubeDefinition.value?.generateScramble?.() ?? ''

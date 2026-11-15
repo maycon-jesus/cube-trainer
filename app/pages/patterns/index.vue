@@ -1,33 +1,18 @@
 <script setup lang="ts">
-import { cubesDefinition, type CubePattern } from '~~/lib/cube/cubesDefinition'
+import { usePuzzles } from '~/stores/api/puzzles'
 
-type PuzzleSummary = {
-  id: string,
-  name: string,
-  imageUrl: string,
-  hasPatterns: boolean
-}
 
 const { locale, t } = useI18n()
 
 usePageSeo('patterns')
 
-const { data: puzzles, error } = await useFetch<PuzzleSummary[]>(() => `/api/${locale.value}/puzzles`)
-if (error.value) {
-  throw createError({
-    statusCode: error.value.statusCode ?? 500,
-    statusMessage: error.value.message
-  })
-}
+const { data: puzzles } = useApiGetPuzzles().useAsyncData()
 
-const sections = computed(() => (puzzles.value ?? []).filter(p => p.hasPatterns))
+const sections = computed(() => puzzles.value?.filter(p => p.hasPatterns) ?? [])
 
-const selectedPattern = ref<CubePattern | null>(null)
+const selectedPattern = ref<Pattern | null>(null)
 const selectedPuzzleId = ref<string | null>(null)
 const detailsOpen = ref(false)
-
-// Inversão de scramble é só de UI/cliente; a API não a expõe.
-const selectedCubeDefinition = computed(() => selectedPuzzleId.value ? cubesDefinition[selectedPuzzleId.value] ?? null : null)
 
 const sectionsJsonld = computed(() => sections.value.map(puzzle => {
   return {
@@ -38,7 +23,7 @@ const sectionsJsonld = computed(() => sections.value.map(puzzle => {
   }
 }))
 
-function openDetails(pattern: CubePattern, puzzleId: string) {
+function openDetails(pattern: Pattern, puzzleId: string) {
   selectedPattern.value = pattern
   selectedPuzzleId.value = puzzleId
   detailsOpen.value = true
@@ -62,6 +47,6 @@ function openDetails(pattern: CubePattern, puzzleId: string) {
       {{ t('patterns.empty') }}
     </v-card>
 
-    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" :cube-definition="selectedCubeDefinition" />
+    <PatternDetailsDialog v-model="detailsOpen" :pattern="selectedPattern" />
   </v-container>
 </template>

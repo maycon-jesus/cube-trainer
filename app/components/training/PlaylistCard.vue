@@ -3,11 +3,11 @@
     <div class="pa-4 d-flex flex-column flex-fill">
       <div class="d-flex align-center ga-3 mb-3">
         <span class="playlist-card__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="cubeIcons[puzzle?.icon ?? '']" v-if="puzzle?.icon" class="playlist-card__icon" />
+          <IconPuzzle :puzzle-id="props.playlist.puzzleId"/>
         </span>
         <div class="flex-fill" style="min-width: 0;">
           <h3 class="text-title-medium font-weight-bold mb-0 text-truncate">{{ playlist.name }}</h3>
-          <span class="text-body-medium text-medium-emphasis">{{ puzzleName }}</span>
+          <span class="text-body-medium text-medium-emphasis">{{ puzzle?.name }}</span>
         </div>
       </div>
 
@@ -46,8 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
-import { cubeIcons } from '~/components/icon';
 import type { TrainingPlaylist } from '~/stores/db/trainingPlaylists';
 
 const { t } = useI18n()
@@ -60,8 +58,7 @@ defineEmits<{
   (e: 'train' | 'edit' | 'delete', playlist: TrainingPlaylist): void
 }>()
 
-const puzzle = computed(() => cubesDefinition[props.playlist.puzzleId])
-const puzzleName = computed(() => (puzzle.value ? t(`cube.${puzzle.value.id}`) : props.playlist.puzzleId))
+const {data: puzzle} = await useApiGetPuzzle().useAsyncData(props.playlist.puzzleId)
 </script>
 
 <style scoped lang="scss">

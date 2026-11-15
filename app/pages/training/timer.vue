@@ -1,64 +1,69 @@
 <template>
   <v-container fluid class="pa-4">
+    <v-row density="comfortable">
+      <v-col cols="12" lg="4" xxl="2">
         <v-row density="comfortable">
-          <v-col cols="12" lg="4" xxl="2" >
-            <v-row density="comfortable">
-              <v-col cols="12" md="6" lg="12">
-                  <CustomCard :title="trainingSetName" :subtitle="trainingSetDescription">
-                      <SessionSelector v-model="configStore.sessionId" />
-                  <TrainingCurrentCase v-if="currentAlgorithm" :algorithm="currentAlgorithm" class="mt-4" />
-                </CustomCard>
-              </v-col>
-              <v-col v-if="display.mdAndUp.value" cols="12" md="6" lg="12">
-                <TimerStats :solves="solves" />
-              </v-col>
-              <v-col v-if="display.lgAndUp.value" cols="12">
-                <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="puzzle" :type="'training'" :training-algorithm-id="currentAlgorithm?.id" @solves-updated="refreshSolves()" />
-              </v-col>
-            </v-row>
+          <v-col cols="12" md="6" lg="12">
+            <CustomCard :title="trainingSetName" :subtitle="trainingSetDescription">
+              <SessionSelector v-model="configStore.sessionId" />
+              <TrainingCurrentCase v-if="currentAlgorithm" :algorithm="currentAlgorithm" class="mt-4" />
+            </CustomCard>
           </v-col>
-
-          <!-- Timer column -->
-          <v-col cols="12" lg="8">
-            <!-- Scramble -->
-            <v-row density="comfortable">
-              <v-col cols="12">
-              <TimerScramble v-show="scramble" :scramble="scramble" @refresh="newScramble()" />
-            </v-col>
-            </v-row>
-
-            <!-- Timer surface -->
-            <v-row density="comfortable">
-              <v-col cols="12">
-              <Timer :scramble="scramble" :class="{elevated: started}" :last-solve="solves[0]?? undefined" :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle" :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @penalty="setLastPenalty" @delete="deleteLast" @start="started=true" @stop="started=false" />
-            </v-col>
-            </v-row>
-
-            <!-- Scramble preview -->
-            <v-row density="comfortable">
-              <v-col cols="12">
-                <CustomCard v-if="puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
-                  <div class="d-flex justify-center py-2">
-                    <ClientOnly>
-                      <ScrambleCube :scramble="scramble" :cube-definition="cubeDefinition" class="scramble-preview" />
-                    </ClientOnly>
-                  </div>
-                </CustomCard>
-              </v-col>
-            </v-row>
+          <v-col v-if="display.mdAndUp.value" cols="12" md="6" lg="12">
+            <TimerStats :solves="solves" />
           </v-col>
+          <v-col v-if="display.lgAndUp.value" cols="12">
+            <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="puzzle"
+              :type="'training'" :training-algorithm-id="currentAlgorithm?.id" @solves-updated="refreshSolves()" />
+          </v-col>
+        </v-row>
+      </v-col>
 
-          <!-- Sidebar: times -->
-          <v-col v-if="display.mdAndDown.value" cols="12">
-            <v-row>
-              <v-col v-if="display.smAndDown.value" cols="12">
-                <TimerStats :solves="solves" />
-              </v-col>
-              <v-col cols="12">
-                <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="puzzle" :type="'training'" :training-algorithm-id="currentAlgorithm?.id" @solves-updated="refreshSolves()" />
-              </v-col>
-            </v-row>
-        </v-col>
+      <!-- Timer column -->
+      <v-col cols="12" lg="8">
+        <!-- Scramble -->
+        <v-row density="comfortable">
+          <v-col cols="12">
+            <TimerScramble v-show="scramble" :scramble="scramble" @refresh="newScramble()" />
+          </v-col>
+        </v-row>
+
+        <!-- Timer surface -->
+        <v-row density="comfortable">
+          <v-col cols="12">
+            <Timer :scramble="scramble" :class="{ elevated: started }" :last-solve="solves[0] ?? undefined"
+              :session-id="configStore.sessionId" :type="'training'" :puzzle="puzzle"
+              :training-algorithm-id="currentAlgorithm?.id" @solve="resolved" @penalty="setLastPenalty"
+              @delete="deleteLast" @start="started = true" @stop="started = false" />
+          </v-col>
+        </v-row>
+
+        <!-- Scramble preview -->
+        <v-row density="comfortable">
+          <v-col cols="12">
+            <CustomCard v-if="puzzle === '3x3x3'" :title="$t('timer.scramble.preview')">
+              <div class="d-flex justify-center py-2">
+                <ClientOnly>
+                  <ScrambleCube :scramble="scramble" :cube-definition="cubeDefinition" class="scramble-preview" />
+                </ClientOnly>
+              </div>
+            </CustomCard>
+          </v-col>
+        </v-row>
+      </v-col>
+
+      <!-- Sidebar: times -->
+      <v-col v-if="display.mdAndDown.value" cols="12">
+        <v-row>
+          <v-col v-if="display.smAndDown.value" cols="12">
+            <TimerStats :solves="solves" />
+          </v-col>
+          <v-col cols="12">
+            <TimerSolves :solves="solves.slice(0, 12)" :session-id="configStore.sessionId" :puzzle="puzzle"
+              :type="'training'" :training-algorithm-id="currentAlgorithm?.id" @solves-updated="refreshSolves()" />
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -67,14 +72,13 @@
 import { useConfigStore } from '~/stores/db/config'
 import { useCustomTimerStore } from '~/stores/customTimer'
 import { useSolvesStore, type Solve } from '~/stores/db/solves'
-import { cubesDefinition, type TrainingAlgorithm } from '~~/lib/cube/cubesDefinition'
+import { puzzlesDefinition } from '~~/lib/puzzle/puzzlesDefinition'
 
 const solvesStore = useSolvesStore()
 const configStore = useConfigStore()
 const customTimerStore = useCustomTimerStore()
 const display = useDisplay()
 const localePath = useLocalePath()
-const { t } = useI18n()
 
 usePageSeo('index', { suffix: false })
 
@@ -85,29 +89,29 @@ const started = ref(false)
 // --- Training set (predefined scrambles) ----------------------------------
 const trainingSet = computed(() => customTimerStore.trainingSet)
 const puzzle = computed(() => customTimerStore.puzzle ?? '')
-const cubeDefinition = computed(() => cubesDefinition[puzzle.value])
+const cubeDefinition = computed(() => puzzlesDefinition[puzzle.value])
 
-const currentAlgorithm = ref<TrainingAlgorithm | null>(null)
+const currentAlgorithm = ref<TrainingSetAlgorithm | null>(null)
 const scramble = ref('')
 
-// Pick a random algorithm from the training set and one of its setup scrambles.
+// Pick a random algorithm from the training set and build its setup scramble.
+// The API exposes the algorithm moves in `solves`; the puzzle definition turns them into a setup.
 async function newScramble() {
-  const algorithms = trainingSet.value ? trainingSet.value.algorithms : []
-  if (algorithms.length === 0) {
+  const algorithms = customTimerStore.algorithms
+  const generateAlgorithmSetup = cubeDefinition.value?.generateAlgorithmSetup
+  const algorithm = algorithms[Math.floor(Math.random() * algorithms.length)]
+  if (!algorithm || !generateAlgorithmSetup || algorithm.solves.length === 0) {
     currentAlgorithm.value = null
     scramble.value = ''
     return
   }
-  const algorithm = algorithms[Math.floor(Math.random() * algorithms.length)]!
   currentAlgorithm.value = algorithm
-  scramble.value = await algorithm.generateSetupScramble()
-
+  scramble.value = await generateAlgorithmSetup(algorithm.solves[0]!)
 }
 
 onBeforeMount(async () => {
   // Guard: this screen only makes sense with a training set loaded.
-  const algorithms = trainingSet.value ? trainingSet.value.algorithms : []
-  if (algorithms.length === 0) {
+  if (customTimerStore.algorithms.length === 0) {
     await navigateTo(localePath({ name: 'training' }))
     return
   }
@@ -135,7 +139,7 @@ async function deleteLast() {
 }
 
 async function refreshSolves() {
-  const trainingAlgorithmIds = trainingSet.value?.algorithms.map((algorithm) => algorithm.id) ?? []
+  const trainingAlgorithmIds = customTimerStore.algorithms.map((algorithm) => algorithm.id)
   solves.value = await solvesStore.getAllWithFilter({
     type: 'training',
     sessionId: configStore.sessionId,
@@ -151,19 +155,12 @@ watch([() => configStore.sessionId, () => trainingSet.value?.id], async () => {
   await refreshSolves()
 })
 
-const trainingSetName = computed(() => {
-  if (!trainingSet.value) return ''
-  return trainingSet.value.name ?? t(trainingSet.value.nameKey??'')
-})
-
-const trainingSetDescription = computed(() => {
-  if (!trainingSet.value) return undefined
-  return trainingSet.value.description ?? (trainingSet.value.descriptionKey? t(trainingSet.value.descriptionKey) : undefined)
-})
+const trainingSetName = computed(() => trainingSet.value?.name ?? '')
+const trainingSetDescription = computed(() => trainingSet.value?.description || undefined)
 </script>
 
 <style scoped>
-.elevated{
+.elevated {
   position: fixed;
   top: 50%;
   left: 50%;

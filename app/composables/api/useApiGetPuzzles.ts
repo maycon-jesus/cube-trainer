@@ -4,7 +4,7 @@ type ResponseData = {
     imageUrl: string,
     hasPatterns: boolean
     hasTrainingSets: boolean
-}
+}[]
 
 export function useApiGetPuzzles() {
     const { locale } = useI18n()
@@ -17,6 +17,9 @@ export function useApiGetPuzzles() {
         },
         useAsyncData: function () {
             return useAsyncData(this.getId(), () => this.$fetch())
+        },
+        useFetch: function () {
+            return useFetch<ResponseData>(`/api/${locale.value}/puzzles`)
         },
         getId: () => {
             return computed(() => `api-${locale.value}-puzzles`)

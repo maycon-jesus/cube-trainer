@@ -17,7 +17,7 @@
             </template>
             <v-list v-if="rows.length" density="compact" bg-color="transparent">
                 <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2"
-                    @click="openSolveDetails(solve)">
+                    @click="openSolveDetails(solve, training)">
                     <template #prepend>
                         <v-avatar v-if="training?.imageUrl" rounded="lg" size="32" class="mr-2">
                             <nuxt-img :src="training.imageUrl" :alt="training.name" width="32" height="32" />
@@ -59,8 +59,8 @@
         <LazySolveAddDialog v-model="openAddModal" editable :session-id="initialSessionId" :puzzle="initialPuzzle"
             type="normal" @added="onSolveAdded" />
 
-        <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty"
-            @delete-solve="removeSolve" />
+        <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve"
+            :algorithm="modalAlgorithm" @set-penalty="setPenalty" @delete-solve="removeSolve" />
     </v-container>
 </template>
 
@@ -71,13 +71,14 @@ import CubeSelector from '~/components/session/CubeSelector.vue'
 import SessionSelector from '~/components/session/SessionSelector.vue'
 import SolveTypeSelector from '~/components/solve/TypeSelector.vue'
 import { useConfigStore } from '~/stores/db/config'
-import type { AlgorithmResponse } from '~/composables/api/useApiGetAlgorithm'
+import type { TrainingSet, TrainingSetAlgorithm } from '~~/shared/types/trainingSet'
 
 const { locale, t } = useI18n()
 const solvesStore = useSolvesStore()
 const sessionsStore = useSessionsStore()
 const configStore = useConfigStore()
-const getAlgorithm = useApiGetAlgorithm()
+const getTrainingSets = useApiGetPuzzleTrainingSets()
+const getTrainingSetAlgorithms = useApiGetPuzzleTrainingSetAlgorithms()
 
 const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
 
@@ -106,37 +107,36 @@ const filter = computed<SolvesFilter>(() => ({
     puzzle: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
 }))
 
-const trainingRequests = computed(() => {
-    const requests = new Map<string, { puzzle: string, algorithmId: string }>()
-    for (const { puzzle, type, trainingAlgorithmId, id } of solves.value) {
-        if (type !== 'training' || !trainingAlgorithmId) continue
-        requests.set(id?.toString() ?? '', { puzzle, algorithmId: trainingAlgorithmId })
-    }
-    return requests
-})
+// Puzzles that have at least one training solve on the current page.
+const trainingPuzzles = computed(() => [...new Set(
+    solves.value
+        .filter(({ type, trainingAlgorithmId }) => type === 'training' && trainingAlgorithmId)
+        .map(({ puzzle }) => puzzle),
+)].sort())
 
 const trainingKey = computed(() =>
-    `history-algorithms-${locale.value}-${[...trainingRequests.value.keys()].sort().join(',')}`)
+    `history-training-sets-${locale.value}-${trainingPuzzles.value.join(',')}`)
 
-const { data: trainingByRequest } = useAsyncData(trainingKey, async () => {
-    const allReqs = trainingRequests.value.entries()
-        .map(async ([reqId, { puzzle, algorithmId }]) => {
-            try {
-                return [reqId, await getAlgorithm.$fetch(puzzle, algorithmId)]
+const { data: trainingIndex } = useAsyncData(trainingKey, async () => {
+    const index: Record<string, TrainingSetAlgorithm & { set: TrainingSet }> = {}
+
+    await Promise.all(trainingPuzzles.value.map(async (puzzle) => {
+        const sets = await getTrainingSets.$fetch(puzzle).catch(() => [] as TrainingSet[])
+
+        await Promise.all(sets.map(async (set) => {
+            const algorithms = await getTrainingSetAlgorithms.$fetch(puzzle, set.id).catch(() => [] as TrainingSetAlgorithm[])
+            for (const algorithm of algorithms) {
+                index[`${puzzle}:${algorithm.id}`] = { ...algorithm, set }
             }
-            catch {
-                return [reqId, null]
-            }
-        })
-    const entries = await Promise.all(allReqs)
-    return Object.fromEntries(entries) as Record<string, AlgorithmResponse | null>
+        }))
+    }))
+
+    return index
 })
 
-function trainingOf(solve: Solve): AlgorithmResponse | null {
-    if (!trainingByRequest.value) return null
-    const id = solve.id ?? ''
-    if (!trainingByRequest.value[id]) return null
-    return trainingByRequest.value[id]
+function trainingOf(solve: Solve): (TrainingSetAlgorithm & { set: TrainingSet }) | null {
+    if (solve.type !== 'training' || !solve.trainingAlgorithmId) return null
+    return trainingIndex.value?.[`${solve.puzzle}:${solve.trainingAlgorithmId}`] ?? null
 }
 
 const rows = computed(() => solves.value.map(solve => ({
@@ -191,10 +191,12 @@ async function onSolveAdded() {
 
 // --- Solve details ---------------------------------------------------------
 const modalSolve = ref<Solve | null>(null)
+const modalAlgorithm = ref<TrainingSetAlgorithm & { set: TrainingSet } | null>(null)
 const openModalSolve = ref(false)
 
-function openSolveDetails(solve: Solve) {
+function openSolveDetails(solve: Solve, algorithm: TrainingSetAlgorithm & { set: TrainingSet } | null) {
     modalSolve.value = solve
+    modalAlgorithm.value = algorithm
     openModalSolve.value = true
 }
 

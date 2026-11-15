@@ -1,16 +1,17 @@
 <template>
-    <v-select
-v-model="model" :label="t('puzzle.label')" :items="items" hide-details item-title="title"
+    <v-select v-model="model" :label="t('puzzle.label')" :items="items" hide-details item-title="title"
         item-value="value" item-icon="icon">
-        <template #selection="{item}">
-            <v-icon v-if="item.icon" class="mr-2"><component :is="item.icon"/></v-icon>
+        <template #selection="{ item }">
+            <v-icon class="mr-2" v-if="item">
+                <IconPuzzle :puzzle-id="item.value" />
+            </v-icon>
             <span>{{ item.title }}</span>
         </template>
         <template #item="{ item, props: attrs }">
             <v-list-item v-bind="attrs">
-                <template v-if="item.icon" #prepend>
+                <template #prepend>
                     <v-icon>
-                        <component :is="item.icon" />
+                        <IconPuzzle :puzzle-id="item.value" />
                     </v-icon>
                 </template>
                 <template #title>
@@ -22,10 +23,6 @@ v-model="model" :label="t('puzzle.label')" :items="items" hide-details item-titl
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue';
-import { cubesDefinition } from '~~/lib/cube/cubesDefinition';
-import { cubeIcons } from '~/components/icon';
-
 const props = defineProps<{
     showAllOption?: boolean
 }>()
@@ -34,25 +31,24 @@ const model = defineModel<string>()
 
 const { t } = useI18n()
 
+const { data: puzzles } = await useApiGetPuzzles().useAsyncData()
+
 type Item = {
     value: string
     title: string
-    icon?: Component
 }
 
 const items = computed<Item[]>(() => {
-    const all: Item[] = Object.entries(cubesDefinition).map(([, cube]) => {
+    const all: Item[] = puzzles.value?.map((cube) => {
         return {
             value: cube.id,
-            title: t(`cube.${cube.id}`),
-            icon: cubeIcons[cube.icon]
+            title: cube.name
         }
-    })
+    }) ?? []
     if (props.showAllOption) {
         all.unshift({
             title: t('puzzle.all'),
             value: ALL_PUZZLES,
-            icon: undefined
         })
     }
     return all

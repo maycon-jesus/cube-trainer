@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { CubeData } from '~~/lib/cube/cubesDefinition'
+import type { PuzzleDefinition } from '~~/lib/puzzle/puzzlesDefinition';
 
-const props = withDefaults(defineProps<{ scramble: string, cubeDefinition?: CubeData, alt?: string }>(), {
+const props = withDefaults(defineProps<{ scramble: string, cubeDefinition?: PuzzleDefinition, alt?: string }>(), {
   alt: 'Scramble preview',
   cubeDefinition: undefined,
 })
@@ -19,7 +19,7 @@ const src = computed(() => {
 </script>
 
 <template>
-  <img class="net" :src="src" :alt="props.alt" >
+  <img class="net" :src="src" :alt="props.alt">
 </template>
 
 <style scoped>

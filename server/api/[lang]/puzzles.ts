@@ -1,16 +1,11 @@
-import { cubesDefinition } from "~~/server/lib/cube/cubesDefinition"
-import { cubesDefinitionI18n } from "~~/server/lib/cube/cubesDefinition.i18n"
+import { cubesDefinition } from "~~/server/lib/puzzle/cubesDefinition"
+import { cubesDefinitionI18n } from "~~/server/lib/puzzle/cubesDefinition.i18n"
 import { Translator } from "~~/lib/translator/translator"
 import { detectLanguage } from "~~/server/lib/utils/detectLanguage"
 import { responseWithCache } from "~~/server/lib/utils/responseWithCache"
+import { Puzzle } from "~~/shared/types/puzzle"
 
-type ResponseType = {
-    id: string,
-    name: string,
-    imageUrl: string,
-    hasPatterns: boolean
-    hasTrainingSets: boolean
-}
+type ResponseType = Puzzle
 
 const translator = new Translator()
 translator.registerLanguages(cubesDefinitionI18n)

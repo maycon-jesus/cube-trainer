@@ -48,11 +48,6 @@
     "label": "Quebra-cabeça",
     "all": "Todos"
   },
-  "footer": {
-    "madeWith": "Feito com {heart} por {author}",
-    "buyMeCoffee": "Me pague um café",
-    "license": "Licença MIT"
-  },
   "stats": {
     "subtitle": "Analise suas resoluções e acompanhe seu progresso ao longo do tempo",
     "common": {

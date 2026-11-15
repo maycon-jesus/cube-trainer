@@ -23,11 +23,7 @@
                 width="300"
                 class="puzzle-card__img d-block"
             />
-            <component
-                :is="props.icon"
-                v-else-if="props.icon"
-                class="puzzle-card__icon"
-            />
+            <IconPuzzle v-else :puzzle-id="props.puzzleId"></IconPuzzle>
         </div>
 
         <div class="puzzle-card__body d-flex flex-column ga-2 pa-4">
@@ -56,9 +52,9 @@
 import type { Component } from 'vue'
 
 const props = defineProps<{
+    puzzleId: string,
     title: string,
     imageUrl?: string,
-    icon?: Component,
     meta?: string,
     badge?: string,
     badgeIcon?: string,

@@ -1,19 +1,12 @@
-import { cubesDefinition } from "~~/server/lib/cube/cubesDefinition"
-import cubesTranslations from "~~/server/lib/cube/i18n"
+import { cubesDefinition } from "~~/server/lib/puzzle/cubesDefinition"
+import cubesTranslations from "~~/server/lib/puzzle/i18n"
 import { Translator } from "~~/lib/translator/translator"
 import { detectLanguage } from "~~/server/lib/utils/detectLanguage"
 import { responseWithCache } from "~~/server/lib/utils/responseWithCache"
-import { TrainingAlgorithm, TrainingSet } from "~~/server/lib/cube/types/training"
+import { TrainingAlgorithm, TrainingSet } from "~~/server/lib/puzzle/types/training"
+import { TrainingSetAlgorithm } from "~~/shared/types/trainingSet"
 
-type ResponseType = {
-    id: string,
-    name: string,
-    imageUrl: string,
-    solves: string[],
-    set: {
-        name: string,
-    }
-}
+type ResponseType = TrainingSetAlgorithm
 
 const translator = new Translator()
 translator.registerLanguages(cubesTranslations)
@@ -56,9 +49,8 @@ export default defineEventHandler((event) => {
         name: t(algorithmFinded.name),
         imageUrl: algorithmFinded.imageUrl,
         solves: algorithmFinded.solves,
-        set: {
-            name: t(setFinded.name)
-        }
+        puzzleId: puzzle,
+        setId: setFinded.id
     }
 
     return responseWithCache(event, resp)

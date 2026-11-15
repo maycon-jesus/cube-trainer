@@ -7,7 +7,8 @@
             "sessions": "Sessions",
             "history": "History",
             "stats": "Statistics",
-            "settings": "Settings"
+            "settings": "Settings",
+            "buyMeCoffee": "Buy me a coffee"
         }
     },
     "pt": {
@@ -18,7 +19,8 @@
             "sessions": "Sessões",
             "history": "Histórico",
             "stats": "Estatísticas",
-            "settings": "Configurações"
+            "settings": "Configurações",
+            "buyMeCoffee": "Me pague um café"
         }
     },
     "es": {
@@ -29,7 +31,8 @@
             "sessions": "Sesiones",
             "history": "Historial",
             "stats": "Estadísticas",
-            "settings": "Ajustes"
+            "settings": "Ajustes",
+            "buyMeCoffee": "Invítame a un café"
         }
     },
     "zh": {
@@ -40,7 +43,8 @@
             "sessions": "分组",
             "history": "历史记录",
             "stats": "统计",
-            "settings": "设置"
+            "settings": "设置",
+            "buyMeCoffee": "请我喝杯咖啡"
         }
     }
 }

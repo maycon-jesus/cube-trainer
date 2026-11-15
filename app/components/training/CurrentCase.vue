@@ -2,12 +2,12 @@
   <div>
     <v-list-item
       class="px-0"
-      :title="algorithmName"
+      :title="props.algorithm.name"
       :subtitle="t('training.currentCase')"
     >
-      <template v-if="algorithm.imageUrl" #prepend>
+      <template v-if="props.algorithm.imageUrl" #prepend>
         <v-avatar rounded="lg" size="48">
-          <v-img :src="algorithm.imageUrl" :alt="algorithmName" />
+          <v-img :src="props.algorithm.imageUrl" :alt="props.algorithm.name" />
         </v-avatar>
       </template>
     </v-list-item>
@@ -27,13 +27,13 @@
     <AnimationExpand :model-value="showSolutions">
       <div class="d-flex flex-column ga-1 pt-1">
         <code
-          v-for="(solution, i) in algorithm.solves"
+          v-for="(solution, i) in props.algorithm.solves"
           :key="i"
           class="current-case__solution text-body-large text-on-surface px-2 py-1 rounded"
         >
           {{ solution }}
         </code>
-        <span v-if="algorithm.solves.length === 0" class="text-label-medium text-medium-emphasis px-2">
+        <span v-if="props.algorithm.solves.length === 0" class="text-label-medium text-medium-emphasis px-2">
           {{ t('training.noSolutions') }}
         </span>
       </div>
@@ -42,10 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition'
-
 const props = defineProps<{
-  algorithm: TrainingAlgorithm
+  algorithm: TrainingSetAlgorithm
 }>()
 
 const { t } = useI18n()
@@ -55,10 +53,6 @@ const showSolutions = ref(false)
 watch(() => props.algorithm.id, () => {
   showSolutions.value = false
 })
-
-const algorithmName = computed(() =>
-  props.algorithm.nameKey ? t(props.algorithm.nameKey) : props.algorithm.name ?? '',
-)
 </script>
 
 <style scoped lang="scss">

@@ -1,0 +1,30 @@
+{
+    "pt": {
+        "footer": {
+            "madeWith": "Feito com {heart} por {author}",
+            "buyMeCoffee": "Me pague um café",
+            "license": "Licença MIT"
+        }
+    },
+    "en": {
+        "footer": {
+            "madeWith": "Made with {heart} by {author}",
+            "buyMeCoffee": "Buy me a coffee",
+            "license": "MIT License"
+        }
+    },
+    "es": {
+        "footer": {
+            "madeWith": "Hecho con {heart} por {author}",
+            "buyMeCoffee": "Invítame a un café",
+            "license": "Licencia MIT"
+        }
+    },
+    "zh": {
+        "footer": {
+            "madeWith": "由 {author} 用 {heart} 制作",
+            "buyMeCoffee": "请我喝杯咖啡",
+            "license": "MIT 许可证"
+        }
+    }
+}

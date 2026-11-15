@@ -1,7 +1,7 @@
 import { Database } from "~~/lib/db/database"
 import { useSessionsStore } from "./sessions"
-import { cubesDefinition } from "~~/lib/cube/cubesDefinition"
 import type { ThemeInstance } from "vuetify"
+import { puzzlesDefinition } from "~~/lib/puzzle/puzzlesDefinition"
 
 export type Config = {
     id?: string,
@@ -54,7 +54,8 @@ export const useConfigStore = defineStore('config', () => {
         await db.deleteDB()
     }
 
-    return { load, sessionId, puzzle, theme, reset,
+    return {
+        load, sessionId, puzzle, theme, reset,
         clear: () => db.clear(),
         count: () => db.count(),
         exportEach: db.exportEach.bind(db),
@@ -89,7 +90,7 @@ async function loadSelectedSessionId(): Promise<number> {
 async function loadSelectedCubeType() {
     const selectedCubeType = await db.get(ConfigKeys.Puzzle)
     if (!selectedCubeType) {
-        const cubeType = Object.keys(cubesDefinition)[1]
+        const cubeType = Object.keys(puzzlesDefinition)[1]
         if (!cubeType) {
             throw new Error("Not exists cube definition")
         }
@@ -99,7 +100,7 @@ async function loadSelectedCubeType() {
         })
         return loadSelectedCubeType()
     } else {
-        const cubeDefinition = cubesDefinition[selectedCubeType.value]
+        const cubeDefinition = puzzlesDefinition[selectedCubeType.value]
         if (!cubeDefinition) {
             await db.delete(ConfigKeys.Puzzle)
             return loadSelectedCubeType()

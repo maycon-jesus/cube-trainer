@@ -1,7 +1,7 @@
 import { md3 } from "vuetify/blueprints";
 import pkg from "./package.json";
 import { themes, defaultThemeName } from "./config/themes";
-import { getPrerenderRoutes } from "./lib/prerenderRoutes"
+// import { getPrerenderRoutes } from "./lib/prerenderRoutes"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -181,10 +181,10 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    prerender: {
-      routes: getPrerenderRoutes(),
-      autoSubfolderIndex: false
-    }
+    //prerender: {
+    //  routes: getPrerenderRoutes(),
+    //  autoSubfolderIndex: false
+    //}
   },
   image: {
     provider: 'cloudflare',
@@ -194,7 +194,8 @@ export default defineNuxtConfig({
   },
   imports: {
     dirs: [
-      '~/composables/**'
+      '~/composables/**',
+      "~/shared/types/**"
     ]
   }
 })

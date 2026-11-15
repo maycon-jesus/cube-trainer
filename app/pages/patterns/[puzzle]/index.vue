@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { cubesDefinition, type CubePattern, type PatternDifficulty } from '~~/lib/cube/cubesDefinition'
-
 const puzzleId = useRoute().params.puzzle as string
-const puzzle = cubesDefinition[puzzleId]
-if (!puzzle) {
+const puzzle = useApiGetPuzzle().useAsyncData(puzzleId)
+if (!puzzle.data) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle not found'
   })
 }
-if (!puzzle.loadPatterns) {
+
+const { data: patterns } = await useApiGetPuzzlePatterns().useAsyncData(puzzleId)
+if (!patterns.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Puzzle does not have patterns'
@@ -17,22 +17,7 @@ if (!puzzle.loadPatterns) {
 }
 
 const localePath = useLocalePath()
-const { t, locale } = useI18n()
-
-const { data, error } = await useFetch<CubePattern[]>(`/api/${locale.value}/puzzle/${puzzleId}/patterns`)
-if (error.value) {
-  throw createError({
-    status: error.value.status,
-    statusText: error.value.message
-  })
-}
-if (!data.value) {
-  throw createError({
-    status: 404,
-    statusText: 'Not found data'
-  })
-}
-const patterns = data.value
+const { t } = useI18n()
 
 usePageSeo(`patterns.puzzles.${puzzleId}`)
 
@@ -40,14 +25,14 @@ const difficulties: PatternDifficulty[] = ['easy', 'medium', 'hard']
 
 const difficulty = ref<PatternDifficulty>()
 
-const selectedPattern = ref<CubePattern | null>(null)
+const selectedPattern = ref<Pattern | null>(null)
 const detailsOpen = ref(false)
 
 const filteredPatterns = computed(() =>
-  patterns.filter((pattern: any) => !difficulty.value || pattern.difficulty === difficulty.value),
+  patterns.value?.filter((pattern: any) => !difficulty.value || pattern.difficulty === difficulty.value) ?? [],
 )
 
-function openDetails(pattern: CubePattern) {
+function openDetails(pattern: Pattern) {
   selectedPattern.value = pattern
   detailsOpen.value = true
 }
@@ -56,7 +41,7 @@ function openDetails(pattern: CubePattern) {
 
 <template>
   <v-container class="py-6" style="max-width: 1200px;">
-    <JsonldPatternsPuzzle :puzzle-id="puzzleId" :patterns="patterns" />
+    <JsonldPatternsPuzzle :puzzle-id="puzzleId" :patterns="patterns!" />
     <v-btn variant="text" class="mb-2 px-2 text-none" prepend-icon="mdi-arrow-left" :to="localePath('/patterns')">
       {{ t('patterns.title') }}
     </v-btn>
@@ -66,7 +51,7 @@ function openDetails(pattern: CubePattern) {
       <template #append>
         <span class="patterns-count d-inline-flex align-center ga-2 text-body-medium font-weight-medium">
           <v-icon icon="mdi-view-grid-outline" size="18" />
-          {{ t('patterns.patternCount', patterns.length) }}
+          {{ t('patterns.patternCount', patterns!.length) }}
         </span>
       </template>
     </LayoutsPageHeader>

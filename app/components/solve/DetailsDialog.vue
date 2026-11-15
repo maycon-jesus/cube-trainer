@@ -46,16 +46,16 @@
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col v-if="training && !trainingPending" cols="12">
+                    <v-col v-if="algorithm" cols="12">
                         <v-card variant="tonal">
                             <v-card-title class="text-body-small">{{ t('solve.details.training') }}</v-card-title>
                             <v-card-text class="d-flex align-center ga-3">
-                                <v-avatar v-if="training.imageUrl" rounded="lg" size="48">
-                                    <nuxt-img :src="training.imageUrl" :alt="training.name" width="48" height="48" />
+                                <v-avatar v-if="algorithm.imageUrl" rounded="lg" size="48">
+                                    <nuxt-img :src="algorithm.imageUrl" :alt="algorithm.name" width="48" height="48" />
                                 </v-avatar>
                                 <div>
-                                    <p class="text-body-large mb-0">{{ training.name }}</p>
-                                    <p class="text-medium-emphasis mt-0">{{ training.set.name }}</p>
+                                    <p class="text-body-large mb-0">{{ algorithm.name }}</p>
+                                    <p class="text-medium-emphasis mt-0">{{ algorithm.set.name }}</p>
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -83,17 +83,14 @@ import type { Penalty, Solve } from '~/stores/db/solves';
 const { locale, t } = useI18n()
 
 const props = defineProps<{
-    solve: Solve
+    solve: Solve,
+    algorithm: TrainingSetAlgorithm & { set: TrainingSet } | null
 }>()
 const emits = defineEmits<{
     (e: 'setPenalty', solve: Solve, penalty: Penalty): void
     (e: 'deleteSolve', solve: Solve): void
 }>()
 const model = defineModel<boolean>()
-
-const getAlgorithm = useApiGetAlgorithm()
-const reqId = computed(() => getAlgorithm.getId(props.solve.puzzle, props.solve.trainingAlgorithmId).value)
-const { data: training, pending: trainingPending } = useAsyncData(reqId, () => getAlgorithm.$fetch(props.solve.puzzle, props.solve.trainingAlgorithmId))
 </script>
 
 <style scoped>

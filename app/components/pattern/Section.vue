@@ -1,9 +1,8 @@
 <template>
   <section v-if="patterns?.length" class="mb-10">
     <div class="d-flex align-center ga-3 mb-4">
-      <span v-if="icon"
-        class="pattern-section__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-        <component :is="icon" class="pattern-section__icon" />
+      <span class="pattern-section__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
+        <IconPuzzle :puzzle-id="puzzle.id" class="pattern-section__icon" />
       </span>
       <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ puzzle.name }}</h2>
       <span class="text-body-medium text-medium-emphasis">
@@ -25,38 +24,22 @@
 </template>
 
 <script setup lang="ts">
-import { cubesDefinition, type CubePattern } from '~~/lib/cube/cubesDefinition'
-import { cubeIcons } from '~/components/icon'
-
-type PuzzleSummary = {
-  id: string,
-  name: string,
-  imageUrl: string,
-  hasPatterns: boolean
-}
-
 const PREVIEW_COUNT = 4
 
 const props = defineProps<{
-  puzzle: PuzzleSummary
+  puzzle: Puzzle
 }>()
 
 const emit = defineEmits<{
-  details: [pattern: CubePattern, puzzleId: string]
+  details: [pattern: Pattern, puzzleId: string]
 }>()
 
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
-const { data: patterns } = await useFetch<CubePattern[]>(() => `/api/${locale.value}/puzzle/${props.puzzle.id}/patterns`)
+const { data: patterns } = await useFetch<Pattern[]>(() => `/api/${locale.value}/puzzle/${props.puzzle.id}/patterns`)
 
 const previewPatterns = computed(() => (patterns.value ?? []).slice(0, PREVIEW_COUNT))
-
-// Ícone é só de UI/cliente; a API não o expõe.
-const icon = computed(() => {
-  const name = cubesDefinition[props.puzzle.id]?.icon
-  return name ? cubeIcons[name] : undefined
-})
 </script>
 
 <style scoped lang="scss">

@@ -1,60 +1,35 @@
 <template>
-  <v-card
-    class="training-card d-flex flex-column h-100"
-    :class="{ 'training-card--selected': selected }"
-    rounded="lg"
-    border
-    flat
-  >
+  <v-card class="training-card d-flex flex-column h-100" :class="{ 'training-card--selected': selected }" rounded="lg"
+    border flat>
     <div class="training-card__image pa-3 d-flex align-center justify-center">
-      <nuxt-img
-        :src="algorithm.imageUrl"
-        :alt="algorithmName"
-        width="200"
-        height="200"
-        class="rounded-lg aspect-ratio-1-1"
-      />
+      <nuxt-img :src="algorithm.imageUrl" :alt="algorithm.name" width="200" height="200"
+        class="rounded-lg aspect-ratio-1-1" />
     </div>
 
     <div class="pa-4 pt-2 d-flex flex-column flex-fill">
-      <h3 class="text-title-medium font-weight-bold mb-2">{{ algorithmName }}</h3>
+      <h3 class="text-title-medium font-weight-bold mb-2">{{ algorithm.name }}</h3>
 
       <div class="d-flex flex-column ga-1 mb-2">
-        <code
-          v-for="(solve, i) in algorithm.solves"
-          :key="i"
-          class="training-card__solve text-body-large text-on-surface px-2 py-1 rounded"
-        >
+        <code v-for="(solve, i) in algorithm.solves" :key="i"
+          class="training-card__solve text-body-large text-on-surface px-2 py-1 rounded">
           {{ solve }}
         </code>
       </div>
 
       <div class="mb-4">
-        <v-btn
-          variant="text"
-          size="small"
-          color="on-surface"
-          class="training-card__setup-toggle px-1 text-none"
-          prepend-icon="mdi-cube-scan"
-          :append-icon="showSetup ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-          @click="toggleSetup"
-        >
+        <v-btn variant="text" size="small" color="on-surface" class="training-card__setup-toggle px-1 text-none"
+          prepend-icon="mdi-cube-scan" :append-icon="showSetup ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          @click="toggleSetup">
           {{ t('training.setup') }}
         </v-btn>
         <AnimationExpand :model-value="showSetup">
           <div class="d-flex align-center ga-1 pt-1">
             <code class="training-card__setup text-body-large text-on-surface px-2 py-1 rounded flex-fill">
               <template v-if="setup">{{ setup }}</template>
-              <v-progress-circular v-else indeterminate size="16" width="2" />
-            </code>
-            <v-btn
-              icon="mdi-refresh"
-              variant="text"
-              size="small"
-              :loading="loadingSetup"
-              :aria-label="t('training.regenerateSetup')"
-              @click="generateSetup"
-            />
+<v-progress-circular v-else indeterminate size="16" width="2" />
+</code>
+            <v-btn icon="mdi-refresh" variant="text" size="small" :loading="loadingSetup"
+              :aria-label="t('training.regenerateSetup')" @click="generateSetup" />
           </div>
         </AnimationExpand>
       </div>
@@ -66,11 +41,8 @@
           </span>
         </div>
         <div class="d-flex flex-wrap ga-2">
-          <div
-            v-for="stat in statTiles"
-            :key="stat.label"
-            class="training-card__stat d-flex flex-column align-center px-3 py-1 rounded flex-fill"
-          >
+          <div v-for="stat in statTiles" :key="stat.label"
+            class="training-card__stat d-flex flex-column align-center px-3 py-1 rounded flex-fill">
             <span class="training-card__stat-label text-label-small text-medium-emphasis">{{ stat.label }}</span>
             <span class="training-card__stat-value text-body-medium font-weight-bold">{{ formatMs(stat.value) }}</span>
           </div>
@@ -78,26 +50,15 @@
       </div>
 
       <div class="d-flex align-center justify-end ga-2 mt-auto">
-        <v-btn
-          icon
-          :variant="selected ? 'flat' : 'tonal'"
-          :color="selected ? 'primary' : undefined"
-          size="small"
+        <v-btn icon :variant="selected ? 'flat' : 'tonal'" :color="selected ? 'primary' : undefined" size="small"
           :aria-label="selected ? t('training.removeFromList') : t('training.addToList')"
-          @click="$emit('add-to-list', algorithm)"
-        >
+          @click="$emit('add-to-list', algorithm)">
           <v-icon :icon="selected ? 'mdi-playlist-check' : 'mdi-playlist-plus'" />
           <v-tooltip activator="parent" location="top">
             {{ selected ? t('training.removeFromList') : t('training.addToList') }}
           </v-tooltip>
         </v-btn>
-        <v-btn
-          color="primary"
-          variant="flat"
-          rounded="pill"
-          prepend-icon="mdi-play"
-          @click="$emit('train', algorithm)"
-        >
+        <v-btn color="primary" variant="flat" rounded="pill" prepend-icon="mdi-play" @click="$emit('train', algorithm)">
           {{ t('training.train') }}
         </v-btn>
       </div>
@@ -106,18 +67,18 @@
 </template>
 
 <script setup lang="ts">
-import type { TrainingAlgorithm } from '~~/lib/cube/cubesDefinition';
 import { useSolvesStore } from '~/stores/db/solves';
 import { bestOf, formatMs, trainingAverages } from '~/utils/stats';
+import { puzzlesDefinition, type PuzzleDefinition } from '~~/lib/puzzle/puzzlesDefinition';
 
 const { t } = useI18n()
 
 const props = defineProps<{
-  algorithm: TrainingAlgorithm
+  algorithm: TrainingSetAlgorithm
   selected?: boolean
 }>()
 defineEmits<{
-  (e: 'train' | 'add-to-list', algorithm: TrainingAlgorithm): void
+  (e: 'train' | 'add-to-list', algorithm: TrainingSetAlgorithm): void
 }>()
 
 const solvesStore = useSolvesStore()
@@ -126,11 +87,17 @@ const showSetup = ref(false)
 const setup = ref('')
 const loadingSetup = ref(false)
 
+const puzzleDefinition = computed(() => {
+  return puzzlesDefinition[props.algorithm.puzzleId]
+})
+
 async function generateSetup() {
   loadingSetup.value = true
   setup.value = ''
   try {
-    setup.value = await props.algorithm.generateSetupScramble()
+    if (puzzleDefinition.value?.generateAlgorithmSetup) {
+      setup.value = await puzzleDefinition.value.generateAlgorithmSetup(props.algorithm.solves[0] ?? '')
+    }
   }
   finally {
     loadingSetup.value = false
@@ -141,10 +108,6 @@ function toggleSetup() {
   showSetup.value = !showSetup.value
   if (showSetup.value && !setup.value && !loadingSetup.value) generateSetup()
 }
-
-const algorithmName = computed(() =>
-  props.algorithm.nameKey ? t(props.algorithm.nameKey) : props.algorithm.name ?? '',
-)
 
 const caseSolves = computed(() => solvesStore.getByTrainingAlgorithmId(props.algorithm.id))
 
@@ -200,7 +163,7 @@ const statTiles = computed(() => [
   font-family: vars.$font-family-mono;
 }
 
-.aspect-ratio-1-1{
+.aspect-ratio-1-1 {
   aspect-ratio: 1/1;
 }
 </style>

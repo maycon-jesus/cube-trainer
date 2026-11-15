@@ -36,22 +36,20 @@
 </template>
 
 <script setup lang="ts">
-import type { CubePattern } from '~~/lib/cube/cubesDefinition'
-
 const { t } = useI18n()
 
 const props = defineProps<{
-  pattern: CubePattern
+  pattern: Pattern
 }>()
 defineEmits<{
-  (e: 'details', pattern: CubePattern): void
+  (e: 'details', pattern: Pattern): void
 }>()
 
 const { copied, copy } = useCopyToClipboard()
 
 const moveCount = computed(() => countMoves(props.pattern.algorithm))
 
-const difficultyColors: Record<CubePattern['difficulty'], string> = {
+const difficultyColors: Record<PatternDifficulty, string> = {
   easy: 'success',
   medium: 'warning',
   hard: 'error',

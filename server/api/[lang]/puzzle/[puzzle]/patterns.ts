@@ -1,9 +1,11 @@
-import { cubesDefinition } from "~~/server/lib/cube/cubesDefinition"
-import cubesTranslations from "~~/server/lib/cube/i18n"
+import { cubesDefinition } from "~~/server/lib/puzzle/cubesDefinition"
+import cubesTranslations from "~~/server/lib/puzzle/i18n"
 import { Translator } from "~~/lib/translator/translator"
 import { detectLanguage } from "~~/server/lib/utils/detectLanguage"
 import { responseWithCache } from "~~/server/lib/utils/responseWithCache"
+import { Pattern } from "~~/shared/types/pattern"
 
+type ResponseType = Pattern
 
 const translator = new Translator()
 translator.registerLanguages(cubesTranslations)
@@ -22,12 +24,16 @@ export default defineEventHandler(async (event) => {
     }
 
     const cubeDefinition = cubesDefinition[puzzle]!
-    const patterns = structuredClone(cubeDefinition.patterns!)
+    const patterns: ResponseType[] = structuredClone(cubeDefinition.patterns!)
+        .map(p => {
+            return {
+                ...p,
+                name: t(p.name),
+                description: t(p.description),
+                puzzleId: puzzle
+            }
+        })
 
-    for (const pattern of patterns) {
-        pattern.name = t(pattern.name)
-        pattern.description = t(pattern.description)
-    }
 
     return responseWithCache(event, patterns)
 })

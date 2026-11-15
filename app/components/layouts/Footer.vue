@@ -10,46 +10,27 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
 <template>
   <v-footer class="cube-footer d-flex flex-column align-center ga-1 pt-6 pb-4 text-caption text-medium-emphasis">
     <div class="sticker-strip" aria-hidden="true">
-      <span
-        v-for="(color, i) in stickerStrip"
-        :key="i"
-        class="sticker-strip__sticker"
-        :style="{ backgroundColor: `var(--c-${color})` }"
-      />
+      <span v-for="(color, i) in stickerStrip" :key="i" class="sticker-strip__sticker"
+        :style="{ backgroundColor: `var(--c-${color})` }" />
     </div>
 
     <div class="d-flex align-center flex-wrap justify-center ga-2">
       <span>v{{ version }}</span>
       <span class="sticker-dot" :style="{ backgroundColor: 'var(--c-red)' }" aria-hidden="true" />
-      <a
-        :href="githubUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="footer-link d-inline-flex align-center ga-1"
-        :style="{ '--accent': 'var(--c-blue)' }"
-      >
+      <a :href="githubUrl" target="_blank" rel="noopener noreferrer" class="footer-link d-inline-flex align-center ga-1"
+        :style="{ '--accent': 'var(--c-blue)' }">
         <v-icon icon="mdi-github" size="small" />
         <span>GitHub</span>
       </a>
       <span class="sticker-dot" :style="{ backgroundColor: 'var(--c-yellow)' }" aria-hidden="true" />
-      <a
-        :href="buyMeCoffeeUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="footer-link d-inline-flex align-center ga-1"
-        :style="{ '--accent': 'var(--c-orange)' }"
-      >
+      <a :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer"
+        class="footer-link d-inline-flex align-center ga-1" :style="{ '--accent': 'var(--c-orange)' }">
         <v-icon icon="mdi-coffee" size="small" />
         <span>{{ t('footer.buyMeCoffee') }}</span>
       </a>
       <span class="sticker-dot" :style="{ backgroundColor: 'var(--c-blue)' }" aria-hidden="true" />
-      <a
-        :href="licenseUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="footer-link d-inline-flex align-center ga-1"
-        :style="{ '--accent': 'var(--c-green)' }"
-      >
+      <a :href="licenseUrl" target="_blank" rel="noopener noreferrer"
+        class="footer-link d-inline-flex align-center ga-1" :style="{ '--accent': 'var(--c-green)' }">
         <v-icon icon="mdi-license" size="small" />
         <span>{{ t('footer.license') }}</span>
       </a>
@@ -58,12 +39,7 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
     <div class="d-flex align-center justify-center ga-2 mt-1">
       <div class="mini-cube" aria-hidden="true">
         <div class="mini-cube__inner">
-          <div
-            v-for="face in cubeFaces"
-            :key="face"
-            class="mini-cube__face"
-            :class="`mini-cube__face--${face}`"
-          />
+          <div v-for="face in cubeFaces" :key="face" class="mini-cube__face" :class="`mini-cube__face--${face}`" />
         </div>
       </div>
       <i18n-t keypath="footer.madeWith" tag="span" scope="global">
@@ -71,7 +47,8 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
           <v-icon icon="mdi-heart" size="x-small" color="primary" />
         </template>
         <template #author>
-          <a href="https://mayconjesus.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Maycon Jesus</a>
+          <a href="https://mayconjesus.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Maycon
+            Jesus</a>
         </template>
       </i18n-t>
     </div>
@@ -150,12 +127,35 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
       linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 1px, transparent 1px);
     background-size: calc(100% / 3) calc(100% / 3);
 
-    &--front { background-color: var(--c-green); transform: rotateY(0deg) translateZ(11px); }
-    &--back { background-color: var(--c-blue); transform: rotateY(180deg) translateZ(11px); }
-    &--right { background-color: var(--c-red); transform: rotateY(90deg) translateZ(11px); }
-    &--left { background-color: var(--c-orange); transform: rotateY(-90deg) translateZ(11px); }
-    &--top { background-color: var(--c-white); transform: rotateX(90deg) translateZ(11px); }
-    &--bottom { background-color: var(--c-yellow); transform: rotateX(-90deg) translateZ(11px); }
+    &--front {
+      background-color: var(--c-green);
+      transform: rotateY(0deg) translateZ(11px);
+    }
+
+    &--back {
+      background-color: var(--c-blue);
+      transform: rotateY(180deg) translateZ(11px);
+    }
+
+    &--right {
+      background-color: var(--c-red);
+      transform: rotateY(90deg) translateZ(11px);
+    }
+
+    &--left {
+      background-color: var(--c-orange);
+      transform: rotateY(-90deg) translateZ(11px);
+    }
+
+    &--top {
+      background-color: var(--c-white);
+      transform: rotateX(90deg) translateZ(11px);
+    }
+
+    &--bottom {
+      background-color: var(--c-yellow);
+      transform: rotateX(-90deg) translateZ(11px);
+    }
   }
 }
 
@@ -176,3 +176,5 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
   }
 }
 </style>
+
+<i18n src="./Footer.i18n.json"></i18n>

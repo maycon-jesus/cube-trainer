@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import { cubesDefinition, type TrainingSet } from '~~/lib/cube/cubesDefinition';
-import { cubeIcons } from '~/components/icon';
 import { useTrainingPlaylistsStore, type TrainingPlaylist } from '~/stores/db/trainingPlaylists';
 import { useCustomTimerStore } from '~/stores/customTimer';
+import { useApiGetPuzzles } from '~/composables/api/useApiGetPuzzles';
+import { useApiGetPuzzleTrainingSets } from '~/composables/api/useApiGetPuzzleTrainingSets';
 
 const { t } = useI18n()
 const localePath = useLocalePath()
-const loadTrainingSets = useTrainingSetLoader()
 
 usePageSeo('training')
 
-const trainablePuzzles = Object.values(cubesDefinition).filter((puzzle) => !!puzzle.loadTrainingSets)
+const { data: apiPuzzles } = await useApiGetPuzzles().useAsyncData()
+const trainablePuzzles = (apiPuzzles.value ?? []).filter((puzzle) => puzzle.hasTrainingSets)
+
+const trainingSetsApi = useApiGetPuzzleTrainingSets()
+const setsByPuzzle: Record<string, TrainingSet[]> = {}
+await Promise.all(trainablePuzzles.map(async (puzzle) => {
+  const { data } = await trainingSetsApi.useAsyncData(puzzle.id)
+  setsByPuzzle[puzzle.id] = data.value ?? []
+}))
 
 const playlistsStore = useTrainingPlaylistsStore()
 const customTimerStore = useCustomTimerStore()
+const apiGetAlgorithm = useApiGetAlgorithm()
 
 const playlists = ref<TrainingPlaylist[]>([])
 const dialogOpen = ref(false)
@@ -38,12 +46,9 @@ function openEdit(playlist: TrainingPlaylist) {
 }
 
 async function trainPlaylist(playlist: TrainingPlaylist) {
-  const playlistPuzzle = cubesDefinition[playlist.puzzleId]
-  const sets = playlistPuzzle ? await loadTrainingSets(playlistPuzzle) : []
   customTimerStore.useTrainingSetDefault(playlist.puzzleId)
   for (const trainingCase of playlist.trainingCases) {
-    const set = sets.find((s) => s.id === trainingCase.setId)
-    const algorithm = set?.algorithms.find((a) => a.id === trainingCase.algorithmId)
+    const algorithm = await apiGetAlgorithm.$fetch(playlist.puzzleId, trainingCase.algorithmId)
     if (algorithm) customTimerStore.addAlgorithmToTrainingSet(algorithm)
   }
   navigateTo(localePath({ name: 'training-timer' }))
@@ -58,36 +63,18 @@ async function confirmDelete() {
   await refreshPlaylists()
 }
 
-const setsByPuzzle: Record<string, TrainingSet[]> = {}
-const caseCounts: Record<string, number> = {}
-
-const loadedPuzzles = await Promise.all(trainablePuzzles.map(async (puzzle) => ({
-  puzzle,
-  sets: await loadTrainingSets(puzzle),
-})))
-
-for (const { puzzle, sets } of loadedPuzzles) {
-  setsByPuzzle[puzzle.id] = sets
-  // Surface each set's case count on the card.
-  for (const set of sets) {
-    caseCounts[`${puzzle.id}:${set.id}`] = set.algorithms.length
-  }
-}
-
-// Sets carry either an i18n `nameKey`/`descriptionKey` or a literal `name`/`description`.
+// Nome e descrição já vêm traduzidos da API.
 function setItems(puzzleId: string) {
-  return (setsByPuzzle[puzzleId] ?? []).map((set) => {
-    const count = caseCounts[`${puzzleId}:${set.id}`]
-    return {
-      title: set.nameKey ? t(set.nameKey) : set.name ?? '',
-      value: set.id,
-      imageUrl: set.imageUrl || undefined,
-      path: localePath(`/training/${puzzleId}/${set.id}`),
-      meta: set.descriptionKey ? t(set.descriptionKey) : set.description ?? undefined,
-      badge: count != null ? t('training.caseCount', count) : undefined,
-      badgeIcon: 'mdi-view-grid-outline',
-    }
-  })
+  return (setsByPuzzle[puzzleId] ?? []).map((set) => ({
+    title: set.name,
+    puzzleId: set.puzzleId,
+    value: set.id,
+    imageUrl: set.imageUrl || undefined,
+    path: localePath(`/training/${puzzleId}/${set.id}`),
+    meta: set.description || undefined,
+    badge: t('training.caseCount', set.algorithmCount),
+    badgeIcon: 'mdi-view-grid-outline',
+  }))
 }
 </script>
 
@@ -98,33 +85,16 @@ function setItems(puzzleId: string) {
     <section class="mb-10">
       <div class="d-flex flex-wrap align-center ga-3 mb-4">
         <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t('training.playlists.title') }}</h2>
-        <v-btn
-          color="primary"
-          variant="flat"
-          rounded="pill"
-          prepend-icon="mdi-playlist-plus"
-          class="ms-auto"
-          @click="openCreate"
-        >
+        <v-btn color="primary" variant="flat" rounded="pill" prepend-icon="mdi-playlist-plus" class="ms-auto"
+          @click="openCreate">
           {{ t('training.playlists.create') }}
         </v-btn>
       </div>
 
       <v-row v-if="playlists.length">
-        <v-col
-          v-for="playlist in playlists"
-          :key="playlist.id"
-          cols="12"
-          sm="6"
-          lg="4"
-          xl="3"
-        >
-          <TrainingPlaylistCard
-            :playlist="playlist"
-            @train="trainPlaylist"
-            @edit="openEdit"
-            @delete="deleteTarget = $event"
-          />
+        <v-col v-for="playlist in playlists" :key="playlist.id" cols="12" sm="6" lg="4" xl="3">
+          <TrainingPlaylistCard :playlist="playlist" @train="trainPlaylist" @edit="openEdit"
+            @delete="deleteTarget = $event" />
         </v-col>
       </v-row>
 
@@ -134,20 +104,15 @@ function setItems(puzzleId: string) {
       </v-card>
     </section>
 
-    <section
-      v-for="puzzle in trainablePuzzles"
-      :key="puzzle.id"
-      class="mb-10"
-    >
+    <section v-for="puzzle in trainablePuzzles" :key="puzzle.id" class="mb-10">
       <div class="d-flex align-center ga-3 mb-4">
-        <span class="training-puzzle-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
-          <component :is="cubeIcons[puzzle.icon]" class="training-puzzle-heading__icon" />
+        <span
+          class="training-puzzle-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
+          <IconPuzzle :puzzle-id="puzzle.id" class="training-puzzle-heading__icon" />
         </span>
         <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t(`cube.${puzzle.id}`) }}</h2>
-        <NuxtLink
-          :to="localePath(`/training/${puzzle.id}`)"
-          class="training-puzzle-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none"
-        >
+        <NuxtLink :to="localePath(`/training/${puzzle.id}`)"
+          class="training-puzzle-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none">
           {{ t('training.viewAll') }}
           <v-icon icon="mdi-arrow-right" size="16" class="training-puzzle-heading__arrow" />
         </NuxtLink>

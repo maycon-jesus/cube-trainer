@@ -32,7 +32,7 @@ const navItems = computed<{
     <template #append>
       <v-list nav>
         <v-list-item :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-coffee"
-          :title="t('footer.buyMeCoffee')" />
+          :title="t('nav.buyMeCoffee')" />
       </v-list>
     </template>
   </v-navigation-drawer>
