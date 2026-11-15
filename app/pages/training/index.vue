@@ -110,7 +110,7 @@ function setItems(puzzleId: string) {
           class="training-puzzle-heading__icon-box d-inline-flex align-center justify-center flex-shrink-0 rounded-lg">
           <IconPuzzle :puzzle-id="puzzle.id" class="training-puzzle-heading__icon" />
         </span>
-        <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ t(`cube.${puzzle.id}`) }}</h2>
+        <h2 class="text-headline-small font-weight-bold mb-0 mt-0">{{ puzzle.name }}</h2>
         <NuxtLink :to="localePath(`/training/${puzzle.id}`)"
           class="training-puzzle-heading__link d-inline-flex align-center ga-1 ms-auto text-body-medium font-weight-medium text-decoration-none">
           {{ t('training.viewAll') }}
