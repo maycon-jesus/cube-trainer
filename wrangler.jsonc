@@ -1,4 +1,5 @@
 {
+    "workers_dev": false,
     "observability": {
         "logs": {
             "enabled": true,
