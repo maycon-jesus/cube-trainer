@@ -119,6 +119,8 @@ async function stopRunning() {
   elapsed.value = ms
   phase.value = 'idle'
   emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId?? '' })
+  // Métrica fire-and-forget: não aguarda nem trata erro.
+  $fetch('/api/metric/solved', { method: 'POST' }).catch(() => {})
   emits('stop')
 }
 

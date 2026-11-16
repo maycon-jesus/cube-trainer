@@ -1,0 +1,6 @@
+CREATE TABLE solves (
+    id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    date       DATE NOT NULL DEFAULT CURRENT_DATE,
+    count      INTEGER
+);
