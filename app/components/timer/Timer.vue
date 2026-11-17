@@ -1,63 +1,54 @@
 <template>
-    <v-card
-        class="timer-surface d-flex flex-column align-center justify-center flex-grow-1 pa-4"
-        :class="`is-${phase}`"
-        @touchstart.prevent="onTouchStart" @touchend.prevent="onTouchEnd">
-        <div class="timer-value font-weight-bold" :class="timerColor">
-            {{ display }}
-        </div>
-        <Transition name="hint-fade" mode="out-in">
-            <div v-if="showActions" key="actions" class="timer-actions mt-6" @touchstart.stop @touchend.stop>
-                <v-btn
-                    size="small" class="text-none" color="success"
-                    :variant="lastSolve?.penalty === 'none' ? 'flat' : 'outlined'"
-                    @click="setPenalty('none')">
-                    {{ t('timer.actions.ok') }}
-                </v-btn>
-                <v-btn
-                    size="small" class="text-none" color="warning"
-                    :variant="lastSolve?.penalty === '+2' ? 'flat' : 'outlined'"
-                    @click="setPenalty('+2')">
-                    +2
-                </v-btn>
-                <v-btn
-                    size="small" class="text-none" color="error"
-                    :variant="lastSolve?.penalty === 'dnf' ? 'flat' : 'outlined'"
-                    @click="setPenalty('dnf')">
-                    DNF
-                </v-btn>
-                <v-btn
-                    size="small" variant="text" color="error" icon="mdi-delete-outline"
-                    :title="t('timer.solves.remove')" @click="deleteSolve()" />
-            </div>
-            <i18n-t
-                v-else-if="phase !== 'running'"
-                key="hint" keypath="timer.hint" tag="div" class="timer-hint mt-6" scope="global">
-                <template #key>
-                    <kbd>{{ t('timer.hintKey') }}</kbd>
-                </template>
-            </i18n-t>
-        </Transition>
-    </v-card>
+  <v-card class="timer-surface d-flex flex-column align-center justify-center flex-grow-1 pa-4" :class="`is-${phase}`"
+    @touchstart.prevent="onTouchStart" @touchend.prevent="onTouchEnd">
+    <div class="timer-value font-weight-bold" :class="timerColor">
+      {{ display }}
+    </div>
+    <Transition name="hint-fade" mode="out-in">
+      <div v-if="showActions" key="actions" class="timer-actions mt-6" @touchstart.stop @touchend.stop>
+        <v-btn size="small" class="text-none" color="success"
+          :variant="lastSolve?.penalty === 'none' ? 'flat' : 'outlined'" @click="setPenalty('none')">
+          {{ t('timer.actions.ok') }}
+        </v-btn>
+        <v-btn size="small" class="text-none" color="warning"
+          :variant="lastSolve?.penalty === '+2' ? 'flat' : 'outlined'" @click="setPenalty('+2')">
+          +2
+        </v-btn>
+        <v-btn size="small" class="text-none" color="error"
+          :variant="lastSolve?.penalty === 'dnf' ? 'flat' : 'outlined'" @click="setPenalty('dnf')">
+          DNF
+        </v-btn>
+        <v-btn size="small" variant="text" color="error" icon="mdi-delete-outline" :title="t('timer.solves.remove')"
+          @click="deleteSolve()" />
+      </div>
+      <i18n-t v-else-if="phase !== 'running'" key="hint" keypath="timer.hint" tag="div" class="timer-hint mt-6"
+        scope="global">
+        <template #key>
+          <kbd>{{ t('timer.hintKey') }}</kbd>
+        </template>
+      </i18n-t>
+    </Transition>
+  </v-card>
 </template>
 
 <script setup lang="ts">
 import type { Type, Solve, Penalty } from '~/stores/db/solves';
 
 const { t } = useI18n()
+const posthog = usePostHog()
 
 const props = defineProps<{
-    lastSolve?: Solve
-    type: Type
-    puzzle: string
-    sessionId: number
-    trainingAlgorithmId?: string
-    scramble: string
+  lastSolve?: Solve
+  type: Type
+  puzzle: string
+  sessionId: number
+  trainingAlgorithmId?: string
+  scramble: string
 }>()
 const emits = defineEmits<{
-    (e: 'solve', solve: Solve): void
-    (e: 'start' | 'stop' | 'delete'): void
-    (e: 'penalty', penalty: Penalty): void
+  (e: 'solve', solve: Solve): void
+  (e: 'start' | 'stop' | 'delete'): void
+  (e: 'penalty', penalty: Penalty): void
 }>()
 
 // Quick-adjust controls for the just-finished solve (below the time).
@@ -118,9 +109,15 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId?? '' })
+  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId ?? '' })
   // Métrica fire-and-forget: não aguarda nem trata erro.
-  $fetch('/api/metric/solved', { method: 'POST' }).catch(() => {})
+  $fetch('/api/metric/solved', { method: 'POST' }).catch(() => { })
+  // Evento customizado no PostHog. Só metadados não identificáveis (sem tempo nem scramble).
+  posthog?.capture('solve_completed', {
+    puzzle: props.puzzle,
+    type: props.type,
+    training_algorithm_id: props.trainingAlgorithmId || undefined,
+  })
   emits('stop')
 }
 
@@ -185,9 +182,9 @@ function onTouchEnd() {
 
 
 // --- Lifecycle ------------------------------------------------------------
-onBeforeMount(()=>{
-    window.addEventListener('keydown', onKeyDown)
-    window.addEventListener('keyup', onKeyUp)
+onBeforeMount(() => {
+  window.addEventListener('keydown', onKeyDown)
+  window.addEventListener('keyup', onKeyUp)
 })
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', onKeyDown)

@@ -85,8 +85,18 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@nuxtjs/i18n',
+    '@posthog/nuxt',
     // '@vite-pwa/nuxt',
   ],
+  posthogConfig: {
+    publicKey: process.env.POSTHOG_PUBLIC_KEY || '',
+    host: process.env.POSTHOG_HOST || 'https://us.i.posthog.com',
+    debug: process.env.POSTHOG_DEBUG === 'true',
+    clientConfig: {
+      person_profiles: 'identified_only',
+    },
+    serverConfig: {},
+  },
   fonts: {
     families: [
       { name: 'Inter', provider: 'google' },
