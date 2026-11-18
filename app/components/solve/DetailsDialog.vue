@@ -41,7 +41,7 @@
                                     <IconPuzzle :puzzle-id="props.solve.puzzle" />
                                 </v-icon>
                                 <span class="text-body-large ml-1">
-                                    {{ t(`cube.${props.solve.puzzle}`) }}
+                                    {{ puzzleDef?.name || props.solve.puzzle }}
                                 </span>
                             </v-card-text>
                         </v-card>
@@ -91,6 +91,9 @@ const emits = defineEmits<{
     (e: 'deleteSolve', solve: Solve): void
 }>()
 const model = defineModel<boolean>()
+
+const puzzleKey = computed(() => props.solve.puzzle)
+const { data: puzzleDef } = await useApiGetPuzzle().useAsyncData(puzzleKey)
 </script>
 
 <style scoped>

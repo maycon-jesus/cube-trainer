@@ -1,0 +1,30 @@
+{
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "basic": {
+                    "name": "Algoritmos Básicos",
+                    "description": "Os algoritmos do método para iniciantes: segunda camada, cruz amarela, face amarela, cantos amarelos e meios amarelos.",
+                    "cases": {
+                        "second-layer-1": "Segunda Camada (Direita)",
+                        "second-layer-2": "Segunda Camada (Esquerda)",
+                        "yellow-cross-1": "Cruz Amarela (Ponto)",
+                        "yellow-cross-2": "Cruz Amarela (L)",
+                        "yellow-cross-3": "Cruz Amarela (Linha)",
+                        "yellow-face-1": "Face Amarela (Gravata)",
+                        "yellow-face-2": "Face Amarela (T)",
+                        "yellow-face-3": "Face Amarela (Faróis)",
+                        "yellow-face-4": "Face Amarela (H)",
+                        "yellow-face-5": "Face Amarela (Pi)",
+                        "yellow-face-6": "Face Amarela (Anti-Sune)",
+                        "yellow-face-7": "Face Amarela (Sune)",
+                        "yellow-corner-1": "Cantos Amarelos 1",
+                        "yellow-corner-2": "Cantos Amarelos 2",
+                        "yellow-middle-clockwise": "Meios Amarelos (Horário)",
+                        "yellow-middle-anticlockwise": "Meios Amarelos (Anti-horário)"
+                    }
+                }
+            }
+        }
+    }
+}

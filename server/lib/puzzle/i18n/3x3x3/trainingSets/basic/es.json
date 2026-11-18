@@ -1,0 +1,30 @@
+{
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "basic": {
+                    "name": "Algoritmos Básicos",
+                    "description": "Los algoritmos del método para principiantes: segunda capa, cruz amarilla, cara amarilla, esquinas amarillas y aristas amarillas.",
+                    "cases": {
+                        "second-layer-1": "Segunda Capa (Derecha)",
+                        "second-layer-2": "Segunda Capa (Izquierda)",
+                        "yellow-cross-1": "Cruz Amarilla (Punto)",
+                        "yellow-cross-2": "Cruz Amarilla (L)",
+                        "yellow-cross-3": "Cruz Amarilla (Línea)",
+                        "yellow-face-1": "Cara Amarilla (Corbata)",
+                        "yellow-face-2": "Cara Amarilla (T)",
+                        "yellow-face-3": "Cara Amarilla (Faros)",
+                        "yellow-face-4": "Cara Amarilla (H)",
+                        "yellow-face-5": "Cara Amarilla (Pi)",
+                        "yellow-face-6": "Cara Amarilla (Anti-Sune)",
+                        "yellow-face-7": "Cara Amarilla (Sune)",
+                        "yellow-corner-1": "Esquinas Amarillas 1",
+                        "yellow-corner-2": "Esquinas Amarillas 2",
+                        "yellow-middle-clockwise": "Aristas Amarillas (Horario)",
+                        "yellow-middle-anticlockwise": "Aristas Amarillas (Antihorario)"
+                    }
+                }
+            }
+        }
+    }
+}

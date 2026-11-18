@@ -42,7 +42,7 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
           <div v-for="face in cubeFaces" :key="face" class="mini-cube__face" :class="`mini-cube__face--${face}`" />
         </div>
       </div>
-      <i18n-t keypath="footer.madeWith" tag="span" scope="global">
+      <i18n-t keypath="footer.madeWith" tag="span">
         <template #heart>
           <v-icon icon="mdi-heart" size="x-small" color="primary" />
         </template>

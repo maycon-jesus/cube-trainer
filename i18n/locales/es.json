@@ -375,8 +375,12 @@
       },
       "3x3x3": {
         "title": "Entrenamiento de Algoritmos 3x3x3",
-        "description": "Entrena los algoritmos F2L, OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",
+        "description": "Entrena los algoritmos básicos para principiantes y los de F2L, OLL y PLL del 3x3x3 y domina cada caso para mejorar tus tiempos.",
         "sets": {
+          "basic": {
+            "title": "Entrenamiento de Algoritmos Básicos del 3x3x3",
+            "description": "Aprende y practica los algoritmos del método para principiantes del Cubo de Rubik: segunda capa, cruz amarilla, cara amarilla, esquinas y aristas amarillas. Ideal para quienes están aprendiendo a resolver el cubo."
+          },
           "pll": {
             "title": "Entrenamiento de Algoritmos PLL del 3x3x3",
             "description": "Aprende y practica los 21 algoritmos PLL para permutar la última capa del Cubo de Rubik. Entrena cada caso para acelerar tus resoluciones."
