@@ -15,5 +15,6 @@
         "issue_detection": {
             "enabled": true
         }
-    }
+    },
+    "preview": {}
 }
