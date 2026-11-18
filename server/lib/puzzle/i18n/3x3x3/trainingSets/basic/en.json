@@ -1,0 +1,30 @@
+{
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "basic": {
+                    "name": "Basic Algorithms",
+                    "description": "The beginner's method algorithms: second layer, yellow cross, yellow face, yellow corners and yellow edges.",
+                    "cases": {
+                        "second-layer-1": "Second Layer (Right)",
+                        "second-layer-2": "Second Layer (Left)",
+                        "yellow-cross-1": "Yellow Cross (Dot)",
+                        "yellow-cross-2": "Yellow Cross (L)",
+                        "yellow-cross-3": "Yellow Cross (Line)",
+                        "yellow-face-1": "Yellow Face (Bowtie)",
+                        "yellow-face-2": "Yellow Face (T)",
+                        "yellow-face-3": "Yellow Face (Headlights)",
+                        "yellow-face-4": "Yellow Face (H)",
+                        "yellow-face-5": "Yellow Face (Pi)",
+                        "yellow-face-6": "Yellow Face (Anti-Sune)",
+                        "yellow-face-7": "Yellow Face (Sune)",
+                        "yellow-corner-1": "Yellow Corners 1",
+                        "yellow-corner-2": "Yellow Corners 2",
+                        "yellow-middle-clockwise": "Yellow Edges (Clockwise)",
+                        "yellow-middle-anticlockwise": "Yellow Edges (Counterclockwise)"
+                    }
+                }
+            }
+        }
+    }
+}

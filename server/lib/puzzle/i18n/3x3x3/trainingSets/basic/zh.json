@@ -1,0 +1,30 @@
+{
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "basic": {
+                    "name": "基础公式",
+                    "description": "新手入门法的公式：第二层、黄色十字、黄色顶面、黄色角块和黄色棱块。",
+                    "cases": {
+                        "second-layer-1": "第二层（右）",
+                        "second-layer-2": "第二层（左）",
+                        "yellow-cross-1": "黄色十字（点）",
+                        "yellow-cross-2": "黄色十字（L形）",
+                        "yellow-cross-3": "黄色十字（一字）",
+                        "yellow-face-1": "黄色顶面（领结）",
+                        "yellow-face-2": "黄色顶面（T形）",
+                        "yellow-face-3": "黄色顶面（车灯）",
+                        "yellow-face-4": "黄色顶面（H形）",
+                        "yellow-face-5": "黄色顶面（Pi形）",
+                        "yellow-face-6": "黄色顶面（Anti-Sune）",
+                        "yellow-face-7": "黄色顶面（Sune）",
+                        "yellow-corner-1": "黄色角块 1",
+                        "yellow-corner-2": "黄色角块 2",
+                        "yellow-middle-clockwise": "黄色棱块（顺时针）",
+                        "yellow-middle-anticlockwise": "黄色棱块（逆时针）"
+                    }
+                }
+            }
+        }
+    }
+}

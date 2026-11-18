@@ -1,6 +1,7 @@
 import { mergeLanguages } from "~~/lib/translator/helpers";
+import basic from "./basic";
 import f2l from "./f2l";
 import oll from "./oll";
 import pll from "./pll";
 
-export default mergeLanguages(f2l, oll, pll)
+export default mergeLanguages(basic, f2l, oll, pll)
