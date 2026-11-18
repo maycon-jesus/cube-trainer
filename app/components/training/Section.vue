@@ -7,7 +7,7 @@
           {{ props.set.description }}
         </p>
       </div>
-      <v-btn color="primary" variant="flat" prepend-icon="mdi-play" rounded="pill" @click="$emit('train-set', set)">
+      <v-btn class="ms-auto" color="primary" variant="flat" prepend-icon="mdi-play" rounded="pill" @click="$emit('train-set', set)">
         {{ t('training.trainAll', { set: props.set.name }) }}
       </v-btn>
     </div>
