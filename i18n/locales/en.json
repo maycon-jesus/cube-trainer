@@ -375,8 +375,12 @@
       },
       "3x3x3": {
         "title": "3x3x3 Algorithm Training",
-        "description": "Train the 3x3x3 F2L, OLL and PLL algorithms and master every case to improve your solve times.",
+        "description": "Train the 3x3x3 beginner basic algorithms plus F2L, OLL and PLL, and master every case to improve your solve times.",
         "sets": {
+          "basic": {
+            "title": "3x3x3 Basic Algorithms Training",
+            "description": "Learn and practice the beginner's method algorithms for the Rubik's Cube: second layer, yellow cross, yellow face, yellow corners and edges. Perfect for anyone learning to solve the cube."
+          },
           "pll": {
             "title": "3x3x3 PLL Algorithm Training",
             "description": "Learn and practice all 21 PLL algorithms to permute the last layer of the Rubik's Cube. Drill every case to speed up your solves."

@@ -372,8 +372,12 @@
       },
       "3x3x3": {
         "title": "Treino de Algoritmos 3x3x3",
-        "description": "Treine os algoritmos de F2L, OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos.",
+        "description": "Treine os algoritmos básicos para iniciantes e os de F2L, OLL e PLL do 3x3x3 e domine cada caso para melhorar seus tempos.",
         "sets": {
+          "basic": {
+            "title": "Treino de Algoritmos Básicos do 3x3x3",
+            "description": "Aprenda e pratique os algoritmos do método para iniciantes do Cubo Mágico: segunda camada, cruz amarela, face amarela, cantos e meios amarelos. Ideal para quem está aprendendo a resolver o cubo."
+          },
           "pll": {
             "title": "Treino de Algoritmos PLL do 3x3x3",
             "description": "Aprenda e pratique todos os 21 algoritmos PLL para permutar a última camada do Cubo Mágico. Treine cada caso para acelerar suas resoluções."
