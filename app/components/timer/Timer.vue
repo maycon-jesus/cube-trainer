@@ -110,14 +110,14 @@ async function stopRunning() {
   elapsed.value = ms
   phase.value = 'idle'
   emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId ?? '' })
-  // Métrica fire-and-forget: não aguarda nem trata erro.
-  $fetch('/api/metric/solved', { method: 'POST' }).catch(() => { })
+
   // Evento customizado no PostHog. Só metadados não identificáveis (sem tempo nem scramble).
   posthog?.capture('solve_completed', {
     puzzle: props.puzzle,
     type: props.type,
     training_algorithm_id: props.trainingAlgorithmId || undefined,
   })
+
   emits('stop')
 }
 
