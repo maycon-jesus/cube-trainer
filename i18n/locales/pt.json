@@ -362,11 +362,15 @@
     "puzzle": {
       "2x2x2": {
         "title": "Treino de Algoritmos 2x2x2",
-        "description": "Treine os algoritmos de OLL do 2x2x2 e domine cada caso para melhorar seus tempos.",
+        "description": "Treine os algoritmos de OLL e PBL do método Ortega no 2x2x2 e domine cada caso para melhorar seus tempos.",
         "sets": {
-          "oll": {
+          "ortega-oll": {
             "title": "Treino de Algoritmos OLL do 2x2x2",
             "description": "Aprenda e pratique todos os 7 algoritmos OLL para orientar a última camada do cubo 2x2. Domine cada caso para melhorar seus tempos."
+          },
+          "ortega-pbl": {
+            "title": "Treino de Algoritmos PBL do 2x2x2",
+            "description": "Aprenda e pratique todos os 6 algoritmos PBL do método Ortega para permutar as duas camadas e resolver o cubo 2x2. Domine cada caso para melhorar seus tempos."
           }
         }
       },

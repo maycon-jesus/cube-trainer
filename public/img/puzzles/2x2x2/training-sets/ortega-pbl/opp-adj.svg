@@ -1,0 +1,17 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M158.541 243.776L222 155.71V56.8748L158.541 144.934V243.776Z" fill="#141414" stroke-width="4" stroke-linejoin="round" stroke="#141414"/>
+<path d="M160.448 238.165L188.365 199.422V155.932L160.448 194.676V238.165Z" fill="#C37124" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M160.448 188.748L188.365 149.998V106.515L160.448 145.259V188.748Z" fill="#EB0000" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M192.177 194.136L220.094 155.386V111.896L192.177 150.646V194.136Z" fill="#2300E9" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M192.177 144.718L220.094 105.968V62.4785L192.177 101.228V144.718Z" fill="#C37124" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M34 198.901L158.541 243.776V144.934L34 100.066V198.901Z" fill="#141414" stroke-width="4" stroke-linejoin="round" stroke="#141414"/>
+<path d="M37.7361 197.287L92.535 217.027V173.538L37.7361 153.797V197.287Z" fill="#4A8223" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M37.7361 147.863L92.535 167.61V124.12L37.7361 104.38V147.863Z" fill="#4A8223" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M100.007 219.721L154.806 239.461V195.972L100.007 176.231V219.721Z" fill="#4A8223" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M100.007 170.304L154.806 190.044V146.555L100.007 126.814V170.304Z" fill="#2300E9" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M34 100.066L158.541 144.934L222 56.8747L97.4587 12L34 100.066Z" fill="#141414" stroke-width="4" stroke-linejoin="round" stroke="#141414"/>
+<path d="M39.6421 98.7697L94.441 118.516L122.358 79.7664L67.5593 60.0198L39.6421 98.7697Z" fill="#FFD500" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M71.3713 54.7402L126.17 74.4805L154.087 35.7305L99.2886 15.9902L71.3713 54.7402Z" fill="#FFD500" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M101.913 121.204L156.711 140.951L184.629 102.201L129.83 82.4604L101.913 121.204Z" fill="#FFD500" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+<path d="M133.642 77.1743L188.441 96.9146L216.358 58.171L161.559 38.4243L133.642 77.1743Z" fill="#FFD500" stroke-linejoin="round" stroke="black" stroke-opacity="0.15"/>
+</svg>

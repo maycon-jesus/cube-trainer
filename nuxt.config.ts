@@ -95,7 +95,9 @@ export default defineNuxtConfig({
     clientConfig: {
       person_profiles: 'identified_only',
     },
-    serverConfig: {},
+    serverConfig: {
+      disabled: true
+    },
   },
   fonts: {
     families: [
@@ -186,20 +188,22 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     xsl: false,
   },
-  prerender: {
-    crawlLinks: true,
-    routes: ['/', '/pt', '/es', '/zh']
-  },
-  image: {
-    provider: 'cloudflare',
-    cloudflare: {
-      baseURL: 'https://cubetrainer.net'
-    }
-  },
+  //prerender: {
+  //  crawlLinks: true,
+  //  routes: ['/', '/pt', '/es', '/zh']
+  //},
   imports: {
     dirs: [
       '~/composables/**',
       "~/shared/types/**"
     ]
-  }
+  },
+  ...(process.env.IS_LOCAL === "true" ? {} : {
+    image: {
+      provider: 'cloudflare',
+      cloudflare: {
+        baseURL: 'https://cubetrainer.net'
+      }
+    },
+  })
 })

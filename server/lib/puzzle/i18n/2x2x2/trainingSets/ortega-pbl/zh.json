@@ -1,0 +1,20 @@
+{
+  "puzzles": {
+    "2x2x2": {
+      "sets": {
+        "ortega-pbl": {
+          "name": "Ortega PBL",
+          "description": "双层排列：Ortega 方法的最后一步，同时排列顶层和底层的角块以还原魔方。",
+          "cases": {
+            "adj": "相邻 / 已还原",
+            "opp": "对角 / 已还原",
+            "opp-opp": "对角 / 对角",
+            "adj-adj": "相邻 / 相邻",
+            "adj-opp": "相邻 / 对角",
+            "opp-adj": "对角 / 相邻"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "puzzles": {
+    "2x2x2": {
+      "sets": {
+        "ortega-pbl": {
+          "name": "Ortega PBL",
+          "description": "Permutação das Duas Camadas: a última etapa do método Ortega, permutando as camadas de cima e de baixo ao mesmo tempo para resolver o cubo.",
+          "cases": {
+            "adj": "Adjacente / Resolvida",
+            "opp": "Diagonal / Resolvida",
+            "opp-opp": "Diagonal / Diagonal",
+            "adj-adj": "Adjacente / Adjacente",
+            "adj-opp": "Adjacente / Diagonal",
+            "opp-adj": "Diagonal / Adjacente"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
-import oll from "./oll";
+import { mergeLanguages } from "~~/lib/translator/helpers";
+import ortegaOll from "./ortega-oll";
+import ortegaPbl from "./ortega-pbl";
 
-export default oll
+export default mergeLanguages(ortegaOll, ortegaPbl)
