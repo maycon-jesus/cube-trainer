@@ -1,0 +1,21 @@
+{
+  "puzzles": {
+    "2x2x2": {
+      "sets": {
+        "ortega-oll": {
+          "name": "Ortega OLL",
+          "description": "顶层定向：调整顶层所有角块的朝向，使顶面变成单一颜色。",
+          "cases": {
+            "sune": "Sune",
+            "anti-sune": "Anti-Sune",
+            "u": "U 情况",
+            "t": "T 情况",
+            "h": "H 情况",
+            "pi": "Pi 情况",
+            "l": "L 情况"
+          }
+        }
+      }
+    }
+  }
+}

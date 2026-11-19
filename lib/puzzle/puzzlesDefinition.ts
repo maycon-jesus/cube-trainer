@@ -2,7 +2,8 @@ import { generateScramble as generateScrambleMegaminx } from "./megaminx"
 import { generateScramble as generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
 import { Engine as Engine333 } from "./3x3x3/engine"
-import { generateScramble as generateScramble333, invertScramble as invertScramble333, randomAUFScramble } from "./3x3x3/scramble"
+import { generateScramble as generateScramble333, invertScramble as invertScramble333 } from "./3x3x3/scramble"
+import { generateScramble as generateScramble222, invertScramble as invertScramble222 } from "./3x3x3/scramble"
 import { newAlgorithmSetup } from "./3x3x3/training/setup"
 
 export type PuzzleDefinition = {
@@ -16,7 +17,9 @@ export type PuzzleDefinition = {
 export const puzzlesDefinition: Record<string, PuzzleDefinition> = {
     "2x2x2": {
         id: "2x2x2",
-        generateScramble: generateScramble333,
+        generateScramble: generateScramble222,
+        invertScramble: invertScramble222,
+        generateAlgorithmSetup: (s: string) => Promise.resolve(invertScramble222(s))
     },
     "3x3x3": {
         id: "3x3x3",

@@ -1,0 +1,21 @@
+{
+  "puzzles": {
+    "2x2x2": {
+      "sets": {
+        "ortega-oll": {
+          "name": "Ortega OLL",
+          "description": "Orientation of the Last Layer: orient every last-layer corner so the top face becomes a single solid color.",
+          "cases": {
+            "sune": "Sune",
+            "anti-sune": "Anti-Sune",
+            "u": "U case",
+            "t": "T case",
+            "h": "H case",
+            "pi": "Pi case",
+            "l": "L case"
+          }
+        }
+      }
+    }
+  }
+}

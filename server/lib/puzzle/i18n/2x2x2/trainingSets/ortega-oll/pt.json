@@ -1,0 +1,21 @@
+{
+  "puzzles": {
+    "2x2x2": {
+      "sets": {
+        "ortega-oll": {
+          "name": "Ortega OLL",
+          "description": "Orientação da Última Camada: oriente todos os cantos da última camada para deixar o topo com uma única cor.",
+          "cases": {
+            "sune": "Sune",
+            "anti-sune": "Anti-Sune",
+            "u": "Caso U",
+            "t": "Caso T",
+            "h": "Caso H",
+            "pi": "Caso Pi",
+            "l": "Caso L"
+          }
+        }
+      }
+    }
+  }
+}

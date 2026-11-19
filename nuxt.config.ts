@@ -188,10 +188,10 @@ export default defineNuxtConfig({
     zeroRuntime: true,
     xsl: false,
   },
-  prerender: {
-    crawlLinks: true,
-    routes: ['/', '/pt', '/es', '/zh']
-  },
+  //prerender: {
+  //  crawlLinks: true,
+  //  routes: ['/', '/pt', '/es', '/zh']
+  //},
   imports: {
     dirs: [
       '~/composables/**',

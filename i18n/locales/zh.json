@@ -367,7 +367,7 @@
         "title": "2x2x2 公式训练",
         "description": "训练 2x2x2 的 OLL 公式，掌握每个情形，提升你的复原成绩。",
         "sets": {
-          "oll": {
+          "ortega-oll": {
             "title": "2x2x2 OLL 公式训练",
             "description": "学习并练习 2x2 魔方顶层定向的全部 7 个 OLL 公式。掌握每个情形，提升你的复原成绩。"
           }

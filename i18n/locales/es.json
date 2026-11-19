@@ -367,7 +367,7 @@
         "title": "Entrenamiento de Algoritmos 2x2x2",
         "description": "Entrena los algoritmos OLL del 2x2x2 y domina cada caso para mejorar tus tiempos.",
         "sets": {
-          "oll": {
+          "ortega-oll": {
             "title": "Entrenamiento de Algoritmos OLL del 2x2x2",
             "description": "Aprende y practica los 7 algoritmos OLL para orientar la última capa del cubo 2x2. Domina cada caso para mejorar tus tiempos."
           }

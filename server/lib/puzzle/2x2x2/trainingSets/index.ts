@@ -4,10 +4,10 @@ import { ortegaPbl } from "./ortega-pbl"
 
 export default [
     {
-        name: 'training.2x2x2.oll.name',
-        id: 'oll',
-        description: 'training.2x2x2.oll.description',
-        imageUrl: '/img/training/2x2x2/oll.png',
+        name: 'puzzles.2x2x2.sets.ortega-oll.name',
+        id: 'ortega-oll',
+        description: 'puzzles.2x2x2.sets.ortega-oll.description',
+        imageUrl: '/img/puzzles/2x2x2/training-sets/ortega-oll.png',
         algorithms: ortegaOll,
     },
     {

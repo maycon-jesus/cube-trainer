@@ -367,7 +367,7 @@
         "title": "2x2x2 Algorithm Training",
         "description": "Train the 2x2x2 OLL algorithms and master every case to improve your solve times.",
         "sets": {
-          "oll": {
+          "ortega-oll": {
             "title": "2x2x2 OLL Algorithm Training",
             "description": "Learn and practice all 7 OLL algorithms to orient the last layer of the 2x2 cube. Master every case to improve your times."
           }
