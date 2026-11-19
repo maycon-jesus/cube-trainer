@@ -365,11 +365,15 @@
     "puzzle": {
       "2x2x2": {
         "title": "2x2x2 Algorithm Training",
-        "description": "Train the 2x2x2 OLL algorithms and master every case to improve your solve times.",
+        "description": "Train the 2x2x2 Ortega OLL and PBL algorithms and master every case to improve your solve times.",
         "sets": {
           "ortega-oll": {
             "title": "2x2x2 OLL Algorithm Training",
             "description": "Learn and practice all 7 OLL algorithms to orient the last layer of the 2x2 cube. Master every case to improve your times."
+          },
+          "ortega-pbl": {
+            "title": "2x2x2 PBL Algorithm Training",
+            "description": "Learn and practice all 6 Ortega PBL algorithms to permute both layers and solve the 2x2 cube. Master every case to improve your times."
           }
         }
       },
