@@ -16,7 +16,7 @@
                     @click="openAddModal = true" />
             </template>
             <v-list v-if="rows.length" density="compact" bg-color="transparent">
-                <v-list-item v-for="{ solve, training, timestamp } in rows" :key="solve.id" class="px-2"
+                <v-list-item v-for="{ solve, training, timestamp, puzzle } in rows" :key="solve.id" class="px-2"
                     @click="openSolveDetails(solve, training)">
                     <template #prepend>
                         <v-avatar v-if="training?.imageUrl" rounded="lg" size="32" class="mr-2">
@@ -31,7 +31,7 @@
                         {{ formatSolve(solve) }}
                     </v-list-item-title>
                     <v-list-item-subtitle class="d-flex align-center flex-wrap ga-2">
-                        <span>{{ t(`cube.${solve.puzzle}`) }}</span>
+                        <span>{{ puzzle?.name ?? solve.puzzle }}</span>
                         <span>·</span>
                         <span>{{ sessionName(solve.sessionId) }}</span>
                         <v-chip v-if="training" size="x-small" color="primary" variant="tonal" label
@@ -134,6 +134,10 @@ const { data: trainingIndex } = useAsyncData(trainingKey, async () => {
     return index
 })
 
+const { data: puzzles } = useApiGetPuzzles().useAsyncData()
+
+const puzzleIndex = computed(() => new Map((puzzles.value ?? []).map(p => [p.id, p])))
+
 function trainingOf(solve: Solve): (TrainingSetAlgorithm & { set: TrainingSet }) | null {
     if (solve.type !== 'training' || !solve.trainingAlgorithmId) return null
     return trainingIndex.value?.[`${solve.puzzle}:${solve.trainingAlgorithmId}`] ?? null
@@ -142,6 +146,7 @@ function trainingOf(solve: Solve): (TrainingSetAlgorithm & { set: TrainingSet })
 const rows = computed(() => solves.value.map(solve => ({
     solve,
     training: trainingOf(solve),
+    puzzle: puzzleIndex.value.get(solve.puzzle),
     timestamp: formatTimestampParts(locale.value, solve.createdAt),
 })))
 
