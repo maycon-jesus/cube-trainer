@@ -20,8 +20,6 @@ export default defineNuxtConfig({
     name: 'Cube Trainer',
   },
   runtimeConfig: {
-    databaseUrl: '',
-    databaseUrlPooled: '',
     public: {
       version: pkg.version,
       appUrl: process.env.APP_URL || 'https://cubetrainer.net',

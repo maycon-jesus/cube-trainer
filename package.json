@@ -21,7 +21,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.1",
     "@nuxt/image": "^2.2.1",
     "@pinia/nuxt": "1.0.1",
     "@posthog/nuxt": "^1.9.1",
