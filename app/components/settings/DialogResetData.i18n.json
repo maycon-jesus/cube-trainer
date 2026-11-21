@@ -1,0 +1,38 @@
+{
+    "en": {
+        "confirmTitle": "Reset all data?",
+        "confirmText": "This will permanently delete all your sessions and solves. This action cannot be undone.",
+        "success": "Data reset successfully",
+        "close": "Close",
+        "cancel": "Cancel",
+        "confirm": "Reset",
+        "error": "Failed to reset data"
+    },
+    "pt": {
+        "confirmTitle": "Resetar todos os dados?",
+        "confirmText": "Isso vai apagar permanentemente todas as suas sessões e resoluções. Esta ação não pode ser desfeita.",
+        "success": "Dados resetados com sucesso",
+        "close": "Fechar",
+        "cancel": "Cancelar",
+        "confirm": "Resetar",
+        "error": "Falha ao resetar os dados"
+    },
+    "es": {
+        "confirmTitle": "¿Restablecer todos los datos?",
+        "confirmText": "Esto eliminará permanentemente todas tus sesiones y resoluciones. Esta acción no se puede deshacer.",
+        "success": "Datos restablecidos correctamente",
+        "close": "Cerrar",
+        "cancel": "Cancelar",
+        "confirm": "Restablecer",
+        "error": "No se pudieron restablecer los datos"
+    },
+    "zh": {
+        "confirmTitle": "重置所有数据？",
+        "confirmText": "这将永久删除你的所有分组和复原记录。此操作无法撤销。",
+        "success": "数据重置成功",
+        "close": "关闭",
+        "cancel": "取消",
+        "confirm": "重置",
+        "error": "数据重置失败"
+    }
+}

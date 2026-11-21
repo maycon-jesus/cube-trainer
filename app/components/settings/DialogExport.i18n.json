@@ -1,0 +1,62 @@
+{
+    "en": {
+        "title": "Export data",
+        "subtitle": "Download your data to take to another device",
+        "filename": {
+            "label": "File name",
+            "required": "Enter a file name"
+        },
+        "progress": "Exporting… {count} of {total} rows",
+        "success": "{count} rows exported successfully",
+        "error": "Failed to export data. Please try again.",
+        "close": "Close",
+        "cancel": "Cancel",
+        "retry": "Try again",
+        "action": "Export"
+    },
+    "pt": {
+        "title": "Exportar dados",
+        "subtitle": "Baixe seus dados para levar a outro dispositivo",
+        "filename": {
+            "label": "Nome do arquivo",
+            "required": "Informe um nome para o arquivo"
+        },
+        "progress": "Exportando… {count} de {total} linhas",
+        "success": "{count} linhas exportadas com sucesso!",
+        "error": "Erro ao exportar dados. Por favor, tente novamente.",
+        "close": "Fechar",
+        "cancel": "Cancelar",
+        "retry": "Tentar novamente",
+        "action": "Exportar"
+    },
+    "es": {
+        "title": "Exportar datos",
+        "subtitle": "Descarga tus datos para llevarlos a otro dispositivo",
+        "filename": {
+            "label": "Nombre del archivo",
+            "required": "Indica un nombre para el archivo"
+        },
+        "progress": "Exportando… {count} de {total} filas",
+        "success": "¡{count} filas exportadas correctamente!",
+        "error": "Error al exportar los datos. Por favor, inténtalo de nuevo.",
+        "close": "Cerrar",
+        "cancel": "Cancelar",
+        "retry": "Reintentar",
+        "action": "Exportar"
+    },
+    "zh": {
+        "title": "导出数据",
+        "subtitle": "下载你的数据以便迁移到其他设备",
+        "filename": {
+            "label": "文件名",
+            "required": "请输入文件名"
+        },
+        "progress": "正在导出… {count} / {total} 行",
+        "success": "成功导出 {count} 行数据！",
+        "error": "导出数据失败，请重试。",
+        "close": "关闭",
+        "cancel": "取消",
+        "retry": "重试",
+        "action": "导出"
+    }
+}

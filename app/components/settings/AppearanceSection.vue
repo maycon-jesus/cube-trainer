@@ -1,11 +1,11 @@
 <template>
     <CustomCard
-        :title="t('settings.appearance.title')"
-        :subtitle="t('settings.appearance.subtitle')"
+        :title="t('title')"
+        :subtitle="t('subtitle')"
         icon="mdi-palette-outline"
     >
         <div class="mb-6">
-            <div class="text-subtitle-2 mb-3">{{ t('settings.appearance.theme') }}</div>
+            <div class="text-subtitle-2 mb-3">{{ t('theme') }}</div>
 
             <div ref="gridEl" class="theme-grid">
                 <button
@@ -41,12 +41,12 @@
                     :append-icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
                     @click="expanded = !expanded"
                 >
-                    {{ expanded ? t('settings.appearance.showLess') : t('settings.appearance.showMore', { count: hiddenCount }) }}
+                    {{ expanded ? t('showLess') : t('showMore', { count: hiddenCount }) }}
                 </v-btn>
             </div>
         </div>
 
-        <div class="text-subtitle-2 mb-3">{{ t('settings.appearance.language') }}</div>
+        <div class="text-subtitle-2 mb-3">{{ t('language') }}</div>
         <v-select
             v-model="currentLocale"
             :items="availableLocales"
@@ -156,3 +156,5 @@ const currentTheme = computed({
     background: rgba(var(--v-theme-primary), 0.06);
 }
 </style>
+
+<i18n src="./AppearanceSection.i18n.json"></i18n>

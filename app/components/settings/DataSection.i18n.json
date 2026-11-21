@@ -1,0 +1,74 @@
+{
+    "en": {
+        "title": "Data",
+        "subtitle": "Manage your local data",
+        "reset": {
+            "action": "Reset data",
+            "description": "Delete all sessions and solves and restore the app to its initial state."
+        },
+        "import": {
+            "title": "Import data",
+            "subtitle": "Import your data from another device",
+            "action": "Import"
+        },
+        "export": {
+            "title": "Export data",
+            "subtitle": "Download your data to take to another device",
+            "action": "Export"
+        }
+    },
+    "pt": {
+        "title": "Dados",
+        "subtitle": "Gerencie seus dados locais",
+        "reset": {
+            "action": "Resetar dados",
+            "description": "Apaga todas as sessões e resoluções e restaura o aplicativo ao estado inicial."
+        },
+        "import": {
+            "title": "Importar dados",
+            "subtitle": "Importe seus dados de outro dispositivo",
+            "action": "Importar"
+        },
+        "export": {
+            "title": "Exportar dados",
+            "subtitle": "Baixe seus dados para levar a outro dispositivo",
+            "action": "Exportar"
+        }
+    },
+    "es": {
+        "title": "Datos",
+        "subtitle": "Gestiona tus datos locales",
+        "reset": {
+            "action": "Restablecer datos",
+            "description": "Elimina todas las sesiones y resoluciones y restaura la aplicación a su estado inicial."
+        },
+        "import": {
+            "title": "Importar datos",
+            "subtitle": "Importa tus datos desde otro dispositivo",
+            "action": "Importar"
+        },
+        "export": {
+            "title": "Exportar datos",
+            "subtitle": "Descarga tus datos para llevarlos a otro dispositivo",
+            "action": "Exportar"
+        }
+    },
+    "zh": {
+        "title": "数据",
+        "subtitle": "管理你的本地数据",
+        "reset": {
+            "action": "重置数据",
+            "description": "删除所有分组和复原记录，并将应用恢复到初始状态。"
+        },
+        "import": {
+            "title": "导入数据",
+            "subtitle": "从其他设备导入你的数据",
+            "action": "导入"
+        },
+        "export": {
+            "title": "导出数据",
+            "subtitle": "下载你的数据以便迁移到其他设备",
+            "action": "导出"
+        }
+    }
+}

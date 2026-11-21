@@ -1,0 +1,46 @@
+{
+    "en": {
+        "title": "Import data",
+        "subtitle": "Import your data from another device",
+        "action": "Import",
+        "progress": "Importing… {count} of {total} rows",
+        "success": "{count} rows imported successfully",
+        "close": "Close",
+        "cancel": "Cancel",
+        "invalidFile": "This file isn’t a valid Cube Trainer backup.",
+        "error": "Failed to import data. Please try again."
+    },
+    "pt": {
+        "title": "Importar dados",
+        "subtitle": "Importe seus dados de outro dispositivo",
+        "action": "Importar",
+        "progress": "Importando… {count} de {total} linhas",
+        "success": "{count} linhas importadas com sucesso!",
+        "close": "Fechar",
+        "cancel": "Cancelar",
+        "invalidFile": "Este arquivo não é um backup válido do Cube Trainer.",
+        "error": "Erro ao importar dados. Por favor, tente novamente."
+    },
+    "es": {
+        "title": "Importar datos",
+        "subtitle": "Importa tus datos desde otro dispositivo",
+        "action": "Importar",
+        "progress": "Importando… {count} de {total} filas",
+        "success": "¡{count} filas importadas correctamente!",
+        "close": "Cerrar",
+        "cancel": "Cancelar",
+        "invalidFile": "Este archivo no es una copia de seguridad válida de Cube Trainer.",
+        "error": "Error al importar los datos. Por favor, inténtalo de nuevo."
+    },
+    "zh": {
+        "title": "导入数据",
+        "subtitle": "从其他设备导入你的数据",
+        "action": "导入",
+        "progress": "正在导入… {count} / {total} 行",
+        "success": "成功导入 {count} 行数据！",
+        "close": "关闭",
+        "cancel": "取消",
+        "invalidFile": "此文件不是有效的 Cube Trainer 备份。",
+        "error": "导入数据失败，请重试。"
+    }
+}

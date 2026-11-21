@@ -6,7 +6,7 @@ usePageSeo('settings')
 
 <template>
   <v-container class="py-6">
-    <h1 class="text-h5 font-weight-bold mb-6">{{ t('settings.title') }}</h1>
+    <h1 class="text-h5 font-weight-bold mb-6">{{ t('title') }}</h1>
 
     <v-row>
       <v-col cols="12">
@@ -18,3 +18,5 @@ usePageSeo('settings')
     </v-row>
   </v-container>
 </template>
+
+<i18n src="./settings.i18n.json"></i18n>

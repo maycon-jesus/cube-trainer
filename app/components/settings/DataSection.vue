@@ -1,5 +1,5 @@
 <template>
-    <CustomCard :title="t('settings.data.title')" :subtitle="t('settings.data.subtitle')" icon="mdi-database-outline">
+    <CustomCard :title="t('title')" :subtitle="t('subtitle')" icon="mdi-database-outline">
         <SettingsDialogImport v-model="importDialog" />
         <SettingsDialogExport v-model="exportDialog" />
         <SettingsDialogResetData v-model="resetDialog" />
@@ -39,8 +39,8 @@
             </v-avatar>
 
             <div class="flex-grow-1">
-                <div class="text-body-1 font-weight-medium text-error">{{ t('settings.data.reset.action') }}</div>
-                <div class="text-body-2 text-medium-emphasis">{{ t('settings.data.reset.description') }}</div>
+                <div class="text-body-1 font-weight-medium text-error">{{ t('reset.action') }}</div>
+                <div class="text-body-2 text-medium-emphasis">{{ t('reset.description') }}</div>
             </div>
 
             <v-btn
@@ -50,7 +50,7 @@
                 prepend-icon="mdi-delete-outline"
                 @click="resetDialog = true"
             >
-                {{ t('settings.data.reset.action') }}
+                {{ t('reset.action') }}
             </v-btn>
         </div>
     </CustomCard>
@@ -69,18 +69,18 @@ const transferActions = [
         key: 'import',
         icon: 'mdi-database-import-outline',
         color: 'primary',
-        title: 'settings.data.import.title',
-        subtitle: 'settings.data.import.subtitle',
-        label: 'settings.data.import.action',
+        title: 'import.title',
+        subtitle: 'import.subtitle',
+        label: 'import.action',
         open: () => { importDialog.value = true },
     },
     {
         key: 'export',
         icon: 'mdi-database-export-outline',
         color: 'primary',
-        title: 'settings.data.export.title',
-        subtitle: 'settings.data.export.subtitle',
-        label: 'settings.data.export.action',
+        title: 'export.title',
+        subtitle: 'export.subtitle',
+        label: 'export.action',
         open: () => { exportDialog.value = true },
     },
 ]
@@ -110,3 +110,5 @@ const transferActions = [
     }
 }
 </style>
+
+<i18n src="./DataSection.i18n.json"></i18n>

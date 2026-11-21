@@ -1,30 +1,30 @@
 <template>
     <v-dialog v-model="model" :max-width="440" :persistent="isImporting">
-        <CustomCard :title="t('settings.data.import.title')" :subtitle="t('settings.data.import.subtitle')" icon="mdi-database-import-outline">
+        <CustomCard :title="t('title')" :subtitle="t('subtitle')" icon="mdi-database-import-outline">
             <template #default>
                 <AnimationExpand :model-value="isSelectingFile">
-                    <v-file-input v-model="importFile" class="mt-1" :label="t('settings.data.import.action')" accept=".txt,text/plain,application/json,.json" :multiple="false"/>
+                    <v-file-input v-model="importFile" class="mt-1" :label="t('action')" accept=".txt,text/plain,application/json,.json" :multiple="false"/>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isImporting">
                     <div class="text-center">
                         <v-progress-circular indeterminate class="d-block mx-auto"/>
                         <div class="text-caption text-medium-emphasis mt-2">
-                            {{ t('settings.data.import.progress', { count: importedCount, total: totalCount }) }}
+                            {{ t('progress', { count: importedCount, total: totalCount }) }}
                         </div>
                     </div>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isFinished">
-                    <v-alert v-if="!importErrorMessage" type="success">{{ t('settings.data.import.success', { count: importedCount }) }}</v-alert>
+                    <v-alert v-if="!importErrorMessage" type="success">{{ t('success', { count: importedCount }) }}</v-alert>
                     <v-alert v-else-if="importErrorMessage" type="error">{{ importErrorMessage }}</v-alert>
                 </AnimationExpand>
 
             </template>
 
             <template #actions>
-                <v-btn color="btn" :disabled="isImporting" @click="model = false">{{ isFinished? t('settings.close') : t('settings.cancel') }}</v-btn>
-                <v-btn v-if="!isFinished" :loading="isImporting" @click="nextStep">{{ t('settings.data.import.action') }}</v-btn>
+                <v-btn color="btn" :disabled="isImporting" @click="model = false">{{ isFinished? t('close') : t('cancel') }}</v-btn>
+                <v-btn v-if="!isFinished" :loading="isImporting" @click="nextStep">{{ t('action') }}</v-btn>
             </template>
         </CustomCard>
     </v-dialog>
@@ -67,8 +67,8 @@ async function importData() {
   } catch (err) {
     console.error(err)
     importErrorMessage.value = err instanceof InvalidBackupFileError
-      ? t('settings.data.import.invalidFile')
-      : t('settings.data.import.error')
+      ? t('invalidFile')
+      : t('error')
   }
 }
 
@@ -94,3 +94,5 @@ watch(model, (newValue) => {
     }
 })
 </script>
+
+<i18n src="./DialogImport.i18n.json"></i18n>

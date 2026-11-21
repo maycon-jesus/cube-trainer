@@ -1,10 +1,10 @@
 <template>
   <v-dialog v-model="model" :max-width="440" :persistent="isResetting">
-    <CustomCard :title="t('settings.data.reset.confirmTitle')" icon="mdi-alert-outline" icon-color="error">
+    <CustomCard :title="t('confirmTitle')" icon="mdi-alert-outline" icon-color="error">
       <template #default>
         <AnimationExpand :model-value="isConfirming">
           <span class="text-body-2 text-medium-emphasis">
-            {{ t('settings.data.reset.confirmText') }}
+            {{ t('confirmText') }}
           </span>
         </AnimationExpand>
 
@@ -13,14 +13,14 @@
         </AnimationExpand>
 
         <AnimationExpand :model-value="isFinished">
-          <v-alert v-if="!resetErrorMessage" type="success">{{ t('settings.data.reset.success') }}</v-alert>
+          <v-alert v-if="!resetErrorMessage" type="success">{{ t('success') }}</v-alert>
           <v-alert v-else type="error">{{ resetErrorMessage }}</v-alert>
         </AnimationExpand>
       </template>
 
       <template #actions>
         <v-btn color="btn" :disabled="isResetting" @click="model = false">
-          {{ isFinished ? t('settings.close') : t('settings.cancel') }}
+          {{ isFinished ? t('close') : t('cancel') }}
         </v-btn>
         <v-btn
           v-if="!isFinished"
@@ -29,7 +29,7 @@
           :loading="isResetting"
           @click="confirmReset"
         >
-          {{ t('settings.data.reset.confirm') }}
+          {{ t('confirm') }}
         </v-btn>
       </template>
     </CustomCard>
@@ -62,7 +62,7 @@ async function confirmReset() {
     resetErrorMessage.value = undefined
   } catch (err) {
     console.error(err)
-    resetErrorMessage.value = t('settings.data.reset.error')
+    resetErrorMessage.value = t('error')
   } finally {
     resetStep.value = steps.finished
   }
@@ -79,3 +79,5 @@ watch(model, (newValue) => {
   }
 })
 </script>
+
+<i18n src="./DialogResetData.i18n.json"></i18n>

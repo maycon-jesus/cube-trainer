@@ -1,14 +1,14 @@
 <template>
     <v-dialog v-model="model" :max-width="440" :persistent="isExporting">
-        <CustomCard :title="t('settings.data.export.title')" :subtitle="t('settings.data.export.subtitle')" icon="mdi-database-export-outline">
+        <CustomCard :title="t('title')" :subtitle="t('subtitle')" icon="mdi-database-export-outline">
             <template #default>
                 <AnimationExpand :model-value="isNaming">
                     <v-text-field
                         v-model="filename"
                         class="mt-1"
-                        :label="t('settings.data.filename.label')"
+                        :label="t('filename.label')"
                         suffix=".txt"
-                        :rules="[(v: string) => !!v.trim() || t('settings.data.filename.required')]"
+                        :rules="[(v: string) => !!v.trim() || t('filename.required')]"
                     />
                 </AnimationExpand>
 
@@ -16,23 +16,23 @@
                     <div class="text-center">
                         <v-progress-circular indeterminate class="d-block mx-auto"/>
                         <div class="text-caption text-medium-emphasis mt-2">
-                            {{ t('settings.data.export.progress', { count: exportedCount, total: totalCount }) }}
+                            {{ t('progress', { count: exportedCount, total: totalCount }) }}
                         </div>
                     </div>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isFinished">
-                    <v-alert type="success">{{ t('settings.data.export.success', { count: exportedCount }) }}</v-alert>
+                    <v-alert type="success">{{ t('success', { count: exportedCount }) }}</v-alert>
                 </AnimationExpand>
 
                 <AnimationExpand :model-value="isError">
-                    <v-alert type="error">{{ t('settings.data.export.error') }}</v-alert>
+                    <v-alert type="error">{{ t('error') }}</v-alert>
                 </AnimationExpand>
             </template>
 
             <template #actions>
-                <v-btn color="btn" :disabled="isExporting" @click="model = false">{{ isFinished || isError ? t('settings.close') : t('settings.cancel') }}</v-btn>
-                <v-btn v-if="!isFinished" :loading="isExporting" :disabled="!filename.trim()" @click="nextStep">{{ isError ? t('settings.data.export.retry') : t('settings.data.export.action') }}</v-btn>
+                <v-btn color="btn" :disabled="isExporting" @click="model = false">{{ isFinished || isError ? t('close') : t('cancel') }}</v-btn>
+                <v-btn v-if="!isFinished" :loading="isExporting" :disabled="!filename.trim()" @click="nextStep">{{ isError ? t('retry') : t('action') }}</v-btn>
             </template>
         </CustomCard>
     </v-dialog>
@@ -94,3 +94,5 @@ watch(model, (newValue) => {
     }
 })
 </script>
+
+<i18n src="./DialogExport.i18n.json"></i18n>
