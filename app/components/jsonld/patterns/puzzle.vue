@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { CubePattern } from '~~/lib/cube/cubesDefinition';
 import { CollectionPage } from '~~/lib/jsonld/collectionPage';
 import { toUseHeadGraph } from '~~/lib/jsonld/graph';
 import { IdReference } from '~~/lib/jsonld/id';
@@ -8,7 +7,7 @@ import { ListItem } from '~~/lib/jsonld/listItem';
 
 const props = defineProps<{
     puzzleId: string
-    patterns: CubePattern[]
+    patterns: Pattern[]
 }>()
 
 const getDomain = useGetDomain()
