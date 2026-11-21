@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { usePuzzles } from '~/stores/api/puzzles'
-
-
-const { locale, t } = useI18n()
+const { t } = useI18n()
 
 usePageSeo('patterns')
 
