@@ -52,7 +52,6 @@
     "all": "Todos"
   },
   "stats": {
-    "subtitle": "Analiza tus resoluciones y sigue tu progreso a lo largo del tiempo",
     "common": {
       "notEnoughData": "Aún no hay datos suficientes"
     },

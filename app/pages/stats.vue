@@ -1,7 +1,7 @@
 <template>
     <v-container class="py-6">
         <!-- Header -->
-        <LayoutsPageHeader :title="t('nav.stats')" :subtitle="t('stats.subtitle')">
+        <LayoutsPageHeader :title="t('title')" :subtitle="t('subtitle')">
             <template #append>
                 <div class="filters d-flex flex-wrap ga-3">
                     <SolveTypeSelector v-model="type" show-all-option />
@@ -68,7 +68,7 @@
                 <StatsPersonalBestJourney :solves="solves" />
             </v-col>
         </v-row>
-        
+
     </v-container>
 </template>
 
@@ -140,3 +140,5 @@ onMounted(loadSolves)
     min-width: 180px;
 }
 </style>
+
+<i18n src="./stats.i18n.json"></i18n>

@@ -52,7 +52,6 @@
     "all": "All"
   },
   "stats": {
-    "subtitle": "Analyze your solves and track your progress over time",
     "common": {
       "notEnoughData": "Not enough data yet"
     },

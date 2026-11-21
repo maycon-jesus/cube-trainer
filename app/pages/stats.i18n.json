@@ -1,0 +1,18 @@
+{
+    "en": {
+        "title": "Statistics",
+        "subtitle": "Analyze your solves and track your progress over time"
+    },
+    "pt": {
+        "subtitle": "Analise suas resoluções e acompanhe seu progresso ao longo do tempo",
+        "title": "Estatísticas"
+    },
+    "es": {
+        "subtitle": "Analiza tus resoluciones y sigue tu progreso a lo largo del tiempo",
+        "title": "Estadísticas"
+    },
+    "zh": {
+        "title": "统计",
+        "subtitle": "分析你的复原记录并追踪长期进步"
+    }
+}
