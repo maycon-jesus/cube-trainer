@@ -1,31 +1,55 @@
 {
-  "training": {
-    "3x3x3": {
-      "f2l": {
-        "name": "F2L",
-        "description": "First Two Layers: pair each corner with its edge and insert them into the slot to finish the first two layers in one go.",
-        "cases": {
-          "case-1": "Case 1",
-          "case-2": "Case 2",
-          "case-3": "Case 3",
-          "case-4": "Case 4",
-          "case-5": "Case 5",
-          "case-6": "Case 6",
-          "case-7": "Case 7",
-          "case-8": "Case 8",
-          "case-9": "Case 9",
-          "case-10": "Case 10",
-          "case-11": "Case 11",
-          "case-12": "Case 12",
-          "case-13": "Case 13",
-          "case-14": "Case 14",
-          "case-15": "Case 15",
-          "case-16": "Case 16",
-          "case-17": "Case 17",
-          "case-18": "Case 18",
-          "case-19": "Case 19"
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "f2l": {
+                    "name": "F2L",
+                    "description": "First Two Layers: pair each corner with its edge and insert them into the slot to finish the first two layers in one go.",
+                    "cases": {
+                        "case-1": "Case 1",
+                        "case-2": "Case 2",
+                        "case-3": "Case 3",
+                        "case-4": "Case 4",
+                        "case-5": "Case 5",
+                        "case-6": "Case 6",
+                        "case-7": "Case 7",
+                        "case-8": "Case 8",
+                        "case-9": "Case 9",
+                        "case-10": "Case 10",
+                        "case-11": "Case 11",
+                        "case-12": "Case 12",
+                        "case-13": "Case 13",
+                        "case-14": "Case 14",
+                        "case-15": "Case 15",
+                        "case-16": "Case 16",
+                        "case-17": "Case 17",
+                        "case-18": "Case 18",
+                        "case-19": "Case 19",
+                        "case-20": "Case 20",
+                        "case-21": "Case 21",
+                        "case-22": "Case 22",
+                        "case-23": "Case 23",
+                        "case-24": "Case 24",
+                        "case-25": "Case 25",
+                        "case-26": "Case 26",
+                        "case-27": "Case 27",
+                        "case-28": "Case 28",
+                        "case-29": "Case 29",
+                        "case-30": "Case 30",
+                        "case-31": "Case 31",
+                        "case-32": "Case 32",
+                        "case-33": "Case 33",
+                        "case-34": "Case 34",
+                        "case-35": "Case 35",
+                        "case-36": "Case 36",
+                        "case-37": "Case 37",
+                        "case-38": "Case 38",
+                        "case-39": "Case 39",
+                        "case-40": "Case 40",
+                        "case-41": "Case 41"
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

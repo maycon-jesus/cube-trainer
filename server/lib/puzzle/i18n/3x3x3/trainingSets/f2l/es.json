@@ -1,31 +1,55 @@
 {
-  "training": {
-    "3x3x3": {
-      "f2l": {
-        "name": "F2L",
-        "description": "Primeras Dos Capas: empareja cada esquina con su arista e insértalas en el hueco para completar las dos primeras capas de una vez.",
-        "cases": {
-          "case-1": "Caso 1",
-          "case-2": "Caso 2",
-          "case-3": "Caso 3",
-          "case-4": "Caso 4",
-          "case-5": "Caso 5",
-          "case-6": "Caso 6",
-          "case-7": "Caso 7",
-          "case-8": "Caso 8",
-          "case-9": "Caso 9",
-          "case-10": "Caso 10",
-          "case-11": "Caso 11",
-          "case-12": "Caso 12",
-          "case-13": "Caso 13",
-          "case-14": "Caso 14",
-          "case-15": "Caso 15",
-          "case-16": "Caso 16",
-          "case-17": "Caso 17",
-          "case-18": "Caso 18",
-          "case-19": "Caso 19"
+    "puzzles": {
+        "3x3x3": {
+            "sets": {
+                "f2l": {
+                    "name": "F2L",
+                    "description": "Primeras Dos Capas: empareja cada esquina con su arista e insértalas en el hueco para completar las dos primeras capas de una vez.",
+                    "cases": {
+                        "case-1": "Caso 1",
+                        "case-2": "Caso 2",
+                        "case-3": "Caso 3",
+                        "case-4": "Caso 4",
+                        "case-5": "Caso 5",
+                        "case-6": "Caso 6",
+                        "case-7": "Caso 7",
+                        "case-8": "Caso 8",
+                        "case-9": "Caso 9",
+                        "case-10": "Caso 10",
+                        "case-11": "Caso 11",
+                        "case-12": "Caso 12",
+                        "case-13": "Caso 13",
+                        "case-14": "Caso 14",
+                        "case-15": "Caso 15",
+                        "case-16": "Caso 16",
+                        "case-17": "Caso 17",
+                        "case-18": "Caso 18",
+                        "case-19": "Caso 19",
+                        "case-20": "Caso 20",
+                        "case-21": "Caso 21",
+                        "case-22": "Caso 22",
+                        "case-23": "Caso 23",
+                        "case-24": "Caso 24",
+                        "case-25": "Caso 25",
+                        "case-26": "Caso 26",
+                        "case-27": "Caso 27",
+                        "case-28": "Caso 28",
+                        "case-29": "Caso 29",
+                        "case-30": "Caso 30",
+                        "case-31": "Caso 31",
+                        "case-32": "Caso 32",
+                        "case-33": "Caso 33",
+                        "case-34": "Caso 34",
+                        "case-35": "Caso 35",
+                        "case-36": "Caso 36",
+                        "case-37": "Caso 37",
+                        "case-38": "Caso 38",
+                        "case-39": "Caso 39",
+                        "case-40": "Caso 40",
+                        "case-41": "Caso 41"
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

@@ -27,10 +27,10 @@ export default [
         algorithms: ollAlgorithms,
     },
     {
-        name: 'training.3x3x3.f2l.name',
+        name: 'puzzles.3x3x3.sets.f2l.name',
         id: 'f2l',
-        description: 'training.3x3x3.f2l.description',
-        imageUrl: '/img/training/3x3x3/f2l.png',
+        description: 'puzzles.3x3x3.sets.f2l.description',
+        imageUrl: '/img/puzzles/3x3x3/training-sets/f2l.png',
         algorithms: f2lAlgorithms,
     },
 ] as TrainingSet[]
