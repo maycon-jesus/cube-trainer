@@ -1,6 +1,8 @@
 import { randomFromArr } from "../../utils/array"
 
-export function generateScramble(movesCount: number = 20): string {
+export function generateScramble(movesCount: number = 11, variation: number = 2): string {
+  movesCount = movesCount + Math.floor(Math.random() * (variation + 1))
+
   const moves: string[] = []
 
   const axisMoves: string[][] = [
@@ -10,37 +12,27 @@ export function generateScramble(movesCount: number = 20): string {
   ]
   const modifiers = ['', '2', "'"]
 
-  const latestAxis: number[] = []
-  let latestMove = -1
+  let latestAxis: number = -1
 
   while (moves.length < movesCount) {
     const [axis, nAxis] = randomFromArr(axisMoves)
 
-    if (latestAxis.length === 2 && latestAxis[0] === nAxis && latestAxis[1] === nAxis) {
+    if (latestAxis === nAxis) {
       continue
     }
 
-    const [move, nMove] = randomFromArr(axis)
-    if (nMove === latestMove && latestAxis[latestAxis.length - 1] === nAxis) {
-      continue
-    }
-
+    const [move] = randomFromArr(axis)
     const [modifier] = randomFromArr(modifiers)
 
     moves.push(move + modifier)
-    latestMove = nMove
-
-    if (latestAxis.length === 2) {
-      latestAxis.shift()
-    }
-    latestAxis.push(nAxis)
+    latestAxis = nAxis
   }
 
   return moves.join(' ')
 }
 
 export function randomAUFScramble(scramble: string): string {
-  const AUFs: (string|null)[] = ["U", "U'", "U2", null]
+  const AUFs: (string | null)[] = ["U", "U'", "U2", null]
   const [auf, _] = randomFromArr(AUFs)
   return auf ? auf + ' ' + scramble : scramble
 }
