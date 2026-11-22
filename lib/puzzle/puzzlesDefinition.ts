@@ -3,7 +3,9 @@ import { generateScramble as generateScramblePyraminx } from "./pyraminx"
 import type { CubeEngine } from "./cube"
 import { Engine as Engine333 } from "./3x3x3/engine"
 import { generateScramble as generateScramble333, invertScramble as invertScramble333 } from "./3x3x3/scramble"
-import { generateScramble as generateScramble222, invertScramble as invertScramble222 } from "./3x3x3/scramble"
+import { generateScramble as generateScramble222, invertScramble as invertScramble222 } from "./2x2x2/scramble"
+import { generateScramble as generateScramble555, invertScramble as invertScramble555 } from "./5x5x5/scramble"
+import { generateScramble as generateScramble444, invertScramble as invertScramble444 } from "./4x4x4/scramble"
 import { newAlgorithmSetup } from "./3x3x3/training/setup"
 
 export type PuzzleDefinition = {
@@ -30,9 +32,13 @@ export const puzzlesDefinition: Record<string, PuzzleDefinition> = {
     },
     "4x4x4": {
         id: "4x4x4",
+        generateScramble: generateScramble444,
+        invertScramble: invertScramble444,
     },
     "5x5x5": {
         id: "5x5x5",
+        generateScramble: generateScramble555,
+        invertScramble: invertScramble555,
     },
     "6x6x6": {
         id: "6x6x6",
