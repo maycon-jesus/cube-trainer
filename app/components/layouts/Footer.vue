@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const { public: { version, githubUrl, licenseUrl, buyMeCoffeeUrl } } = useRuntimeConfig()
+const posthog = usePostHog()
+
+function onDonateClick() {
+  posthog?.capture('donate_clicked', { location: 'footer' })
+}
 
 const stickerStrip = ['green', 'white', 'red', 'yellow', 'blue', 'orange', 'white', 'green', 'yellow', 'red', 'orange', 'blue']
 
@@ -23,10 +28,10 @@ const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom']
         <span>GitHub</span>
       </a>
       <span class="sticker-dot" :style="{ backgroundColor: 'var(--c-yellow)' }" aria-hidden="true" />
-      <a :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer"
+      <a :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" @click="onDonateClick"
         class="footer-link d-inline-flex align-center ga-1" :style="{ '--accent': 'var(--c-orange)' }">
-        <v-icon icon="mdi-coffee" size="small" />
-        <span>{{ t('footer.buyMeCoffee') }}</span>
+        <v-icon icon="mdi-hand-heart" size="small" />
+        <span>{{ t('footer.donate') }}</span>
       </a>
       <span class="sticker-dot" :style="{ backgroundColor: 'var(--c-blue)' }" aria-hidden="true" />
       <a :href="licenseUrl" target="_blank" rel="noopener noreferrer"

@@ -8,7 +8,7 @@
             "history": "History",
             "stats": "Statistics",
             "settings": "Settings",
-            "buyMeCoffee": "Buy me a coffee"
+            "donate": "Donate"
         }
     },
     "pt": {
@@ -20,7 +20,7 @@
             "history": "Histórico",
             "stats": "Estatísticas",
             "settings": "Configurações",
-            "buyMeCoffee": "Me pague um café"
+            "donate": "Doar"
         }
     },
     "es": {
@@ -32,7 +32,7 @@
             "history": "Historial",
             "stats": "Estadísticas",
             "settings": "Ajustes",
-            "buyMeCoffee": "Invítame a un café"
+            "donate": "Donar"
         }
     },
     "zh": {
@@ -44,7 +44,7 @@
             "history": "历史记录",
             "stats": "统计",
             "settings": "设置",
-            "buyMeCoffee": "请我喝杯咖啡"
+            "donate": "捐赠"
         }
     }
 }

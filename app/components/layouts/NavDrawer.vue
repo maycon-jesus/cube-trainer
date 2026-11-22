@@ -4,6 +4,11 @@ import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric } from 
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { public: { buyMeCoffeeUrl } } = useRuntimeConfig()
+const posthog = usePostHog()
+
+function onDonateClick() {
+  posthog?.capture('donate_clicked', { location: 'nav_drawer' })
+}
 
 const layoutState = useLayoutStateStore()
 
@@ -31,8 +36,8 @@ const navItems = computed<{
 
     <template #append>
       <v-list nav>
-        <v-list-item :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-coffee"
-          :title="t('nav.buyMeCoffee')" />
+        <v-list-item :href="buyMeCoffeeUrl" target="_blank" rel="noopener noreferrer" prepend-icon="mdi-hand-heart"
+          :title="t('nav.donate')" @click="onDonateClick" />
       </v-list>
     </template>
   </v-navigation-drawer>
