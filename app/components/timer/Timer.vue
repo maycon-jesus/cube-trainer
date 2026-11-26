@@ -41,12 +41,12 @@ const props = defineProps<{
   lastSolve?: Solve
   type: Type
   puzzle: string
-  sessionId: number
+  sessionId: string
   trainingAlgorithmId?: string
   scramble: string
 }>()
 const emits = defineEmits<{
-  (e: 'solve', solve: Solve): void
+  (e: 'solve', solve: Omit<Solve, 'id'>): void
   (e: 'start' | 'stop' | 'delete'): void
   (e: 'penalty', penalty: Penalty): void
 }>()

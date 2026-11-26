@@ -82,7 +82,7 @@ const getTrainingSetAlgorithms = useApiGetPuzzleTrainingSetAlgorithms()
 
 const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
 
-function sessionName(id: number) {
+function sessionName(id: string) {
     return sessionNames.value.get(id) ?? t('page.unknownSession')
 }
 
@@ -91,7 +91,7 @@ usePageSeo('history')
 const PAGE_SIZE = 20
 
 const type = ref<Type | typeof ALL_TYPES>(ALL_TYPES)
-const sessionId = ref<number>(ALL_SESSIONS)
+const sessionId = ref<string>(ALL_SESSIONS)
 const puzzle = ref<string>(ALL_PUZZLES)
 
 const page = ref(1)

@@ -44,7 +44,7 @@ import SessionSelector from '~/components/session/SessionSelector.vue'
 import CubeSelector from '~/components/session/CubeSelector.vue'
 
 const props = defineProps<{
-    sessionId: number
+    sessionId: string
     puzzle: string
     type: Type
     trainingAlgorithmId?: string

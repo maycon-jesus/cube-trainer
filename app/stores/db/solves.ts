@@ -1,40 +1,45 @@
 import { defineStore } from 'pinia'
-import { Database, type Stored } from '~~/lib/db/database'
+import { IndexedDatabase, type StoredItemPreset } from '~~/lib/db/indexedDatabase'
 
 export type Penalty = 'none' | '+2' | 'dnf'
 export type Type = 'normal' | 'training'
 
 export type SolvesFilter = {
   type?: Type
-  sessionId?: number
+  sessionId?: string
   puzzle?: string
   trainingAlgorithmId?: string
   trainingAlgorithmIds?: string[]
 }
 
-export type Solve = Stored<{
+export type Solve = StoredItemPreset<{
   ms: number
   scramble: string
   penalty: Penalty
   createdAt: number
   puzzle: string
   type: Type
-  sessionId: number
+  sessionId: string
   trainingAlgorithmId: string
 }>
 
-// Shared instance
-const db = new Database<Solve>('solves-history', 'solves', {
-  version: 1,
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }, { name: 'sessionId', keyPath: 'sessionId' }, { name: 'trainingAlgorithmId', keyPath: 'trainingAlgorithmId' }, { name: 'puzzle', keyPath: 'puzzle' },
-  { name: 'type', keyPath: 'type' },
-  {
-    name: 'all-solves',
-    keyPath: ['type', 'sessionId', 'puzzle', 'trainingAlgorithmId'],
-    options: { unique: false },
-  },
+// Shared instance. The primary key is a UUIDv7, so key order == creation order:
+// iterating with 'prev' already yields newest first.
+const db = new IndexedDatabase<Solve>('solves', {
+  indexes: [
+    { name: 'sessionId', keyPath: 'sessionId' },
+    { name: 'trainingAlgorithmId', keyPath: 'trainingAlgorithmId' },
+    { name: 'puzzle', keyPath: 'puzzle' },
+    { name: 'type', keyPath: 'type' },
+    {
+      name: 'all-solves',
+      keyPath: ['type', 'sessionId', 'puzzle', 'trainingAlgorithmId'],
+      options: { unique: false },
+    },
   ],
 })
+
+const newestFirst = (a: Solve, b: Solve) => b.createdAt - a.createdAt
 
 export const useSolvesStore = defineStore('solves', () => {
   const solves = ref<Solve[]>([])
@@ -42,17 +47,15 @@ export const useSolvesStore = defineStore('solves', () => {
 
   async function refresh() {
     if (!import.meta.client) return
-    const all = await db.getEntries(null, 0, 10000, 'prev')
-
-    // Newest first.
-    solves.value = all.sort((a, b) => b.createdAt - a.createdAt)
+    const all = await db.getEntries(null, 'prev', 10000)
+    solves.value = all.sort(newestFirst)
     ready.value = true
   }
 
-  async function add(solve: Omit<Solve, 'id'>): Promise<number> {
+  async function add(solve: Omit<Solve, 'id'>): Promise<string> {
     const id = await db.add(solve)
     solves.value = [{ ...solve, id }, ...solves.value]
-    return id as number
+    return id
   }
 
   async function update(solve: Solve): Promise<void> {
@@ -60,15 +63,15 @@ export const useSolvesStore = defineStore('solves', () => {
     solves.value = solves.value.map((it) => (it.id === solve.id ? solve : it))
   }
 
-  async function remove(id: number): Promise<void> {
+  async function remove(id: string): Promise<void> {
     await db.delete(id)
     solves.value = solves.value.filter((it) => it.id !== id)
   }
 
-  async function removeBySessionId(id: number): Promise<void> {
-    const all = await db.getAllByIndex('sessionId', id)
-    const ids = all.map(it => it.id!)
-    await db.bulkDelete(ids)
+  async function removeBySessionId(sessionId: string): Promise<void> {
+    const all = await db.getAllByIndex('sessionId', sessionId)
+    await db.bulkDelete(all.map((it) => it.id))
+    solves.value = solves.value.filter((it) => it.sessionId !== sessionId)
   }
 
   async function clear(): Promise<void> {
@@ -95,20 +98,27 @@ export const useSolvesStore = defineStore('solves', () => {
     return solves.value.filter((solve) => solve.trainingAlgorithmId === trainingAlgorithmId).slice(0, limit)
   }
 
-  async function getAll(type: Type, sessionId: number, puzzle: string, trainingAlgorithmId: string): Promise<Solve[]> {
+  async function getAll(type: Type, sessionId: string, puzzle: string, trainingAlgorithmId: string): Promise<Solve[]> {
     const solves = await db.getAllByIndex('all-solves', [type, sessionId, puzzle, trainingAlgorithmId])
-    return solves.sort((a, b) => b.createdAt - a.createdAt)
+    return solves.sort(newestFirst)
   }
 
   function matchesFilter(filter: SolvesFilter) {
     return (solve: Solve) => {
-      if(filter.type && (solve.type ?? 'normal') !== filter.type) return false
-      if(filter.sessionId && solve.sessionId !== filter.sessionId) return false
-      if(filter.puzzle && solve.puzzle !== filter.puzzle) return false
-      if(filter.trainingAlgorithmId && solve.trainingAlgorithmId !== filter.trainingAlgorithmId) return false
-      if(filter.trainingAlgorithmIds && !filter.trainingAlgorithmIds.includes(solve.trainingAlgorithmId) ) return false
+      if (filter.type && (solve.type ?? 'normal') !== filter.type) return false
+      if (filter.sessionId && solve.sessionId !== filter.sessionId) return false
+      if (filter.puzzle && solve.puzzle !== filter.puzzle) return false
+      if (filter.trainingAlgorithmId && solve.trainingAlgorithmId !== filter.trainingAlgorithmId) return false
+      if (filter.trainingAlgorithmIds && !filter.trainingAlgorithmIds.includes(solve.trainingAlgorithmId)) return false
       return true
     }
+  }
+
+  function getEntriesWithFilter(filter: SolvesFilter, direction: IDBCursorDirection, size: number): Promise<Solve[]> {
+    const predicate = matchesFilter(filter)
+    const index = (['trainingAlgorithmId', 'sessionId', 'puzzle'] as const).find((key) => filter[key])
+    if (index) return db.getEntriesByIndex(index, filter[index], direction, size, predicate)
+    return db.getEntries(null, direction, size, predicate)
   }
 
   async function getAllWithFilter(filter: SolvesFilter & {
@@ -116,32 +126,32 @@ export const useSolvesStore = defineStore('solves', () => {
     page: number
   }): Promise<Solve[]> {
     const offset = (filter.page - 1) * filter.pageSize
-    return db.getEntries(null, offset, filter.pageSize, 'prev', matchesFilter(filter))
+    const entries = await getEntriesWithFilter(filter, 'prev', offset + filter.pageSize)
+    return entries.slice(offset)
   }
 
   async function countWithFilter(filter: SolvesFilter): Promise<number> {
-    return db.countEntries(null, matchesFilter(filter))
+    const entries = await getEntriesWithFilter(filter, 'next', -1)
+    return entries.length
   }
 
-  async function getBySessionId(sessionId: number, size: number): Promise<Solve[]> {
-    const solves = await db.getEntriesByIndex('sessionId', sessionId, 0,size, 'prev')
-    return solves
+  async function getBySessionId(sessionId: string, size: number): Promise<Solve[]> {
+    return db.getEntriesByIndex('sessionId', sessionId, 'prev', size)
   }
 
-  async function countBySessionId(sessionId: number): Promise<number> {
-    const count = await db.countByIndex('sessionId', sessionId)
-    return count
+  async function countBySessionId(sessionId: string): Promise<number> {
+    return db.countByIndex('sessionId', sessionId)
   }
 
-  async function changeSessionId(oldSessionId: number, newSessionId: number): Promise<void> {
-    const solves = await db.getAllByIndex('sessionId', oldSessionId)
-    for (const solve of solves) {
-      solve.sessionId = newSessionId
-      await db.put(solve)
-    }
+  async function changeSessionId(oldSessionId: string, newSessionId: string): Promise<void> {
+    const moved = (await db.getAllByIndex('sessionId', oldSessionId))
+      .map((solve) => ({ ...solve, sessionId: newSessionId }))
+    await db.bulkPut(moved)
+    solves.value = solves.value.map((it) => (it.sessionId === oldSessionId ? { ...it, sessionId: newSessionId } : it))
   }
 
-  return { solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getByTrainingAlgorithmId, getBySessionId ,countBySessionId, getAllWithFilter, countWithFilter,changeSessionId,
+  return {
+    solves, ready, refresh, add, update, remove, clear, removeBySessionId, reset, load, getAll, getByTrainingAlgorithmId, getBySessionId, countBySessionId, getAllWithFilter, countWithFilter, changeSessionId,
     count: () => db.count(),
     exportEach: db.exportEach.bind(db),
     importBatch: db.importBatch.bind(db),

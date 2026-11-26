@@ -91,7 +91,7 @@ export class Database<T extends Record<string, unknown>> {
         return this.tx('readonly', (s) => s.getAll() as IDBRequest<T[]>)
     }
 
-    async getEntries(indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
+    async getEntries(indexQuery: IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
             const transaction = db.transaction(this.store, 'readonly')
@@ -132,7 +132,7 @@ export class Database<T extends Record<string, unknown>> {
         })
     }
 
-    async getEntriesByIndex(indexName: string, indexQuery:IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
+    async getEntriesByIndex(indexName: string, indexQuery: IndexQuery, offset: number, size: number, direction: IDBCursorDirection, filter?: (val: T) => boolean): Promise<T[]> {
         const db = await this.open()
         return new Promise((resolve, reject) => {
             const transaction = db.transaction(this.store, 'readonly')
@@ -282,7 +282,7 @@ export class Database<T extends Record<string, unknown>> {
     // export & import
     async exportEach(onBatch: (rows: T[]) => Promise<void>, batchSize = 1000): Promise<void> {
         let after: IDBValidKey | null = null
-        for (;;) {
+        for (; ;) {
             const range = after != null ? IDBKeyRange.lowerBound(after, true) : null
             const page = await this.getEntries(range, 0, batchSize, 'next')
             if (page.length === 0) break
@@ -291,7 +291,7 @@ export class Database<T extends Record<string, unknown>> {
             after = (page[page.length - 1] as Record<string, IDBValidKey>)[this.keyPath]!
         }
     }
-    
+
     /** Append one batch of records during a streamed import. */
     async importBatch(rows: T[]): Promise<void> {
         await this.bulkAdd(rows)

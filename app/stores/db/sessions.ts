@@ -1,18 +1,17 @@
 import { defineStore } from 'pinia'
-import { Database, type Stored } from '~~/lib/db/database'
 import { useSolvesStore } from './solves'
 import { useConfigStore } from './config'
+import { IndexedDatabase } from '~~/lib/db/indexedDatabase'
 
 export const DEFAULT_SESSION_NAME = 'Padrão'
 
-export type Session = Stored<{
+export type Session = {
+  id: string
   name: string
   createdAt: number
-}>
+}
 
-const db = new Database<Session>('session', 'session', {
-  indexes: [{ name: 'createdAt', keyPath: 'createdAt' }],
-})
+const db = new IndexedDatabase<Session>('sessions', {})
 
 export const useSessionsStore = defineStore('sessions', () => {
   const sessions = ref<Session[]>([])
@@ -29,11 +28,11 @@ export const useSessionsStore = defineStore('sessions', () => {
     ready.value = true
   }
 
-  async function add(name: string): Promise<number> {
-    const session: Session = { name, createdAt: Date.now() }
-    const id = await db.add(session) 
+  async function add(name: string): Promise<string> {
+    const session: Omit<Session, "id"> = { name, createdAt: Date.now() }
+    const id = await db.add(session)
     sessions.value = [{ ...session, id }, ...sessions.value]
-    return id as number
+    return id
   }
 
   async function update(session: Session): Promise<void> {
@@ -41,11 +40,11 @@ export const useSessionsStore = defineStore('sessions', () => {
     sessions.value = sessions.value.map((it) => (it.id === session.id ? session : it))
   }
 
-  async function remove(id: number, moveSolvesToSessionId?: number|null): Promise<void> {
+  async function remove(id: string, moveSolvesToSessionId?: string | null): Promise<void> {
     await db.delete(id)
-    if(!moveSolvesToSessionId) {
+    if (!moveSolvesToSessionId) {
       await solves.removeBySessionId(id)
-    }else{
+    } else {
       await solves.changeSessionId(id, moveSolvesToSessionId)
     }
     await load()
@@ -68,10 +67,10 @@ export const useSessionsStore = defineStore('sessions', () => {
   }
 
   async function getLastSession(): Promise<Session | undefined> {
-    return (await db.getEntries(null,0,1, 'prev'))[0]
+    return (await db.getAll(null, 1))[0]
   }
 
-  async function getSession(id: number) {
+  async function getSession(id: string): Promise<Session | undefined> {
     return db.get(id)
   }
 
@@ -85,7 +84,8 @@ export const useSessionsStore = defineStore('sessions', () => {
     await db.deleteDB()
   }
 
-  return { sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset ,getAll,
+  return {
+    sessions, getSession, getLastSession, ready, refresh, add, update, remove, clear, load, reset, getAll,
     count: () => db.count(),
     exportEach: db.exportEach.bind(db),
     importBatch: db.importBatch.bind(db),

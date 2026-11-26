@@ -119,7 +119,7 @@ onBeforeMount(async () => {
   await refreshSolves()
 })
 
-async function resolved(solve: Solve) {
+async function resolved(solve: Omit<Solve, 'id'>) {
   await add(solve)
   await newScramble()
   await refreshSolves()

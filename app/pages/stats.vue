@@ -89,7 +89,7 @@ const MAX_SOLVES = 10000
 
 const type = ref<Type | typeof ALL_TYPES>(ALL_TYPES)
 const puzzle = ref<string>(config.puzzle || ALL_PUZZLES)
-const sessionId = ref<number>(config.sessionId || ALL_SESSIONS)
+const sessionId = ref<string>(config.sessionId || ALL_SESSIONS)
 
 // Keep selectors in sync once the persisted config finishes loading.
 watch(() => config.puzzle, (value) => {

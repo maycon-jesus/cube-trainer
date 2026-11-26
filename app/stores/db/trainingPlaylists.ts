@@ -1,44 +1,38 @@
 import { defineStore } from 'pinia'
-import { Database, type Stored } from '~~/lib/db/database'
+import { IndexedDatabase, type StoredItemPreset } from '~~/lib/db/indexedDatabase'
 
 export type TrainingCase = {
   setId: string
   algorithmId: string
 }
 
-export type TrainingPlaylist = Stored<{
+export type TrainingPlaylist = StoredItemPreset<{
   name: string
   puzzleId: string
   trainingCases: TrainingCase[]
   createdAt: number
 }>
 
-const db = new Database<TrainingPlaylist>('training-playlists', 'training-playlists', {
-  version: 1,
-  indexes: [
-    { name: 'createdAt', keyPath: 'createdAt' },
-    { name: 'puzzleId', keyPath: 'puzzleId' },
-  ],
-})
+const db = new IndexedDatabase<TrainingPlaylist>("training-playlists", {})
 
 export const useTrainingPlaylistsStore = defineStore('trainingPlaylists', () => {
   async function getAll(): Promise<TrainingPlaylist[]> {
     if (!import.meta.client) return []
     const all = await db.getAll()
-    return all.sort((a, b) => b.createdAt - a.createdAt)
+    return all
   }
 
-  async function add(playlist: Omit<TrainingPlaylist, 'id' | 'createdAt'>): Promise<number> {
-    const entry: TrainingPlaylist = { ...playlist, createdAt: Date.now() }
+  async function add(playlist: Omit<TrainingPlaylist, 'id' | 'createdAt'>): Promise<string> {
+    const entry = { ...playlist, createdAt: Date.now() }
     const id = await db.add(entry)
-    return id as number
+    return id
   }
 
   async function update(playlist: TrainingPlaylist): Promise<void> {
     await db.put(playlist)
   }
 
-  async function remove(id: number): Promise<void> {
+  async function remove(id: string): Promise<void> {
     await db.delete(id)
   }
 
@@ -46,23 +40,18 @@ export const useTrainingPlaylistsStore = defineStore('trainingPlaylists', () => 
     await db.clear()
   }
 
-  async function get(id: number): Promise<TrainingPlaylist | undefined> {
+  async function get(id: string): Promise<TrainingPlaylist | undefined> {
     return db.get(id)
   }
 
-  async function getByPuzzleId(puzzleId: string): Promise<TrainingPlaylist[]> {
-    const all = await db.getAllByIndex('puzzleId', puzzleId)
-    return all.sort((a, b) => b.createdAt - a.createdAt)
-  }
-
-  async function load() {}
+  async function load() { }
 
   async function reset() {
     await db.deleteDB()
   }
 
   return {
-    getAll, add, update, remove, clear, get, getByPuzzleId, load, reset,
+    getAll, add, update, remove, clear, get, load, reset,
     count: () => db.count(),
     exportEach: db.exportEach.bind(db),
     importBatch: db.importBatch.bind(db),
