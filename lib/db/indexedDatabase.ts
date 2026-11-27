@@ -1,4 +1,5 @@
 import { uuidv7 } from "../uuid/v7"
+import { JournalingLogger } from "./journaling"
 
 export interface IndexDefinition {
     name: string
@@ -22,6 +23,7 @@ export class IndexedDatabase<StoredItem extends StoredItemPreset<object>, KeyTyp
     private version: number
     private indexes: IndexDefinition[]
     private upgradeTransactions: Record<number, (store: IDBObjectStore) => void>
+    private journalingLogger?: JournalingLogger
 
     constructor(private name: string, options: DatabaseOptions) {
         this.version = options.version ?? 1
@@ -202,30 +204,37 @@ export class IndexedDatabase<StoredItem extends StoredItemPreset<object>, KeyTyp
     public async add(value: PartialBy<StoredItem, "id">): Promise<KeyType> {
         const valueWithId = this.withId(value)
         const key = await this.tx('readwrite', async (s) => await this.waitDbRequest(s.add(valueWithId)))
+        await this.journalingLogger?.log('add', key)
         return key as KeyType
     }
 
     public async bulkAdd(values: PartialBy<StoredItem, "id">[]): Promise<KeyType[]> {
-        return this.tx("readwrite", async (store) => {
+        const keys = await this.tx("readwrite", async (store) => {
             const ids = await Promise.all(values.map(v => this.waitDbRequest(store.add(this.withId(v)))))
             return ids as KeyType[]
         })
+        await this.journalingLogger?.bulkLogSameType("add", keys)
+        return keys
     }
 
     public async put(value: StoredItem): Promise<KeyType> {
         const key = await this.tx('readwrite', async (s) => await this.waitDbRequest(s.put(value)))
+        await this.journalingLogger?.log('update', key)
         return key as KeyType
     }
 
     public async bulkPut(values: StoredItem[]): Promise<KeyType[]> {
-        return this.tx("readwrite", async (store) => {
+        const keys = await this.tx("readwrite", async (store) => {
             const ids = await Promise.all(values.map(v => this.waitDbRequest(store.put(v))))
             return ids as KeyType[]
         })
+        await this.journalingLogger?.bulkLogSameType("add", keys)
+        return keys
     }
 
     public async delete(id: IDBValidKey | IDBKeyRange): Promise<void> {
         await this.tx('readwrite', async (s) => await this.waitDbRequest(s.delete(id)))
+        await this.journalingLogger?.log('delete', id)
     }
 
     public async bulkDelete(ids: KeyType[]): Promise<void> {
