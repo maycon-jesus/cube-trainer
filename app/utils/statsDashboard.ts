@@ -307,8 +307,8 @@ export type PuzzleCount = {
 export function solvesByPuzzle(solves: Solve[]): PuzzleCount[] {
   const counts = new Map<string, number>()
   for (const solve of solves) {
-    const previous = counts.get(solve.puzzle) ?? 0
-    counts.set(solve.puzzle, previous + 1)
+    const previous = counts.get(solve.puzzleId) ?? 0
+    counts.set(solve.puzzleId, previous + 1)
   }
 
   const result: PuzzleCount[] = []

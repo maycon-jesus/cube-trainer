@@ -1,17 +1,14 @@
-import { Database } from "~~/lib/db/database"
 import { useSessionsStore } from "./sessions"
 import type { ThemeInstance } from "vuetify"
 import { puzzlesDefinition } from "~~/lib/puzzle/puzzlesDefinition"
+import { IndexedDatabase } from "~~/lib/db/indexedDatabase"
 
 export type Config = {
-    id?: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    id: string,
     value: any
 }
 
-const db = new Database<Config>('config', 'config', {
-    autoIncrement: false,
-})
+const db = new IndexedDatabase<Config>('config', {})
 
 enum ConfigKeys {
     SessionId = 'sessionId',
@@ -19,16 +16,18 @@ enum ConfigKeys {
     Theme = 'theme'
 }
 
-const configEntry = <T>(id: ConfigKeys, value: T) => {
-    const entry = ref(value)
+const configEntry = <T>(id: ConfigKeys, defValue: T) => {
+    const entry = ref(defValue)
     return computed({
         get: () => entry.value,
         set: async (value: T) => {
+            if(entry.value !== defValue){
+                await db.put({
+                    id: id,
+                    value: value
+                })
+            }
             entry.value = value
-            await db.put({
-                id: id,
-                value: value
-            })
         }
     })
 }
@@ -36,7 +35,7 @@ const configEntry = <T>(id: ConfigKeys, value: T) => {
 export const useConfigStore = defineStore('config', () => {
     const $theme = useTheme()
 
-    const sessionId = configEntry(ConfigKeys.SessionId, 0)
+    const sessionId = configEntry(ConfigKeys.SessionId, '')
     const puzzle = configEntry(ConfigKeys.Puzzle, '')
     const theme = configEntry(ConfigKeys.Theme, '')
 
@@ -48,7 +47,7 @@ export const useConfigStore = defineStore('config', () => {
     }
 
     async function reset() {
-        sessionId.value = 0
+        sessionId.value = ''
         puzzle.value = ''
         theme.value = ''
         await db.deleteDB()
@@ -63,7 +62,7 @@ export const useConfigStore = defineStore('config', () => {
     }
 })
 
-async function loadSelectedSessionId(): Promise<number> {
+async function loadSelectedSessionId(): Promise<string> {
     const sessionId = await db.get(ConfigKeys.SessionId)
     if (!sessionId) {
         const lastSession = await useSessionsStore().getLastSession()
@@ -75,14 +74,12 @@ async function loadSelectedSessionId(): Promise<number> {
         }
         return loadSelectedSessionId()
     } else {
-        const sessionIdParsed = parseInt(sessionId.value)
-
-        const exists = await useSessionsStore().getSession(sessionIdParsed)
+        const exists = await useSessionsStore().getSession(sessionId.value)
         if (!exists) {
             await db.delete(ConfigKeys.SessionId)
             return loadSelectedSessionId()
         } else {
-            return sessionIdParsed
+            return sessionId.value
         }
     }
 }
@@ -122,3 +119,4 @@ async function loadSelectedTheme(themeInstance: ThemeInstance) {
         return selectedTheme.value
     }
 }
+export { db as configDb }

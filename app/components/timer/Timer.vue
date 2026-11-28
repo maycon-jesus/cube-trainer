@@ -41,12 +41,12 @@ const props = defineProps<{
   lastSolve?: Solve
   type: Type
   puzzle: string
-  sessionId: number
+  sessionId: string
   trainingAlgorithmId?: string
   scramble: string
 }>()
 const emits = defineEmits<{
-  (e: 'solve', solve: Solve): void
+  (e: 'solve', solve: Omit<Solve, 'id'>): void
   (e: 'start' | 'stop' | 'delete'): void
   (e: 'penalty', penalty: Penalty): void
 }>()
@@ -109,7 +109,7 @@ async function stopRunning() {
   const ms = performance.now() - startTime
   elapsed.value = ms
   phase.value = 'idle'
-  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzle: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId ?? '' })
+  emits('solve', { ms, scramble: props.scramble, penalty: 'none', createdAt: Date.now(), type: props.type, puzzleId: props.puzzle, sessionId: props.sessionId, trainingAlgorithmId: props.trainingAlgorithmId || undefined })
   // Evento customizado no PostHog. Só metadados não identificáveis (sem tempo nem scramble).
   posthog?.capture('solve_completed', {
     puzzle: props.puzzle,

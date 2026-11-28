@@ -194,7 +194,7 @@ async function save() {
     const [setId, algorithmId] = k.split('::')
     return { setId: setId!, algorithmId: algorithmId! }
   })
-  if (props.playlist?.id != null) {
+  if (props.playlist != null) {
     await playlistsStore.update({ ...props.playlist, name: name.value.trim(), puzzleId: puzzleId.value, trainingCases })
   } else {
     await playlistsStore.add({ name: name.value.trim(), puzzleId: puzzleId.value, trainingCases })

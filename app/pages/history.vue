@@ -23,7 +23,7 @@
                             <nuxt-img :src="training.imageUrl" :alt="training.name" width="32" height="32" />
                         </v-avatar>
                         <v-icon v-else class="mr-1" size="32">
-                            <IconPuzzle :puzzle-id="solve.puzzle" />
+                            <IconPuzzle :puzzle-id="solve.puzzleId" />
                         </v-icon>
                     </template>
                     <v-list-item-title class="font-weight-medium"
@@ -31,7 +31,7 @@
                         {{ formatSolve(solve) }}
                     </v-list-item-title>
                     <v-list-item-subtitle class="d-flex align-center flex-wrap ga-2">
-                        <span>{{ puzzle?.name ?? solve.puzzle }}</span>
+                        <span>{{ puzzle?.name ?? solve.puzzleId }}</span>
                         <span>·</span>
                         <span>{{ sessionName(solve.sessionId) }}</span>
                         <v-chip v-if="training" size="x-small" color="primary" variant="tonal" label
@@ -59,8 +59,7 @@
         <LazySolveAddDialog v-model="openAddModal" editable :session-id="initialSessionId" :puzzle="initialPuzzle"
             type="normal" @added="onSolveAdded" />
 
-        <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve"
-            :algorithm="modalAlgorithm" @set-penalty="setPenalty" @delete-solve="removeSolve" />
+        <LazySolveDetailsDialog v-if="modalSolve" v-model="openModalSolve" :solve="modalSolve" @set-penalty="setPenalty" @delete-solve="removeSolve" />
     </v-container>
 </template>
 
@@ -82,7 +81,7 @@ const getTrainingSetAlgorithms = useApiGetPuzzleTrainingSetAlgorithms()
 
 const sessionNames = computed(() => new Map(sessionsStore.sessions.map(s => [s.id, s.name])))
 
-function sessionName(id: number) {
+function sessionName(id: string) {
     return sessionNames.value.get(id) ?? t('page.unknownSession')
 }
 
@@ -91,7 +90,7 @@ usePageSeo('history')
 const PAGE_SIZE = 20
 
 const type = ref<Type | typeof ALL_TYPES>(ALL_TYPES)
-const sessionId = ref<number>(ALL_SESSIONS)
+const sessionId = ref<string>(ALL_SESSIONS)
 const puzzle = ref<string>(ALL_PUZZLES)
 
 const page = ref(1)
@@ -104,14 +103,14 @@ const pageCount = computed(() => Math.ceil(total.value / PAGE_SIZE))
 const filter = computed<SolvesFilter>(() => ({
     type: type.value === ALL_TYPES ? undefined : type.value,
     sessionId: sessionId.value === ALL_SESSIONS ? undefined : sessionId.value,
-    puzzle: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
+    puzzleId: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
 }))
 
 // Puzzles that have at least one training solve on the current page.
 const trainingPuzzles = computed(() => [...new Set(
     solves.value
         .filter(({ type, trainingAlgorithmId }) => type === 'training' && trainingAlgorithmId)
-        .map(({ puzzle }) => puzzle),
+        .map(({ puzzleId }) => puzzleId),
 )].sort())
 
 const trainingKey = computed(() =>
@@ -140,13 +139,13 @@ const puzzleIndex = computed(() => new Map((puzzles.value ?? []).map(p => [p.id,
 
 function trainingOf(solve: Solve): (TrainingSetAlgorithm & { set: TrainingSet }) | null {
     if (solve.type !== 'training' || !solve.trainingAlgorithmId) return null
-    return trainingIndex.value?.[`${solve.puzzle}:${solve.trainingAlgorithmId}`] ?? null
+    return trainingIndex.value?.[`${solve.puzzleId}:${solve.trainingAlgorithmId}`] ?? null
 }
 
 const rows = computed(() => solves.value.map(solve => ({
     solve,
     training: trainingOf(solve),
-    puzzle: puzzleIndex.value.get(solve.puzzle),
+    puzzle: puzzleIndex.value.get(solve.puzzleId),
     timestamp: formatTimestampParts(locale.value, solve.createdAt),
 })))
 
@@ -196,12 +195,10 @@ async function onSolveAdded() {
 
 // --- Solve details ---------------------------------------------------------
 const modalSolve = ref<Solve | null>(null)
-const modalAlgorithm = ref<TrainingSetAlgorithm & { set: TrainingSet } | null>(null)
 const openModalSolve = ref(false)
 
 function openSolveDetails(solve: Solve, algorithm: TrainingSetAlgorithm & { set: TrainingSet } | null) {
     modalSolve.value = solve
-    modalAlgorithm.value = algorithm
     openModalSolve.value = true
 }
 

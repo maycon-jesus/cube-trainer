@@ -54,7 +54,7 @@ const sessionStore = useSessionsStore()
 
 const deleting = ref(false)
 const moveSolves = ref(false)
-const sessionSelected = ref<number | undefined>(undefined)
+const sessionSelected = ref<string | undefined>(undefined)
 
 const moveSolvesToSessionId = computed(() => {
   if (moveSolves.value) {

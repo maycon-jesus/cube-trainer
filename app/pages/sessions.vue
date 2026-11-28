@@ -20,23 +20,23 @@ type SessionStats = {
 }
 
 const sessions = ref<Session[]>([])
-const solvesBySession = ref<Record<number, Solve[]>>({})
-const sessionStats = ref<Record<number, SessionStats>>({})
+const solvesBySession = ref<Record<string, Solve[]>>({})
+const sessionStats = ref<Record<string, SessionStats>>({})
 const solvesCount = ref(0)
 
-async function reload(){
+async function reload() {
   sessions.value = await sessionsStore.getAll()
 }
 
-onBeforeMount(async()=>{
+onBeforeMount(async () => {
   await reload()
 })
 
 watch(sessions, async () => {
-  solvesCount.value=0
+  solvesCount.value = 0
   for (const session of sessions.value) {
-    const solves = await solvesStore.getBySessionId(session.id!, 12)
-    const count = await solvesStore.countBySessionId(session.id!)
+    const solves = await solvesStore.getBySessionId(session.id, 12)
+    const count = await solvesStore.countBySessionId(session.id)
     solvesBySession.value[session.id!] = solves
 
     sessionStats.value[session.id!] = {
@@ -153,9 +153,7 @@ function openDelete(session: Session) {
     <!-- Session cards -->
     <v-row density="comfortable">
       <v-col v-for="session in sessions" :key="session.id" cols="12" sm="6">
-        <v-card
- class="session-card h-100 d-flex flex-column"
-          :class="{ 'session-card--current': isCurrent(session) }">
+        <v-card class="session-card h-100 d-flex flex-column" :class="{ 'session-card--current': isCurrent(session) }">
           <v-card-item>
             <template #prepend>
               <v-avatar variant="tonal" :color="isCurrent(session) ? 'primary' : undefined">
@@ -177,8 +175,7 @@ function openDelete(session: Session) {
                   <v-btn icon="mdi-dots-vertical" variant="text" size="small" v-bind="menuProps" />
                 </template>
                 <v-list density="compact">
-                  <v-list-item
-prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
+                  <v-list-item prepend-icon="mdi-check-circle-outline" :disabled="isCurrent(session)"
                     @click="setCurrent(session)">
                     <v-list-item-title>{{ t('sessions.setCurrent') }}</v-list-item-title>
                   </v-list-item>

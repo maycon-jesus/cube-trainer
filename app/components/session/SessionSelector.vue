@@ -1,21 +1,16 @@
 <template>
     <div>
-        <v-select
-        v-model="model"
-        :label="t('session.label')"
-        :items="items"
-        hide-details
-    >
-    <template #append-item>
-        <v-list-item @click="openCreateDialog=true">
-            <template #prepend>
-                <v-icon>mdi-plus</v-icon>
+        <v-select v-model="model" :label="t('session.label')" :items="items" hide-details>
+            <template #append-item>
+                <v-list-item @click="openCreateDialog = true">
+                    <template #prepend>
+                        <v-icon>mdi-plus</v-icon>
+                    </template>
+                    <v-list-item-title>{{ t('sessions.create') }}</v-list-item-title>
+                </v-list-item>
             </template>
-            <v-list-item-title>{{ t('sessions.create') }}</v-list-item-title>
-        </v-list-item>
-    </template>
-    </v-select>
-    <session-create-rename-dialog v-model="openCreateDialog" form-mode="create" />
+        </v-select>
+        <session-create-rename-dialog v-model="openCreateDialog" form-mode="create" />
     </div>
 </template>
 
@@ -23,11 +18,11 @@
 import { useSessionsStore } from '~/stores/db/sessions';
 
 const props = defineProps<{
-    excludedIds?: number[]
+    excludedIds?: string[]
     showAllOption?: boolean
 }>()
 
-const model = defineModel<number>()
+const model = defineModel<string>()
 
 const { t } = useI18n()
 const sessionStore = useSessionsStore()

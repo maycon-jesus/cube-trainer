@@ -119,7 +119,7 @@ onBeforeMount(async () => {
   await refreshSolves()
 })
 
-async function resolved(solve: Solve) {
+async function resolved(solve: Omit<Solve, 'id'>) {
   await add(solve)
   await newScramble()
   await refreshSolves()
@@ -143,7 +143,7 @@ async function refreshSolves() {
   solves.value = await solvesStore.getAllWithFilter({
     type: 'training',
     sessionId: configStore.sessionId,
-    puzzle: puzzle.value,
+    puzzleId: puzzle.value,
     trainingAlgorithmIds,
     pageSize: 1000,
     page: 1,

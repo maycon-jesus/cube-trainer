@@ -47,7 +47,7 @@ import { useSolvesStore, type Penalty, type Solve, type Type } from '~/stores/db
 
 defineProps<{
     solves: Solve[],
-    sessionId: number,
+    sessionId: string,
     puzzle: string,
     type: Type,
     trainingAlgorithmId?: string,

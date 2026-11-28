@@ -89,7 +89,7 @@ const MAX_SOLVES = 10000
 
 const type = ref<Type | typeof ALL_TYPES>(ALL_TYPES)
 const puzzle = ref<string>(config.puzzle || ALL_PUZZLES)
-const sessionId = ref<number>(config.sessionId || ALL_SESSIONS)
+const sessionId = ref<string>(config.sessionId || ALL_SESSIONS)
 
 // Keep selectors in sync once the persisted config finishes loading.
 watch(() => config.puzzle, (value) => {
@@ -102,7 +102,7 @@ watch(() => config.sessionId, (value) => {
 const filter = computed<SolvesFilter>(() => ({
     type: type.value === ALL_TYPES ? undefined : type.value,
     sessionId: sessionId.value === ALL_SESSIONS ? undefined : sessionId.value,
-    puzzle: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
+    puzzleId: puzzle.value === ALL_PUZZLES ? undefined : puzzle.value,
 }))
 
 const solves = ref<Solve[]>([])
@@ -114,13 +114,13 @@ async function loadSolves() {
     const result = await solvesStore.getAllWithFilter({ ...filter.value, page: 1, pageSize: MAX_SOLVES })
     solves.value = result.sort((a, b) => b.createdAt - a.createdAt)
 
-    if (filter.value.puzzle === undefined) {
+    if (filter.value.puzzleId === undefined) {
         solvesAllPuzzles.value = solves.value
         return
     }
     const allPuzzles = await solvesStore.getAllWithFilter({
         ...filter.value,
-        puzzle: undefined,
+        puzzleId: undefined,
         page: 1,
         pageSize: MAX_SOLVES,
     })
