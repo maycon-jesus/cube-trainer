@@ -23,12 +23,9 @@ export type Solve = StoredItemPreset<{
   trainingAlgorithmId?: string
 }>
 
-// Shared instance. The primary key is a UUIDv7, so key order == creation order:
-// iterating with 'prev' already yields newest first.
 const db = new IndexedDatabase<Solve>('solves', {
   indexes: [
     { name: 'sessionId', keyPath: 'sessionId' },
-    // Optional fields: solves without them are simply left out of the index.
     { name: 'trainingAlgorithmId', keyPath: 'trainingAlgorithmId' },
     { name: 'puzzleId', keyPath: 'puzzleId' },
     { name: 'type', keyPath: 'type' },
