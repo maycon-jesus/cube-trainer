@@ -12,7 +12,7 @@ import {
 } from './idb'
 import { LEGACY_DATABASES, LEGACY_SECTIONS, type LegacySection, type MigratedData } from './schema'
 
-export type MigrationTarget<Row> = { importBatch(rows: Row[]): Promise<void> }
+export type MigrationTarget<Row> = { bulkPut(rows: Row[]): Promise<unknown> }
 export type MigrationTargets = { [K in LegacySection]: MigrationTarget<MigratedData[K][number]> }
 
 const WRITE_BATCH_SIZE = 1000
@@ -28,7 +28,7 @@ function withLock(fn: () => Promise<void>): Promise<void> {
 
 async function writeSection<K extends LegacySection>(target: MigrationTargets[K], rows: MigratedData[K]) {
     for (let i = 0; i < rows.length; i += WRITE_BATCH_SIZE) {
-        await target.importBatch(rows.slice(i, i + WRITE_BATCH_SIZE) as never)
+        await target.bulkPut(rows.slice(i, i + WRITE_BATCH_SIZE) as never)
     }
 }
 
@@ -36,7 +36,9 @@ async function writeSection<K extends LegacySection>(target: MigrationTargets[K]
  * Idempotent and resumable. Steps:
  *  1. read + convert the legacy data and persist it as a snapshot (or resume an existing one);
  *  2. delete the legacy databases whose names the new layout reuses;
- *  3. write everything through the stores (`importBatch` = put, so retries are safe);
+ *  3. write everything through the store databases with `bulkPut`: it journals each row in the
+ *     same transaction (`add` when new, `update` on a resumed run), so the migrated history is
+ *     picked up by sync, and retries are safe;
  *  4. delete the remaining legacy databases and the snapshot.
  *
  * Must run before any store opens its database.

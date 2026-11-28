@@ -91,3 +91,5 @@ export const useSessionsStore = defineStore('sessions', () => {
     importBatch: db.importBatch.bind(db),
   }
 })
+
+export { db as sessionsDb }

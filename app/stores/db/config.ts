@@ -119,3 +119,4 @@ async function loadSelectedTheme(themeInstance: ThemeInstance) {
         return selectedTheme.value
     }
 }
+export { db as configDb }

@@ -57,3 +57,5 @@ export const useTrainingPlaylistsStore = defineStore('trainingPlaylists', () => 
     importBatch: db.importBatch.bind(db),
   }
 })
+
+export { db as trainingPlaylistsDb }

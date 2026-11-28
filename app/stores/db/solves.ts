@@ -145,3 +145,5 @@ export const useSolvesStore = defineStore('solves', () => {
     importBatch: db.importBatch.bind(db),
   }
 })
+
+export { db as solvesDb }
