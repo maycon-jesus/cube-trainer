@@ -1,14 +1,35 @@
+let lastTs = 0
+let seq = 0
+
+/**
+ * UUIDv7 (RFC 9562) with a 12-bit counter in `rand_a` (method 1), so IDs generated
+ * in this context are strictly increasing even within the same millisecond.
+ */
 export function uuidv7(): string {
     const bytes = crypto.getRandomValues(new Uint8Array(16));
 
-    // 48 bits de timestamp Unix em ms (big-endian) nos bytes 0..5
     let ts = Date.now();
-    for (let i = 5; i >= 0; i--) {
-        bytes[i] = ts % 256;
-        ts = Math.floor(ts / 256);
+    if (ts <= lastTs) {
+        // Same ms (or clock went backwards): keep the last timestamp and bump the counter.
+        ts = lastTs;
+        seq++;
+        if (seq > 0xfff) {
+            ts = ++lastTs;
+            seq = 0;
+        }
+    } else {
+        lastTs = ts;
+        seq = 0;
     }
 
-    bytes[6] = (bytes[6] & 0x0f) | 0x70; // versão 7
+    // 48 bits de timestamp Unix em ms (big-endian) nos bytes 0..5
+    for (let i = 5, t = ts; i >= 0; i--) {
+        bytes[i] = t % 256;
+        t = Math.floor(t / 256);
+    }
+
+    bytes[6] = 0x70 | (seq >> 8); // versão 7 + 4 bits altos do contador
+    bytes[7] = seq & 0xff;        // 8 bits baixos do contador
     bytes[8] = (bytes[8] & 0x3f) | 0x80; // variante 10xx
 
     return formatUuid(bytes);

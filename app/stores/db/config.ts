@@ -16,16 +16,18 @@ enum ConfigKeys {
     Theme = 'theme'
 }
 
-const configEntry = <T>(id: ConfigKeys, value: T) => {
-    const entry = ref(value)
+const configEntry = <T>(id: ConfigKeys, defValue: T) => {
+    const entry = ref(defValue)
     return computed({
         get: () => entry.value,
         set: async (value: T) => {
+            if(entry.value !== defValue){
+                await db.put({
+                    id: id,
+                    value: value
+                })
+            }
             entry.value = value
-            await db.put({
-                id: id,
-                value: value
-            })
         }
     })
 }
