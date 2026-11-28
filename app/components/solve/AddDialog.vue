@@ -113,10 +113,10 @@ async function submit() {
     scramble: scramble.value.trim(),
     penalty: penalty.value,
     createdAt: createdAt.value,
-    puzzle: props.editable ? localPuzzle.value : props.puzzle,
+    puzzleId: props.editable ? localPuzzle.value : props.puzzle,
     type: props.type,
     sessionId: props.editable ? localSessionId.value : props.sessionId,
-    trainingAlgorithmId: props.trainingAlgorithmId ?? '',
+    trainingAlgorithmId: props.trainingAlgorithmId || undefined,
   })
   model.value = false
   emits('added')

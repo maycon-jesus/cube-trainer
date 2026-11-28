@@ -143,7 +143,7 @@ async function refreshSolves() {
   solves.value = await solvesStore.getAllWithFilter({
     type: 'training',
     sessionId: configStore.sessionId,
-    puzzle: puzzle.value,
+    puzzleId: puzzle.value,
     trainingAlgorithmIds,
     pageSize: 1000,
     page: 1,

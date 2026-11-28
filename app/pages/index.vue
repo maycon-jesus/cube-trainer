@@ -116,7 +116,7 @@ async function refrehSolves() {
   solves.value = await solvesStore.getAllWithFilter({
     type: 'normal',
     sessionId: configStore.sessionId,
-    puzzle: configStore.puzzle,
+    puzzleId: configStore.puzzle,
     pageSize: 1000,
     page: 1,
   })

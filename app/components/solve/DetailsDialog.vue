@@ -38,10 +38,10 @@
                             <v-card-title class="text-body-small">{{ t('solve.details.puzzle') }}</v-card-title>
                             <v-card-text class="d-flex align-center">
                                 <v-icon>
-                                    <IconPuzzle :puzzle-id="props.solve.puzzle" />
+                                    <IconPuzzle :puzzle-id="props.solve.puzzleId" />
                                 </v-icon>
                                 <span class="text-body-large ml-1">
-                                    {{ puzzleDef?.name || props.solve.puzzle }}
+                                    {{ puzzleDef?.name || props.solve.puzzleId }}
                                 </span>
                             </v-card-text>
                         </v-card>
@@ -55,7 +55,7 @@
                                 </v-avatar>
                                 <div>
                                     <p class="text-body-large mb-0">{{ algorithm.name }}</p>
-                                    <p class="text-medium-emphasis mt-0">{{ algorithm.set.name }}</p>
+                                    <p class="text-medium-emphasis mt-0" v-show="!!trainingSet">{{ trainingSet?.name }}</p>
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -84,7 +84,6 @@ const { locale, t } = useI18n()
 
 const props = defineProps<{
     solve: Solve,
-    algorithm: TrainingSetAlgorithm & { set: TrainingSet } | null
 }>()
 const emits = defineEmits<{
     (e: 'setPenalty', solve: Solve, penalty: Penalty): void
@@ -92,8 +91,31 @@ const emits = defineEmits<{
 }>()
 const model = defineModel<boolean>()
 
-const puzzleKey = computed(() => props.solve.puzzle)
-const { data: puzzleDef } = await useApiGetPuzzle().useAsyncData(puzzleKey)
+const puzzleKey = computed(() => props.solve.puzzleId)
+const { data: puzzleDef } = useApiGetPuzzle().useAsyncData(puzzleKey)
+
+const algorithmApi = useApiGetAlgorithm()
+const algorithmId = computed(() => props.solve.trainingAlgorithmId)
+const { data: algorithm } = useAsyncData(
+  ()=>`solve-details-algorithm-${locale.value}-${props.solve.puzzleId}-${props.solve.trainingAlgorithmId}`,
+  () =>{
+     return algorithmId.value
+    ? algorithmApi.$fetch(props.solve.puzzleId, algorithmId.value)
+    : Promise.resolve(null)
+  }
+)
+
+const trainingSetApi = useApiGetPuzzleTrainingSet()
+const { data: trainingSet } = useAsyncData(
+  ()=>`solve-details-training-set-${locale.value}-${props.solve.puzzleId}-${algorithm.value?.setId}`,
+  () =>{
+     return algorithm.value?.setId
+    ? trainingSetApi.$fetch(props.solve.puzzleId, algorithm.value.setId)
+    : Promise.resolve(null)
+  }
+)
+
+
 </script>
 
 <style scoped>
